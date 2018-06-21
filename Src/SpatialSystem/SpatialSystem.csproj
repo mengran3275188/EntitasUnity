@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7243F97-5FC1-4327-81CC-C76C94721D7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SpatialSystem</RootNamespace>
+    <AssemblyName>SpatialSystem</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CellManager.cs" />
+    <Compile Include="Geometry.cs" />
+    <Compile Include="ISpaceObject.cs" />
+    <Compile Include="ISpatialSystem.cs" />
+    <Compile Include="PathFinder\JumpPointFinder.cs" />
+    <Compile Include="KdGeometryTree.cs" />
+    <Compile Include="KdObjectTree.cs" />
+    <Compile Include="KdObstacleTree.cs" />
+    <Compile Include="MapData\MapDataUtil.cs" />
+    <Compile Include="MapData\NavmeshData\NavmeshMapParser.cs" />
+    <Compile Include="MapData\TiledData\TiledMapParser.cs" />
+    <Compile Include="PrKdTree.cs" />
+    <Compile Include="RvoAlgorithm.cs" />
+    <Compile Include="SpatialSystem.cs" />
+    <Compile Include="MapData\TiledData\TiledData.cs" />
+    <Compile Include="MapData\TiledData\TmxToTxt.cs" />
+    <Compile Include="Triangulation.cs" />
+    <Compile Include="PathFinder\TreeCacheFinder.cs" />
+    <Compile Include="PathFinder\TriangulationNetworkFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{ea8f8fd9-bda8-4368-881f-f0c820907f7a}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
