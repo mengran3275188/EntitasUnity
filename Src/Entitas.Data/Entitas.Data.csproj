@@ -57,6 +57,7 @@
     <Compile Include="MovementComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceComponent.cs" />
+    <Compile Include="SceneInstanceInfo.cs" />
     <Compile Include="SingletonComponets.cs" />
     <Compile Include="SkillComponents.cs" />
     <Compile Include="SkillInstanceInfo.cs" />

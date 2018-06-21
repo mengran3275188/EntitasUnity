@@ -1,4 +1,5 @@
 ﻿using System;
+using Entitas.Data;
 using Spatial;
 using Entitas.CodeGeneration.Attributes;
 
@@ -25,5 +26,10 @@ namespace Entitas.Component
     {
         public CellManager CellMgr;
         public JumpPointFinder Finder;
+    }
+    [Unique]
+    public sealed class SceneComponent : IComponent
+    {
+        public SceneInstanceInfo Instance;
     }
 }

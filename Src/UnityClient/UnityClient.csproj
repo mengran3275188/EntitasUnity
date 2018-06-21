@@ -49,22 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generated\Game\Components\GameMainPlayerComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameInputComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameTimeInfoComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameSpatialComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameMovementComponent.cs" />
-    <Compile Include="Generated\Game\Components\GamePositionComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameRotationComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameAnimationComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameResourceComponent.cs" />
-    <Compile Include="Generated\Game\Components\GameSkillComponent.cs" />
-    <Compile Include="Generated\Game\GameComponentsLookup.cs" />
-    <Compile Include="Generated\Game\GameAttribute.cs" />
-    <Compile Include="Generated\Game\GameContext.cs" />
-    <Compile Include="Generated\Game\GameMatcher.cs" />
-    <Compile Include="Generated\Contexts.cs" />
-    <Compile Include="Generated\Game\GameEntity.cs" />
+    <Compile Include="Features\Scene\SceneSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Skill\Command\ScriptableDataUtility.cs" />
@@ -101,6 +86,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\GameStartSystem.cs" />
+    <Compile Include="Generated\Contexts.cs" />
+    <Compile Include="Generated\Game\GameAttribute.cs" />
+    <Compile Include="Generated\Game\GameComponents.cs" />
+    <Compile Include="Generated\Game\GameComponentsLookup.cs" />
+    <Compile Include="Generated\Game\GameContext.cs" />
+    <Compile Include="Generated\Game\GameEntity.cs" />
+    <Compile Include="Generated\Game\GameMatcher.cs" />
     <Compile Include="Kernel\GameKernel.cs" />
     <Compile Include="Kernel\GfxSystem.cs" />
     <Compile Include="Kernel\GfxSystemImpl.cs" />

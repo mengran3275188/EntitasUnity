@@ -15,11 +15,12 @@ public static class GameComponentsLookup {
     public const int Position = 4;
     public const int Resource = 5;
     public const int Rotation = 6;
-    public const int Skill = 7;
-    public const int Spatial = 8;
-    public const int TimeInfo = 9;
+    public const int Scene = 7;
+    public const int Skill = 8;
+    public const int Spatial = 9;
+    public const int TimeInfo = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Animation",
@@ -29,6 +30,7 @@ public static class GameComponentsLookup {
         "Position",
         "Resource",
         "Rotation",
+        "Scene",
         "Skill",
         "Spatial",
         "TimeInfo"
@@ -42,6 +44,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Component.PositionComponent),
         typeof(Entitas.Component.ResourceComponent),
         typeof(Entitas.Component.RotationComponent),
+        typeof(Entitas.Component.SceneComponent),
         typeof(Entitas.Component.SkillComponent),
         typeof(Entitas.Component.SpatialComponent),
         typeof(Entitas.Component.TimeInfoComponent)

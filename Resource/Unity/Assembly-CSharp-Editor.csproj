@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{33C3DCDC-76CB-1FCD-751B-4E7E18D0E2DF}</ProjectGuid>
+    <ProjectGuid>{6311E6C6-0A20-383B-320B-694068DE37A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -61,10 +61,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\NavmeshExportWindow.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>E:/Github/EntitasUnity/unity/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/Github/EntitasUnity/unity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity2018.1.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -310,37 +310,37 @@
       <HintPath>C:/Program Files/Unity2018.1.2f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DesperateDevs.Logging">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/DesperateDevs.Logging.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/DesperateDevs.Logging.dll</HintPath>
     </Reference>
     <Reference Include="DesperateDevs.Utils">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/DesperateDevs.Utils.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/DesperateDevs.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Entitas.CodeGeneration.Attributes">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/Entitas.CodeGeneration.Attributes.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/Entitas.CodeGeneration.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="Entitas.Component">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/Entitas.Component.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/Entitas.Component.dll</HintPath>
     </Reference>
     <Reference Include="Entitas">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/Entitas.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/Entitas.dll</HintPath>
     </Reference>
     <Reference Include="ScriptableData">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/ScriptableData.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/ScriptableData.dll</HintPath>
     </Reference>
     <Reference Include="SkillSystem">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/SkillSystem.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/SkillSystem.dll</HintPath>
     </Reference>
     <Reference Include="SpatialSystem">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/SpatialSystem.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/SpatialSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityClient">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/UnityClient.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/UnityClient.dll</HintPath>
     </Reference>
     <Reference Include="UnityDelegate">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/UnityDelegate.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/UnityDelegate.dll</HintPath>
     </Reference>
     <Reference Include="Util">
-      <HintPath>E:/Github/EntitasUnity/unity/Assets/Plugins/Util.dll</HintPath>
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/Util.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -362,6 +362,9 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptableSystem">
+      <HintPath>E:/Github/EntitasUnity/Resource/Unity/Assets/Plugins/ScriptableSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity2018.1.2f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -399,7 +402,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{C3DA89E1-70C6-7D6C-993E-C8F831D35880}</Project>
+      <Project>{CD8C9303-404B-FB8D-6B9B-21988D5CAC0A}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>
