@@ -558,30 +558,35 @@ namespace TableReaderGenerator
                     sw.Close();
                 }
             }
+
+            HashSet<string> tableHeaders = new HashSet<string>();
             foreach (var tablePair in m_Tables)
             {
                 string table = tablePair.Key;
                 TableDef tableDef = tablePair.Value;
                 file = tableDef.m_CsFileName + ".cs";
-                try
+                if(tableHeaders.Add(file))
                 {
-                    using (StreamWriter sw = new StreamWriter(file, true))
+                    try
                     {
-                        sw.WriteLine("//----------------------------------------------------------------------------");
-                        sw.WriteLine("//！！！不要手动修改此文件，此文件由TableReaderGenerator按table.dsl生成！！！");
-                        sw.WriteLine("//----------------------------------------------------------------------------");
-                        sw.WriteLine("using System;");
-                        sw.WriteLine("using System.Collections.Generic;");
-                        sw.WriteLine("using System.Runtime.InteropServices;");
-                        sw.WriteLine("using System.IO;");
-                        sw.WriteLine("using System.Text;");
-                        sw.WriteLine("using Util;");
-                        sw.Close();
+                        using (StreamWriter sw = new StreamWriter(file, true))
+                        {
+                            sw.WriteLine("//----------------------------------------------------------------------------");
+                            sw.WriteLine("//！！！不要手动修改此文件，此文件由TableReaderGenerator按table.dsl生成！！！");
+                            sw.WriteLine("//----------------------------------------------------------------------------");
+                            sw.WriteLine("using System;");
+                            sw.WriteLine("using System.Collections.Generic;");
+                            sw.WriteLine("using System.Runtime.InteropServices;");
+                            sw.WriteLine("using System.IO;");
+                            sw.WriteLine("using System.Text;");
+                            sw.WriteLine("using Util;");
+                            sw.Close();
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 }
                 GenReader(table, file, true);
             }
@@ -1099,7 +1104,7 @@ namespace TableReaderGenerator
                 if (args[0] == "gendsl")
                 {
                     LogUtil.Info("GenAllDsl");
-                    //GenAllDsl();
+                    GenAllDsl();
                     GenDataReader(true);
                 }
                 else if (args[0] == "gentoolreader")
@@ -1111,6 +1116,7 @@ namespace TableReaderGenerator
             else
             {
                 LogUtil.Info("GenDataReader");
+                GenAllDsl();
                 GenDataReader(false);
             }
         }

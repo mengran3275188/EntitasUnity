@@ -1,5 +1,5 @@
-﻿using Skill;
-using Entitas.CodeGeneration.Attributes;
+﻿using Entitas.CodeGeneration.Attributes;
+using Entitas.Data;
 
 namespace Entitas.Component
 {

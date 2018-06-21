@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Skill;
+using ScriptableSystem;
 using UnityClient;
 
-namespace Skill.Commands
+namespace SkillCommands
 {
-    internal class AnimationCommand : AbstractSkillCommand
+    internal class AnimationCommand : AbstractCommand
     {
-        public override ISkillCommand Clone()
+        public override ICommand Clone()
         {
             AnimationCommand command = new AnimationCommand();
             command.m_AnimName = m_AnimName;
@@ -24,7 +24,7 @@ namespace Skill.Commands
             return command;
         }
 
-        protected override ExecResult ExecCommand(SkillInstance instance, long delta)
+        protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (null != obj)

@@ -12,12 +12,10 @@ set pdb2mdb=%homedir%\Tools\Xbuild\pdb2mdb.exe
 
 set logdir=%workdir%\Buildlog
 
-%xbuild% /version
-
 mkdir %logdir%
 
 echo building UnityClient.sln ...
-%xbuild% /nologo /noconsolelogger /property:Configuration=Debug ^
+%xbuild% /m /nologo /noconsolelogger /property:Configuration=Debug ^
          /flp:LogFile=%logdir%\UnityClient.sln.log;Encoding=UTF-8 ^
 		 /t:clean;rebuild ^
          %workdir%\UnityClient.sln

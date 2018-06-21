@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Skill;
 using UnityClient;
 using System.IO;
 using Entitas;
@@ -44,7 +43,7 @@ namespace TestSkill
 
             var player = contexts.game.CreateEntity();
 
-            player.AddSkill(null);
+            //player.AddSkill(null);
 
             SkillSystem.Instance.StartSkill(player, player, 1);
 

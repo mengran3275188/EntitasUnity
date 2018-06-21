@@ -1,8 +1,9 @@
 ﻿using System;
 using Util;
 using System.Collections.Generic;
+using ScriptableSystem;
 
-namespace Skill.Commands
+namespace SkillCommands
 {
     public class MoveSectionInfo
     {
@@ -24,9 +25,9 @@ namespace Skill.Commands
         public Vector3 curSpeedVect = Vector3.zero;
     }
 
-    public class CurveMoveCommand : AbstractSkillCommand
+    public class CurveMoveCommand : AbstractCommand
     {
-        public override ISkillCommand Clone()
+        public override ICommand Clone()
         {
             CurveMoveCommand copy = new CurveMoveCommand();
             copy.m_IsLockRotate = m_IsLockRotate;
@@ -62,7 +63,7 @@ namespace Skill.Commands
             m_IsCurveMoving = true;
         }
 
-        protected override ExecResult ExecCommand(SkillInstance instance, long delta)
+        protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (obj == null)
@@ -112,7 +113,7 @@ namespace Skill.Commands
             return ExecResult.Parallel;
         }
 
-        private void Init(GameEntity obj, SkillInstance instance)
+        private void Init(GameEntity obj, Instance instance)
         {
             CopySectionList();
             m_ElapsedTime = 0;

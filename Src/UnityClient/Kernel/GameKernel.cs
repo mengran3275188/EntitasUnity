@@ -25,6 +25,7 @@ namespace UnityClient.Kernel
                 }
             });
 
+            LoadConfig();
 
             s_Logic.OnStart();
             GfxMoudle.Instance.OnStart(s_Logic);
@@ -37,6 +38,12 @@ namespace UnityClient.Kernel
         }
         public static void OnQuit()
         {
+        }
+        private static void LoadConfig()
+        {
+            Entitas.Data.ActionConfigProvider.Instance.LoadForClient();
+            Entitas.Data.PlayerConfigProvider.Instance.LoadForClient();
+            Entitas.Data.NpcConfigProvider.Instance.LoadForClient();
         }
 
 

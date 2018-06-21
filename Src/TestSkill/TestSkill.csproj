@@ -47,10 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkillSystem\SkillSystem.csproj">
-      <Project>{ba0cabca-7a2e-49e4-8b77-8d65df7d7b16}</Project>
-      <Name>SkillSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnityClient\UnityClient.csproj">
       <Project>{d2e23c36-7d65-448a-bda0-efa3a36e11f6}</Project>
       <Name>UnityClient</Name>

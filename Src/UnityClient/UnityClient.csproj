@@ -117,9 +117,9 @@
       <Project>{4295c1b7-d43f-4e38-85ad-33623489fbbe}</Project>
       <Name>ScriptableData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SkillSystem\SkillSystem.csproj">
-      <Project>{ba0cabca-7a2e-49e4-8b77-8d65df7d7b16}</Project>
-      <Name>SkillSystem</Name>
+    <ProjectReference Include="..\ScriptableSystem\ScriptableSystem.csproj">
+      <Project>{858834c7-8228-4a4e-9d06-064b792a91f7}</Project>
+      <Name>ScriptableSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpatialSystem\SpatialSystem.csproj">
       <Project>{a7243f97-5fc1-4327-81cc-c76c94721d7a}</Project>

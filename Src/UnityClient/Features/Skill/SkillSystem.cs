@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using ScriptableSystem;
 using Entitas;
-using Skill;
 using Util;
+using Entitas.Data;
 
 namespace UnityClient
 {
@@ -19,8 +18,8 @@ namespace UnityClient
         {
             GfxSystem.EventForLogic.Subscribe<int>("player_use_skill", "skill_system", this.PlayUseSkill);
 
-            SkillCommandManager.Instance.RegisterCommandFactory("animation", new SkillCommandFactoryHelper<Skill.Commands.AnimationCommand>());
-            SkillCommandManager.Instance.RegisterCommandFactory("curvemove", new SkillCommandFactoryHelper<Skill.Commands.CurveMoveCommand>());
+            CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
+            CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
         }
 
         public void Execute()
@@ -83,8 +82,8 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 //do load
-                SkillConfigManager.Instance.LoadSkillIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath("tables/Skill/test.mr"));
-                SkillInstance instance = SkillConfigManager.Instance.NewSkillInstance(skillId, 0);
+                ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath("tables/Skill/test.mr"));
+                Instance instance = ConfigManager.Instance.NewInstance(skillId, 0);
                 if(null == instance)
                 {
                     LogUtil.Error("Can't load skill config, skill:{0}!", skillId);

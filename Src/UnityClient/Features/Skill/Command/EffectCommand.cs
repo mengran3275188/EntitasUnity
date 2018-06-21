@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityClient;
+using ScriptableSystem;
 using Util;
 
-namespace Skill.Commands
+namespace SkillCommands
 {
     /// <summary>
     /// charactereffect(effect_path,delete_time,attach_bone[,start_time]);
@@ -17,9 +18,9 @@ namespace Skill.Commands
     ///   transform(vector3(0,1,0)[,eular(0,0,0)[,vector3(1,1,1)]]);
     /// };
     /// </summary>
-    internal class CharacterEffectCommand : AbstractSkillCommand
+    internal class CharacterEffectCommand : AbstractCommand
     {
-        public override ISkillCommand Clone()
+        public override ICommand Clone()
         {
             CharacterEffectCommand triger = new CharacterEffectCommand();
             triger.m_EffectPath = m_EffectPath;
@@ -33,7 +34,7 @@ namespace Skill.Commands
             return triger;
         }
 
-        protected override ExecResult ExecCommand(SkillInstance instance, long delta)
+        protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (null != obj)
@@ -125,9 +126,9 @@ namespace Skill.Commands
     /// <summary>
     /// sceneeffect(effect_path,delete_time[,vector3(x,y,z)[,start_time[,eular(rx,ry,rz)[,vector3(sx,sy,sz)]]]]);
     /// </summary>
-    internal class SceneEffectCommand : AbstractSkillCommand
+    internal class SceneEffectCommand : AbstractCommand
     {
-        public override ISkillCommand Clone()
+        public override ICommand Clone()
         {
             SceneEffectCommand triger = new SceneEffectCommand();
             triger.m_EffectPath = m_EffectPath;
@@ -189,7 +190,7 @@ namespace Skill.Commands
         //    }
         //}
 
-        protected override ExecResult ExecCommand(SkillInstance instance, long delta)
+        protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             //GameEntity obj = instance.Target as GameEntity;
             //if (null != obj)

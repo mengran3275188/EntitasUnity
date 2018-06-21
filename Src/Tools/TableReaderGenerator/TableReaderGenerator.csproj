@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{71D6F6E0-A8B2-4920-B5FD-C677955D83FE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>table_reader_generator</RootNamespace>
-    <AssemblyName>table_reader_generator</AssemblyName>
+    <RootNamespace>TableReaderGenerator</RootNamespace>
+    <AssemblyName>TableReaderGenerator</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

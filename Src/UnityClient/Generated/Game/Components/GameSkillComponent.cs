@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Entitas.Component.SkillComponent skill { get { return (Entitas.Component.SkillComponent)GetComponent(GameComponentsLookup.Skill); } }
     public bool hasSkill { get { return HasComponent(GameComponentsLookup.Skill); } }
 
-    public void AddSkill(Skill.SkillInstanceInfo newInstance) {
+    public void AddSkill(Entitas.Data.SkillInstanceInfo newInstance) {
         var index = GameComponentsLookup.Skill;
         var component = CreateComponent<Entitas.Component.SkillComponent>(index);
         component.Instance = newInstance;
         AddComponent(index, component);
     }
 
-    public void ReplaceSkill(Skill.SkillInstanceInfo newInstance) {
+    public void ReplaceSkill(Entitas.Data.SkillInstanceInfo newInstance) {
         var index = GameComponentsLookup.Skill;
         var component = CreateComponent<Entitas.Component.SkillComponent>(index);
         component.Instance = newInstance;
