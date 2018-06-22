@@ -11,5 +11,4 @@ bin/
 /Resource/Unity/Library/
 /Resource/Unity/Temp/
 /Resource/Unity/Assets/Plugins/
-/Resource/Unity/Assets/StreamingAssets/tables/
-/Resource/Unity/Assets/StreamingAssets/tables.meta
+/Resource/Unity/Assets/StreamingAssets
