@@ -9,4 +9,8 @@ namespace Entitas.Component
     {
         public uint ResourceId;
     }
+    public sealed class IdComponent : IComponent
+    {
+        [PrimaryEntityIndex]public uint value;
+    }
 }
