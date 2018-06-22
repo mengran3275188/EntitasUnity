@@ -4,7 +4,7 @@ obj/
 [Bb]in
 .vs/
 src/buildlog
-unity/Library/
-unity/Temp/
-unity/Assets/StreamingAssets/tables/
-unity/Assets/StreamingAssets/tables.meta
+Resource/Unity/Library/
+Resource/Unity/Temp/
+Resource/Unity/Assets/StreamingAssets/tables/
+Resource/Unity/Assets/StreamingAssets/tables.meta
