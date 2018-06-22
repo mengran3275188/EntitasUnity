@@ -137,10 +137,10 @@ namespace Entitas.Data
 
 namespace Entitas.Data
 {
-	public sealed partial class NpcConfig : IData2
+	public sealed partial class CharacterConfig : IData2
 	{
 		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 24)]
-		private struct NpcConfigRecord
+		private struct CharacterConfigRecord
 		{
 			internal int Id;
 			internal int Description;
@@ -170,7 +170,7 @@ namespace Entitas.Data
 
 		public bool CollectDataFromBinary(BinaryTable table, int index)
 		{
-			NpcConfigRecord record = GetRecord(table,index);
+			CharacterConfigRecord record = GetRecord(table,index);
 			Id = DBCUtil.ExtractInt(table, record.Id, 0);
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Model = DBCUtil.ExtractString(table, record.Model, "");
@@ -182,7 +182,7 @@ namespace Entitas.Data
 
 		public void AddToBinary(BinaryTable table)
 		{
-			NpcConfigRecord record = new NpcConfigRecord();
+			CharacterConfigRecord record = new CharacterConfigRecord();
 			record.Id = DBCUtil.SetValue(table, Id, 0);
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Model = DBCUtil.SetValue(table, Model, "");
@@ -198,124 +198,124 @@ namespace Entitas.Data
 			return Id;
 		}
 
-		private unsafe NpcConfigRecord GetRecord(BinaryTable table, int index)
+		private unsafe CharacterConfigRecord GetRecord(BinaryTable table, int index)
 		{
-			NpcConfigRecord record;
+			CharacterConfigRecord record;
 			byte[] bytes = table.Records[index];
 			fixed (byte* p = bytes) {
-				record = *(NpcConfigRecord*)p;
+				record = *(CharacterConfigRecord*)p;
 			}
 			return record;
 		}
-		private static unsafe byte[] GetRecordBytes(NpcConfigRecord record)
+		private static unsafe byte[] GetRecordBytes(CharacterConfigRecord record)
 		{
-			byte[] bytes = new byte[sizeof(NpcConfigRecord)];
+			byte[] bytes = new byte[sizeof(CharacterConfigRecord)];
 			fixed (byte* p = bytes) {
-				NpcConfigRecord* temp = (NpcConfigRecord*)p;
+				CharacterConfigRecord* temp = (CharacterConfigRecord*)p;
 				*temp = record;
 			}
 			return bytes;
 		}
 	}
 
-	public sealed partial class NpcConfigProvider
+	public sealed partial class CharacterConfigProvider
 	{
 		public void LoadForClient()
 		{
-			Load(FilePathDefine_Client.C_NpcConfig);
+			Load(FilePathDefine_Client.C_CharacterConfig);
 		}
 		public void LoadForServer()
 		{
-			Load(FilePathDefine_Server.C_NpcConfig);
+			Load(FilePathDefine_Server.C_CharacterConfig);
 		}
 		public void Load(string file)
 		{
 			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
-				m_NpcConfigMgr.CollectDataFromBinary(file);
+				m_CharacterConfigMgr.CollectDataFromBinary(file);
 			} else {
-				m_NpcConfigMgr.CollectDataFromDBC(file);
+				m_CharacterConfigMgr.CollectDataFromDBC(file);
 			}
 		}
 		public void Save(string file)
 		{
 		#if DEBUG
-			m_NpcConfigMgr.SaveToBinary(file);
+			m_CharacterConfigMgr.SaveToBinary(file);
 		#endif
 		}
 		public void Clear()
 		{
-			m_NpcConfigMgr.Clear();
+			m_CharacterConfigMgr.Clear();
 		}
 
-		public DataDictionaryMgr2<NpcConfig> NpcConfigMgr
+		public DataDictionaryMgr2<CharacterConfig> CharacterConfigMgr
 		{
-			get { return m_NpcConfigMgr; }
+			get { return m_CharacterConfigMgr; }
 		}
 
-		public int GetNpcConfigCount()
+		public int GetCharacterConfigCount()
 		{
-			return m_NpcConfigMgr.GetDataCount();
+			return m_CharacterConfigMgr.GetDataCount();
 		}
 
-		public NpcConfig GetNpcConfig(int id)
+		public CharacterConfig GetCharacterConfig(int id)
 		{
-			return m_NpcConfigMgr.GetDataById(id);
+			return m_CharacterConfigMgr.GetDataById(id);
 		}
 
-		private DataDictionaryMgr2<NpcConfig> m_NpcConfigMgr = new DataDictionaryMgr2<NpcConfig>();
+		private DataDictionaryMgr2<CharacterConfig> m_CharacterConfigMgr = new DataDictionaryMgr2<CharacterConfig>();
 
-		public static NpcConfigProvider Instance
+		public static CharacterConfigProvider Instance
 		{
 			get { return s_Instance; }
 		}
-		private static NpcConfigProvider s_Instance = new NpcConfigProvider();
+		private static CharacterConfigProvider s_Instance = new CharacterConfigProvider();
 	}
 }
 
 namespace Entitas.Data
 {
-	public sealed partial class PlayerConfig : IData2
+	public sealed partial class SceneConfig : IData2
 	{
 		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
-		private struct PlayerConfigRecord
+		private struct SceneConfigRecord
 		{
 			internal int Id;
-			internal int Model;
-			internal int ActionId;
-			internal int ActionPrefix;
+			internal int Description;
+			internal int Script;
+			internal int Navmesh;
 		}
 
 		public int Id;
-		public string Model;
-		public int ActionId;
-		public string ActionPrefix;
+		public string Description;
+		public string Script;
+		public string Navmesh;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
 			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
-			Model = DBCUtil.ExtractString(node, "Model", "");
-			ActionId = DBCUtil.ExtractNumeric<int>(node, "ActionId", 0);
-			ActionPrefix = DBCUtil.ExtractString(node, "ActionPrefix", "");
+			Description = DBCUtil.ExtractString(node, "Description", "");
+			Script = DBCUtil.ExtractString(node, "Script", "");
+			Navmesh = DBCUtil.ExtractString(node, "Navmesh", "");
 			return true;
 		}
 
 		public bool CollectDataFromBinary(BinaryTable table, int index)
 		{
-			PlayerConfigRecord record = GetRecord(table,index);
+			SceneConfigRecord record = GetRecord(table,index);
 			Id = DBCUtil.ExtractInt(table, record.Id, 0);
-			Model = DBCUtil.ExtractString(table, record.Model, "");
-			ActionId = DBCUtil.ExtractInt(table, record.ActionId, 0);
-			ActionPrefix = DBCUtil.ExtractString(table, record.ActionPrefix, "");
+			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Script = DBCUtil.ExtractString(table, record.Script, "");
+			Navmesh = DBCUtil.ExtractString(table, record.Navmesh, "");
 			return true;
 		}
 
 		public void AddToBinary(BinaryTable table)
 		{
-			PlayerConfigRecord record = new PlayerConfigRecord();
+			SceneConfigRecord record = new SceneConfigRecord();
 			record.Id = DBCUtil.SetValue(table, Id, 0);
-			record.Model = DBCUtil.SetValue(table, Model, "");
-			record.ActionId = DBCUtil.SetValue(table, ActionId, 0);
-			record.ActionPrefix = DBCUtil.SetValue(table, ActionPrefix, "");
+			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Script = DBCUtil.SetValue(table, Script, "");
+			record.Navmesh = DBCUtil.SetValue(table, Navmesh, "");
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}
@@ -325,76 +325,76 @@ namespace Entitas.Data
 			return Id;
 		}
 
-		private unsafe PlayerConfigRecord GetRecord(BinaryTable table, int index)
+		private unsafe SceneConfigRecord GetRecord(BinaryTable table, int index)
 		{
-			PlayerConfigRecord record;
+			SceneConfigRecord record;
 			byte[] bytes = table.Records[index];
 			fixed (byte* p = bytes) {
-				record = *(PlayerConfigRecord*)p;
+				record = *(SceneConfigRecord*)p;
 			}
 			return record;
 		}
-		private static unsafe byte[] GetRecordBytes(PlayerConfigRecord record)
+		private static unsafe byte[] GetRecordBytes(SceneConfigRecord record)
 		{
-			byte[] bytes = new byte[sizeof(PlayerConfigRecord)];
+			byte[] bytes = new byte[sizeof(SceneConfigRecord)];
 			fixed (byte* p = bytes) {
-				PlayerConfigRecord* temp = (PlayerConfigRecord*)p;
+				SceneConfigRecord* temp = (SceneConfigRecord*)p;
 				*temp = record;
 			}
 			return bytes;
 		}
 	}
 
-	public sealed partial class PlayerConfigProvider
+	public sealed partial class SceneConfigProvider
 	{
 		public void LoadForClient()
 		{
-			Load(FilePathDefine_Client.C_PlayerConfig);
+			Load(FilePathDefine_Client.C_SceneConfig);
 		}
 		public void LoadForServer()
 		{
-			Load(FilePathDefine_Server.C_PlayerConfig);
+			Load(FilePathDefine_Server.C_SceneConfig);
 		}
 		public void Load(string file)
 		{
 			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
-				m_PlayerConfigMgr.CollectDataFromBinary(file);
+				m_SceneConfigMgr.CollectDataFromBinary(file);
 			} else {
-				m_PlayerConfigMgr.CollectDataFromDBC(file);
+				m_SceneConfigMgr.CollectDataFromDBC(file);
 			}
 		}
 		public void Save(string file)
 		{
 		#if DEBUG
-			m_PlayerConfigMgr.SaveToBinary(file);
+			m_SceneConfigMgr.SaveToBinary(file);
 		#endif
 		}
 		public void Clear()
 		{
-			m_PlayerConfigMgr.Clear();
+			m_SceneConfigMgr.Clear();
 		}
 
-		public DataDictionaryMgr2<PlayerConfig> PlayerConfigMgr
+		public DataDictionaryMgr2<SceneConfig> SceneConfigMgr
 		{
-			get { return m_PlayerConfigMgr; }
+			get { return m_SceneConfigMgr; }
 		}
 
-		public int GetPlayerConfigCount()
+		public int GetSceneConfigCount()
 		{
-			return m_PlayerConfigMgr.GetDataCount();
+			return m_SceneConfigMgr.GetDataCount();
 		}
 
-		public PlayerConfig GetPlayerConfig(int id)
+		public SceneConfig GetSceneConfig(int id)
 		{
-			return m_PlayerConfigMgr.GetDataById(id);
+			return m_SceneConfigMgr.GetDataById(id);
 		}
 
-		private DataDictionaryMgr2<PlayerConfig> m_PlayerConfigMgr = new DataDictionaryMgr2<PlayerConfig>();
+		private DataDictionaryMgr2<SceneConfig> m_SceneConfigMgr = new DataDictionaryMgr2<SceneConfig>();
 
-		public static PlayerConfigProvider Instance
+		public static SceneConfigProvider Instance
 		{
 			get { return s_Instance; }
 		}
-		private static PlayerConfigProvider s_Instance = new PlayerConfigProvider();
+		private static SceneConfigProvider s_Instance = new SceneConfigProvider();
 	}
 }

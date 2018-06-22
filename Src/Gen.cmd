@@ -1,1 +1,1 @@
-..\Tools\EntitasCodeGenerator\Entitas.CodeGeneration.CodeGenerator.CLI.exe gen -v
+..\Tools\EntitasCodeGenerator\Entitas.CodeGeneration.CodeGenerator.CLI.exe gen

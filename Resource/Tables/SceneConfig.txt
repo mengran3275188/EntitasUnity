@@ -1,2 +1,3 @@
-Id	Description	Navmesh
-1	≤‚ ‘≥°æ∞	Test.navmesh
+Id	Description	Script	Navmesh
+int	string	string	string
+1	≤‚ ‘≥°æ∞	Tables/Scene/Test.mr	Tables/Scene/Test.navmesh

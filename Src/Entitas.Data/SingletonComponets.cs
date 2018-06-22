@@ -30,6 +30,7 @@ namespace Entitas.Component
     [Unique]
     public sealed class SceneComponent : IComponent
     {
-        public SceneInstanceInfo Instance;
+        public SceneConfig Config;
+        public SceneInstanceInfo ScriptInstance;
     }
 }

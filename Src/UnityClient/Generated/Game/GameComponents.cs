@@ -153,22 +153,22 @@ public partial class GameContext {
     public Entitas.Component.SceneComponent scene { get { return sceneEntity.scene; } }
     public bool hasScene { get { return sceneEntity != null; } }
 
-    public GameEntity SetScene(Entitas.Data.SceneInstanceInfo newInstance) {
+    public GameEntity SetScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         if (hasScene) {
             throw new Entitas.EntitasException("Could not set Scene!\n" + this + " already has an entity with Entitas.Component.SceneComponent!",
                 "You should check if the context already has a sceneEntity before setting it or use context.ReplaceScene().");
         }
         var entity = CreateEntity();
-        entity.AddScene(newInstance);
+        entity.AddScene(newConfig, newScriptInstance);
         return entity;
     }
 
-    public void ReplaceScene(Entitas.Data.SceneInstanceInfo newInstance) {
+    public void ReplaceScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         var entity = sceneEntity;
         if (entity == null) {
-            entity = SetScene(newInstance);
+            entity = SetScene(newConfig, newScriptInstance);
         } else {
-            entity.ReplaceScene(newInstance);
+            entity.ReplaceScene(newConfig, newScriptInstance);
         }
     }
 
@@ -482,17 +482,19 @@ public partial class GameEntity {
     public Entitas.Component.SceneComponent scene { get { return (Entitas.Component.SceneComponent)GetComponent(GameComponentsLookup.Scene); } }
     public bool hasScene { get { return HasComponent(GameComponentsLookup.Scene); } }
 
-    public void AddScene(Entitas.Data.SceneInstanceInfo newInstance) {
+    public void AddScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         var index = GameComponentsLookup.Scene;
         var component = CreateComponent<Entitas.Component.SceneComponent>(index);
-        component.Instance = newInstance;
+        component.Config = newConfig;
+        component.ScriptInstance = newScriptInstance;
         AddComponent(index, component);
     }
 
-    public void ReplaceScene(Entitas.Data.SceneInstanceInfo newInstance) {
+    public void ReplaceScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         var index = GameComponentsLookup.Scene;
         var component = CreateComponent<Entitas.Component.SceneComponent>(index);
-        component.Instance = newInstance;
+        component.Config = newConfig;
+        component.ScriptInstance = newScriptInstance;
         ReplaceComponent(index, component);
     }
 

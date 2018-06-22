@@ -1124,7 +1124,7 @@ namespace TableReaderGenerator
         private static void GenDataReader(bool genToolReader)
         {
             TableDslParser parser = new TableDslParser();
-            parser.Init("table.dsl", "../../");
+            parser.Init("table.dsl", "../../Resource/");
             parser.GenAllReaders(GetAllTableFiles());
             if (genToolReader)
             {

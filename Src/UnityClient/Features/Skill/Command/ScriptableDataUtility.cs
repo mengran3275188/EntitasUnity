@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Util;
 
-namespace SkillCommands
+namespace ScriptableData
 {
   public static class ScriptableDataUtility
   {

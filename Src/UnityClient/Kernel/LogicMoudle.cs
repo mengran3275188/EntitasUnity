@@ -38,13 +38,14 @@ namespace UnityClient.Kernel
             systems.Add(new TimeSystem(contexts));
             systems.Add(new InputSystem(contexts));
             systems.Add(new CameraSystem(contexts));
-            systems.Add(SpatialSystem.Instance);
-            systems.Add(new GameStartSystem(contexts));
+            systems.Add(new SceneSystem());
             systems.Add(new MovementSystem(contexts));
             systems.Add(new PositionSystem(contexts));
             systems.Add(new RotationSystem(contexts));
             systems.Add(new AnimationSystem(contexts));
             systems.Add(SkillSystem.Instance);
+
+            systems.Add(new GameStartSystem(contexts));
             return systems;
         }
         public int CurActionNum

@@ -9,21 +9,6 @@ namespace SkillCommands
 {
     internal class AnimationCommand : AbstractCommand
     {
-        public override ICommand Clone()
-        {
-            AnimationCommand command = new AnimationCommand();
-            command.m_AnimName = m_AnimName;
-            command.m_Speed = m_Speed;
-            command.m_Weight = m_Weight;
-            command.m_Layer = m_Layer;
-            command.m_WrapMode = m_WrapMode;
-            command.m_PlayMode = m_PlayMode;
-            command.m_BlendMode = m_BlendMode;
-            command.m_MixingNode = m_MixingNode;
-            command.m_CrossFadeTime = m_CrossFadeTime;
-            return command;
-        }
-
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;

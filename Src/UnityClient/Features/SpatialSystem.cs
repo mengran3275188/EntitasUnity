@@ -8,31 +8,27 @@ using Spatial;
 
 namespace UnityClient
 {
-    public class SpatialSystem : Singleton<SpatialSystem>, IInitializeSystem, IExecuteSystem
+    public class SpatialSystem : Singleton<SpatialSystem>
     {
-        public void Initialize()
+        public void Init(string navmesh)
         {
-            m_GameContext = Contexts.sharedInstance.game;
+            var gameContext = Contexts.sharedInstance.game;
 
             float width, height;
             NavmeshMapParser mapParser = new NavmeshMapParser();
-            mapParser.ParseTileDataWithNavmesh(HomePath.Instance.GetAbsolutePath("tables/Scene/Photo_20180422200931.navmesh"), out width, out height);
+            mapParser.ParseTileDataWithNavmesh(HomePath.Instance.GetAbsolutePath(navmesh), out width, out height);
 
             m_CellMgr = new CellManager();
             m_CellMgr.Init(width, height, 0.1f);
 
             mapParser.GenerateObstacleInfoWithNavmesh(m_CellMgr);
             JumpPointFinder finder = new JumpPointFinder();
-            m_GameContext.SetSpatial(m_CellMgr, finder);
-
             finder.Init(m_CellMgr);
+
+            gameContext.SetSpatial(m_CellMgr, finder);
             // 
 
         }
-        public void Execute()
-        {
-        }
-
         public bool CanPass(float curPosX, float curPosZ, float toPosX, float toPosZ)
         {
             CellPos cur_cell = new CellPos();
@@ -93,7 +89,6 @@ namespace UnityClient
             return pos;
         }
 
-        private GameContext m_GameContext;
         private CellManager m_CellMgr;
     }
 }

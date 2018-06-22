@@ -27,8 +27,9 @@ namespace UnityClient.Kernel
 
             LoadConfig();
 
-            s_Logic.OnStart();
             GfxMoudle.Instance.OnStart(s_Logic);
+
+            s_Logic.OnStart();
         }
 
         public static void OnTick()
@@ -42,8 +43,8 @@ namespace UnityClient.Kernel
         private static void LoadConfig()
         {
             Entitas.Data.ActionConfigProvider.Instance.LoadForClient();
-            Entitas.Data.PlayerConfigProvider.Instance.LoadForClient();
-            Entitas.Data.NpcConfigProvider.Instance.LoadForClient();
+            Entitas.Data.SceneConfigProvider.Instance.LoadForClient();
+            Entitas.Data.CharacterConfigProvider.Instance.LoadForClient();
         }
 
 

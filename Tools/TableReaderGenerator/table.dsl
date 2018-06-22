@@ -7,7 +7,7 @@ tabledef(ActionConfig, dictionary, public)
 	fielddef(Stand, Stand, string);
 	fielddef(Run, Run, string);
 };
-tabledef(NpcConfig, dictionary, public)
+tabledef(CharacterConfig, dictionary, public)
 {
 	recordmodifier(partial);
 	providermodifier(partial);
@@ -18,12 +18,12 @@ tabledef(NpcConfig, dictionary, public)
 	fielddef(ActionId, ActionId, int);
 	fielddef(ActionPrefix, ActionPrefix, string);
 };
-tabledef(PlayerConfig, dictionary, public)
+tabledef(SceneConfig, dictionary, public)
 {
 	recordmodifier(partial);
 	providermodifier(partial);
 	fielddef(Id, Id, int);
-	fielddef(Model, Model, string);
-	fielddef(ActionId, ActionId, int);
-	fielddef(ActionPrefix, ActionPrefix, string);
+	fielddef(Description, Description, string);
+	fielddef(Script, Script, string);
+	fielddef(Navmesh, Navmesh, string);
 };

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityClient;
 using ScriptableSystem;
+using ScriptableData;
 using Util;
 
 namespace SkillCommands
@@ -20,19 +21,6 @@ namespace SkillCommands
     /// </summary>
     internal class CharacterEffectCommand : AbstractCommand
     {
-        public override ICommand Clone()
-        {
-            CharacterEffectCommand triger = new CharacterEffectCommand();
-            triger.m_EffectPath = m_EffectPath;
-            triger.m_AttachPath = m_AttachPath;
-            triger.m_DeleteTime = m_DeleteTime;
-            triger.m_IsAttach = m_IsAttach;
-            triger.m_Pos = m_Pos;
-            triger.m_Dir = m_Dir;
-            triger.m_Scale = m_Scale;
-            triger.m_SpeedInfuence = m_SpeedInfuence;
-            return triger;
-        }
 
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {

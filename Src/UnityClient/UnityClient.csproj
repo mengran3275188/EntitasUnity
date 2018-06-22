@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
   </ItemGroup>
   <ItemGroup>

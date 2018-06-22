@@ -1,0 +1,4 @@
+Id	Description	Model	Scale	ActionId	ActionPrefix
+int	string	string	float	int	string
+1	第一只主角	xxxxx	1	1	1_
+1001	第一只小怪	xxxxx	1	1	1_

@@ -76,7 +76,10 @@ namespace ScriptableSystem
         {
             SemanticAnalyze(instance);
         }
-        public abstract ICommand Clone();
+        public virtual ICommand Clone()
+        {
+            return this.MemberwiseClone() as ICommand;
+        }
         protected virtual void ResetState() { }
         protected virtual void UpdateArguments(object iterator, object[] args) { }
         protected virtual void UpdateVariables(Instance instance) { }

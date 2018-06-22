@@ -18,23 +18,8 @@ namespace UnityClient
 
         public void Initialize()
         {
-            uint resId = IdGenerater.Instance.NextId();
-            GfxSystem.Instantiate(resId, "");
-            GameEntity entity = game.CreateEntity();
-            entity.isMainPlayer = true;
-            entity.AddMovement(MoveState.Idle, 0, 0);
-            entity.AddResource(resId);
-            Vector3 pos = SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));
-            entity.AddPosition(pos.x, pos.y, pos.z);
-            entity.AddRotation(RotateState.UserRotate, 0);
-            entity.AddSkill(null);
-            LoadConfig();
-        }
+            SceneSystem.Instance.Load(1);
 
-        private void LoadConfig()
-        {
-            PlayerConfigProvider.Instance.LoadForClient();
-            LogUtil.Debug(PlayerConfigProvider.Instance.GetPlayerConfigCount().ToString());
         }
     }
 }
