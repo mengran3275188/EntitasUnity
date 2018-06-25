@@ -6,6 +6,8 @@ bin/
 *.csproj.user
 *.mdb
 *.pdb
+/Resource/Unity/Assembly-CSharp.csproj
+/Resource/Unity/Assembly-CSharp-Editor.csproj
 /Src/buildlog
 /Src/Bin
 /Resource/Unity/Library/
