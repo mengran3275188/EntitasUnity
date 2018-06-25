@@ -8,7 +8,7 @@ namespace Util
 {
     public class HomePath : Singleton<HomePath>
     {
-        private HomePath()
+        public HomePath()
         {
           string tmpPath = Assembly.GetExecutingAssembly().Location;
           m_HomePath = tmpPath.Substring(0, tmpPath.LastIndexOfAny(new char[] { '\\', '/' }));

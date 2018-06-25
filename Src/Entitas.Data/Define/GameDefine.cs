@@ -10,10 +10,12 @@ namespace Entitas.Data
         Idle,
         UserMoving,
         SkillMoving,
+        ImpactMoving,
     }
     public enum RotateState
     { 
         UserRotate,
         SkillRotate,
+        ImpactRotate,
     }
 }

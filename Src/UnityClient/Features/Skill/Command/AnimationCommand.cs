@@ -99,4 +99,29 @@ namespace SkillCommands
         private string m_MixingNode = "";
         private long m_CrossFadeTime = 300;
     }
+    public class AnimationSpeedCommand : AbstractCommand
+    {
+        protected override ExecResult ExecCommand(Instance instance, long delta)
+        {
+            GameEntity obj = instance.Target as GameEntity;
+            if (obj != null)
+            {
+                GfxSystem.SetAnimationSpeed(obj.resource.ResourceId, m_AnimName, m_Speed);
+            }
+            return ExecResult.Finished;
+        }
+
+        protected override void Load(ScriptableData.CallData callData)
+        {
+            int num = callData.GetParamNum();
+            if (num >= 2)
+            {
+                m_AnimName = callData.GetParamId(0);
+                m_Speed = float.Parse(callData.GetParamId(1));
+            }
+        }
+
+        private string m_AnimName = "";
+        private float m_Speed = 1.0f;
+    }
 }

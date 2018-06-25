@@ -8,4 +8,11 @@ namespace Entitas.Data
         public Instance m_SkillInstance;
         public bool m_IsUsed;
     }
+
+    public class ImpactInstanceInfo
+    {
+        public int m_ImpactId;
+        public Instance m_ImpactInstance;
+        public bool m_IsUsed;
+    }
 }

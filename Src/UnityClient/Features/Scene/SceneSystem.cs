@@ -9,9 +9,6 @@ namespace UnityClient
 {
     public class SceneSystem : Singleton<SceneSystem>, IInitializeSystem, IExecuteSystem
     {
-        private SceneSystem()
-        {
-        }
         public void Initialize()
         {
             CommandManager.Instance.RegisterCommandFactory("createcharacter", new CommandFactoryHelper<SceneCommand.CreateCharacterCommand>());

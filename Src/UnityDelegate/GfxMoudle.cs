@@ -200,6 +200,60 @@ namespace UnityDelegate
         {
             CameraManager.Instance.UpdateCamera(x, y, z);
         }
+        public void SetAnimationSpeed(uint resId, string animName, float speed)
+        {
+            int id = 0;
+            if (m_IdMapper.TryGetValue(resId, out id))
+            {
+                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
+                if (null != target)
+                {
+                    Animation animation = target.GetComponent<Animation>();
+                    if (null != animation)
+                    {
+                        AnimationState state = animation[animName];
+                        if (null != state)
+                        {
+                            state.speed = speed;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+            }
+        }
+        public void MoveChildToBone(uint resId, string childName, string boneName)
+        {
+            int id = 0;
+            if (m_IdMapper.TryGetValue(resId, out id))
+            {
+                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
+                if (null != target)
+                {
+                    Transform child = FindChildRecursive(target.transform, childName);
+                    if (null == child)
+                    {
+                        LogUtil.Error("GfxMoudle.MoveChildToBone : child {0} not found.", childName);
+                        return;
+                    }
+                    Transform bone = FindChildRecursive(target.transform, boneName);
+                    if(null == bone)
+                    {
+                        LogUtil.Error("GfxMoudle.MoveChildToBone : bone {0} not found.", boneName);
+                        return;
+                    }
+                    child.parent = bone;
+                    child.localRotation = UnityEngine.Quaternion.identity;
+                    child.localPosition = UnityEngine.Vector3.zero;
+                }
+            }
+            else
+            {
+                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+            }
+        }
         public bool GetJoyStickDir(out float dir)
         {
             dir = 0;

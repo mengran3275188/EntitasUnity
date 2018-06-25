@@ -56,6 +56,14 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.UpdateCamera(x, y, z);
         }
+        public static void SetAnimationSpeed(uint resId, string animName, float speed)
+        {
+            GfxSystemImpl.Gfx.SetAnimationSpeed(resId, animName, speed);
+        }
+        public static void MoveChildToBone(uint resId, string childName, string boneName)
+        {
+            GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
+        }
 
         // 线程安全的方法允许返回值
         public static bool GetJoyStickDir(out float dir)

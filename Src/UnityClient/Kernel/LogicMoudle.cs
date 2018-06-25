@@ -44,6 +44,7 @@ namespace UnityClient.Kernel
             systems.Add(new RotationSystem(contexts));
             systems.Add(new AnimationSystem(contexts));
             systems.Add(SkillSystem.Instance);
+            systems.Add(ImpactSystem.Instance);
 
             systems.Add(new GameStartSystem(contexts));
             return systems;

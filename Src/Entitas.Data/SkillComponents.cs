@@ -7,4 +7,8 @@ namespace Entitas.Component
     {
         public SkillInstanceInfo Instance;
     }
+    public sealed class ImpactComponent : IComponent
+    {
+        public ImpactInstanceInfo Instance;
+    }
 }

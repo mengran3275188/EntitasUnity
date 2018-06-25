@@ -2,13 +2,13 @@ skill(1)
 {
 	onmessage("start")
 	{
-		log("skill start");
+		log("impact start");
 		
-		animation("zhankuang_badaozhan_01");
-		areadamage(vector3(0, 0, 0), 3, 0);
+		//animation("zhankuang_badaozhan_01");
+		//areadamage(vector3(0, 0, 0), 3, 0);
 		curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0);
 		wait(3000);
-		log("skill stoped");
+		log("impact stoped");
 		terminate();
 	};
 };

@@ -9,7 +9,7 @@ namespace UnityClient
 {
     public class SkillSystem : Singleton<SkillSystem>, IInitializeSystem, IExecuteSystem
     {
-        private SkillSystem()
+        public SkillSystem()
         {
             m_GameContext = Contexts.sharedInstance.game;
             m_SkillEntities = m_GameContext.GetGroup(GameMatcher.Skill);
@@ -19,7 +19,11 @@ namespace UnityClient
             GfxSystem.EventForLogic.Subscribe<int>("player_use_skill", "skill_system", this.PlayUseSkill);
 
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
+            CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
+            CommandManager.Instance.RegisterCommandFactory("movechild", new CommandFactoryHelper<SkillCommands.MoveChildTrigger>());
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
         }
 
         public void Execute()
@@ -65,7 +69,7 @@ namespace UnityClient
 
         private void UpdateSkillControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
         {
-            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.SkillMoving : Entitas.Data.MoveState.UserMoving,
+            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.SkillMoving : Entitas.Data.MoveState.Idle,
                                    entity.hasMovement ? entity.movement.MovingDir : 0, 0);
             entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.SkillRotate : Entitas.Data.RotateState.UserRotate,
                                    entity.hasRotation ? entity.rotation.RotateDir : 0);
@@ -82,7 +86,7 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 //do load
-                ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath("tables/Skill/test.mr"));
+                ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath("tables/Skill/julitiaokong.mr"));
                 Instance instance = ConfigManager.Instance.NewInstance(skillId, 0);
                 if(null == instance)
                 {

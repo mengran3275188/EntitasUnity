@@ -53,6 +53,8 @@
     <Compile Include="Features\Scene\SceneSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Skill\Command\AreaDamageCommand.cs" />
+    <Compile Include="Features\Skill\Command\GeneralCommand.cs" />
     <Compile Include="Features\Skill\Command\ScriptableDataUtility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\PositionSystem.cs" />
+    <Compile Include="Features\Skill\ImpactSystem.cs" />
     <Compile Include="Features\Skill\SkillSystem.cs" />
     <Compile Include="Features\SpatialSystem.cs" />
   </ItemGroup>
