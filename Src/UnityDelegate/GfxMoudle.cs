@@ -56,7 +56,7 @@ namespace UnityDelegate
 
         public void Instantiate(uint resId, string path)
         {
-            var obj = ResourceSystem.NewObject("Hero/5_zhankuang/1_JianShi_A_01") as UnityEngine.GameObject;
+            var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;
             m_IdMapper[resId] = obj.GetInstanceID();
         }
         public void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)

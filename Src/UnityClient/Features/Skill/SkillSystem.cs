@@ -9,7 +9,7 @@ namespace UnityClient
 {
     public class SkillSystem : Singleton<SkillSystem>, IInitializeSystem, IExecuteSystem
     {
-        public SkillSystem()
+        private SkillSystem()
         {
             m_GameContext = Contexts.sharedInstance.game;
             m_SkillEntities = m_GameContext.GetGroup(GameMatcher.Skill);

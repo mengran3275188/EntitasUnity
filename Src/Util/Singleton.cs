@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Util
 {
-    public abstract class Singleton<T> where T : class, new()
+    public abstract class Singleton<T> where T : class
     {
+        protected Singleton() { }
         public static T Instance
         {
             get { return s_Instance; }

@@ -9,7 +9,7 @@ namespace UnityClient
 {
     public class SceneSystem : Singleton<SceneSystem>, IInitializeSystem, IExecuteSystem
     {
-        public SceneSystem()
+        private SceneSystem()
         {
         }
         public void Initialize()
