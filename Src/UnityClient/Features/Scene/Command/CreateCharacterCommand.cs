@@ -20,26 +20,52 @@ namespace SceneCommand
                 m_LocalRotation = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
             }
         }
+        protected override void Load(FunctionData funcData)
+        {
+            ScriptableData.CallData callData = funcData.Call;
+            if (null == callData)
+                return;
+            Load(callData);
+            for(int i = 0; i < funcData.Statements.Count; ++i)
+            {
+                ScriptableData.CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
+                if (null == stCall)
+                    continue;
+                if(stCall.GetId() == "mainplayer")
+                {
+                    m_MainPlayer = true;
+                }
+            }
+        }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             var gameContext = Contexts.sharedInstance.game;
 
-            uint resId = IdGenerater.Instance.NextId();
-            GfxSystem.Instantiate(resId, "");
+            CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(m_CharacterId);
+            if(null != config)
+            {
+                uint resId = IdGenerater.Instance.NextId();
+                GfxSystem.Instantiate(resId, config.Model);
 
-            GameEntity entity = gameContext.CreateEntity();
-            entity.isMainPlayer = true;
-            entity.AddMovement(MoveState.Idle, 0, 0);
-            entity.AddResource(resId);
-            Vector3 pos = new Vector3(5, 0, 5);//SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));
-            entity.AddPosition(pos.x, pos.y, pos.z);
-            entity.AddRotation(RotateState.UserRotate, 0);
-            entity.AddSkill(null);
+                GameEntity entity = gameContext.CreateEntity();
+                entity.isMainPlayer = m_MainPlayer;
+                entity.AddMovement(MoveState.Idle, 0, 0);
+                entity.AddResource(resId);
+                //SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));
+                entity.AddPosition(m_LocalPosition.x, m_LocalPosition.y, m_LocalPosition.z);
+                entity.AddRotation(RotateState.UserRotate, 0);
+                entity.AddSkill(null);
+            }
+            else
+            {
+                LogUtil.Error("CreateCharacterCommand.ExecCommand : character config {0} not found!", m_CharacterId);
+            }
 
             return ExecResult.Finished;
         }
 
         private int m_CharacterId;
+        private bool m_MainPlayer = false;
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
     }

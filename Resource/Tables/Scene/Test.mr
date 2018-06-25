@@ -3,7 +3,11 @@ script(1)
 	onmessage("start")
 	{
 		log("scene start");
-		createcharacter(1, vector3(5, 0, 5), vector3(0, 0, 0));
+		createcharacter(1, vector3(5, 0, 5), vector3(0, 0, 0))
+		{
+			mainplayer();
+		};
+		createcharacter(1001, vector3(15, 0, 15), vector3(0, 0, 0));
 		wait(3000);
 		log("scene stoped");
 	};
