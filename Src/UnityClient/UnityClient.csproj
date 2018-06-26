@@ -35,6 +35,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Behaviac, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugins\Behaviac.dll</HintPath>
+    </Reference>
     <Reference Include="Entitas">
       <HintPath>..\Plugins\Entitas.dll</HintPath>
     </Reference>
@@ -49,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="behaviac_generated\types\AgentProperties.cs" />
+    <Compile Include="behaviac_generated\types\CharacterAgent.cs" />
     <Compile Include="EntitasGenerated\Contexts.cs" />
     <Compile Include="EntitasGenerated\Game\GameAttribute.cs" />
     <Compile Include="EntitasGenerated\Game\GameComponents.cs" />
@@ -56,6 +62,7 @@
     <Compile Include="EntitasGenerated\Game\GameContext.cs" />
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
+    <Compile Include="Features\AISystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
   </ItemGroup>
