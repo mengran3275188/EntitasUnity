@@ -25,8 +25,11 @@
         <Param Name="param0" Type="const char*" TypeFullName="System.String" DisplayName="param0" Desc="param0" />
       </Method>
     </agent>
-    <agent classfullname="FirstAgent" base="behaviac::Agent" DisplayName="FirstAgent" Desc="FirstAgent" IsRefType="true" IsCustomized="true">
-      <Method Name="SayHello" DisplayName="SayHello" Desc="SayHello" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+    <agent classfullname="CharacterAgent" base="behaviac::Agent" DisplayName="CharacterAgent" Desc="CharacterAgent" IsRefType="true" IsCustomized="true">
+      <Method Name="CanUseSkill" DisplayName="CanUseSkill" Desc="当前是否可以使用技能" Class="CharacterAgent" ReturnType="bool" ReturnTypeFullName="System.Boolean" Static="false" Public="true" istask="false" />
+      <Method Name="UseSkill" DisplayName="UseSkill" Desc="使用指定技能id的技能" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
+        <Param Name="SkillId" Type="const int" TypeFullName="System.Int32" IsConst="true" DisplayName="SkillId" Desc="SkillId" />
+      </Method>
     </agent>
   </agents>
   <instances />

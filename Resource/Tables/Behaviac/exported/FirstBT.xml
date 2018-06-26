@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
 <!--Source File: FirstBT.xml-->
-<behavior name="FirstBT" agenttype="FirstAgent" version="5">
-  <node class="Action" id="0">
-    <property Method="Self.FirstAgent::SayHello()" />
-    <property ResultOption="BT_SUCCESS" />
+<behavior name="FirstBT" agenttype="CharacterAgent" version="5">
+  <node class="Sequence" id="1">
+    <node class="Wait" id="2">
+      <property Time="const float 1000" />
+    </node>
+    <node class="IfElse" id="3">
+      <node class="Condition" id="0">
+        <property Operator="Equal" />
+        <property Opl="Self.CharacterAgent::CanUseSkill()" />
+        <property Opr="const bool true" />
+      </node>
+      <node class="Action" id="4">
+        <property Method="Self.CharacterAgent::UseSkill(1)" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+      <node class="Noop" id="5" />
+    </node>
   </node>
 </behavior>

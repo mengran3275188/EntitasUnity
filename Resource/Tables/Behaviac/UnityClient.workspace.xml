@@ -4,7 +4,13 @@
     <cs>
       <isexported>False</isexported>
       <exportfilecount>1</exportfilecount>
-      <folder>../../../src/Behaviac/</folder>
+      <folder>../../../../Src/UnityClient/</folder>
     </cs>
+    <bson>
+      <isexported>False</isexported>
+    </bson>
+    <xml>
+      <isexported>True</isexported>
+    </xml>
   </export>
 </workspace>
