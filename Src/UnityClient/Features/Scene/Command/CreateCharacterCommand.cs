@@ -49,7 +49,7 @@ namespace SceneCommand
 
                 GameEntity entity = gameContext.CreateEntity();
                 entity.isMainPlayer = m_MainPlayer;
-                if(entity.isMainPlayer)
+                if(!entity.isMainPlayer)
                 {
                     try
                     {

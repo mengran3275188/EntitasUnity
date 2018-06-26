@@ -188,7 +188,7 @@ namespace behaviac
 
 		public override bool Load()
 		{
-			AgentMeta.TotalSignature = 465716495;
+			AgentMeta.TotalSignature = 2873842731;
 
 			AgentMeta meta;
 
@@ -203,10 +203,11 @@ namespace behaviac
 			meta.RegisterMethod(502968959, new CMethod_behaviac_Agent_VectorRemove());
 
 			// CharacterAgent
-			meta = new AgentMeta(3744758360);
+			meta = new AgentMeta(3851063257);
 			AgentMeta._AgentMetas_[3209652550] = meta;
 			meta.RegisterMethod(1672911688, new CAgentMethod<bool>(delegate(Agent self) { return ((CharacterAgent)self).CanUseSkill(); }));
 			meta.RegisterMethod(1045109914, new CAgentStaticMethodVoid<string>(delegate(string param0) { CharacterAgent.LogMessage(param0); }));
+			meta.RegisterMethod(3823470545, new CAgentMethod<behaviac.EBTStatus>(delegate(Agent self) { return ((CharacterAgent)self).MoveToPlayer(); }));
 			meta.RegisterMethod(2129264648, new CAgentMethodVoid<int>(delegate(Agent self, int SkillId) { ((CharacterAgent)self).UseSkill(SkillId); }));
 			meta.RegisterMethod(2521019022, new CMethod_behaviac_Agent_VectorAdd());
 			meta.RegisterMethod(2306090221, new CMethod_behaviac_Agent_VectorClear());

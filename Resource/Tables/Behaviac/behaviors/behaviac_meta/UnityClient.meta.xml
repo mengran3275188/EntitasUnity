@@ -30,6 +30,7 @@
       <Method Name="UseSkill" DisplayName="UseSkill" Desc="使用指定技能id的技能" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
         <Param Name="SkillId" Type="const int" TypeFullName="System.Int32" IsConst="true" DisplayName="SkillId" Desc="SkillId" />
       </Method>
+      <Method Name="MoveToPlayer" DisplayName="MoveToPlayer" Desc="向目标玩家移动" Class="CharacterAgent" ReturnType="behaviac::EBTStatus" ReturnTypeFullName="XMLPluginBehaviac.behaviac_EBTStatus" Static="false" Public="true" istask="false" />
     </agent>
   </agents>
   <instances />

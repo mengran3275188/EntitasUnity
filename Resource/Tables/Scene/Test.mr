@@ -7,7 +7,7 @@ script(1)
 		{
 			mainplayer();
 		};
-		createcharacter(1001, vector3(15, 0, 15), vector3(0, 0, 0));
+		createcharacter(1002, vector3(15, 0, 15), vector3(0, 0, 0));
 		wait(3000);
 		log("scene stoped");
 	};

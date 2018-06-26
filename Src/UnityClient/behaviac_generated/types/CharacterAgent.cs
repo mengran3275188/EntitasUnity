@@ -23,6 +23,24 @@ public class CharacterAgent : behaviac.Agent
 ///<<< END WRITING YOUR CODE
 	}
 
+	public behaviac.EBTStatus MoveToPlayer()
+	{
+///<<< BEGIN WRITING YOUR CODE MoveToPlayer
+        var context = Contexts.sharedInstance.game;
+        var mainPlayer = context.mainPlayerEntity;
+        var self = GetOwner();
+        if (Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z)) > 2)
+        {
+            self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z), 0);
+        }
+        else
+        {
+            self.ReplaceMovement(Entitas.Data.MoveState.Idle, 0, 0);
+        }
+		return behaviac.EBTStatus.BT_SUCCESS;
+///<<< END WRITING YOUR CODE
+	}
+
 	public void UseSkill(int SkillId)
 	{
 ///<<< BEGIN WRITING YOUR CODE UseSkill

@@ -38,6 +38,7 @@ namespace UnityClient.Kernel
             systems.Add(new TimeSystem(contexts));
             systems.Add(new InputSystem(contexts));
             systems.Add(new CameraSystem(contexts));
+            systems.Add(IdSystem.Instance);
             systems.Add(SceneSystem.Instance);
             systems.Add(new MovementSystem(contexts));
             systems.Add(new PositionSystem(contexts));
