@@ -44,7 +44,7 @@ namespace SceneCommand
             CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(m_CharacterId);
             if(null != config)
             {
-                uint resId = IdGenerater.Instance.NextId();
+                uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
                 GfxSystem.Instantiate(resId, config.Model);
 
                 GameEntity entity = gameContext.CreateEntity();

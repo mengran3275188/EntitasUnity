@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Util
 {
-    public sealed class IdGenerater : Singleton<IdGenerater>
+    public sealed class IdGenerator
     {
         public uint NextId()
         {

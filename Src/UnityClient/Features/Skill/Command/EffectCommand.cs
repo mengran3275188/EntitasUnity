@@ -28,7 +28,7 @@ namespace SkillCommands
             if (null != obj)
             {
                 string effectPath = m_EffectPath;
-                GfxSystem.CreateAndAttachGameObject(IdGenerater.Instance.NextId(), effectPath, obj.resource.ResourceId, m_AttachPath, m_DeleteTime, m_IsAttach);
+                GfxSystem.CreateAndAttachGameObject(IdSystem.Instance.GenId(IdEnum.Resource), effectPath, obj.resource.ResourceId, m_AttachPath, m_DeleteTime, m_IsAttach);
             }
             return ExecResult.Finished;
         }
