@@ -49,6 +49,21 @@ namespace SceneCommand
 
                 GameEntity entity = gameContext.CreateEntity();
                 entity.isMainPlayer = m_MainPlayer;
+                if(entity.isMainPlayer)
+                {
+                    try
+                    {
+                        var agent = new CharacterAgent();
+                        agent.Init(1);
+                        bool ret = agent.btload("FirstBT");
+                        agent.btsetcurrent("FirstBT");
+                        entity.AddAI(agent);
+                        entity.AddId(1);
+                    }catch(Exception ex)
+                    {
+                        LogUtil.Error("{0}\n{1}", ex.Message, ex.StackTrace);
+                    }
+                }
                 entity.AddMovement(MoveState.Idle, 0, 0);
                 entity.AddResource(resId);
                 //SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));

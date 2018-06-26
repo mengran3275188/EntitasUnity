@@ -19,6 +19,8 @@ namespace UnityClient
         {
             float curTime = TimeUtility.Instance.GetLocalSeconds();
 
+            behaviac.Workspace.Instance.DoubleValueSinceStartup = curTime * 1000;
+
             m_GameContext.ReplaceTimeInfo(curTime, curTime - m_GameContext.timeInfo.Time);
         }
 

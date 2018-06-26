@@ -8,23 +8,25 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Animation = 0;
-    public const int Id = 1;
-    public const int Impact = 2;
-    public const int Input = 3;
-    public const int MainPlayer = 4;
-    public const int Movement = 5;
-    public const int Position = 6;
-    public const int Resource = 7;
-    public const int Rotation = 8;
-    public const int Scene = 9;
-    public const int Skill = 10;
-    public const int Spatial = 11;
-    public const int TimeInfo = 12;
+    public const int AI = 0;
+    public const int Animation = 1;
+    public const int Id = 2;
+    public const int Impact = 3;
+    public const int Input = 4;
+    public const int MainPlayer = 5;
+    public const int Movement = 6;
+    public const int Position = 7;
+    public const int Resource = 8;
+    public const int Rotation = 9;
+    public const int Scene = 10;
+    public const int Skill = 11;
+    public const int Spatial = 12;
+    public const int TimeInfo = 13;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
+        "AI",
         "Animation",
         "Id",
         "Impact",
@@ -41,6 +43,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Entitas.Component.AIComponent),
         typeof(Entitas.Component.AnimationComponent),
         typeof(Entitas.Component.IdComponent),
         typeof(Entitas.Component.ImpactComponent),

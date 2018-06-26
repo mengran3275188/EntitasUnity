@@ -13,4 +13,8 @@ namespace Entitas.Component
     {
         [PrimaryEntityIndex]public uint value;
     }
+    public sealed class AIComponent : IComponent
+    {
+        public behaviac.Agent Agent;
+    }
 }
