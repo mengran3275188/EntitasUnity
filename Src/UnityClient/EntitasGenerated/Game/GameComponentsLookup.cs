@@ -10,8 +10,8 @@ public static class GameComponentsLookup {
 
     public const int AI = 0;
     public const int Animation = 1;
-    public const int Id = 2;
-    public const int Impact = 3;
+    public const int Buff = 2;
+    public const int Id = 3;
     public const int Input = 4;
     public const int MainPlayer = 5;
     public const int Movement = 6;
@@ -28,8 +28,8 @@ public static class GameComponentsLookup {
     public static readonly string[] componentNames = {
         "AI",
         "Animation",
+        "Buff",
         "Id",
-        "Impact",
         "Input",
         "MainPlayer",
         "Movement",
@@ -45,8 +45,8 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Entitas.Component.AIComponent),
         typeof(Entitas.Component.AnimationComponent),
+        typeof(Entitas.Component.BuffComponent),
         typeof(Entitas.Component.IdComponent),
-        typeof(Entitas.Component.ImpactComponent),
         typeof(Entitas.Component.InputComponent),
         typeof(Entitas.Component.MainPlayerComponent),
         typeof(Entitas.Component.MovementComponent),

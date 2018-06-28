@@ -2,6 +2,7 @@
 using Util;
 using System.Collections.Generic;
 using ScriptableSystem;
+using ScriptableData;
 
 namespace SkillCommands
 {
@@ -27,11 +28,18 @@ namespace SkillCommands
 
     public class CurveMoveCommand : AbstractCommand
     {
+        private enum DirectionType
+        {
+            Target,
+            SenderTarget,
+        }
         public override ICommand Clone()
         {
             CurveMoveCommand copy = new CurveMoveCommand();
             copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_SectionList.AddRange(m_SectionList);
+            copy.m_DirectionType = m_DirectionType;
+            copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_IsCurveMoving = true;
             return copy;
         }
@@ -62,11 +70,40 @@ namespace SkillCommands
             }
             m_IsCurveMoving = true;
         }
+        protected override void Load(FunctionData funcData)
+        {
+            ScriptableData.CallData callData = funcData.Call;
+            if(null != callData)
+            {
+                Load(callData);
+                foreach(ScriptableData.ISyntaxComponent statement in funcData.Statements)
+                {
+                    ScriptableData.CallData stCall = statement as ScriptableData.CallData;
+                    string id = stCall.GetId();
+                    string param = stCall.GetParamId(0);
+
+                    if(id == "direction")
+                    {
+                        if(stCall.GetParamNum() >= 1)
+                        {
+                            m_DirectionType = int.Parse(stCall.GetParamId(0)) == 0 ? DirectionType.Target : DirectionType.SenderTarget;
+                            if (m_DirectionType == DirectionType.SenderTarget)
+                                m_IsLockRotate = true;
+                        }
+                    }
+                }
+            }
+        }
 
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            if (obj == null)
+            GameEntity target = instance.Target as GameEntity;
+            if (target == null)
+            {
+                return ExecResult.Finished;
+            }
+            GameEntity sender = instance.Sender as GameEntity;
+            if(sender == null)
             {
                 return ExecResult.Finished;
             }
@@ -76,7 +113,7 @@ namespace SkillCommands
             }
             if (!m_IsInited)
             {
-                Init(obj, instance);
+                Init(sender, target, instance);
             }
             if (m_SectionListCopy.Count == 0)
             {
@@ -91,7 +128,7 @@ namespace SkillCommands
             {
                 float end_time = cur_section.startTime + cur_section.moveTime;
                 float used_time = end_time - cur_section.lastUpdateTime;
-                cur_section.curSpeedVect = Move(obj, cur_section.curSpeedVect, cur_section.accelVect, used_time);
+                cur_section.curSpeedVect = Move(target, cur_section.curSpeedVect, cur_section.accelVect, used_time);
                 m_SectionListCopy.RemoveAt(0);
                 if (m_SectionListCopy.Count > 0)
                 {
@@ -107,19 +144,32 @@ namespace SkillCommands
             }
             else
             {
-                cur_section.curSpeedVect = Move(obj, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
+                cur_section.curSpeedVect = Move(target, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
                 cur_section.lastUpdateTime = realTime;
             }
             return ExecResult.Parallel;
         }
 
-        private void Init(GameEntity obj, Instance instance)
+        private void Init(GameEntity sender, GameEntity target, Instance instance)
         {
             CopySectionList();
             m_ElapsedTime = 0;
             m_SectionListCopy[0].startTime = m_ElapsedTime;
             m_SectionListCopy[0].lastUpdateTime = m_ElapsedTime;
             m_SectionListCopy[0].curSpeedVect = m_SectionListCopy[0].speedVect;
+
+            if(m_IsLockRotate)
+            {
+                if(m_DirectionType == DirectionType.SenderTarget)
+                {
+                    m_RotateDir = Util.Mathf.Atan2(target.position.x - sender.position.x, target.position.z - sender.position.z);
+                }
+                else
+                {
+                    m_RotateDir = target.rotation.RotateDir;
+                }
+            }
+
             m_IsInited = true;
         }
 
@@ -135,22 +185,24 @@ namespace SkillCommands
         {
             if (!m_IsLockRotate)
             {
+                m_RotateDir = obj.rotation.RotateDir;
             }
 
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
-            Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(obj.rotation.RotateDir, 0, 0) * local_motion;
+            Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
             Vector3 word_target_pos = new Vector3(obj.position.x + object_motion.x, obj.position.y + object_motion.y, obj.position.z + object_motion.z);
             obj.ReplacePosition(word_target_pos.x, word_target_pos.y, word_target_pos.z);
             return (speed_vect + accel_vect * time);
         }
 
-        private bool m_IsLockRotate = true;
+        private bool m_IsLockRotate = false;
+        private DirectionType m_DirectionType = DirectionType.Target;
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
         private List<MoveSectionInfo> m_SectionListCopy = new List<MoveSectionInfo>();
         private bool m_IsCurveMoving = false;
+        private float m_RotateDir = 0;
 
         private bool m_IsInited = false;
         private float m_ElapsedTime;
-        private static float m_MaxMoveStep = 3;
     }
 }

@@ -9,10 +9,10 @@ namespace Entitas.Data
         public bool m_IsUsed;
     }
 
-    public class ImpactInstanceInfo
+    public class BuffInstanceInfo
     {
-        public int m_ImpactId;
-        public Instance m_ImpactInstance;
+        public int m_BuffId;
+        public Instance m_BuffInstance;
         public bool m_IsUsed;
     }
 }

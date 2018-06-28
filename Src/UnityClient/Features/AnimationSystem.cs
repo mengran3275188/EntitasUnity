@@ -17,7 +17,7 @@ namespace UnityClient
         }
         protected override bool Filter(GameEntity entity)
         {
-            return entity.movement.State != Entitas.Data.MoveState.SkillMoving;
+            return entity.movement.State != Entitas.Data.MoveState.SkillMoving && entity.movement.State != MoveState.ImpactMoving;
         }
         protected override void Execute(List<GameEntity> entities)
         {

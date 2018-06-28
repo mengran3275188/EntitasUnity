@@ -4,10 +4,15 @@ skill(1)
 	{
 		log("impact start");
 		
-		//animation("zhankuang_badaozhan_01");
-		//areadamage(vector3(0, 0, 0), 3, 0);
-		curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0);
-		wait(3000);
+		animation("hurt_l")
+		{
+			speed(10);
+		};
+		curvemove(true, 0.2, 0, 0, 10, 0, 0, -50)
+		{
+			direction(1);
+		};
+		wait(200);
 		log("impact stoped");
 		terminate();
 	};

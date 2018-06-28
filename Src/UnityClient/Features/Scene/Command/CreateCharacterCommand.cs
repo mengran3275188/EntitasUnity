@@ -71,7 +71,7 @@ namespace SceneCommand
                 entity.AddPosition(m_LocalPosition.x, m_LocalPosition.y, m_LocalPosition.z);
                 entity.AddRotation(RotateState.UserRotate, 0);
                 entity.AddSkill(null);
-                entity.AddImpact(null);
+                entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>());
             }
             else
             {

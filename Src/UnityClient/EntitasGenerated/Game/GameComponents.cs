@@ -617,25 +617,25 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.ImpactComponent impact { get { return (Entitas.Component.ImpactComponent)GetComponent(GameComponentsLookup.Impact); } }
-    public bool hasImpact { get { return HasComponent(GameComponentsLookup.Impact); } }
+    public Entitas.Component.BuffComponent buff { get { return (Entitas.Component.BuffComponent)GetComponent(GameComponentsLookup.Buff); } }
+    public bool hasBuff { get { return HasComponent(GameComponentsLookup.Buff); } }
 
-    public void AddImpact(Entitas.Data.ImpactInstanceInfo newInstance) {
-        var index = GameComponentsLookup.Impact;
-        var component = CreateComponent<Entitas.Component.ImpactComponent>(index);
-        component.Instance = newInstance;
+    public void AddBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos) {
+        var index = GameComponentsLookup.Buff;
+        var component = CreateComponent<Entitas.Component.BuffComponent>(index);
+        component.InstanceInfos = newInstanceInfos;
         AddComponent(index, component);
     }
 
-    public void ReplaceImpact(Entitas.Data.ImpactInstanceInfo newInstance) {
-        var index = GameComponentsLookup.Impact;
-        var component = CreateComponent<Entitas.Component.ImpactComponent>(index);
-        component.Instance = newInstance;
+    public void ReplaceBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos) {
+        var index = GameComponentsLookup.Buff;
+        var component = CreateComponent<Entitas.Component.BuffComponent>(index);
+        component.InstanceInfos = newInstanceInfos;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveImpact() {
-        RemoveComponent(GameComponentsLookup.Impact);
+    public void RemoveBuff() {
+        RemoveComponent(GameComponentsLookup.Buff);
     }
 }
 
@@ -974,17 +974,17 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherImpact;
+    static Entitas.IMatcher<GameEntity> _matcherBuff;
 
-    public static Entitas.IMatcher<GameEntity> Impact {
+    public static Entitas.IMatcher<GameEntity> Buff {
         get {
-            if (_matcherImpact == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Impact);
+            if (_matcherBuff == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Buff);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherImpact = matcher;
+                _matcherBuff = matcher;
             }
 
-            return _matcherImpact;
+            return _matcherBuff;
         }
     }
 }

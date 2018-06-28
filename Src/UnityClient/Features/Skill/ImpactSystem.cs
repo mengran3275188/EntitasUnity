@@ -12,7 +12,7 @@ namespace UnityClient
         public ImpactSystem()
         {
             m_GameContext = Contexts.sharedInstance.game;
-            m_ImpactEntities = m_GameContext.GetGroup(GameMatcher.Impact);
+            m_ImpactEntities = m_GameContext.GetGroup(GameMatcher.Buff);
         }
         public void Initialize()
         {
@@ -22,43 +22,43 @@ namespace UnityClient
             long time = (long)(m_GameContext.timeInfo.Time * 1000);
             foreach (GameEntity entity in m_ImpactEntities)
             {
-                Entitas.Component.ImpactComponent impactComponent = entity.impact;
-                ImpactInstanceInfo info = impactComponent.Instance;
-                if (null != info)
+                Entitas.Component.BuffComponent buffComponent = entity.buff;
+                for(int i = buffComponent.InstanceInfos.Count - 1; i >= 0; i --)
                 {
-                    info.m_ImpactInstance.Tick(time);
-                    if(info.m_ImpactInstance.IsTerminated)
+                    var info = buffComponent.InstanceInfos[i];
+                    info.m_BuffInstance.Tick(time);
+                    if(info.m_BuffInstance.IsTerminated)
                     {
                         RecycleImpactInstance(info);
 
-                        entity.ReplaceImpact(null);
+                        buffComponent.InstanceInfos.Remove(info);
 
-                        UpdateImpactControlMoveAndRotation(entity, false, false);
+                        UpdateBuffControlMoveAndRotation(entity, false, false);
                     }
                 }
             }
         }
-        public void StartImpact(GameEntity sender, GameEntity target, int impactId)
+        public void StartBuff(GameEntity sender, GameEntity target, int impactId)
         {
-            if(target.hasImpact && target.impact.Instance == null)
+            if(target.hasBuff)
             {
-                ImpactInstanceInfo instance = NewImpactInstance(impactId);
+                BuffInstanceInfo instance = NewBuffInstance(impactId);
                 if(null != instance)
                 {
-                    instance.m_ImpactInstance.Sender = sender;
-                    instance.m_ImpactInstance.Target = target;
-                    instance.m_ImpactInstance.Context = null;
-                    instance.m_ImpactInstance.GlobalVariables = m_GlobalVariables;
-                    instance.m_ImpactInstance.Start();
+                    instance.m_BuffInstance.Sender = sender;
+                    instance.m_BuffInstance.Target = target;
+                    instance.m_BuffInstance.Context = null;
+                    instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
+                    instance.m_BuffInstance.Start();
 
-                    target.ReplaceImpact(instance);
+                    target.buff.InstanceInfos.Add(instance);
 
-                    UpdateImpactControlMoveAndRotation(target, true, true);
+                    UpdateBuffControlMoveAndRotation(target, true, true);
                 }
             }
         }
 
-        private void UpdateImpactControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
+        private void UpdateBuffControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
         {
             entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.ImpactMoving : Entitas.Data.MoveState.Idle,
                                    entity.hasMovement ? entity.movement.MovingDir : 0, 0);
@@ -66,23 +66,23 @@ namespace UnityClient
                                    entity.hasRotation ? entity.rotation.RotateDir : 0);
         }
 
-        private ImpactInstanceInfo NewImpactInstance(int impactId)
+        private BuffInstanceInfo NewBuffInstance(int buffId)
         {
-            ImpactInstanceInfo instanceInfo = GetUnusedImpactInstanceInfoFromPool(impactId);
+            BuffInstanceInfo instanceInfo = GetUnusedBuffInstanceInfoFromPool(buffId);
             if(null == instanceInfo)
             {
-                ConfigManager.Instance.LoadIfNotExist(impactId, 2, HomePath.Instance.GetAbsolutePath("Tables/Impact/test.mr"));
-                Instance instance = ConfigManager.Instance.NewInstance(impactId, 2);
+                ConfigManager.Instance.LoadIfNotExist(buffId, 2, HomePath.Instance.GetAbsolutePath("Tables/Impact/test.mr"));
+                Instance instance = ConfigManager.Instance.NewInstance(buffId, 2);
                 if(null == instance)
                 {
-                    LogUtil.Error("ImpactSystem.NewImpactInstance : Can't load impact config, impact:{0}.", impactId);
+                    LogUtil.Error("ImpactSystem.NewImpactInstance : Can't load impact config, impact:{0}.", buffId);
                 }
-                ImpactInstanceInfo res = new ImpactInstanceInfo();
-                res.m_ImpactId = impactId;
-                res.m_ImpactInstance = instance;
+                BuffInstanceInfo res = new BuffInstanceInfo();
+                res.m_BuffId = buffId;
+                res.m_BuffInstance = instance;
                 res.m_IsUsed = true;
 
-                AddImpactInstanceInfoToPool(impactId, res);
+                AddImpactInstanceInfoToPool(buffId, res);
                 return res;
             }
             else
@@ -91,36 +91,36 @@ namespace UnityClient
                 return instanceInfo;
             }
         }
-        private void RecycleImpactInstance(ImpactInstanceInfo info)
+        private void RecycleImpactInstance(BuffInstanceInfo info)
         {
-            info.m_ImpactInstance.Reset();
+            info.m_BuffInstance.Reset();
             info.m_IsUsed = false;
         }
-        private void AddImpactInstanceInfoToPool(int impactId, ImpactInstanceInfo info)
+        private void AddImpactInstanceInfoToPool(int buffId, BuffInstanceInfo info)
         {
-            List<ImpactInstanceInfo> infos;
-            if(m_ImpactInstancePool.TryGetValue(impactId, out infos))
+            List<BuffInstanceInfo> infos;
+            if(m_BuffInstancePool.TryGetValue(buffId, out infos))
             {
                 infos.Add(info);
             }
             else
             {
-                infos = new List<ImpactInstanceInfo>();
+                infos = new List<BuffInstanceInfo>();
                 infos.Add(info);
-                m_ImpactInstancePool.Add(impactId, infos);
+                m_BuffInstancePool.Add(buffId, infos);
             }
         }
-        private ImpactInstanceInfo GetUnusedImpactInstanceInfoFromPool(int impactId)
+        private BuffInstanceInfo GetUnusedBuffInstanceInfoFromPool(int buffId)
         {
-            ImpactInstanceInfo info = null;
-            List<ImpactInstanceInfo> infos;
-            if(m_ImpactInstancePool.TryGetValue(impactId, out infos))
+            BuffInstanceInfo info = null;
+            List<BuffInstanceInfo> infos;
+            if(m_BuffInstancePool.TryGetValue(buffId, out infos))
             {
-                foreach(var impactInfo in infos)
+                foreach(var buffInfo in infos)
                 {
-                    if(!impactInfo.m_IsUsed)
+                    if(!buffInfo.m_IsUsed)
                     {
-                        info = impactInfo;
+                        info = buffInfo;
                         break;
                     }
                 }
@@ -129,8 +129,8 @@ namespace UnityClient
         }
 
         private Dictionary<string, object> m_GlobalVariables = new Dictionary<string, object>();
-        private List<ImpactInstanceInfo> m_ImpactLogicInfos = new List<ImpactInstanceInfo>();
-        private Dictionary<int, List<ImpactInstanceInfo>> m_ImpactInstancePool = new Dictionary<int, List<ImpactInstanceInfo>>();
+        private List<BuffInstanceInfo> m_ImpactLogicInfos = new List<BuffInstanceInfo>();
+        private Dictionary<int, List<BuffInstanceInfo>> m_BuffInstancePool = new Dictionary<int, List<BuffInstanceInfo>>();
 
         private readonly IGroup<GameEntity> m_ImpactEntities;
         private readonly GameContext m_GameContext;

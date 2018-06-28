@@ -29,9 +29,15 @@ public class CharacterAgent : behaviac.Agent
         var context = Contexts.sharedInstance.game;
         var mainPlayer = context.mainPlayerEntity;
         var self = GetOwner();
-        if (Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z)) > 2)
+
+        if (IsSkillActivite() || IsBuffActivite())
+            return behaviac.EBTStatus.BT_SUCCESS;
+
+        if (Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z)) > 3)
         {
-            self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z), 0);
+            float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
+            self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
+            self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
         }
         else
         {
@@ -58,6 +64,16 @@ public class CharacterAgent : behaviac.Agent
     private GameEntity GetOwner()
     {
         return Contexts.sharedInstance.game.GetEntityWithId(m_EntityId);
+    }
+    private bool IsSkillActivite()
+    {
+        GameEntity self = GetOwner();
+        return self.hasSkill && null != self.skill.Instance;
+    }
+    private bool IsBuffActivite()
+    {
+        GameEntity self = GetOwner();
+        return self.hasBuff && self.buff.InstanceInfos.Count > 0;
     }
     private uint m_EntityId;
 

@@ -1,4 +1,4 @@
-﻿using Entitas.CodeGeneration.Attributes;
+﻿using System.Collections.Generic;
 using Entitas.Data;
 
 namespace Entitas.Component
@@ -7,8 +7,8 @@ namespace Entitas.Component
     {
         public SkillInstanceInfo Instance;
     }
-    public sealed class ImpactComponent : IComponent
+    public sealed class BuffComponent : IComponent
     {
-        public ImpactInstanceInfo Instance;
+        public List<BuffInstanceInfo> InstanceInfos;
     }
 }
