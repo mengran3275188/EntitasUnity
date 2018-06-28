@@ -86,7 +86,10 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 //do load
-                ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath("tables/Skill/julitiaokong.mr"));
+                SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
+                if(null != config)
+                    ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath(config.Script));
+
                 Instance instance = ConfigManager.Instance.NewInstance(skillId, 0);
                 if(null == instance)
                 {

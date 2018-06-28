@@ -398,3 +398,125 @@ namespace Entitas.Data
 		private static SceneConfigProvider s_Instance = new SceneConfigProvider();
 	}
 }
+
+namespace Entitas.Data
+{
+	public sealed partial class SkillConfig : IData2
+	{
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 12)]
+		private struct SkillConfigRecord
+		{
+			internal int Id;
+			internal int Description;
+			internal int Script;
+		}
+
+		public int Id;
+		public string Description;
+		public string Script;
+
+		public bool CollectDataFromDBC(DBC_Row node)
+		{
+			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
+			Description = DBCUtil.ExtractString(node, "Description", "");
+			Script = DBCUtil.ExtractString(node, "Script", "");
+			return true;
+		}
+
+		public bool CollectDataFromBinary(BinaryTable table, int index)
+		{
+			SkillConfigRecord record = GetRecord(table,index);
+			Id = DBCUtil.ExtractInt(table, record.Id, 0);
+			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Script = DBCUtil.ExtractString(table, record.Script, "");
+			return true;
+		}
+
+		public void AddToBinary(BinaryTable table)
+		{
+			SkillConfigRecord record = new SkillConfigRecord();
+			record.Id = DBCUtil.SetValue(table, Id, 0);
+			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Script = DBCUtil.SetValue(table, Script, "");
+			byte[] bytes = GetRecordBytes(record);
+			table.Records.Add(bytes);
+		}
+
+		public int GetId()
+		{
+			return Id;
+		}
+
+		private unsafe SkillConfigRecord GetRecord(BinaryTable table, int index)
+		{
+			SkillConfigRecord record;
+			byte[] bytes = table.Records[index];
+			fixed (byte* p = bytes) {
+				record = *(SkillConfigRecord*)p;
+			}
+			return record;
+		}
+		private static unsafe byte[] GetRecordBytes(SkillConfigRecord record)
+		{
+			byte[] bytes = new byte[sizeof(SkillConfigRecord)];
+			fixed (byte* p = bytes) {
+				SkillConfigRecord* temp = (SkillConfigRecord*)p;
+				*temp = record;
+			}
+			return bytes;
+		}
+	}
+
+	public sealed partial class SkillConfigProvider
+	{
+		public void LoadForClient()
+		{
+			Load(FilePathDefine_Client.C_SkillConfig);
+		}
+		public void LoadForServer()
+		{
+			Load(FilePathDefine_Server.C_SkillConfig);
+		}
+		public void Load(string file)
+		{
+			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
+				m_SkillConfigMgr.CollectDataFromBinary(file);
+			} else {
+				m_SkillConfigMgr.CollectDataFromDBC(file);
+			}
+		}
+		public void Save(string file)
+		{
+		#if DEBUG
+			m_SkillConfigMgr.SaveToBinary(file);
+		#endif
+		}
+		public void Clear()
+		{
+			m_SkillConfigMgr.Clear();
+		}
+
+		public DataDictionaryMgr2<SkillConfig> SkillConfigMgr
+		{
+			get { return m_SkillConfigMgr; }
+		}
+
+		public int GetSkillConfigCount()
+		{
+			return m_SkillConfigMgr.GetDataCount();
+		}
+
+		public SkillConfig GetSkillConfig(int id)
+		{
+			return m_SkillConfigMgr.GetDataById(id);
+		}
+
+		private DataDictionaryMgr2<SkillConfig> m_SkillConfigMgr = new DataDictionaryMgr2<SkillConfig>();
+
+		public static SkillConfigProvider Instance
+		{
+			get { return s_Instance; }
+		}
+		private static SkillConfigProvider s_Instance = new SkillConfigProvider();
+	}
+}

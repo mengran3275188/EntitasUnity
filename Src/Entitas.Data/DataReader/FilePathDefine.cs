@@ -14,11 +14,13 @@ namespace Entitas.Data
 		public const string C_ActionConfig = "Tables/ActionConfig.txt";
 		public const string C_CharacterConfig = "Tables/CharacterConfig.txt";
 		public const string C_SceneConfig = "Tables/SceneConfig.txt";
+		public const string C_SkillConfig = "Tables/SkillConfig.txt";
 	}
 	internal class FilePathDefine_Server
 	{
 		public const string C_ActionConfig = "Tables/ActionConfig.txt";
 		public const string C_CharacterConfig = "Tables/CharacterConfig.txt";
 		public const string C_SceneConfig = "Tables/SceneConfig.txt";
+		public const string C_SkillConfig = "Tables/SkillConfig.txt";
 	}
 }
