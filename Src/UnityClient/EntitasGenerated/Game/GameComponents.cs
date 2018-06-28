@@ -293,19 +293,27 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Component.AnimationComponent animationComponent = new Entitas.Component.AnimationComponent();
+    public Entitas.Component.AnimationComponent animation { get { return (Entitas.Component.AnimationComponent)GetComponent(GameComponentsLookup.Animation); } }
+    public bool hasAnimation { get { return HasComponent(GameComponentsLookup.Animation); } }
 
-    public bool isAnimation {
-        get { return HasComponent(GameComponentsLookup.Animation); }
-        set {
-            if (value != isAnimation) {
-                if (value) {
-                    AddComponent(GameComponentsLookup.Animation, animationComponent);
-                } else {
-                    RemoveComponent(GameComponentsLookup.Animation);
-                }
-            }
-        }
+    public void AddAnimation(int newActionId, string newPrefix) {
+        var index = GameComponentsLookup.Animation;
+        var component = CreateComponent<Entitas.Component.AnimationComponent>(index);
+        component.ActionId = newActionId;
+        component.Prefix = newPrefix;
+        AddComponent(index, component);
+    }
+
+    public void ReplaceAnimation(int newActionId, string newPrefix) {
+        var index = GameComponentsLookup.Animation;
+        var component = CreateComponent<Entitas.Component.AnimationComponent>(index);
+        component.ActionId = newActionId;
+        component.Prefix = newPrefix;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveAnimation() {
+        RemoveComponent(GameComponentsLookup.Animation);
     }
 }
 

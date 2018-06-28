@@ -1,3 +1,4 @@
 ModelId	Description	Stand	Run
 int	string	string	string
-1	测试动作表	stand	run
+1	测试主角动作表	stand_01	run_01
+2	测试小怪动作表	stand	run

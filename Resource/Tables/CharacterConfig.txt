@@ -1,5 +1,5 @@
 Id	Description	Model	Scale	ActionId	ActionPrefix
 int	string	string	float	int	string
 1	第一只主角	Hero/5_zhankuang/1_JianShi_A_01	1	1	zhankuang_
-1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	1	
-1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	1	
+1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	2	
+1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	2	

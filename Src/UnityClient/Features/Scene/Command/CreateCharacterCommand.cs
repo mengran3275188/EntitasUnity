@@ -64,6 +64,7 @@ namespace SceneCommand
                         LogUtil.Error("{0}\n{1}", ex.Message, ex.StackTrace);
                     }
                 }
+                entity.AddAnimation(config.ActionId, config.ActionPrefix);
                 entity.AddMovement(MoveState.Idle, 0, 0);
                 entity.AddResource(resId);
                 //SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));

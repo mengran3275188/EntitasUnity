@@ -22,6 +22,8 @@ namespace Entitas.Component
 
     public sealed class AnimationComponent : IComponent
     {
+        public int ActionId;
+        public string Prefix;
     }
 }
 

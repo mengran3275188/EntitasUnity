@@ -18,4 +18,12 @@ namespace Entitas.Data
         SkillRotate,
         ImpactRotate,
     }
+
+    public enum AnimationType
+    {
+        None = -1,
+        Idle = 1,
+        Run = 2,
+        Hurt = 3,
+    }
 }

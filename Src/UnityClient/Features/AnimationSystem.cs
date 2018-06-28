@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entitas;
+using Entitas.Data;
 
 namespace UnityClient
 {
@@ -12,7 +13,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(new TriggerOnEvent<GameEntity>(GameMatcher.Movement, GroupEvent.AddedOrRemoved));
+            return context.CreateCollector(new TriggerOnEvent<GameEntity>(GameMatcher.AllOf(GameMatcher.Animation, GameMatcher.Movement), GroupEvent.Added));
         }
         protected override bool Filter(GameEntity entity)
         {
@@ -22,15 +23,36 @@ namespace UnityClient
         {
             foreach(GameEntity entity in entities)
             {
+                var animation = entity.animation;
+
                 if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
                 {
-                    GfxSystem.PlayAnimation(entity.resource.ResourceId, "zhankuang_run_01");
+                    GfxSystem.PlayAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
                 }
                 else
                 {
-                    GfxSystem.PlayAnimation(entity.resource.ResourceId, "zhankuang_stand_01");
+                    GfxSystem.PlayAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
                 }
             }
+        }
+        private string GetAnimationName(int actionId, string prefix, AnimationType animationType)
+        {
+            string animationName = string.Empty;
+
+            ActionConfig config = ActionConfigProvider.Instance.GetActionConfig(actionId);
+            if(null != config)
+            {
+                switch(animationType)
+                {
+                    case AnimationType.Idle:
+                        animationName = string.Format("{0}{1}", prefix, config.Stand);
+                        break;
+                    case AnimationType.Run:
+                        animationName = string.Format("{0}{1}", prefix, config.Run);
+                        break;
+                }
+            }
+            return animationName;
         }
         private readonly GameContext m_Context;
     }
