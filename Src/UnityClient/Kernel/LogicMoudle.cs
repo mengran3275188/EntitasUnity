@@ -50,6 +50,8 @@ namespace UnityClient.Kernel
             systems.Add(new CollisionSystem(contexts));
 
             systems.Add(new GameStartSystem(contexts));
+
+            systems.Add(new DestoryEntitySystem(contexts));
             return systems;
         }
         public int CurActionNum

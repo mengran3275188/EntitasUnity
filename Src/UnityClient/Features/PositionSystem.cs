@@ -17,7 +17,7 @@ namespace UnityClient
         }
         protected override bool Filter(GameEntity entity)
         {
-            return true;
+            return entity.isEnabled;
         }
         protected override void Execute(List<GameEntity> entities)
         {

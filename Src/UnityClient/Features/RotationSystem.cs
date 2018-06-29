@@ -16,7 +16,7 @@ namespace UnityClient
 
         protected override bool Filter(GameEntity entity)
         {
-            return true;
+            return entity.isEnabled;
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {

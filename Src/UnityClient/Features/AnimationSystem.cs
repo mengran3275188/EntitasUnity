@@ -13,11 +13,11 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(new TriggerOnEvent<GameEntity>(GameMatcher.AllOf(GameMatcher.Animation, GameMatcher.Movement), GroupEvent.Added));
+            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Animation, GameMatcher.Movement));
         }
         protected override bool Filter(GameEntity entity)
         {
-            return entity.movement.State != Entitas.Data.MoveState.SkillMoving && entity.movement.State != MoveState.ImpactMoving;
+            return entity.isEnabled && entity.movement.State != Entitas.Data.MoveState.SkillMoving && entity.movement.State != MoveState.ImpactMoving;
         }
         protected override void Execute(List<GameEntity> entities)
         {

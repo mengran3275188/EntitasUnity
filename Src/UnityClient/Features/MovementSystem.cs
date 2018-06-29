@@ -15,7 +15,8 @@ namespace UnityClient
         }
         public void Execute()
         {
-            foreach(GameEntity entity in m_MovingEntities)
+            var entities = m_MovingEntities.GetEntities();
+            foreach(GameEntity entity in entities)
             {
                 if (entity.movement.State != Entitas.Data.MoveState.UserMoving)
                     continue;

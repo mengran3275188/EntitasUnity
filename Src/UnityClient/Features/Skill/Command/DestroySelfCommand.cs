@@ -14,7 +14,7 @@ namespace SkillCommands
             if (null == target)
                 return ExecResult.Finished;
 
-            target.Destroy();
+            target.isDestory = true;
             return ExecResult.Finished;
         }
     }

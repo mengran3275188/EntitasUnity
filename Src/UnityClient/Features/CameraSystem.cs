@@ -14,11 +14,11 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.MainPlayerPosition);
+            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Position, GameMatcher.MainPlayer));
         }
         protected override bool Filter(GameEntity entity)
         {
-            return true;
+            return entity.isEnabled;
         }
         protected override void Execute(List<GameEntity> entities)
         {

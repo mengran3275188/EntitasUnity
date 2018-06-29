@@ -28,4 +28,7 @@ namespace Entitas.Component
         public BoxCollider Collider;
         public Vector3 Offset;
     }
+    public sealed class DestoryComponent : IComponent
+    {
+    }
 }
