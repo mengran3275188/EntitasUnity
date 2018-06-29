@@ -3,3 +3,7 @@ int	string	string	float	int	string
 1	第一只主角	Hero/5_zhankuang/1_JianShi_A_01	1	1	zhankuang_
 1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	2	
 1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	2	
+1003	第一只小怪的第一只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_01	1	-1	
+1004	第一只小怪的第二只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_02	1	-1	
+1005	第一只小怪的第三只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_03	1	-1	
+1006	第一只小怪的第四只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_04	1	-1	

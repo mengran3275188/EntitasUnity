@@ -13,7 +13,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Position);
+            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Position, GameMatcher.Resource));
         }
         protected override bool Filter(GameEntity entity)
         {

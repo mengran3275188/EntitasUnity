@@ -6,9 +6,16 @@
     <node class="Wait" id="0">
       <property Time="const float 100" />
     </node>
-    <node class="Action" id="2">
-      <property Method="Self.CharacterAgent::MoveToPlayer()" />
-      <property ResultOption="BT_INVALID" />
+    <node class="IfElse" id="2">
+      <node class="Action" id="3">
+        <property Method="Self.CharacterAgent::CanUseSkill()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+      <node class="Action" id="4">
+        <property Method="Self.CharacterAgent::UseSkill(100201)" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+      <node class="Noop" id="5" />
     </node>
   </node>
 </behavior>

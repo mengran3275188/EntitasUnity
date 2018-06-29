@@ -1,0 +1,25 @@
+skill(100201)
+{
+	onmessage("start")
+	{
+		animation("attack_01");
+		wait(500);
+		createcharacter(1003, vector3(0, 1.2, 0.75), vector3(0, 0, 0))
+		{
+			skill(100202);
+		};
+		wait(666);
+		terminate();
+	};
+
+};
+skill(100202)
+{
+	onmessage("start")
+	{
+		curvemove(true, 0.19, 0, 0, -1, 0, 0, 0, 0.8, 0, 0, 20, 0, 0, 0);
+		wait(1000);
+		destroyself();
+		terminate();
+	};
+}

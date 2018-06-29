@@ -20,7 +20,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Rotation);
+            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Rotation, GameMatcher.Resource));
         }
         protected override void Execute(List<GameEntity> entities)
         {

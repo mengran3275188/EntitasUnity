@@ -35,47 +35,76 @@ namespace SceneCommand
                 {
                     m_MainPlayer = true;
                 }
+                if(stCall.GetId() == "skill")
+                {
+                    if(stCall.GetParamNum() >= 1)
+                    {
+                        m_SkillId = int.Parse(stCall.GetParamId(0));
+                    }
+                }
+                if(stCall.GetId() == "ai")
+                {
+                    if(stCall.GetParamNum() >= 1)
+                    {
+                        m_AIScript = stCall.GetParamId(0);
+                    }
+                }
             }
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             var gameContext = Contexts.sharedInstance.game;
 
+            var target = instance.Target as GameEntity;
+            if (null == target)
+                return ExecResult.Finished;
+
             CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(m_CharacterId);
             if(null != config)
             {
-                uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
                 uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
-                GfxSystem.Instantiate(resId, config.Model);
-
                 GameEntity entity = gameContext.CreateEntity();
-                entity.isMainPlayer = m_MainPlayer;
                 entity.AddId(entityId);
-                if(!entity.isMainPlayer)
-                {
-                    try
-                    {
-                        var agent = new CharacterAgent();
-                        agent.Init(entityId);
-                        bool ret = agent.btload("FirstBT");
-                        agent.btsetcurrent("FirstBT");
-                        entity.AddAI(agent);
-                    }catch(Exception ex)
-                    {
-                        LogUtil.Error("{0}\n{1}", ex.Message, ex.StackTrace);
-                    }
-                }
-                entity.AddAnimation(config.ActionId, config.ActionPrefix);
-                entity.AddMovement(MoveState.Idle, 0, 0);
+
+                entity.isMainPlayer = m_MainPlayer;
+
+
+                // res
+                uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
+                GfxSystem.Instantiate(resId, config.Model);
                 entity.AddResource(resId);
-                //SpatialSystem.Instance.GetNearestWalkablePos(new Vector3(0, 0, 0));
-                entity.AddPosition(m_LocalPosition.x, m_LocalPosition.y, m_LocalPosition.z);
-                entity.AddRotation(RotateState.UserRotate, 0);
+
+                // animation
+                entity.AddAnimation(config.ActionId, config.ActionPrefix);
+
+                // movement
+                entity.AddMovement(MoveState.Idle, 0, 0);
+                entity.AddPosition(target.position.x + m_LocalPosition.x, target.position.y + m_LocalPosition.y,  target.position.z + m_LocalPosition.z);
+                entity.AddRotation(RotateState.UserRotate, m_LocalRotation.y);
+
+                // AI
+                if(!string.IsNullOrEmpty(m_AIScript))
+                {
+                    var agent = new CharacterAgent();
+                    agent.Init(entityId);
+                    bool ret = agent.btload(m_AIScript);
+                    agent.btsetcurrent(m_AIScript);
+                    entity.AddAI(agent);
+                }
+                // skill
                 entity.AddSkill(null);
                 entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>());
 
-                SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, new Vector3(1,2,1));
-                entity.AddCollision(LogCollision, boxCollider, new Vector3(0, 1, 0));
+                // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。
+                if(m_SkillId > 0)
+                {
+                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId);
+                }
+
+                // collision
+                //SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, new Vector3(1,2,1));
+                //entity.AddCollision(LogCollision, boxCollider, new Vector3(0, 1, 0));
+
             }
             else
             {
@@ -93,5 +122,7 @@ namespace SceneCommand
         private bool m_MainPlayer = false;
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
+        private int m_SkillId = 0;
+        private string m_AIScript = string.Empty;
     }
 }

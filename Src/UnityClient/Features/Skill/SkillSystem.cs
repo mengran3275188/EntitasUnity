@@ -24,12 +24,15 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
+            CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
         }
 
         public void Execute()
         {
             long time = (long)(m_GameContext.timeInfo.Time * 1000);
-            foreach (GameEntity entity in m_SkillEntities)
+
+            var entities = m_SkillEntities.GetEntities();
+            foreach (GameEntity entity in entities)
             {
                 Entitas.Component.SkillComponent skillComponent = entity.skill;
                 SkillInstanceInfo info = skillComponent.Instance;

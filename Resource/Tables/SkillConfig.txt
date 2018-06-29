@@ -1,3 +1,5 @@
 Id	Description	Script
 int	string	string
 1	Ö÷½ÇÆÕ¹¥	Tables/SkillScripts/PuGong.mr
+100201	ºüÀêÉä¼ı	Tables/SkillScripts/LittleFox.mr
+100202	ºüÀêÉäµÄ¼ı	Tables/SkillScripts/LittleFox.mr

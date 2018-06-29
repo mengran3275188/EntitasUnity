@@ -12,6 +12,12 @@ namespace UnityClient
         public void Initialize()
         {
             CommandManager.Instance.RegisterCommandFactory("createcharacter", new CommandFactoryHelper<SceneCommand.CreateCharacterCommand>());
+
+            // scriptsystem 归一化
+            // script system 依赖一个拥有transform 信息的entity.
+            Contexts.sharedInstance.game.SetScene(null, null);
+            Contexts.sharedInstance.game.sceneEntity.AddPosition(0, 0, 0);
+            Contexts.sharedInstance.game.sceneEntity.AddRotation(RotateState.UserRotate, 0);
         }
         public void Load(int id)
         {
@@ -22,6 +28,7 @@ namespace UnityClient
                 var sceneInstance = NewSceneInstance(id, config.Script);
                 sceneInstance.m_SceneInstance.Start();
                 Contexts.sharedInstance.game.ReplaceScene(config, sceneInstance);
+
             }
             else
             {
@@ -51,6 +58,9 @@ namespace UnityClient
                 {
                     LogUtil.Error("SceneSystem::NewSceneInstance scene script {0} not found!", sceneId);
                 }
+                instance.Sender = Contexts.sharedInstance.game.sceneEntity;
+                instance.Target = Contexts.sharedInstance.game.sceneEntity;
+
                 SceneInstanceInfo sii = new SceneInstanceInfo();
                 sii.m_SceneId = sceneId;
                 sii.m_SceneInstance = instance;
