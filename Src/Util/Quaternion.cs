@@ -151,6 +151,22 @@ namespace Util
             result.w = num9 * num6 * num3 + num8 * num5 * num2;
             return result;
         }
+        public static void CreateFromYawPitchRoll(float yaw, float pitch, float roll, out Quaternion quaternion)
+        {
+            float num = roll * 0.5f;
+            float num2 = (float)Math.Sin((double)num);
+            float num3 = (float)Math.Cos((double)num);
+            float num4 = pitch * 0.5f;
+            float num5 = (float)Math.Sin((double)num4);
+            float num6 = (float)Math.Cos((double)num4);
+            float num7 = yaw * 0.5f;
+            float num8 = (float)Math.Sin((double)num7);
+            float num9 = (float)Math.Cos((double)num7);
+            quaternion.x = num9 * num5 * num3 + num8 * num6 * num2;
+            quaternion.y = num8 * num6 * num3 - num9 * num5 * num2;
+            quaternion.z = num9 * num6 * num2 - num8 * num5 * num3;
+            quaternion.w = num9 * num6 * num3 + num8 * num5 * num2;
+        }
         // Makes euler angles positive 0/360 with 0.0001 hacked to support old behaviour of QuaternionToEuler
         private static Vector3 Internal_MakePositive(Vector3 euler)
         {

@@ -45,20 +45,21 @@ namespace SceneCommand
             if(null != config)
             {
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
+                uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
                 GfxSystem.Instantiate(resId, config.Model);
 
                 GameEntity entity = gameContext.CreateEntity();
                 entity.isMainPlayer = m_MainPlayer;
+                entity.AddId(entityId);
                 if(!entity.isMainPlayer)
                 {
                     try
                     {
                         var agent = new CharacterAgent();
-                        agent.Init(1);
+                        agent.Init(entityId);
                         bool ret = agent.btload("FirstBT");
                         agent.btsetcurrent("FirstBT");
                         entity.AddAI(agent);
-                        entity.AddId(1);
                     }catch(Exception ex)
                     {
                         LogUtil.Error("{0}\n{1}", ex.Message, ex.StackTrace);
@@ -72,6 +73,9 @@ namespace SceneCommand
                 entity.AddRotation(RotateState.UserRotate, 0);
                 entity.AddSkill(null);
                 entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>());
+
+                SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, new Vector3(1,2,1));
+                entity.AddCollision(LogCollision, boxCollider, new Vector3(0, 1, 0));
             }
             else
             {
@@ -79,6 +83,10 @@ namespace SceneCommand
             }
 
             return ExecResult.Finished;
+        }
+        private void LogCollision(uint targetId)
+        {
+            LogUtil.Info("LogCollision {0}.", targetId);
         }
 
         private int m_CharacterId;

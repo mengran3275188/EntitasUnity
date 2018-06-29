@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AABB.cs" />
     <Compile Include="ClientConcurrent\ClientConcurrentActionProcessor.cs" />
     <Compile Include="ClientConcurrent\ClientConcurrentDictionary.cs" />
     <Compile Include="ClientConcurrent\ClientConcurrentObjectPool.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="IdGenerater.cs" />
     <Compile Include="LogUtil.cs" />
     <Compile Include="Mathf.cs" />
+    <Compile Include="Matrix3x3.cs" />
     <Compile Include="MyActionAndFunc.cs" />
     <Compile Include="ClientConcurrent\MyDictionary.cs" />
     <Compile Include="ObjectCache.cs" />
