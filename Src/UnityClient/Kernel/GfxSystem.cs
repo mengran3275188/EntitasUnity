@@ -28,6 +28,10 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.Instantiate(resId, path);
         }
+        public static void DestoryResource(uint resId)
+        {
+            GfxSystemImpl.Gfx.DestroyResource(resId);
+        }
         public static void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)
         {
             GfxSystemImpl.Gfx.CreateAndAttachGameObject(resId, resource, parentId, path, recycleTime, isAttach);

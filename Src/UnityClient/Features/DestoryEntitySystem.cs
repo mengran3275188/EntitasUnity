@@ -15,6 +15,13 @@ namespace UnityClient
             var entities = m_NeedDestroyEntities.GetEntities();
             foreach(var entity in entities)
             {
+
+                // 一些资源的处理临时放在这里
+                if(entity.hasResource)
+                {
+                    GfxSystem.DestoryResource(entity.resource.ResourceId);
+                }
+
                 entity.Destroy();
             }
         }

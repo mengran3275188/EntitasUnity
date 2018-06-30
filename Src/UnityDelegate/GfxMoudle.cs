@@ -59,6 +59,20 @@ namespace UnityDelegate
             var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;
             m_IdMapper[resId] = obj.GetInstanceID();
         }
+        public void DestroyResource(uint resId)
+        {
+            int id;
+            if(m_IdMapper.TryGetValue(resId, out id))
+            {
+                GameObject obj = ResourceSystem.GetObject(id) as GameObject;
+                if (null != obj)
+                    ResourceSystem.RecycleObject(obj);
+            }
+            else
+            {
+                LogUtil.Error("CreateAndAttachGameObject : can not find obj with resId {0}.", resId);
+            }
+        }
         public void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)
         {
             int id = 0;
