@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Features\PositionSystem.cs" />
     <Compile Include="Features\Skill\ImpactSystem.cs" />
+    <Compile Include="Features\Skill\SkillDefine.cs" />
     <Compile Include="Features\Skill\SkillSystem.cs" />
     <Compile Include="Features\SpatialSystem.cs" />
   </ItemGroup>

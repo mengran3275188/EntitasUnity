@@ -23,6 +23,33 @@ public class CharacterAgent : behaviac.Agent
 ///<<< END WRITING YOUR CODE
 	}
 
+	public float DistanceToPlayer()
+	{
+///<<< BEGIN WRITING YOUR CODE DistanceToPlayer
+        var context = Contexts.sharedInstance.game;
+        var mainPlayer = context.mainPlayerEntity;
+        var self = GetOwner();
+        float dis = Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z));
+        return dis;
+///<<< END WRITING YOUR CODE
+	}
+
+	public void EscapeFromPlayer()
+	{
+///<<< BEGIN WRITING YOUR CODE EscapeFromPlayer
+        var context = Contexts.sharedInstance.game;
+        var mainPlayer = context.mainPlayerEntity;
+        var self = GetOwner();
+
+        if (IsSkillActivite() || IsBuffActivite())
+            return;
+
+        float dir = Util.Mathf.Atan2(self.position.x - mainPlayer.position.x, self.position.z - mainPlayer.position.x);
+        self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
+///<<< END WRITING YOUR CODE
+	}
+
 	public behaviac.EBTStatus MoveToPlayer()
 	{
 ///<<< BEGIN WRITING YOUR CODE MoveToPlayer
@@ -33,17 +60,21 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return behaviac.EBTStatus.BT_SUCCESS;
 
-        if (Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z)) > 3)
+        float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
+        self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
+		return behaviac.EBTStatus.BT_SUCCESS;
+///<<< END WRITING YOUR CODE
+	}
+
+	public void StopMove()
+	{
+///<<< BEGIN WRITING YOUR CODE StopMove
+        if (IsSkillActivite() || IsBuffActivite())
         {
-            float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
-            self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
-            self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
-        }
-        else
-        {
+            var self = GetOwner();
             self.ReplaceMovement(Entitas.Data.MoveState.Idle, 0, 0);
         }
-		return behaviac.EBTStatus.BT_SUCCESS;
 ///<<< END WRITING YOUR CODE
 	}
 

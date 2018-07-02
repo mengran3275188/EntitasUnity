@@ -3,19 +3,48 @@
 <!--Source File: FirstBT.xml-->
 <behavior name="FirstBT" agenttype="CharacterAgent" version="5">
   <node class="Sequence" id="1">
-    <node class="IfElse" id="2">
-      <node class="Action" id="3">
-        <property Method="Self.CharacterAgent::CanUseSkill()" />
-        <property ResultOption="BT_SUCCESS" />
+    <node class="IfElse" id="6">
+      <node class="And" id="7">
+        <node class="Condition" id="8">
+          <property Operator="GreaterEqual" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 6" />
+        </node>
+        <node class="Condition" id="9">
+          <property Operator="LessEqual" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 10" />
+        </node>
       </node>
-      <node class="Action" id="4">
-        <property Method="Self.CharacterAgent::UseSkill(100201)" />
-        <property ResultOption="BT_SUCCESS" />
+      <node class="IfElse" id="2">
+        <node class="Action" id="3">
+          <property Method="Self.CharacterAgent::CanUseSkill()" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Action" id="4">
+          <property Method="Self.CharacterAgent::UseSkill(100201)" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Noop" id="5" />
       </node>
-      <node class="Noop" id="5" />
+      <node class="IfElse" id="10">
+        <node class="Condition" id="11">
+          <property Operator="LessEqual" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 6" />
+        </node>
+        <node class="Action" id="12">
+          <property Method="Self.CharacterAgent::EscapeFromPlayer()" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Action" id="13">
+          <property Method="Self.CharacterAgent::MoveToPlayer()" />
+          <property ResultOption="BT_INVALID" />
+        </node>
+      </node>
     </node>
     <node class="Wait" id="0">
-      <property Time="const float 2000" />
+      <property Time="const float 100" />
     </node>
   </node>
 </behavior>

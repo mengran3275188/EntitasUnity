@@ -31,6 +31,9 @@
         <Param Name="SkillId" Type="const int" TypeFullName="System.Int32" IsConst="true" DisplayName="SkillId" Desc="SkillId" />
       </Method>
       <Method Name="MoveToPlayer" DisplayName="MoveToPlayer" Desc="向目标玩家移动" Class="CharacterAgent" ReturnType="behaviac::EBTStatus" ReturnTypeFullName="XMLPluginBehaviac.behaviac_EBTStatus" Static="false" Public="true" istask="false" />
+      <Method Name="DistanceToPlayer" DisplayName="DistanceToPlayer" Desc="和目标的距离" Class="CharacterAgent" ReturnType="float" ReturnTypeFullName="System.Single" Static="false" Public="true" istask="false" />
+      <Method Name="EscapeFromPlayer" DisplayName="EscapeFromPlayer" Desc="逃离目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="StopMove" DisplayName="StopMove" Desc="停止移动" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
     </agent>
   </agents>
   <instances />
