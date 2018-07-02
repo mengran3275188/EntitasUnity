@@ -49,6 +49,15 @@ namespace SceneCommand
                         m_AIScript = stCall.GetParamId(0);
                     }
                 }
+                if(stCall.GetId() == "collision")
+                {
+                    if(stCall.GetParamNum() >= 2)
+                    {
+                        m_HasCollision = true;
+                        m_CollisionOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as CallData);
+                        m_CollisionSize = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
+                    }
+                }
             }
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
@@ -102,8 +111,11 @@ namespace SceneCommand
                 }
 
                 // collision
-                //SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, new Vector3(1,2,1));
-                //entity.AddCollision(LogCollision, boxCollider, new Vector3(0, 1, 0));
+                if(m_HasCollision)
+                {
+                    SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, m_CollisionSize);
+                    entity.AddCollision(null, boxCollider, m_CollisionOffset);
+                }
 
             }
             else
@@ -124,5 +136,8 @@ namespace SceneCommand
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
         private string m_AIScript = string.Empty;
+        private bool m_HasCollision = false;
+        private Vector3 m_CollisionOffset = Vector3.zero;
+        private Vector3 m_CollisionSize = Vector3.one;
     }
 }

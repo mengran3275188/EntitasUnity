@@ -6,10 +6,12 @@ script(1)
 		createcharacter(1, vector3(5, 0, 5), vector3(0, 0, 0))
 		{
 			mainplayer();
+			collision(vector3(0,0,0), vector3(1,2,1));
 		};
 		createcharacter(1002, vector3(15, 0, 15), vector3(0, 0, 0))
 		{
 			ai("FirstBT");
+			//collision(vector3(0,0,0), vector3(1,2,1));
 		};
 		wait(3000);
 		log("scene stoped");

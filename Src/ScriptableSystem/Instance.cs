@@ -416,6 +416,28 @@ namespace ScriptableSystem
                 handler.Analyze(this);
             }
         }
+        public void AddLocalVariable(string varName, object val)
+        {
+            if(m_LocalVariables.ContainsKey(varName))
+            {
+                m_LocalVariables[varName] = val;
+            }
+            else
+            {
+                m_LocalVariables.Add(varName, val);
+            }
+        }
+        public void AddGlobalVariable(string varName, object val)
+        {
+            if(m_GlobalVariables.ContainsKey(varName))
+            {
+                m_GlobalVariables[varName] = val;
+            }
+            else
+            {
+                m_LocalVariables.Add(varName, val);
+            }
+        }
         private class MessageInfo
         {
             public string m_MsgId = null;

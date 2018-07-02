@@ -27,11 +27,11 @@ namespace UnityClient
 
                 if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
                 {
-                    GfxSystem.PlayAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
                 }
                 else
                 {
-                    GfxSystem.PlayAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
                 }
             }
         }

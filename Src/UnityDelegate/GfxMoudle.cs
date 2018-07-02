@@ -168,6 +168,26 @@ namespace UnityDelegate
                 LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
             }
         }
+        public void CrossFadeAnimation(uint resId, string animName, float fadeLength = 0.3f)
+        {
+            int id = 0;
+            if (m_IdMapper.TryGetValue(resId, out id))
+            {
+                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
+                if (null != target)
+                {
+                    Animation animation = target.GetComponent<Animation>();
+                    if (null != animation)
+                    {
+                        animation.CrossFade(animName, 0.3f);
+                    }
+                }
+            }
+            else
+            {
+                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+            }
+        }
         public void PlayAnimation(uint resId, string animName, float speed, float weight, int layer, int wrapMode, int blendMode, int playMode, long crossFadeTime)
         {
             int id = 0;

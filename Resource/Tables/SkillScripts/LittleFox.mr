@@ -8,6 +8,7 @@ skill(100201)
 		{
 			skill(100202);
 		};
+		log("create arrow");
 		wait(666);
 		terminate();
 	};
@@ -18,7 +19,17 @@ skill(100202)
 	onmessage("start")
 	{
 		curvemove(true, 0.19, 0, 0, -1, 0, 0, 0, 0.8, 0, 0, 20, 0, 0, 0);
+		colliderdamage(1, vector3(0,0,0), vector3(1, 1, 1))objid("@colliderId");
 		wait(1000);
+		log(@colliderId);
+		removecollider();
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		removecollider();
 		destroyself();
 		terminate();
 	};

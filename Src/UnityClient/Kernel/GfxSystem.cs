@@ -48,6 +48,10 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.PlayAnimation(resId, animName);
         }
+        public static void CrossFadeAnimation(uint resId, string animName)
+        {
+            GfxSystemImpl.Gfx.CrossFadeAnimation(resId, animName);
+        }
         public static void PlayAnimation(uint resId, string animName, float speed, float weight, int layer, int wrapMode, int blendMode, int playMode, long crossFadeTime)
         {
             GfxSystemImpl.Gfx.PlayAnimation(resId, animName, speed,  weight, layer, wrapMode, blendMode, playMode, crossFadeTime);

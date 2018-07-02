@@ -15,6 +15,8 @@ namespace SkillCommands
                 return ExecResult.Finished;
 
             target.isDestory = true;
+
+            Util.LogUtil.Info("Destroy self ~");
             return ExecResult.Finished;
         }
     }
