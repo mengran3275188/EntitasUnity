@@ -37,7 +37,7 @@ namespace SkillCommands
                     if(InCircle(center, m_Range, entity.position))
                     {
                         LogUtil.Debug("AreaDamageCommand.ExecCommand : find damage target {0}", entity.ToString());
-                        UnityClient.ImpactSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.RotateDir);
+                        UnityClient.BuffSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.RotateDir);
                     }
                 }
             }

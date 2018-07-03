@@ -46,7 +46,7 @@ namespace UnityClient.Kernel
             systems.Add(new AnimationSystem(contexts));
             systems.Add(new AISystem(contexts));
             systems.Add(SkillSystem.Instance);
-            systems.Add(ImpactSystem.Instance);
+            systems.Add(BuffSystem.Instance);
             systems.Add(new CollisionSystem(contexts));
 
             systems.Add(new GameStartSystem(contexts));

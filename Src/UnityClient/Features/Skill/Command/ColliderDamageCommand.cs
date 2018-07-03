@@ -97,7 +97,7 @@ namespace SkillCommands
             GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget)
             {
-                UnityClient.ImpactSystem.Instance.StartBuff(target, collideTarget, 1, target.position.Value, target.rotation.RotateDir);
+                UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, 1, target.position.Value, target.rotation.RotateDir);
                 m_Instance.SendMessage("oncollision");
             }
         }

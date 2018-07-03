@@ -7,9 +7,9 @@ using ScriptableSystem;
 
 namespace UnityClient
 {
-    public class ImpactSystem : Singleton<ImpactSystem>, IInitializeSystem, IExecuteSystem
+    public class BuffSystem : Singleton<BuffSystem>, IInitializeSystem, IExecuteSystem
     {
-        public ImpactSystem()
+        public BuffSystem()
         {
             m_GameContext = Contexts.sharedInstance.game;
             m_ImpactEntities = m_GameContext.GetGroup(GameMatcher.Buff);
