@@ -8,7 +8,6 @@ skill(100201)
 		{
 			skill(100202);
 		};
-		log("create arrow");
 		wait(666);
 		terminate();
 	};
@@ -24,7 +23,6 @@ skill(100202)
             direction(2);
         };
 		wait(1000);
-		log(@colliderId);
 		removecollider();
 		destroyself();
 		terminate();
