@@ -44,9 +44,24 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return;
 
-        float dir = Util.Mathf.Atan2(self.position.x - mainPlayer.position.x, self.position.z - mainPlayer.position.x);
+        float dir = Util.Mathf.Atan2(self.position.x - mainPlayer.position.x, self.position.z - mainPlayer.position.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
         self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
+///<<< END WRITING YOUR CODE
+	}
+
+	public void FaceToTarget()
+	{
+///<<< BEGIN WRITING YOUR CODE FaceToTarget
+        var context = Contexts.sharedInstance.game;
+        var mainPlayer = context.mainPlayerEntity;
+        var self = GetOwner();
+
+        if (IsSkillActivite() || IsBuffActivite())
+            return ;
+
+        float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
+        self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
 ///<<< END WRITING YOUR CODE
 	}
 
@@ -82,6 +97,7 @@ public class CharacterAgent : behaviac.Agent
 	{
 ///<<< BEGIN WRITING YOUR CODE UseSkill
         GameEntity self = GetOwner();
+        FaceToTarget();
         UnityClient.SkillSystem.Instance.StartSkill(self, self, SkillId);
 ///<<< END WRITING YOUR CODE
 	}

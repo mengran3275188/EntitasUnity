@@ -115,7 +115,7 @@ namespace SkillCommands
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
-            if(null != obj)
+            if(null != obj && obj.hasCollision)
             {
                 obj.RemoveCollision();
             }

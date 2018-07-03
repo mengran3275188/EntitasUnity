@@ -32,6 +32,7 @@ namespace SkillCommands
         {
             Target,
             SenderTarget,
+            Sender,                 // 通常用在召唤物技能
         }
         public override ICommand Clone()
         {
@@ -86,7 +87,7 @@ namespace SkillCommands
                     {
                         if(stCall.GetParamNum() >= 1)
                         {
-                            m_DirectionType = int.Parse(stCall.GetParamId(0)) == 0 ? DirectionType.Target : DirectionType.SenderTarget;
+                            m_DirectionType = (DirectionType)int.Parse(stCall.GetParamId(0));
                             if (m_DirectionType == DirectionType.SenderTarget)
                                 m_IsLockRotate = true;
                         }
@@ -160,13 +161,17 @@ namespace SkillCommands
 
             if(m_IsLockRotate)
             {
-                if(m_DirectionType == DirectionType.SenderTarget)
+                switch(m_DirectionType)
                 {
-                    m_RotateDir = Util.Mathf.Atan2(target.position.x - sender.position.x, target.position.z - sender.position.z);
-                }
-                else
-                {
-                    m_RotateDir = target.rotation.RotateDir;
+                    case DirectionType.Sender:
+                        m_RotateDir = sender.rotation.RotateDir;
+                        break;
+                    case DirectionType.SenderTarget:
+                        m_RotateDir = Util.Mathf.Atan2(target.position.x - sender.position.x, target.position.z - sender.position.z);
+                        break;
+                    case DirectionType.Target:
+                        m_RotateDir = target.rotation.RotateDir;
+                        break;
                 }
             }
 
@@ -192,6 +197,7 @@ namespace SkillCommands
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
             Vector3 word_target_pos = new Vector3(obj.position.x + object_motion.x, obj.position.y + object_motion.y, obj.position.z + object_motion.z);
             obj.ReplacePosition(word_target_pos.x, word_target_pos.y, word_target_pos.z);
+            obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
             return (speed_vect + accel_vect * time);
         }
 

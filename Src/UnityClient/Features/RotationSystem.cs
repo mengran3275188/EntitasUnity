@@ -26,8 +26,6 @@ namespace UnityClient
         {
             foreach(GameEntity entity in entities)
             {
-                if (entity.rotation.State == Entitas.Data.RotateState.SkillRotate)
-                    continue;
                 GfxSystem.UpdateRotation(entity.resource.ResourceId, entity.rotation.RotateDir);
             }
         }

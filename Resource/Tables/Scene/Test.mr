@@ -3,15 +3,38 @@ script(1)
 	onmessage("start")
 	{
 		log("scene start");
-		createcharacter(1, vector3(5, 0, 5), vector3(0, 0, 0))
+		createcharacter(1, vector3(50, 0, 50), vector3(0, 0, 0))
 		{
 			mainplayer();
 			collision(vector3(0,0,0), vector3(1,2,1));
 		};
-		createcharacter(1002, vector3(15, 0, 15), vector3(0, 0, 0))
+		createcharacter(1002, vector3(60, 0, 60), vector3(0, 0, 0))
 		{
 			ai("FirstBT");
-			//collision(vector3(0,0,0), vector3(1,2,1));
+		};
+		createcharacter(1002, vector3(40, 0, 40), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
+		};
+		createcharacter(1002, vector3(45, 0, 45), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
+		};
+		createcharacter(1002, vector3(45, 0, 55), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
+		};
+		createcharacter(1002, vector3(55, 0, 60), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
+		};
+		createcharacter(1002, vector3(60, 0, 55), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
+		};
+		createcharacter(1002, vector3(55, 0, 55), vector3(0, 0, 0))
+		{
+			ai("FirstBT");
 		};
 		wait(3000);
 		log("scene stoped");
