@@ -52,7 +52,7 @@ namespace UnityClient
                 }
             }
         }
-        public void StartSkill(GameEntity sender, GameEntity target, int skillId)
+        public void StartSkill(GameEntity sender, GameEntity target, int skillId, Vector3 senderPosition, float direction)
         {
             if(target.hasSkill && target.skill.Instance == null)
             {
@@ -61,6 +61,8 @@ namespace UnityClient
                 {
                     instance.m_SkillInstance.Sender = sender;
                     instance.m_SkillInstance.Target = target;
+                    instance.m_SkillInstance.SenderPosition = senderPosition;
+                    instance.m_SkillInstance.SenderDirection = direction;
                     instance.m_SkillInstance.Context = null;
                     instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
                     instance.m_SkillInstance.Start();
@@ -69,6 +71,13 @@ namespace UnityClient
 
                     UpdateSkillControlMoveAndRotation(target, true, true);
                 }
+            }
+        }
+        public void BreakSkill(GameEntity target)
+        {
+            if(target.hasSkill && target.skill.Instance != null)
+            {
+                target.skill.Instance.m_SkillInstance.SendMessage("onbreak");
             }
         }
 
@@ -83,7 +92,7 @@ namespace UnityClient
         {
             var mainPlayer = m_GameContext.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId);
+                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {

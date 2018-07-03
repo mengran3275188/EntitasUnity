@@ -107,7 +107,7 @@ namespace SceneCommand
                 // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。
                 if(m_SkillId > 0)
                 {
-                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId);
+                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.RotateDir);
                 }
 
                 // collision

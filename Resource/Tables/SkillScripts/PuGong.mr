@@ -67,5 +67,11 @@ skill(1)
 	wait(357); // 700
 	terminate();
 	};
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        terminate();
+    };
 	
 };

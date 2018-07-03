@@ -13,13 +13,13 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            m_GameContext.SetTimeInfo(TimeUtility.Instance.GetLocalSeconds(), 0);
+            m_GameContext.SetTimeInfo(GfxSystemImpl.Gfx.GetTime(), 0);
         }
         public void Execute()
         {
-            float curTime = TimeUtility.Instance.GetLocalSeconds();
+            float curTime = GfxSystemImpl.Gfx.GetTime();
 
-            behaviac.Workspace.Instance.DoubleValueSinceStartup = curTime * 1000;
+            behaviac.Workspace.Instance.DoubleValueSinceStartup = curTime * 1000f;
 
             m_GameContext.ReplaceTimeInfo(curTime, curTime - m_GameContext.timeInfo.Time);
         }

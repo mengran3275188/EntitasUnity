@@ -45,7 +45,7 @@ namespace TestSkill
 
             //player.AddSkill(null);
 
-            SkillSystem.Instance.StartSkill(player, player, 1);
+            //SkillSystem.Instance.StartSkill(player, player, 1, player.position.Value, player.);
 
 
             while(true)

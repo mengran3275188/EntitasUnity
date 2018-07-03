@@ -38,14 +38,18 @@ namespace UnityClient
                 }
             }
         }
-        public void StartBuff(GameEntity sender, GameEntity target, int impactId)
+        public void StartBuff(GameEntity sender, GameEntity target, int impactId, Vector3 position, float direction)
         {
             if(target.hasBuff)
             {
+                SkillSystem.Instance.BreakSkill(target);
+
                 BuffInstanceInfo instance = NewBuffInstance(impactId);
                 if(null != instance)
                 {
                     instance.m_BuffInstance.Sender = sender;
+                    instance.m_BuffInstance.SenderPosition = position;
+                    instance.m_BuffInstance.SenderDirection = direction;
                     instance.m_BuffInstance.Target = target;
                     instance.m_BuffInstance.Context = null;
                     instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;

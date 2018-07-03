@@ -123,6 +123,16 @@ namespace ScriptableSystem
             get { return m_Sender; }
             set { m_Sender = value; }
         }
+        public Vector3 SenderPosition
+        {
+            get { return m_SenderPosition; }
+            set { m_SenderPosition = value; }
+        }
+        public float SenderDirection
+        {
+            get { return m_SenderDir; }
+            set { m_SenderDir = value; }
+        }
         public object Target
         {
             get { return m_Target; }
@@ -455,6 +465,8 @@ namespace ScriptableSystem
         private object m_Context = null;
         private object m_Sender = null;
         private object m_Target = null;
+        private Vector3 m_SenderPosition = Vector3.zero;
+        private float m_SenderDir = 0;
         private Dictionary<string, Queue<MessageInfo>> m_MessageQueues = new Dictionary<string, Queue<MessageInfo>>();
         private List<MessageHandler> m_ActiveHandlers = new List<MessageHandler>();
         private List<MessageHandler> m_MessageHandlers = new List<MessageHandler>();

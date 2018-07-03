@@ -305,6 +305,10 @@ namespace UnityDelegate
         {
             return m_InputSkillId;
         }
+        public float GetTime()
+        {
+            return Time.time;
+        }
 
 
         public void SetJoystickXY(float x, float y)

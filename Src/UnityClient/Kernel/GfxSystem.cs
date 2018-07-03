@@ -86,5 +86,9 @@ namespace UnityClient
         {
             return GfxSystemImpl.Gfx.GetCameraYaw();
         }
+        public static float GetTime()
+        {
+            return GfxSystemImpl.Gfx.GetTime();
+        }
     }
 }

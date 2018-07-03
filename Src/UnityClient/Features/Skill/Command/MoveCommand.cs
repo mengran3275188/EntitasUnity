@@ -164,10 +164,10 @@ namespace SkillCommands
                 switch(m_DirectionType)
                 {
                     case DirectionType.Sender:
-                        m_RotateDir = sender.rotation.RotateDir;
+                        m_RotateDir = instance.SenderDirection;
                         break;
                     case DirectionType.SenderTarget:
-                        m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - sender.position.Value.x, target.position.Value.z - sender.position.Value.z);
+                        m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
                         break;
                     case DirectionType.Target:
                         m_RotateDir = target.rotation.RotateDir;

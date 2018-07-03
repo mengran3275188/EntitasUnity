@@ -2,8 +2,6 @@ skill(1)
 {
 	onmessage("start")
 	{
-		log("impact start");
-		
 		animation("hurt_l")
 		{
 			speed(10);
@@ -13,7 +11,6 @@ skill(1)
 			direction(1);
 		};
 		wait(200);
-		log("impact stoped");
 		terminate();
 	};
 };

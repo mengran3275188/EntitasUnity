@@ -52,11 +52,11 @@ namespace UnityClient
             GameEntity mainPlayer = gameContext.mainPlayerEntity;
             if (null != mainPlayer)
             {
-                if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.movement.MovingDir))
+                if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.movement.MovingDir))
                 {
                     mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, moveDir, 0);
                 }
-                if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
+                if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && mainPlayer.rotation.State != RotateState.ImpactRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
                 {
                     mainPlayer.ReplaceRotation(RotateState.UserRotate, moveDir);
                 }
