@@ -226,21 +226,17 @@ public partial class GameEntity {
     public Entitas.Component.PositionComponent position { get { return (Entitas.Component.PositionComponent)GetComponent(GameComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(GameComponentsLookup.Position); } }
 
-    public void AddPosition(float newX, float newY, float newZ) {
+    public void AddPosition(Util.Vector3 newValue) {
         var index = GameComponentsLookup.Position;
         var component = CreateComponent<Entitas.Component.PositionComponent>(index);
-        component.x = newX;
-        component.y = newY;
-        component.z = newZ;
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePosition(float newX, float newY, float newZ) {
+    public void ReplacePosition(Util.Vector3 newValue) {
         var index = GameComponentsLookup.Position;
         var component = CreateComponent<Entitas.Component.PositionComponent>(index);
-        component.x = newX;
-        component.y = newY;
-        component.z = newZ;
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

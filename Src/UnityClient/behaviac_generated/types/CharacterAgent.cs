@@ -29,7 +29,7 @@ public class CharacterAgent : behaviac.Agent
         var context = Contexts.sharedInstance.game;
         var mainPlayer = context.mainPlayerEntity;
         var self = GetOwner();
-        float dis = Util.Vector3.Distance(new Util.Vector3(mainPlayer.position.x, mainPlayer.position.y, mainPlayer.position.z), new Util.Vector3(self.position.x, self.position.y, self.position.z));
+        float dis = Util.Vector3.Distance(mainPlayer.position.Value, self.position.Value);
         return dis;
 ///<<< END WRITING YOUR CODE
 	}
@@ -44,7 +44,7 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return;
 
-        float dir = Util.Mathf.Atan2(self.position.x - mainPlayer.position.x, self.position.z - mainPlayer.position.z);
+        float dir = Util.Mathf.Atan2(self.position.Value.x - mainPlayer.position.Value.x, self.position.Value.z - mainPlayer.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
         self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
 ///<<< END WRITING YOUR CODE
@@ -60,7 +60,7 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return ;
 
-        float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
+        float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x - self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
 ///<<< END WRITING YOUR CODE
 	}
@@ -75,7 +75,7 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return behaviac.EBTStatus.BT_SUCCESS;
 
-        float dir = Util.Mathf.Atan2(mainPlayer.position.x - self.position.x, mainPlayer.position.z - self.position.z);
+        float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x- self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
         self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
 		return behaviac.EBTStatus.BT_SUCCESS;

@@ -1,4 +1,5 @@
 ﻿using Entitas.Data;
+using Util;
 
 namespace Entitas.Component
 {
@@ -10,9 +11,7 @@ namespace Entitas.Component
     }
     public sealed class PositionComponent : IComponent
     {
-        public float x;
-        public float y;
-        public float z;
+        public Vector3 Value;
     }
     public sealed class RotationComponent : IComponent
     {

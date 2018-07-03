@@ -26,7 +26,7 @@ namespace SkillCommands
             if(null != obj)
             {
                 Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.RotateDir, 0, 0);
-                Vector3 center = new Vector3(obj.position.x, obj.position.y, obj.position.z) + quaternion * m_RelativeCenter;
+                Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
 
                 var entities = Contexts.sharedInstance.game.GetGroup(GameMatcher.Position);
                 foreach(var entity in entities)
@@ -46,7 +46,7 @@ namespace SkillCommands
 
         private bool InCircle(Vector3 point, float range, PositionComponent position)
         {
-            return Vector3.Distance(point, new Vector3(position.x, position.y, position.z)) < range;
+            return Vector3.Distance(point, position.Value) < range;
         }
 
         private Vector3 m_RelativeCenter;

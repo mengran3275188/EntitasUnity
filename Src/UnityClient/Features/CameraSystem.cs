@@ -24,7 +24,7 @@ namespace UnityClient
         {
             foreach(GameEntity e in entities)
             {
-                GfxSystem.UpdateCamera(e.position.x, e.position.y, e.position.z);
+                GfxSystem.UpdateCamera(e.position.Value.x, e.position.Value.y, e.position.Value.z);
             }
         }
 

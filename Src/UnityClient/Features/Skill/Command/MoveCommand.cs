@@ -167,7 +167,7 @@ namespace SkillCommands
                         m_RotateDir = sender.rotation.RotateDir;
                         break;
                     case DirectionType.SenderTarget:
-                        m_RotateDir = Util.Mathf.Atan2(target.position.x - sender.position.x, target.position.z - sender.position.z);
+                        m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - sender.position.Value.x, target.position.Value.z - sender.position.Value.z);
                         break;
                     case DirectionType.Target:
                         m_RotateDir = target.rotation.RotateDir;
@@ -195,8 +195,8 @@ namespace SkillCommands
 
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
-            Vector3 word_target_pos = new Vector3(obj.position.x + object_motion.x, obj.position.y + object_motion.y, obj.position.z + object_motion.z);
-            obj.ReplacePosition(word_target_pos.x, word_target_pos.y, word_target_pos.z);
+            Vector3 word_target_pos = obj.position.Value + object_motion;
+            obj.ReplacePosition(word_target_pos);
             obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
             return (speed_vect + accel_vect * time);
         }

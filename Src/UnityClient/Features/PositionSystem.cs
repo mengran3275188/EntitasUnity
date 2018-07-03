@@ -23,7 +23,7 @@ namespace UnityClient
         {
             foreach(GameEntity entity in entities)
             {
-                GfxSystem.UpdatePosition(entity.resource.ResourceId, entity.position.x, entity.position.y, entity.position.z);
+                GfxSystem.UpdatePosition(entity.resource.ResourceId, entity.position.Value.x, entity.position.Value.y, entity.position.Value.z);
             }
         }
 

@@ -19,7 +19,7 @@ namespace UnityClient
             var entities = m_CollisionGroup.GetEntities();
             foreach(var entity in entities)
             {
-                entity.collision.Collider.UpdatePosition(new Util.Vector3(entity.collision.Offset.x + entity.position.x, entity.collision.Offset.y + entity.position.y, entity.collision.Offset.z + entity.position.z));
+                entity.collision.Collider.UpdatePosition(entity.collision.Offset + entity.position.Value);
             }
             for(int i = 0; i < entities.Length - 1; ++i)
             {

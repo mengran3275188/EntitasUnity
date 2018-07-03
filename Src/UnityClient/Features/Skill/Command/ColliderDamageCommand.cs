@@ -93,7 +93,13 @@ namespace SkillCommands
 
         private void OnCollision(uint targetEntityId)
         {
-            m_Instance.SendMessage("oncollision");
+            GameEntity target = m_Instance.Target as GameEntity;
+            GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
+            if(null !=  target && null != collideTarget)
+            {
+                UnityClient.ImpactSystem.Instance.StartBuff(target, collideTarget, 1);
+                m_Instance.SendMessage("oncollision");
+            }
         }
 
 

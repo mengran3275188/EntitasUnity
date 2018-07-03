@@ -28,31 +28,31 @@ namespace UnityClient
                 bool canMove = true;
                 do
                 {
-                    if (CanGo(entity.position.x, entity.position.z, moveDir, distance))
+                    if (CanGo(entity.position.Value.x, entity.position.Value.z, moveDir, distance))
                         break;
                     float newDir = (float)((moveDir + Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.x, entity.position.z, newDir, distance))
+                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
                     {
                         moveDir = newDir;
                         lastAdjust = 1;
                         break;
                     }
                     newDir = (float)((moveDir + Math.PI * 2 - Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust <= 0 && CanGo(entity.position.x, entity.position.z, newDir, distance))
+                    if(lastAdjust <= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
                     {
                         moveDir = newDir;
                         lastAdjust = -1;
                         break;
                     }
                     newDir = (float)((moveDir + Math.PI / 2) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.x, entity.position.z, newDir, distance))
+                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
                     {
                         moveDir = newDir;
                         lastAdjust = 1;
                         break;
                     }
                     newDir = (float)((moveDir + Math.PI * 2 - Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.x, entity.position.z, newDir, distance))
+                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
                     {
                         moveDir = newDir;
                         lastAdjust = -1;
@@ -63,11 +63,11 @@ namespace UnityClient
 
                 if(canMove)
                 {
-                    float newX = entity.position.x + (float)Math.Sin(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
-                    float newY = entity.position.y;
-                    float newZ = entity.position.z + (float)Math.Cos(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
+                    float newX = entity.position.Value.x + (float)Math.Sin(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
+                    float newY = entity.position.Value.y;
+                    float newZ = entity.position.Value.z + (float)Math.Cos(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
 
-                    entity.ReplacePosition(newX, newY, newZ);
+                    entity.ReplacePosition(new Util.Vector3(newX, newY, newZ));
                 }
             }
         }
