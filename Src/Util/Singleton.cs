@@ -6,7 +6,7 @@ namespace Util
 {
     public abstract class Singleton<T> where T : class, new()
     {
-        protected Singleton() { }
+        static Singleton() { }
         public static T Instance
         {
             get { return s_Instance; }

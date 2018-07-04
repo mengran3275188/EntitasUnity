@@ -76,6 +76,7 @@ namespace SceneCommand
                 entity.AddId(entityId);
 
                 entity.isMainPlayer = m_MainPlayer;
+                entity.isSpatial = !entity.isMainPlayer;
 
 
                 // res

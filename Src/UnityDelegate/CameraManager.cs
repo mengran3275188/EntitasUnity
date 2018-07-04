@@ -31,8 +31,8 @@ namespace UnityDelegate
 
         private UnityEngine.Camera m_MainCamera;
 
-        private const float c_Height = 3;
-        private const float c_Distance = 10;
+        private const float c_Height = 15;
+        private const float c_Distance = 22;
         private const float c_FixDir = 0;
     }
 }

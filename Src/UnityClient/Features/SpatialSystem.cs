@@ -8,9 +8,39 @@ using Spatial;
 
 namespace UnityClient
 {
-    public class SpatialSystem : Singleton<SpatialSystem>
+    public class SpatialSystem : Singleton<SpatialSystem>, IInitializeSystem, IExecuteSystem
     {
-        public void Init(string navmesh)
+        public void Initialize()
+        {
+            var context = Contexts.sharedInstance.game;
+            m_SpatialEntities = context.GetGroup(GameMatcher.AllOf(GameMatcher.Spatial, GameMatcher.Position));
+        }
+        public void Execute()
+        {
+
+            m_CellMgr.ClearDynamic();
+
+            var entities = m_SpatialEntities.GetEntities();
+
+            foreach(var entity in entities)
+            {
+                Vector3 min = entity.position.Value - new Vector3(0.5f, 0.0f, 0.5f);
+                Vector3 max = entity.position.Value + new Vector3(0.5f, 0.0f, 0.5f);
+                int minRow, minCol, maxRow, maxCol;
+
+                m_CellMgr.GetCell(min, out minRow, out minCol);
+                m_CellMgr.GetCell(max, out maxRow, out maxCol);
+
+                for(int i = minRow; i <=maxRow; ++i)
+                {
+                    for(int j = minCol; j <= maxCol; ++j)
+                    {
+                        m_CellMgr.SetCellStatus(i, j, BlockType.DYNAMIC_BLOCK);
+                    }
+                }
+            }
+        }
+        public void Load(string navmesh)
         {
             var gameContext = Contexts.sharedInstance.game;
 
@@ -19,15 +49,11 @@ namespace UnityClient
             mapParser.ParseTileDataWithNavmesh(HomePath.Instance.GetAbsolutePath(navmesh), out width, out height);
 
             m_CellMgr = new CellManager();
-            m_CellMgr.Init(width, height, 0.1f);
+            m_CellMgr.Init(width, height, 0.5f);
 
             mapParser.GenerateObstacleInfoWithNavmesh(m_CellMgr);
             JumpPointFinder finder = new JumpPointFinder();
             finder.Init(m_CellMgr);
-
-            gameContext.SetSpatial(m_CellMgr, finder);
-            // 
-
         }
         public bool CanPass(float curPosX, float curPosZ, float toPosX, float toPosZ)
         {
@@ -49,7 +75,7 @@ namespace UnityClient
             block = BlockType.GetBlockType(status);
             if (block != BlockType.NOT_BLOCK)
             {
-                LogUtil.Debug("CanPass ({0},{1})->({2},{3}), target is blocked {4}", cur_cell.row, cur_cell.col, to_cell.row, to_cell.col, block);
+                //LogUtil.Debug("CanPass ({0},{1})->({2},{3}), target is blocked {4}", cur_cell.row, cur_cell.col, to_cell.row, to_cell.col, block);
                 return false;
             }
             if (Math.Abs(cur_cell.row - to_cell.row) >= 1 || Math.Abs(cur_cell.col - to_cell.col) >= 1)
@@ -89,6 +115,7 @@ namespace UnityClient
             return pos;
         }
 
+        private IGroup<GameEntity> m_SpatialEntities;
         private CellManager m_CellMgr;
     }
 }

@@ -31,4 +31,7 @@ namespace Entitas.Component
     public sealed class DestoryComponent : IComponent
     {
     }
+    public sealed class SpatialComponent : IComponent
+    {
+    }
 }

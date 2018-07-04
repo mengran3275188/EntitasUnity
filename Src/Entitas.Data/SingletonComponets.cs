@@ -22,12 +22,6 @@ namespace Entitas.Component
         public float DeltaTime;
     }
     [Unique]
-    public sealed class SpatialComponent : IComponent
-    {
-        public CellManager CellMgr;
-        public JumpPointFinder Finder;
-    }
-    [Unique]
     public sealed class SceneComponent : IComponent
     {
         public SceneConfig Config;

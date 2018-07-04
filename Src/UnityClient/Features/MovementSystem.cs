@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
+using Util;
 
 namespace UnityClient
 {
@@ -16,7 +17,7 @@ namespace UnityClient
         public void Execute()
         {
             var entities = m_MovingEntities.GetEntities();
-            foreach(GameEntity entity in entities)
+            foreach (GameEntity entity in entities)
             {
                 if (entity.movement.State != Entitas.Data.MoveState.UserMoving)
                     continue;
@@ -25,49 +26,76 @@ namespace UnityClient
                 float speed = 10.0f;
                 int lastAdjust = entity.movement.LastAdjust;
                 float distance = speed * m_GameContext.timeInfo.DeltaTime;
-                bool canMove = true;
-                do
+                Vector3 oldPos = entity.position.Value;
+                Vector3 newPos = new Vector3();
+                Vector3 testPos = new Vector3();
+                for (int ct = 0; ct < 8; ++ct)
                 {
-                    if (CanGo(entity.position.Value.x, entity.position.Value.z, moveDir, distance))
-                        break;
-                    float newDir = (float)((moveDir + Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
-                    {
-                        moveDir = newDir;
-                        lastAdjust = 1;
-                        break;
-                    }
-                    newDir = (float)((moveDir + Math.PI * 2 - Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust <= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
-                    {
-                        moveDir = newDir;
-                        lastAdjust = -1;
-                        break;
-                    }
-                    newDir = (float)((moveDir + Math.PI / 2) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
-                    {
-                        moveDir = newDir;
-                        lastAdjust = 1;
-                        break;
-                    }
-                    newDir = (float)((moveDir + Math.PI * 2 - Math.PI / 4) % (Math.PI * 2));
-                    if(lastAdjust >= 0 && CanGo(entity.position.Value.x, entity.position.Value.z, newDir, distance))
-                    {
-                        moveDir = newDir;
-                        lastAdjust = -1;
-                        break;
-                    }
-                    canMove = false;
-                } while (false);
+                    float cosV = Mathf.Cos(moveDir);
+                    float sinV = Mathf.Sin(moveDir);
 
-                if(canMove)
-                {
-                    float newX = entity.position.Value.x + (float)Math.Sin(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
-                    float newY = entity.position.Value.y;
-                    float newZ = entity.position.Value.z + (float)Math.Cos(moveDir) * speed * m_GameContext.timeInfo.DeltaTime;
+                    float z = oldPos.z + cosV * distance;
+                    float x = oldPos.x + sinV * distance;
 
-                    entity.ReplacePosition(new Util.Vector3(newX, newY, newZ));
+                    float testDistance = distance + 0.75f;
+
+                    float testZ = oldPos.z + cosV * testDistance;
+                    float testX = oldPos.x + sinV * testDistance;
+
+                    newPos = new Vector3(x, 0, z);
+                    testPos = new Vector3(testX, 0, testZ);
+
+                    if (SpatialSystem.Instance.CanPass(oldPos, testPos))
+                    {
+                        entity.ReplacePosition(newPos);
+                        entity.ReplaceMovement(Entitas.Data.MoveState.UserMoving, moveDir, lastAdjust);
+                        break;
+                    }
+                    else
+                    {
+                        float newDir = (moveDir + Mathf.PI / 4) % (Mathf.PI * 2);
+                        if (lastAdjust >= 0 && CanGo(oldPos.x, oldPos.z, newDir, testDistance))
+                        {
+                            LogUtil.Info("adjust dir:{0}->{1} success, last adjust:{2}", moveDir, newDir, lastAdjust);
+                            moveDir = newDir;
+                            lastAdjust = 1;
+                        }
+                        else
+                        {
+                            newDir = (moveDir + Mathf.PI * 2 - Mathf.PI / 4) % (Mathf.PI * 2);
+                            if (lastAdjust <= 0 && CanGo(oldPos.x, oldPos.z, newDir, testDistance))
+                            {
+                                LogUtil.Info("adjust dir:{0}->{1} success, last adjust:{2}", moveDir, newDir, lastAdjust);
+                                moveDir = newDir;
+                                lastAdjust = -1;
+                            }
+                            else
+                            {
+                                newDir = (moveDir + Mathf.PI / 2) % (Mathf.PI * 2);
+                                if (lastAdjust >= 0 && CanGo(oldPos.x, oldPos.z, newDir, testDistance))
+                                {
+                                    LogUtil.Info("adjust dir:{0}->{1} success, last adjust:{2}", moveDir, newDir, lastAdjust);
+                                    moveDir = newDir;
+                                    lastAdjust = 1;
+                                }
+                                else
+                                {
+                                    newDir = (moveDir + Mathf.PI * 2 - Mathf.PI / 2) % (Mathf.PI * 2);
+                                    if (lastAdjust <= 0 && CanGo(oldPos.x, oldPos.z, newDir, testDistance))
+                                    {
+                                        LogUtil.Info("adjust dir:{0}->{1} success, last adjust:{2}", moveDir, newDir, lastAdjust);
+                                        moveDir = newDir;
+                                        lastAdjust = -1;
+                                    }
+                                    else
+                                    {
+                                        LogUtil.Info("adjust dir:{0}->{1} failed, last adjust:{2}", moveDir, newDir, lastAdjust);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
