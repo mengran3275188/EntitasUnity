@@ -82,7 +82,7 @@ namespace WindowsFormsApplication1
         private NavmeshMapParser nav_map_parser_ = null;
         private MapPatchParser map_patch_parser_ = null;
         private CellManager cell_manager_ = null;
-        private SpatialSystem spatial_system_ = null;
+        private Spatial.SpatialSystem spatial_system_ = null;
         private TestSpaceObject control_obj_ = new TestSpaceObject(1);
         private List<TestSpaceObject> space_objs_ = new List<TestSpaceObject>();
         private List<TestSpaceObject> selected_objs_ = new List<TestSpaceObject>();
@@ -252,6 +252,7 @@ namespace WindowsFormsApplication1
                             space_objs_.Add(obj);
 
                             prkdtree_.Clear();
+                            kdtree_.Clear();
                             int objCt = space_objs_.Count;
                             if (objCt > 0)
                             {
@@ -268,7 +269,21 @@ namespace WindowsFormsApplication1
                                 kdtree_.Build(temp);
                                 long edTime2 = TimeUtility.Instance.GetElapsedTimeUs();
 
-                                this.Text = "obj num " + objCt + " prkdtree consume " + (edTime1 - stTime1) + "us kdtree consume " + (edTime2 - stTime1) + "us";
+                                System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+                                stopWatch.Start();
+                                cell_manager_.ClearDynamic();
+                                foreach(ISpaceObject spaceObj in space_objs_)
+                                {
+                                    List<CellPos> cells = cell_manager_.GetCellsInCircle(Transform(spaceObj.GetPosition()), 20);
+                                    foreach(CellPos cellpos in cells)
+                                    {
+                                        cell_manager_.SetCellStatus(cellpos.row, cellpos.col, BlockType.DYNAMIC_BLOCK);
+                                    }
+                                }
+                                stopWatch.Stop();
+
+
+                                this.Text = "obj num " + objCt + " prkdtree consume " + (edTime1 - stTime1) + "us kdtree consume " + (edTime2 - stTime1) + "us dynmic consume " + (stopWatch.ElapsedTicks) + "ticks";
                             }
                         }
                         break;
@@ -470,7 +485,7 @@ namespace WindowsFormsApplication1
         {
             double PI_1 = Math.PI;
             double PI_2 = 2 * Math.PI;
-            double forecastDistance = 0.75 * cell_width_ / 0.5;
+            double forecastDistance = 0.75 * cell_width_;
             double speed = 5.0 * cell_width_ / 0.5;
             Vector3 old_pos = control_obj_.GetPosition();
             Vector3 new_pos = new Vector3();
@@ -493,6 +508,8 @@ namespace WindowsFormsApplication1
                     checkY = y;
                     checkX = x;
                 }
+                    checkY = y;
+                    checkX = x;
 
                 new_pos = new Vector3((float)x, 0, (float)y);
                 Vector3 check_pos = new Vector3((float)checkX, 0, (float)checkY);
@@ -500,6 +517,10 @@ namespace WindowsFormsApplication1
                 {
                     //正常移动
                     control_obj_.SetPosition(new_pos);
+                    if(cell_manager_.GetCellStatus(new_pos) == BlockType.STATIC_BLOCK)
+                    {
+                        LogUtil.Info("ERROR !");
+                    }
                     break;
                 }
                 else
@@ -582,7 +603,7 @@ namespace WindowsFormsApplication1
             tiled_map_parser_ = new TiledMapParser();
             nav_map_parser_ = new NavmeshMapParser();
             map_patch_parser_ = new MapPatchParser();
-            spatial_system_ = new SpatialSystem();
+            spatial_system_ = new Spatial.SpatialSystem();
             cell_manager_ = new CellManager();
 
             back_image_ = Image.FromFile(map_image_);
@@ -617,7 +638,7 @@ namespace WindowsFormsApplication1
             //tree_cache_finder_.PrepareForSearch(path_file_);
             jump_point_finder_ = new JumpPointFinder();
             jump_point_finder_.Init(cell_manager_);
-            jump_point_finder_.PreprocessMap(path_file_);
+            //jump_point_finder_.PreprocessMap(path_file_);
             //*/
 
             spatial_system_.Init(map_file_, path_file_);
@@ -741,13 +762,19 @@ namespace WindowsFormsApplication1
 
             kdtree_.VisitTree((float x0, float z0, float x1, float z1, int begin, int end, KdTreeObject[] objs) =>
             {
-                graphics_.Graphics.DrawLine(kdtree_pen, x0, z0, x1, z1);
+                //graphics_.Graphics.DrawLine(kdtree_pen, x0, z0, x1, z1);
+                graphics_.Graphics.DrawLine(kdtree_pen, x0, z0, x0, z1);
+                graphics_.Graphics.DrawLine(kdtree_pen, x0, z1, x1, z1);
+                graphics_.Graphics.DrawLine(kdtree_pen, x1, z1, x1, z0);
+                graphics_.Graphics.DrawLine(kdtree_pen, x1, z0, x0, z0);
             });
 
+            /*
             spatial_system_.TriangulationNetworkFinder.KdTree.VisitTree((float x0, float z0, float x1, float z1, int begin, int end, TriangleNode[] objs) =>
             {
                 graphics_.Graphics.DrawLine(kdgeotree_pen, x0, z0, x1, z1);
             });
+            */
 
             ct = selected_objs_.Count;
             for (int i = 0; i < ct; ++i)
@@ -842,6 +869,7 @@ namespace WindowsFormsApplication1
                 DrawPath();
                 DrawObjs();
                 DrawMarkerSquare();
+                UpdateObstacleGraph();
                 Vector3 pos = Transform(control_obj_.GetPosition());
                 graphics_.Graphics.FillEllipse(obj_brush, pos.x - cell_width_, pos.z - cell_width_, cell_width_ * 2, cell_width_ * 2);
                 graphics_.Graphics.DrawEllipse(obj_pen, pos.x - cell_width_, pos.z - cell_width_, cell_width_ * 2, cell_width_ * 2);

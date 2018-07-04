@@ -118,6 +118,16 @@ namespace Spatial
             cell_width_ *= scale;
         }
 
+        public void ClearDynamic()
+        {
+            for (int row = 0; row < max_row_; row++)
+            {
+                for (int col = 0; col < max_col_; col++)
+                {
+                   cells_arr_[row, col] &= 0xfb;
+                }
+            }
+        }
         // 查询cell
         public bool GetCell(Vector3 pos, out int cell_row, out int cell_col)
         {

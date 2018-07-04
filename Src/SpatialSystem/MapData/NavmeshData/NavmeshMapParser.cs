@@ -9,7 +9,7 @@ namespace Spatial
     {
 
         private const string NAVMESH_VERSION = "SGNAVMESH_01";
-        public static IList<TriangleNode> BuildTriangleFromFile(string sFilePath, out float width, out float height)
+        public static IList<TriangleNode> BuildTriangleFromFile(string sFilePath, bool useFileScale, out float width, out float height)
         {
             width = 0;
             height = 0;
@@ -33,13 +33,15 @@ namespace Spatial
                         width = binReader.ReadInt32();
                         height = binReader.ReadInt32();
                         float scale = binReader.ReadSingle();
+                        if (!useFileScale)
+                            scale = 1.0f;
 
                         // 读取导航三角形数量
                         int navCount = binReader.ReadInt32();
                         for (int i = 0; i < navCount; i++)
                         {
                             TriangleNode node = new TriangleNode();
-                            node.Read(binReader, 1.0f);
+                            node.Read(binReader, scale);
                             TriangleNodeList.Add(node);
                             TriangleNodeMap.Add(node.Id, node);
                         }
@@ -112,14 +114,14 @@ namespace Spatial
             TriangleNodeMap.Clear();
             return ret;
         }
-        public bool ParseTileDataWithNavmesh(string file, float scale, float width, float height)
+        public bool ParseTileDataWithNavmeshUseFileScale(string file, float width, float height)
         {
-            navmesh_triangle_list = BuildTriangleFromFile(file, out width, out height);
+            navmesh_triangle_list = BuildTriangleFromFile(file, true, out width, out height);
             return true;
         }
         public bool ParseTileDataWithNavmesh(string file, out float width, out float height)
         {
-            navmesh_triangle_list = BuildTriangleFromFile(file, out width, out height);
+            navmesh_triangle_list = BuildTriangleFromFile(file, false, out width, out height);
             return true;
         }
         public void GenerateObstacleInfoWithNavmesh(CellManager cellMgr)

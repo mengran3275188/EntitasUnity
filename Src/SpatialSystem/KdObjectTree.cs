@@ -336,16 +336,30 @@ namespace Spatial
         bool isVertical = (maxX - minX > maxZ - minZ);
         if (isVertical) {
           float splitValue = 0.5f * (maxX + minX);
+                    /*
           if (!visitor(splitValue, minZ, splitValue, maxZ, begin, end, m_Objects)) {
             m_QueryStack.Clear();
             return;
           }
+          */
+          if(!visitor(minX, minZ, maxX, maxZ, begin, end, m_Objects))
+                    {
+                        m_QueryStack.Clear();
+                        return;
+                    }
         } else {
           float splitValue = 0.5f * (maxZ + minZ);
+                    /*
           if (!visitor(minX, splitValue, maxX, splitValue, begin, end, m_Objects)) {
             m_QueryStack.Clear();
             return;
           }
+          */
+          if(!visitor(minX, minZ, maxX, maxZ, begin, end, m_Objects))
+                    {
+                        m_QueryStack.Clear();
+                        return;
+                    }
         }
 
         if (left > 0)

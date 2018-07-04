@@ -376,7 +376,7 @@ namespace Spatial
             byte block = BlockType.GetBlockType(curStatus);
             if (block != BlockType.NOT_BLOCK)
             {
-                return true;
+                return false;
             }
             byte status = cell_manager_.GetCellStatus(to_cell.row, to_cell.col);
             block = BlockType.GetBlockType(status);

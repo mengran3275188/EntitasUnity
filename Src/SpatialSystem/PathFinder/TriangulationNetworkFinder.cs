@@ -70,7 +70,7 @@ namespace Spatial
             float width;
             float height;
             m_Triangulation.PreTriangles.Clear();
-            m_TriangulationNetwork = NavmeshMapParser.BuildTriangleFromFile(filename, out width, out height);
+            m_TriangulationNetwork = NavmeshMapParser.BuildTriangleFromFile(filename, false, out width, out height);
             m_KdTree.Build(m_TriangulationNetwork);
         }
         public bool CanPass(Vector3 start, Vector3 target)
