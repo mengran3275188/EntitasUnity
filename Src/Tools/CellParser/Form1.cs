@@ -626,7 +626,7 @@ namespace WindowsFormsApplication1
             ///*
             cell_manager_.Init(map_actual_width_, map_actual_height_, cell_actual_width_);
             cell_manager_.Scale(map_width_ / map_actual_width_);
-            nav_map_parser_.ParseTileDataWithNavmesh(nav_file_, 100, map_actual_width_, map_actual_height_);
+            nav_map_parser_.ParseTileDataWithNavmeshUseFileScale(nav_file_, map_actual_width_, map_actual_height_);
             nav_map_parser_.GenerateObstacleInfoWithNavmesh(cell_manager_);
 
             //map_parser_.ParseTiledData(obstacle_file_, map_width_, map_height_);
@@ -643,7 +643,7 @@ namespace WindowsFormsApplication1
 
             spatial_system_.Init(map_file_, path_file_);
             long stTime = TimeUtility.Instance.GetElapsedTimeUs();
-            spatial_system_.LoadObstacle(obs_file_, 100.0f);
+            spatial_system_.LoadObstacle(obs_file_, true);
             spatial_system_.TriangulationNetworkFinder.SparseDistance = 16.0f;
             triangles = spatial_system_.TriangulationNetworkFinder.TriangulationNetwork;
             long edTime = TimeUtility.Instance.GetElapsedTimeUs();

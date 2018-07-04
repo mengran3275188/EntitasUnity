@@ -65,12 +65,12 @@ namespace Spatial
             get { return m_SparseDistance; }
             set { m_SparseDistance = value; m_SparseDistanceSqr = m_SparseDistance * m_SparseDistance; }
         }
-        public void Load(string filename, float scale)
+        public void Load(string filename, bool useFileScale)
         {
             float width;
             float height;
             m_Triangulation.PreTriangles.Clear();
-            m_TriangulationNetwork = NavmeshMapParser.BuildTriangleFromFile(filename, false, out width, out height);
+            m_TriangulationNetwork = NavmeshMapParser.BuildTriangleFromFile(filename, useFileScale, out width, out height);
             m_KdTree.Build(m_TriangulationNetwork);
         }
         public bool CanPass(Vector3 start, Vector3 target)

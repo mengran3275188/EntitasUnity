@@ -48,20 +48,20 @@ namespace Spatial
             }
         }
 
-        public void LoadObstacle(string file, float scale)
+        public void LoadObstacle(string file, bool useFileScale)
         {
             string filePath = HomePath.Instance.GetAbsolutePath(file);
             if (File.Exists(filePath))
             {
-                TiledMapParser mapParser = new TiledMapParser();
-                mapParser.LoadObstacleInfo(filePath, m_KdObstacleTree, scale);
-                m_KdObstacleTree.Build();
+                //TiledMapParser mapParser = new TiledMapParser();
+                //mapParser.LoadObstacleInfo(filePath, m_KdObstacleTree, scale);
+                //m_KdObstacleTree.Build();
             }
             else
             {
                 LogUtil.Error("Can't find obstacle file: {0}", filePath);
             }
-            triangulation_network_finder_.Load(filePath, scale);
+            triangulation_network_finder_.Load(filePath, useFileScale);
         }
 
         public void Reset()
