@@ -6,8 +6,7 @@ namespace Entitas.Component
     public sealed class MovementComponent : IComponent
     {
         public MoveState State;
-        public float MovingDir;
-        public int LastAdjust;
+        public Vector3 Force;
     }
     public sealed class PositionComponent : IComponent
     {

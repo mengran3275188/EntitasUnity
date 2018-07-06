@@ -5,6 +5,7 @@ using System.Text;
 using Entitas;
 using Entitas.Data;
 using UnityDelegate;
+using Util;
 
 namespace UnityClient
 {
@@ -52,9 +53,16 @@ namespace UnityClient
             GameEntity mainPlayer = gameContext.mainPlayerEntity;
             if (null != mainPlayer)
             {
-                if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.movement.MovingDir))
+                if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving)
                 {
-                    mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, moveDir, 0);
+                    mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Cos(moveDir), 0, Mathf.Sin(moveDir)) * 10);
+                    if(mainPlayer.hasPhysics)
+                    {
+                        if(isMoving)
+                            mainPlayer.physics.Rigid.LinearVelocity = (new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * 10);
+                        else
+                            mainPlayer.physics.Rigid.LinearVelocity = Vector3.zero;
+                    }
                 }
                 if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && mainPlayer.rotation.State != RotateState.ImpactRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
                 {

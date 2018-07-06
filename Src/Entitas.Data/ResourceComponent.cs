@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using SpatialSystem;
 using Util;
 
 namespace Entitas.Component
@@ -22,11 +21,9 @@ namespace Entitas.Component
         public behaviac.Agent Agent;
     }
     // TODO(camp id)
-    public sealed class CollisionComponent : IComponent
+    public sealed class PhysicsComponent : IComponent
     {
-        public CollisionDelegate OnCollision;
-        public BoxCollider Collider;
-        public Vector3 Offset;
+        public Jitter.Dynamics.RigidBody Rigid;
     }
     public sealed class DestoryComponent : IComponent
     {

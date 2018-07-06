@@ -63,9 +63,9 @@
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="Features\AISystem.cs" />
-    <Compile Include="Features\CollisionSystem.cs" />
     <Compile Include="Features\DestoryEntitySystem.cs" />
     <Compile Include="Features\IdSystem.cs" />
+    <Compile Include="Features\PhysicsSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
   </ItemGroup>
@@ -121,6 +121,10 @@
     <ProjectReference Include="..\Entitas.Data\Entitas.Data.csproj">
       <Project>{ebe6ebae-a092-4895-a7a3-8bd6179bdb5c}</Project>
       <Name>Entitas.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jitter\Jitter.csproj">
+      <Project>{aa03ef1a-94f7-4d30-ab14-2092863ff923}</Project>
+      <Name>Jitter</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScriptableData\ScriptableData.csproj">
       <Project>{4295c1b7-d43f-4e38-85ad-33623489fbbe}</Project>

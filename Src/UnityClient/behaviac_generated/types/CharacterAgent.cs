@@ -45,8 +45,9 @@ public class CharacterAgent : behaviac.Agent
             return;
 
         float dir = Util.Mathf.Atan2(self.position.Value.x - mainPlayer.position.Value.x, self.position.Value.z - mainPlayer.position.Value.z);
+        Util.Vector3 force = new Util.Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
-        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force);
 ///<<< END WRITING YOUR CODE
 	}
 
@@ -76,8 +77,9 @@ public class CharacterAgent : behaviac.Agent
             return behaviac.EBTStatus.BT_SUCCESS;
 
         float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x- self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
+        Util.Vector3 force = new Util.Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
-        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, dir, 0);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force);
 		return behaviac.EBTStatus.BT_SUCCESS;
 ///<<< END WRITING YOUR CODE
 	}
@@ -88,7 +90,7 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
         {
             var self = GetOwner();
-            self.ReplaceMovement(Entitas.Data.MoveState.Idle, 0, 0);
+            self.ReplaceMovement(Entitas.Data.MoveState.Idle, Util.Vector3.zero);
         }
 ///<<< END WRITING YOUR CODE
 	}

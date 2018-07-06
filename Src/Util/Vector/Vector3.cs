@@ -10,6 +10,8 @@ namespace Util
     public partial struct Vector3
     {
         public const float kEpsilon = 0.00001F;
+        private const float ZeroEpsilonSq = Mathf.Epsilon * Mathf.Epsilon;
+        public static Vector3 InternalZero = zero;
 
         // X component of the vector.
         public float x;
@@ -109,6 +111,20 @@ namespace Util
         public Vector3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
         // Creates a new vector with given x, y components and sets /z/ to zero.
         public Vector3(float x, float y) { this.x = x; this.y = y; z = 0F; }
+        /// <summary>
+        /// Constructor initializing a new instance of the structure
+        /// </summary>
+        /// <param name="xyz">All components of the vector are set to xyz</param>
+        public Vector3(float xyz)
+        {
+            this.x = xyz;
+            this.y = xyz;
+            this.z = xyz;
+        }
+        static Vector3()
+        {
+            InternalZero = zero;
+        }
 
         // Set x, y and z components of an existing Vector3.
         public void Set(float newX, float newY, float newZ) { x = newX; y = newY; z = newZ; }
@@ -118,15 +134,6 @@ namespace Util
 
         // Multiplies every component of this vector by the same component of /scale/.
         public void Scale(Vector3 scale) { x *= scale.x; y *= scale.y; z *= scale.z; }
-
-        // Cross Product of two vectors.
-        public static Vector3 Cross(Vector3 lhs, Vector3 rhs)
-        {
-            return new Vector3(
-                lhs.y * rhs.z - lhs.z * rhs.y,
-                lhs.z * rhs.x - lhs.x * rhs.z,
-                lhs.x * rhs.y - lhs.y * rhs.x);
-        }
 
         // used to allow Vector3s to be used as keys in hash tables
         public override int GetHashCode()
@@ -150,14 +157,6 @@ namespace Util
         }
 
         // *undoc* --- we have normalized property now
-        public static Vector3 Normalize(Vector3 value)
-        {
-            float mag = Magnitude(value);
-            if (mag > kEpsilon)
-                return value / mag;
-            else
-                return zero;
-        }
 
         // Makes this vector have a ::ref::magnitude of 1.
         public void Normalize()
@@ -171,9 +170,6 @@ namespace Util
 
         // Returns this vector with a ::ref::magnitude of 1 (RO).
         public Vector3 normalized { get { return Vector3.Normalize(this); } }
-
-        // Dot Product of two vectors.
-        public static float Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }
 
         // Projects a vector onto another vector.
         public static Vector3 Project(Vector3 vector, Vector3 onNormal)
@@ -238,18 +234,6 @@ namespace Util
         // Returns the squared length of this vector (RO).
         public float sqrMagnitude { get { return x * x + y * y + z * z; } }
 
-        // Returns a vector that is made from the smallest components of two vectors.
-        public static Vector3 Min(Vector3 lhs, Vector3 rhs)
-        {
-            return new Vector3(Mathf.Min(lhs.x, rhs.x), Mathf.Min(lhs.y, rhs.y), Mathf.Min(lhs.z, rhs.z));
-        }
-
-        // Returns a vector that is made from the largest components of two vectors.
-        public static Vector3 Max(Vector3 lhs, Vector3 rhs)
-        {
-            return new Vector3(Mathf.Max(lhs.x, rhs.x), Mathf.Max(lhs.y, rhs.y), Mathf.Max(lhs.z, rhs.z));
-        }
-
         static readonly Vector3 zeroVector = new Vector3(0F, 0F, 0F);
         static readonly Vector3 oneVector = new Vector3(1F, 1F, 1F);
         static readonly Vector3 upVector = new Vector3(0F, 1F, 0F);
@@ -287,6 +271,7 @@ namespace Util
         public static Vector3 operator-(Vector3 a) { return new Vector3(-a.x, -a.y, -a.z); }
         // Multiplies a vector by a number.
         public static Vector3 operator*(Vector3 a, float d) { return new Vector3(a.x * d, a.y * d, a.z * d); }
+        public static float operator*(Vector3 a, Vector3 b) { return Dot(ref a, ref b); }
         // Multiplies a vector by a number.
         public static Vector3 operator*(float d, Vector3 a) { return new Vector3(a.x * d, a.y * d, a.z * d); }
         // Divides a vector by a number.
@@ -320,5 +305,376 @@ namespace Util
         public static Vector3 fwd { get { return new Vector3(0F, 0F, 1F); } }
         [System.Obsolete("Use Vector3.Angle instead. AngleBetween uses radians instead of degrees and was deprecated for this reason")]
         public static float AngleBetween(Vector3 from, Vector3 to) { return Mathf.Acos(Mathf.Clamp(Vector3.Dot(from.normalized, to.normalized), -1F, 1F)); }
+
+
+        /// <summary>
+        /// Transforms a vector by the given matrix.
+        /// </summary>
+        /// <param name="position">The vector to transform.</param>
+        /// <param name="matrix">The transform matrix.</param>
+        /// <returns>The transformed vector.</returns>
+        #region public static JVector Transform(JVector position, JMatrix matrix)
+        public static Vector3 Transform(Vector3 position, Matrix3x3 matrix)
+        {
+            Vector3 result;
+            Vector3.Transform(ref position, ref matrix, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Transforms a vector by the given matrix.
+        /// </summary>
+        /// <param name="position">The vector to transform.</param>
+        /// <param name="matrix">The transform matrix.</param>
+        /// <param name="result">The transformed vector.</param>
+        public static void Transform(ref Vector3 position, ref Matrix3x3 matrix, out Vector3 result)
+        {
+            float num0 = ((position.x * matrix.M11) + (position.y * matrix.M21)) + (position.z * matrix.M31);
+            float num1 = ((position.x * matrix.M12) + (position.y * matrix.M22)) + (position.z * matrix.M32);
+            float num2 = ((position.x * matrix.M13) + (position.y * matrix.M23)) + (position.z * matrix.M33);
+
+            result.x = num0;
+            result.y = num1;
+            result.z = num2;
+        }
+
+        /// <summary>
+        /// Transforms a vector by the transposed of the given Matrix.
+        /// </summary>
+        /// <param name="position">The vector to transform.</param>
+        /// <param name="matrix">The transform matrix.</param>
+        /// <param name="result">The transformed vector.</param>
+        public static void TransposedTransform(ref Vector3 position, ref Matrix3x3 matrix, out Vector3 result)
+        {
+            float num0 = ((position.x * matrix.M11) + (position.y * matrix.M12)) + (position.z * matrix.M13);
+            float num1 = ((position.x * matrix.M21) + (position.y * matrix.M22)) + (position.z * matrix.M23);
+            float num2 = ((position.x * matrix.M31) + (position.y * matrix.M32)) + (position.z * matrix.M33);
+
+            result.x = num0;
+            result.y = num1;
+            result.z = num2;
+        }
+        #endregion
+        /// <summary>
+        /// Calculates the dot product of two vectors.
+        /// </summary>
+        /// <param name="vector1">The first vector.</param>
+        /// <param name="vector2">The second vector.</param>
+        /// <returns>Returns the dot product of both vectors.</returns>
+        #region public static float Dot(Vector3 vector1, Vector3 vector2)
+        public static float Dot(Vector3 vector1, Vector3 vector2)
+        {
+            return Vector3.Dot(ref vector1, ref vector2);
+        }
+
+
+        /// <summary>
+        /// Calculates the dot product of both vectors.
+        /// </summary>
+        /// <param name="vector1">The first vector.</param>
+        /// <param name="vector2">The second vector.</param>
+        /// <returns>Returns the dot product of both vectors.</returns>
+        public static float Dot(ref Vector3 vector1, ref Vector3 vector2)
+        {
+            return ((vector1.x * vector2.x) + (vector1.y * vector2.y)) + (vector1.z * vector2.z);
+        }
+        #endregion
+
+        /// <summary>
+        /// Adds two vectors.
+        /// </summary>
+        /// <param name="value1">The first vector.</param>
+        /// <param name="value2">The second vector.</param>
+        /// <returns>The sum of both vectors.</returns>
+        #region public static void Add(JVector value1, JVector value2)
+        public static Vector3 Add(Vector3 value1, Vector3 value2)
+        {
+            Vector3 result;
+            Vector3.Add(ref value1, ref value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Adds to vectors.
+        /// </summary>
+        /// <param name="value1">The first vector.</param>
+        /// <param name="value2">The second vector.</param>
+        /// <param name="result">The sum of both vectors.</param>
+        public static void Add(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        {
+            float num0 = value1.x + value2.x;
+            float num1 = value1.y + value2.y;
+            float num2 = value1.z + value2.z;
+
+            result.x = num0;
+            result.y = num1;
+            result.z = num2;
+        }
+        #endregion
+
+        /// <summary>
+        /// Subtracts two vectors.
+        /// </summary>
+        /// <param name="value1">The first vector.</param>
+        /// <param name="value2">The second vector.</param>
+        /// <returns>The difference of both vectors.</returns>
+        #region public static JVector Subtract(JVector value1, JVector value2)
+        public static Vector3 Subtract(Vector3 value1, Vector3 value2)
+        {
+            Vector3 result;
+            Vector3.Subtract(ref value1, ref value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Subtracts to vectors.
+        /// </summary>
+        /// <param name="value1">The first vector.</param>
+        /// <param name="value2">The second vector.</param>
+        /// <param name="result">The difference of both vectors.</param>
+        public static void Subtract(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        {
+            float num0 = value1.x - value2.x;
+            float num1 = value1.y - value2.y;
+            float num2 = value1.z - value2.z;
+
+            result.x = num0;
+            result.y = num1;
+            result.z = num2;
+        }
+        #endregion
+
+        /// <summary>
+        /// The cross product of two vectors.
+        /// </summary>
+        /// <param name="vector1">The first vector.</param>
+        /// <param name="vector2">The second vector.</param>
+        /// <returns>The cross product of both vectors.</returns>
+        #region public static JVector Cross(JVector vector1, JVector vector2)
+        public static Vector3 Cross(Vector3 vector1, Vector3 vector2)
+        {
+            Vector3 result;
+            Vector3.Cross(ref vector1, ref vector2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// The cross product of two vectors.
+        /// </summary>
+        /// <param name="vector1">The first vector.</param>
+        /// <param name="vector2">The second vector.</param>
+        /// <param name="result">The cross product of both vectors.</param>
+        public static void Cross(ref Vector3 vector1, ref Vector3 vector2, out Vector3 result)
+        {
+            float num3 = (vector1.y * vector2.z) - (vector1.z * vector2.y);
+            float num2 = (vector1.z * vector2.x) - (vector1.x * vector2.z);
+            float num = (vector1.x * vector2.y) - (vector1.y * vector2.x);
+            result.x = num3;
+            result.y = num2;
+            result.z = num;
+        }
+        #endregion
+        public float LengthSquared()
+        {
+            return (((this.x * this.x) + (this.y * this.y)) + (this.z * this.z));
+        }
+        public bool IsNearlyZero()
+        {
+            return (this.LengthSquared() < ZeroEpsilonSq);
+        }
+        #region public static JVector Negate(JVector value)
+        public void Negate()
+        {
+            this.x = -this.x;
+            this.y = -this.y;
+            this.z = -this.z;
+        }
+
+        /// <summary>
+        /// Inverses the direction of a vector.
+        /// </summary>
+        /// <param name="value">The vector to inverse.</param>
+        /// <returns>The negated vector.</returns>
+        public static Vector3 Negate(Vector3 value)
+        {
+            Vector3 result;
+            Vector3.Negate(ref value,out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Inverses the direction of a vector.
+        /// </summary>
+        /// <param name="value">The vector to inverse.</param>
+        /// <param name="result">The negated vector.</param>
+        public static void Negate(ref Vector3 value, out Vector3 result)
+        {
+            float num0 = -value.x;
+            float num1 = -value.y;
+            float num2 = -value.z;
+
+            result.x = num0;
+            result.y = num1;
+            result.z = num2;
+        }
+        #endregion
+        #region public static void Swap(ref Vector3 vector1, ref Vector3 vector2)
+
+        /// <summary>
+        /// Swaps the components of both vectors.
+        /// </summary>
+        /// <param name="vector1">The first vector to swap with the second.</param>
+        /// <param name="vector2">The second vector to swap with the first.</param>
+        public static void Swap(ref Vector3 vector1, ref Vector3 vector2)
+        {
+            float temp;
+
+            temp = vector1.x;
+            vector1.x = vector2.x;
+            vector2.x = temp;
+
+            temp = vector1.y;
+            vector1.y = vector2.y;
+            vector2.y = temp;
+
+            temp = vector1.z;
+            vector1.z = vector2.z;
+            vector2.z = temp;
+        }
+        #endregion
+        /// <summary>
+        /// Multiply a vector with a factor.
+        /// </summary>
+        /// <param name="value1">The vector to multiply.</param>
+        /// <param name="scaleFactor">The scale factor.</param>
+        /// <returns>Returns the multiplied vector.</returns>
+        #region public static JVector Multiply(JVector value1, float scaleFactor)
+        public static Vector3 Multiply(Vector3 value1, float scaleFactor)
+        {
+            Vector3 result;
+            Vector3.Multiply(ref value1, scaleFactor, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Multiply a vector with a factor.
+        /// </summary>
+        /// <param name="value1">The vector to multiply.</param>
+        /// <param name="scaleFactor">The scale factor.</param>
+        /// <param name="result">Returns the multiplied vector.</param>
+        public static void Multiply(ref Vector3 value1, float scaleFactor, out Vector3 result)
+        {
+            result.x = value1.x * scaleFactor;
+            result.y = value1.y * scaleFactor;
+            result.z = value1.z * scaleFactor;
+        }
+        #endregion
+        /// <summary>
+        /// Calculates the cross product of two vectors.
+        /// </summary>
+        /// <param name="value1">The first vector.</param>
+        /// <param name="value2">The second vector.</param>
+        /// <returns>Returns the cross product of both.</returns>
+        #region public static JVector operator %(JVector value1, JVector value2)
+        public static Vector3 operator %(Vector3 value1, Vector3 value2)
+        {
+            Vector3 result; Vector3.Cross(ref value1, ref value2, out result);
+            return result;
+        }
+        #endregion
+        /// <summary>
+        /// Gets a vector with the minimum x,y and z values of both vectors.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The second value.</param>
+        /// <returns>A vector with the minimum x,y and z values of both vectors.</returns>
+        #region public static JVector Min(JVector value1, JVector value2)
+
+        public static Vector3 Min(Vector3 value1, Vector3 value2)
+        {
+            Vector3 result;
+            Vector3.Min(ref value1, ref value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        ///  ets a vector with the minimum x,y and z values of both vectors.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The second value.</param>
+        /// <param name="result">A vector with the minimum x,y and z values of both vectors.</param>
+        public static void Min(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        {
+            result.x = (value1.x < value2.x) ? value1.x : value2.x;
+            result.y = (value1.y < value2.y) ? value1.y : value2.y;
+            result.z = (value1.z < value2.z) ? value1.z : value2.z;
+        }
+        #endregion
+
+        /// <summary>
+        /// Gets a vector with the maximum x,y and z values of both vectors.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The second value.</param>
+        /// <returns>A vector with the maximum x,y and z values of both vectors.</returns>
+        #region public static Vector3 Max(Vector3 value1, Vector3 value2)
+        public static Vector3 Max(Vector3 value1, Vector3 value2)
+        {
+            Vector3 result;
+            Vector3.Max(ref value1, ref value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a vector with the maximum x,y and z values of both vectors.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The second value.</param>
+        /// <param name="result">A vector with the maximum x,y and z values of both vectors.</param>
+        public static void Max(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        {
+            result.x = (value1.x > value2.x) ? value1.x : value2.x;
+            result.y = (value1.y > value2.y) ? value1.y : value2.y;
+            result.z = (value1.z > value2.z) ? value1.z : value2.z;
+        }
+        #endregion
+        /// <summary>
+        /// Normalizes the given vector.
+        /// </summary>
+        /// <param name="value">The vector which should be normalized.</param>
+        /// <returns>A normalized vector.</returns>
+        #region public static JVector Normalize(JVector value)
+        public static Vector3 Normalize(Vector3 value)
+        {
+            Vector3 result;
+            Vector3.Normalize(ref value, out result);
+            return result;
+        }
+        /// <summary>
+        /// Normalizes the given vector.
+        /// </summary>
+        /// <param name="value">The vector which should be normalized.</param>
+        /// <param name="result">A normalized vector.</param>
+        public static void Normalize(ref Vector3 value, out Vector3 result)
+        {
+            float num2 = ((value.x * value.x) + (value.y * value.y)) + (value.z * value.z);
+            float num = 1f / ((float)Math.Sqrt((double)num2));
+            result.x = value.x * num;
+            result.y = value.y * num;
+            result.z = value.z * num;
+        }
+        #endregion
+
+        /// <summary>
+        /// Sets the length of the vector to zero.
+        /// </summary>
+        #region public void MakeZero()
+        public void MakeZero()
+        {
+            x = 0.0f;
+            y = 0.0f;
+            z = 0.0f;
+        }
+        #endregion
     }
 }

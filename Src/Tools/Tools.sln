@@ -5,13 +5,17 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptableData", "..\ScriptableData\ScriptableData.csproj", "{4295C1B7-D43F-4E38-85AD-33623489FBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "table_reader_generator", "TableReaderGenerator\TableReaderGenerator.csproj", "{71D6F6E0-A8B2-4920-B5FD-C677955D83FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableReaderGenerator", "TableReaderGenerator\TableReaderGenerator.csproj", "{71D6F6E0-A8B2-4920-B5FD-C677955D83FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialSystem", "..\SpatialSystem\SpatialSystem.csproj", "{A7243F97-5FC1-4327-81CC-C76C94721D7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellParser", "CellParser\CellParser.csproj", "{CE310EF9-9902-4267-8CC0-E826890A2138}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "..\Util\Util.csproj", "{EA8F8FD9-BDA8-4368-881F-F0C820907F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaiDemo", "DaiDemo\DaiDemo.csproj", "{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jitter", "..\Jitter\Jitter.csproj", "{AA03EF1A-94F7-4D30-AB14-2092863FF923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +83,30 @@ Global
 		{EA8F8FD9-BDA8-4368-881F-F0C820907F7A}.Release|x64.Build.0 = Release|Any CPU
 		{EA8F8FD9-BDA8-4368-881F-F0C820907F7A}.Release|x86.ActiveCfg = Release|Any CPU
 		{EA8F8FD9-BDA8-4368-881F-F0C820907F7A}.Release|x86.Build.0 = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|x64.Build.0 = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Debug|x86.Build.0 = Debug|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|x64.ActiveCfg = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|x64.Build.0 = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|x86.ActiveCfg = Release|Any CPU
+		{4A86DA2A-8DF2-4F8C-8FBA-AE3EEB257876}.Release|x86.Build.0 = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Debug|x86.Build.0 = Debug|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|x64.Build.0 = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA03EF1A-94F7-4D30-AB14-2092863FF923}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

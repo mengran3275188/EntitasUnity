@@ -88,8 +88,8 @@ namespace SceneCommand
                 entity.AddAnimation(config.ActionId, config.ActionPrefix);
 
                 // movement
-                entity.AddMovement(MoveState.Idle, 0, 0);
-                entity.AddPosition(target.position.Value + m_LocalPosition);
+                entity.AddMovement(MoveState.Idle, Vector3.zero);
+                entity.AddPosition(target.position.Value + m_LocalPosition + Vector3.up);
                 entity.AddRotation(RotateState.UserRotate, m_LocalRotation.y + target.rotation.RotateDir);
 
                 // AI
@@ -114,8 +114,15 @@ namespace SceneCommand
                 // collision
                 if(m_HasCollision)
                 {
-                    SpatialSystem.BoxCollider boxCollider = new SpatialSystem.BoxCollider(Vector3.zero, m_CollisionSize);
-                    entity.AddCollision(null, boxCollider, m_CollisionOffset);
+                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(1, 0.5f);
+
+                    Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape);
+                    rigid.Material.KineticFriction = 0;
+                    rigid.Material.StaticFriction = 0;
+                    rigid.IsParticle = true;
+                    rigid.Position = entity.position.Value;
+                    rigid.IsStatic = !entity.isMainPlayer;
+                    entity.AddPhysics(rigid);
                 }
 
             }

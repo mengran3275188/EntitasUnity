@@ -84,7 +84,7 @@ namespace UnityClient
         private void UpdateSkillControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
         {
             entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.SkillMoving : Entitas.Data.MoveState.Idle,
-                                   entity.hasMovement ? entity.movement.MovingDir : 0, 0);
+                                   entity.hasMovement ? entity.movement.Force : Vector3.zero);
             entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.SkillRotate : Entitas.Data.RotateState.UserRotate,
                                    entity.hasRotation ? entity.rotation.RotateDir : 0);
         }

@@ -51,7 +51,6 @@
     <Compile Include="MapData\TiledData\TiledMapParser.cs" />
     <Compile Include="PrKdTree.cs" />
     <Compile Include="RvoAlgorithm.cs" />
-    <Compile Include="Shape\Shape.cs" />
     <Compile Include="SpatialSystem.cs" />
     <Compile Include="MapData\TiledData\TiledData.cs" />
     <Compile Include="MapData\TiledData\TmxToTxt.cs" />

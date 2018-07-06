@@ -70,9 +70,9 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
-            SpatialSystem.BoxCollider collider = new SpatialSystem.BoxCollider(Vector3.zero, m_Size);
+            //SpatialSystem.BoxCollider collider = new SpatialSystem.BoxCollider(Vector3.zero, m_Size);
 
-            target.AddCollision(OnCollision, collider, m_Offset);
+            //target.AddCollision(OnCollision, collider, m_Offset);
 
             if(m_HaveObjId)
             {
@@ -121,10 +121,10 @@ namespace SkillCommands
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
-            if(null != obj && obj.hasCollision)
-            {
-                obj.RemoveCollision();
-            }
+            //if(null != obj && obj.hasCollision)
+            //{
+            //    obj.RemoveCollision();
+            //}
             return ExecResult.Finished;
         }
     }

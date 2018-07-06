@@ -105,6 +105,20 @@ namespace Util
 
         // *undocumented*
         public const float kEpsilon = 0.000001F;
+        /// <summary>
+        /// Sets the length of the quaternion to one.
+        /// </summary>
+        #region public void Normalize()
+        public void Normalize()
+        {
+            float num2 = (((this.x * this.x) + (this.y * this.y)) + (this.z * this.z)) + (this.w * this.w);
+            float num = 1f / ((float)Math.Sqrt((double)num2));
+            this.x *= num;
+            this.y *= num;
+            this.z *= num;
+            this.w *= num;
+        }
+        #endregion
 
         // Are two quaternions equal to each other?
         public static bool operator ==(Quaternion lhs, Quaternion rhs)
@@ -133,6 +147,105 @@ namespace Util
             return Mathf.Acos(Mathf.Min(Mathf.Abs(dot), 1.0F)) * 2.0F * Mathf.Rad2Deg;
         }
 
+        /// <summary>
+        /// Multiply two quaternions.
+        /// </summary>
+        /// <param name="quaternion1">The first quaternion.</param>
+        /// <param name="quaternion2">The second quaternion.</param>
+        /// <returns>The product of both quaternions.</returns>
+        #region public static Quaternion Multiply(Quaternion quaternion1, Quaternion quaternion2)
+        public static Quaternion Multiply(Quaternion quaternion1, Quaternion quaternion2)
+        {
+            Quaternion result;
+            Quaternion.Multiply(ref quaternion1, ref quaternion2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Multiply two quaternions.
+        /// </summary>
+        /// <param name="quaternion1">The first quaternion.</param>
+        /// <param name="quaternion2">The second quaternion.</param>
+        /// <param name="result">The product of both quaternions.</param>
+        public static void Multiply(ref Quaternion quaternion1, ref Quaternion quaternion2, out Quaternion result)
+        {
+            float x = quaternion1.x;
+            float y = quaternion1.y;
+            float z = quaternion1.z;
+            float w = quaternion1.w;
+            float num4 = quaternion2.x;
+            float num3 = quaternion2.y;
+            float num2 = quaternion2.z;
+            float num = quaternion2.w;
+            float num12 = (y * num2) - (z * num3);
+            float num11 = (z * num4) - (x * num2);
+            float num10 = (x * num3) - (y * num4);
+            float num9 = ((x * num4) + (y * num3)) + (z * num2);
+            result.x = ((x * num) + (num4 * w)) + num12;
+            result.y = ((y * num) + (num3 * w)) + num11;
+            result.z = ((z * num) + (num2 * w)) + num10;
+            result.w = (w * num) - num9;
+        }
+        #endregion
+        /// <summary>
+        /// Creates a quaternion from a matrix.
+        /// </summary>
+        /// <param name="matrix">A matrix representing an orientation.</param>
+        /// <returns>JQuaternion representing an orientation.</returns>
+        #region public static JQuaternion CreateFromMatrix(JMatrix matrix)
+        public static Quaternion CreateFromMatrix(Matrix3x3 matrix)
+        {
+            Quaternion result;
+            Quaternion.CreateFromMatrix(ref matrix, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Creates a quaternion from a matrix.
+        /// </summary>
+        /// <param name="matrix">A matrix representing an orientation.</param>
+        /// <param name="result">JQuaternion representing an orientation.</param>
+        public static void CreateFromMatrix(ref Matrix3x3 matrix, out Quaternion result)
+        {
+            float num8 = (matrix.M11 + matrix.M22) + matrix.M33;
+            if (num8 > 0f)
+            {
+                float num = (float)Math.Sqrt((double)(num8 + 1f));
+                result.w = num * 0.5f;
+                num = 0.5f / num;
+                result.x = (matrix.M23 - matrix.M32) * num;
+                result.y = (matrix.M31 - matrix.M13) * num;
+                result.z = (matrix.M12 - matrix.M21) * num;
+            }
+            else if ((matrix.M11 >= matrix.M22) && (matrix.M11 >= matrix.M33))
+            {
+                float num7 = (float)Math.Sqrt((double)(((1f + matrix.M11) - matrix.M22) - matrix.M33));
+                float num4 = 0.5f / num7;
+                result.x = 0.5f * num7;
+                result.y = (matrix.M12 + matrix.M21) * num4;
+                result.z = (matrix.M13 + matrix.M31) * num4;
+                result.w = (matrix.M23 - matrix.M32) * num4;
+            }
+            else if (matrix.M22 > matrix.M33)
+            {
+                float num6 = (float)Math.Sqrt((double)(((1f + matrix.M22) - matrix.M11) - matrix.M33));
+                float num3 = 0.5f / num6;
+                result.x = (matrix.M21 + matrix.M12) * num3;
+                result.y = 0.5f * num6;
+                result.z = (matrix.M32 + matrix.M23) * num3;
+                result.w = (matrix.M31 - matrix.M13) * num3;
+            }
+            else
+            {
+                float num5 = (float)Math.Sqrt((double)(((1f + matrix.M33) - matrix.M11) - matrix.M22));
+                float num2 = 0.5f / num5;
+                result.x = (matrix.M31 + matrix.M13) * num2;
+                result.y = (matrix.M32 + matrix.M23) * num2;
+                result.z = 0.5f * num5;
+                result.w = (matrix.M12 - matrix.M21) * num2;
+            }
+        }
+        #endregion
         public static Quaternion CreateFromYawPitchRoll(float yaw, float pitch, float roll)
         {
             float num = roll * 0.5f;

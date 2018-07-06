@@ -152,21 +152,19 @@ public partial class GameEntity {
     public Entitas.Component.MovementComponent movement { get { return (Entitas.Component.MovementComponent)GetComponent(GameComponentsLookup.Movement); } }
     public bool hasMovement { get { return HasComponent(GameComponentsLookup.Movement); } }
 
-    public void AddMovement(Entitas.Data.MoveState newState, float newMovingDir, int newLastAdjust) {
+    public void AddMovement(Entitas.Data.MoveState newState, Util.Vector3 newForce) {
         var index = GameComponentsLookup.Movement;
         var component = CreateComponent<Entitas.Component.MovementComponent>(index);
         component.State = newState;
-        component.MovingDir = newMovingDir;
-        component.LastAdjust = newLastAdjust;
+        component.Force = newForce;
         AddComponent(index, component);
     }
 
-    public void ReplaceMovement(Entitas.Data.MoveState newState, float newMovingDir, int newLastAdjust) {
+    public void ReplaceMovement(Entitas.Data.MoveState newState, Util.Vector3 newForce) {
         var index = GameComponentsLookup.Movement;
         var component = CreateComponent<Entitas.Component.MovementComponent>(index);
         component.State = newState;
-        component.MovingDir = newMovingDir;
-        component.LastAdjust = newLastAdjust;
+        component.Force = newForce;
         ReplaceComponent(index, component);
     }
 
@@ -381,29 +379,25 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.CollisionComponent collision { get { return (Entitas.Component.CollisionComponent)GetComponent(GameComponentsLookup.Collision); } }
-    public bool hasCollision { get { return HasComponent(GameComponentsLookup.Collision); } }
+    public Entitas.Component.PhysicsComponent physics { get { return (Entitas.Component.PhysicsComponent)GetComponent(GameComponentsLookup.Physics); } }
+    public bool hasPhysics { get { return HasComponent(GameComponentsLookup.Physics); } }
 
-    public void AddCollision(Entitas.Component.CollisionDelegate newOnCollision, SpatialSystem.BoxCollider newCollider, Util.Vector3 newOffset) {
-        var index = GameComponentsLookup.Collision;
-        var component = CreateComponent<Entitas.Component.CollisionComponent>(index);
-        component.OnCollision = newOnCollision;
-        component.Collider = newCollider;
-        component.Offset = newOffset;
+    public void AddPhysics(Jitter.Dynamics.RigidBody newRigid) {
+        var index = GameComponentsLookup.Physics;
+        var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
+        component.Rigid = newRigid;
         AddComponent(index, component);
     }
 
-    public void ReplaceCollision(Entitas.Component.CollisionDelegate newOnCollision, SpatialSystem.BoxCollider newCollider, Util.Vector3 newOffset) {
-        var index = GameComponentsLookup.Collision;
-        var component = CreateComponent<Entitas.Component.CollisionComponent>(index);
-        component.OnCollision = newOnCollision;
-        component.Collider = newCollider;
-        component.Offset = newOffset;
+    public void ReplacePhysics(Jitter.Dynamics.RigidBody newRigid) {
+        var index = GameComponentsLookup.Physics;
+        var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
+        component.Rigid = newRigid;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveCollision() {
-        RemoveComponent(GameComponentsLookup.Collision);
+    public void RemovePhysics() {
+        RemoveComponent(GameComponentsLookup.Physics);
     }
 }
 
@@ -836,17 +830,17 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherCollision;
+    static Entitas.IMatcher<GameEntity> _matcherPhysics;
 
-    public static Entitas.IMatcher<GameEntity> Collision {
+    public static Entitas.IMatcher<GameEntity> Physics {
         get {
-            if (_matcherCollision == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Collision);
+            if (_matcherPhysics == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Physics);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherCollision = matcher;
+                _matcherPhysics = matcher;
             }
 
-            return _matcherCollision;
+            return _matcherPhysics;
         }
     }
 }

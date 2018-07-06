@@ -11,12 +11,12 @@ public static class GameComponentsLookup {
     public const int AI = 0;
     public const int Animation = 1;
     public const int Buff = 2;
-    public const int Collision = 3;
-    public const int Destory = 4;
-    public const int Id = 5;
-    public const int Input = 6;
-    public const int MainPlayer = 7;
-    public const int Movement = 8;
+    public const int Destory = 3;
+    public const int Id = 4;
+    public const int Input = 5;
+    public const int MainPlayer = 6;
+    public const int Movement = 7;
+    public const int Physics = 8;
     public const int Position = 9;
     public const int Resource = 10;
     public const int Rotation = 11;
@@ -31,12 +31,12 @@ public static class GameComponentsLookup {
         "AI",
         "Animation",
         "Buff",
-        "Collision",
         "Destory",
         "Id",
         "Input",
         "MainPlayer",
         "Movement",
+        "Physics",
         "Position",
         "Resource",
         "Rotation",
@@ -50,12 +50,12 @@ public static class GameComponentsLookup {
         typeof(Entitas.Component.AIComponent),
         typeof(Entitas.Component.AnimationComponent),
         typeof(Entitas.Component.BuffComponent),
-        typeof(Entitas.Component.CollisionComponent),
         typeof(Entitas.Component.DestoryComponent),
         typeof(Entitas.Component.IdComponent),
         typeof(Entitas.Component.InputComponent),
         typeof(Entitas.Component.MainPlayerComponent),
         typeof(Entitas.Component.MovementComponent),
+        typeof(Entitas.Component.PhysicsComponent),
         typeof(Entitas.Component.PositionComponent),
         typeof(Entitas.Component.ResourceComponent),
         typeof(Entitas.Component.RotationComponent),

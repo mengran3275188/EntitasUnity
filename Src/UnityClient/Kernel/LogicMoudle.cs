@@ -41,6 +41,7 @@ namespace UnityClient.Kernel
             systems.Add(IdSystem.Instance);
             systems.Add(SceneSystem.Instance);
             systems.Add(SpatialSystem.Instance);
+            systems.Add(new PhysicsSystem(contexts));
             systems.Add(new MovementSystem(contexts));
             systems.Add(new PositionSystem(contexts));
             systems.Add(new RotationSystem(contexts));
@@ -48,7 +49,6 @@ namespace UnityClient.Kernel
             systems.Add(new AISystem(contexts));
             systems.Add(SkillSystem.Instance);
             systems.Add(BuffSystem.Instance);
-            systems.Add(new CollisionSystem(contexts));
 
             systems.Add(new GameStartSystem(contexts));
 

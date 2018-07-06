@@ -17,7 +17,7 @@ namespace Util
         public float M32;
         public float M33;
 
-        internal static Matrix3x3 InternalIdentity;
+        public static Matrix3x3 InternalIdentity;
 
         /// <summary>
         /// Identity matrix.

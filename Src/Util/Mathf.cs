@@ -170,9 +170,7 @@ namespace Util
         public const float Rad2Deg = 1F / Deg2Rad;
 
         // A tiny floating point value (RO).
-        public static readonly float Epsilon =
-            UnityEngineInternal.MathfInternal.IsFlushToZeroEnabled ? UnityEngineInternal.MathfInternal.FloatMinNormal
-            : UnityEngineInternal.MathfInternal.FloatMinDenormal;
+        public const float Epsilon = 1.192092896e-012f;
 
         // Clamps a value between a minimum float and maximum float value.
         public static float Clamp(float value, float min, float max)
@@ -404,6 +402,18 @@ namespace Util
             var buffer = new byte[8];
             r.NextBytes(buffer);
             return (long)(System.BitConverter.ToUInt64(buffer, 0) & System.Int64.MaxValue);
+        }
+        public static void Abs(ref Matrix3x3 matrix,out Matrix3x3 result)
+        {
+            result.M11 = Math.Abs(matrix.M11);
+            result.M12 = Math.Abs(matrix.M12);
+            result.M13 = Math.Abs(matrix.M13);
+            result.M21 = Math.Abs(matrix.M21);
+            result.M22 = Math.Abs(matrix.M22);
+            result.M23 = Math.Abs(matrix.M23);
+            result.M31 = Math.Abs(matrix.M31);
+            result.M32 = Math.Abs(matrix.M32);
+            result.M33 = Math.Abs(matrix.M33);
         }
     }
 }
