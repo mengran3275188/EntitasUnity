@@ -451,8 +451,8 @@ ModelImporter:
     - serializedVersion: 16
       name: attack_02
       takeName: Take 001
-      firstFrame: 150
-      lastFrame: 205
+      firstFrame: 170
+      lastFrame: 186
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -601,8 +601,8 @@ ModelImporter:
     - serializedVersion: 16
       name: attack_01
       takeName: Take 001
-      firstFrame: 230
-      lastFrame: 280
+      firstFrame: 246
+      lastFrame: 262
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
