@@ -19,12 +19,27 @@ namespace UnityClient
             var entities = m_MovingEntities.GetEntities();
             foreach (GameEntity entity in entities)
             {
-
                 if(entity.hasPhysics)
                 {
-                    entity.ReplacePosition(entity.physics.Rigid.Position);
+                    Vector3 position = entity.physics.Rigid.Position;
+                    Vector3 velocity = entity.movement.Force;
+
+                    //entity.physics.Rigid.IsStatic = entity.movement.State == Entitas.Data.MoveState.Idle;
+                    //if(!entity.physics.Rigid.IsStatic)
+                    {
+                        if(entity.movement.State == Entitas.Data.MoveState.Idle)
+                        {
+                            entity.physics.Rigid.LinearVelocity = Vector3.zero;
+                        }
+                        else
+                        {
+                        entity.physics.Rigid.LinearVelocity = velocity;
+                        }
+                    }
+                    entity.ReplacePosition(position);
                 }
             }
+
         }
 
         private bool CanGo(float x, float y, float dir, float distance)

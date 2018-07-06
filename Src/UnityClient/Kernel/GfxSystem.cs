@@ -24,6 +24,14 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.OnQuit();
         }
+        public static void DrawLine(Vector3 start, Vector3 end)
+        {
+            GfxSystemImpl.Gfx.DrawLine(start.x, start.y, start.z, end.x, end.y, end.z);
+        }
+        public static void DrawPoint(Vector3 pos, float radius)
+        {
+            GfxSystemImpl.Gfx.DrawPoint(pos.x, pos.y, pos.z, radius);
+        }
         public static void Instantiate(uint resId, string path)
         {
             GfxSystemImpl.Gfx.Instantiate(resId, path);

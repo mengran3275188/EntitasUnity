@@ -382,14 +382,14 @@ public partial class GameEntity {
     public Entitas.Component.PhysicsComponent physics { get { return (Entitas.Component.PhysicsComponent)GetComponent(GameComponentsLookup.Physics); } }
     public bool hasPhysics { get { return HasComponent(GameComponentsLookup.Physics); } }
 
-    public void AddPhysics(Jitter.Dynamics.RigidBody newRigid) {
+    public void AddPhysics(Entitas.Data.RigidObject newRigid) {
         var index = GameComponentsLookup.Physics;
         var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
         component.Rigid = newRigid;
         AddComponent(index, component);
     }
 
-    public void ReplacePhysics(Jitter.Dynamics.RigidBody newRigid) {
+    public void ReplacePhysics(Entitas.Data.RigidObject newRigid) {
         var index = GameComponentsLookup.Physics;
         var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
         component.Rigid = newRigid;

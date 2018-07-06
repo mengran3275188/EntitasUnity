@@ -38,6 +38,7 @@ namespace Jitter.Collision
     {
         BBox BoundingBox { get; }
         bool IsStaticOrInactive{ get; }
+        bool IsTrigger { get; }
     }
 
 

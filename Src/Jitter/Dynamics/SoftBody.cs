@@ -733,6 +733,12 @@ namespace Jitter.Dynamics
         {
             get { return !active; }
         }
+        private bool isTrigger = false;
+        public bool IsTrigger
+        {
+            get { return isTrigger; }
+            set { isTrigger = value; }
+        }
     }
 
 

@@ -193,11 +193,16 @@ namespace SkillCommands
                 m_RotateDir = obj.rotation.RotateDir;
             }
 
+            Vector3 speed = speed_vect + accel_vect * time / 2;
+            obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
+            obj.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, speed);
+            /*
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
             Vector3 word_target_pos = obj.position.Value + object_motion;
             obj.ReplacePosition(word_target_pos);
             obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
+            */
             return (speed_vect + accel_vect * time);
         }
 

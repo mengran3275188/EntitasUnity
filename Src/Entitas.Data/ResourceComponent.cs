@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using Util;
+using Entitas.Data;
 
 namespace Entitas.Component
 {
@@ -23,7 +24,7 @@ namespace Entitas.Component
     // TODO(camp id)
     public sealed class PhysicsComponent : IComponent
     {
-        public Jitter.Dynamics.RigidBody Rigid;
+        public RigidObject Rigid;
     }
     public sealed class DestoryComponent : IComponent
     {

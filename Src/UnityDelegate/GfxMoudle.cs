@@ -54,6 +54,14 @@ namespace UnityDelegate
             UnityEngine.Debug.Log(log);
         }
 
+        public void DrawLine(float startx, float starty, float startz, float endx, float endy, float endz)
+        {
+            Gizmos.DrawLine(new UnityEngine.Vector3(startx, starty, startz), new UnityEngine.Vector3(endx, endy, endz));
+        }
+        public void DrawPoint(float pointx, float pointy, float pointz, float radius)
+        {
+            Gizmos.DrawSphere(new UnityEngine.Vector3(pointx, pointy, pointz), radius);
+        }
         public void Instantiate(uint resId, string path)
         {
             var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;

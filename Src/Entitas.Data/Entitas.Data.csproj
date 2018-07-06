@@ -58,6 +58,7 @@
     <Compile Include="DataReader\FilePathDefine.cs" />
     <Compile Include="Define\GameDefine.cs" />
     <Compile Include="Define\KeyboardCode.cs" />
+    <Compile Include="Define\RigidObject.cs" />
     <Compile Include="MovementComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceComponent.cs" />

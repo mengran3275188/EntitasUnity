@@ -890,6 +890,9 @@ namespace Jitter
         {
             Arbiter arbiter = null;
 
+            if (body1.IsTrigger || body2.IsTrigger)
+                return;
+
             lock (arbiterMap)
             {
                 arbiterMap.LookUpArbiter(body1, body2, out arbiter);

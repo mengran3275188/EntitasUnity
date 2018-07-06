@@ -116,12 +116,14 @@ namespace SceneCommand
                 {
                     Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(1, 0.5f);
 
-                    Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape);
-                    rigid.Material.KineticFriction = 0;
-                    rigid.Material.StaticFriction = 0;
-                    rigid.IsParticle = true;
+                    Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
+                    physicsMaterial.KineticFriction = 0;
+                    physicsMaterial.StaticFriction = 0;
+
+                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial);
                     rigid.Position = entity.position.Value;
-                    rigid.IsStatic = !entity.isMainPlayer;
+                    //rigid.IsStatic = true;
+
                     entity.AddPhysics(rigid);
                 }
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: TestPhysics.xml-->
+<behavior name="TestPhysics" agenttype="CharacterAgent" version="5">
+  <node class="Action" id="0">
+    <property Method="Self.CharacterAgent::MoveToPlayer()" />
+    <property ResultOption="BT_INVALID" />
+  </node>
+</behavior>

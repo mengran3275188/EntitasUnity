@@ -55,14 +55,7 @@ namespace UnityClient
             {
                 if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving)
                 {
-                    mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Cos(moveDir), 0, Mathf.Sin(moveDir)) * 10);
-                    if(mainPlayer.hasPhysics)
-                    {
-                        if(isMoving)
-                            mainPlayer.physics.Rigid.LinearVelocity = (new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * 10);
-                        else
-                            mainPlayer.physics.Rigid.LinearVelocity = Vector3.zero;
-                    }
+                    mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * 10);
                 }
                 if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && mainPlayer.rotation.State != RotateState.ImpactRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
                 {

@@ -640,6 +640,13 @@ namespace Jitter.Dynamics
             get { return (!this.isActive || this.isStatic); }
         }
 
+        private bool isTrigger = false;
+        public bool IsTrigger
+        {
+            get { return isTrigger; }
+            set { isTrigger = value; }
+        }
+
         private bool enableDebugDraw = false;
         public bool EnableDebugDraw
         {

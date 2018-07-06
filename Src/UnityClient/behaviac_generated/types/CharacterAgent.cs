@@ -47,7 +47,8 @@ public class CharacterAgent : behaviac.Agent
         float dir = Util.Mathf.Atan2(self.position.Value.x - mainPlayer.position.Value.x, self.position.Value.z - mainPlayer.position.Value.z);
         Util.Vector3 force = new Util.Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
-        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force.normalized * 5);
+        self.physics.Rigid.LinearVelocity = force;
 ///<<< END WRITING YOUR CODE
 	}
 
@@ -77,9 +78,9 @@ public class CharacterAgent : behaviac.Agent
             return behaviac.EBTStatus.BT_SUCCESS;
 
         float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x- self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
-        Util.Vector3 force = new Util.Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
+        Util.Vector3 force = new Util.Vector3(mainPlayer.position.Value.x- self.position.Value.x, 0, mainPlayer.position.Value.z - self.position.Value.z);
         self.ReplaceRotation(Entitas.Data.RotateState.UserRotate, dir);
-        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force);
+        self.ReplaceMovement(Entitas.Data.MoveState.UserMoving, force.normalized * 5);
 		return behaviac.EBTStatus.BT_SUCCESS;
 ///<<< END WRITING YOUR CODE
 	}

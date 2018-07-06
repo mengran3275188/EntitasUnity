@@ -13,7 +13,11 @@ namespace UnityClient
         {
             m_Context = contexts.game;
             m_World = new Jitter.World(new Jitter.Collision.CollisionSystemSAP());
+
+            m_World.CollisionSystem.CollisionDetected += CollisionSystem_CollisionDetected;
         }
+
+
         public void Initialize()
         {
 
@@ -45,6 +49,10 @@ namespace UnityClient
         private void PhysicsSystem_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
             throw new NotImplementedException();
+        }
+        private void CollisionSystem_CollisionDetected(Jitter.Dynamics.RigidBody body1, Jitter.Dynamics.RigidBody body2, Util.Vector3 point1, Util.Vector3 point2, Util.Vector3 normal, float penetration)
+        {
+            Util.LogUtil.Info("CollisionDetected {0} {1} {2} {3}", body1.Position, body2.Position, point1, point2);
         }
 
         private readonly GameContext m_Context;
