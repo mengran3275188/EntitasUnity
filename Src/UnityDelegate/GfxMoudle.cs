@@ -60,174 +60,151 @@ namespace UnityDelegate
         }
         public void DrawPoint(float pointx, float pointy, float pointz, float radius)
         {
-           // Gizmos.DrawSphere(new UnityEngine.Vector3(pointx, pointy, pointz), radius);
+            // Gizmos.DrawSphere(new UnityEngine.Vector3(pointx, pointy, pointz), radius);
         }
         public void Instantiate(uint resId, string path)
         {
             var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;
-            m_IdMapper[resId] = obj.GetInstanceID();
-        }
-        public void DestroyResource(uint resId)
-        {
-            int id;
-            if(m_IdMapper.TryGetValue(resId, out id))
+            if (null != obj)
             {
-                GameObject obj = ResourceSystem.GetObject(id) as GameObject;
-                if (null != obj)
-                    ResourceSystem.RecycleObject(obj);
+                RememberGameObject(resId, obj);
             }
             else
             {
-                LogUtil.Error("CreateAndAttachGameObject : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.Instantiate new object failed. Resource path is {0}.", path);
+            }
+        }
+        public void DestroyResource(uint resId)
+        {
+            GameObject obj = GetGameObject(resId);
+            if (null != obj)
+            {
+                ResourceSystem.RecycleObject(obj);
+            }
+            else
+            {
+                LogUtil.Error("GfxMoudle.DestroyResource : can not find obj with resId {0}.", resId);
             }
         }
         public void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)
         {
-            int id = 0;
-            if(m_IdMapper.TryGetValue(resId, out id))
+            GameObject parent = GetGameObject(resId);
+            if (null != parent)
             {
-                GameObject parent = ResourceSystem.GetObject(id) as GameObject;
-                if(null != parent)
+                Transform t = FindChildRecursive(parent.transform, path);
+                if (null != t)
                 {
-                    Transform t = FindChildRecursive(parent.transform, path);
-                    if(null != t)
+                    GameObject obj = ResourceManager.Instance.NewObject(resource, recycleTime) as GameObject;
+                    if (null != obj)
                     {
-                        GameObject obj = ResourceManager.Instance.NewObject(resource, recycleTime) as GameObject;
-                        if(null != obj)
-                        {
-                            m_IdMapper[resId] = obj.GetInstanceID();
-                            obj.transform.parent = t;
-                            obj.transform.localPosition = UnityEngine.Vector3.zero;
-                            if (isAttach)
-                                obj.transform.parent = null;
-                        }
-                        else
-                        {
-                            LogUtil.Error("CreateAndAttachGameObject: new object failed. resId = {0}, resource = {1}.", resId, resource);
-                        }
+                        RememberGameObject(resId, obj);
+                        obj.transform.parent = t;
+                        obj.transform.localPosition = UnityEngine.Vector3.zero;
+                        if (isAttach)
+                            obj.transform.parent = null;
                     }
                     else
                     {
-                        LogUtil.Error("CreateAndAttachGameObject: parent bone path not found. parentId = {0}, path = {1}.", parentId, path);
+                        LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: new object failed. resId = {0}, resource = {1}.", resId, resource);
                     }
                 }
                 else
                 {
-                        LogUtil.Error("CreateAndAttachGameObject: parent  object not found. parentId = {0}.", parentId);
+                    LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: parent bone path not found. parentId = {0}, path = {1}.", parentId, path);
                 }
             }
             else
             {
-                LogUtil.Error("CreateAndAttachGameObject : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: can not find parent  object with resId. parentId = {0}.", parentId);
             }
         }
         public void UpdatePosition(uint resId, float x, float y, float z)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
-                {
-                    target.transform.position = new UnityEngine.Vector3(x, y, z);
-                }
+                target.transform.position = new UnityEngine.Vector3(x, y, z);
             }
             else
             {
-                LogUtil.Error("UpdatePostion : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.UpdatePostion : can not find obj with resId {0}.", resId);
             }
         }
         public void UpdateRotation(uint resId, float rotation)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
-                {
-                    target.transform.rotation = UnityEngine.Quaternion.Euler(0, rotation / UnityEngine.Mathf.PI * 180f, 0);
-                }
+                target.transform.rotation = UnityEngine.Quaternion.Euler(0, rotation / UnityEngine.Mathf.PI * 180f, 0);
             }
             else
             {
-                LogUtil.Error("UpdateRotation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.UpdateRotation : can not find obj with resId {0}.", resId);
             }
         }
         public void PlayAnimation(uint resId, string animName)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
+                Animation animation = target.GetComponent<Animation>();
+                if (null != animation)
                 {
-                    Animation animation = target.GetComponent<Animation>();
-                    if (null != animation)
+                    if (!animation.Play(animName))
                     {
-                        if (!animation.Play(animName))
-                        {
-                            LogUtil.Error("PlayAnimation failed. Target {0} animName {1}.", target.name, animName);
-                        }
+                        LogUtil.Error("PlayAnimation failed. Target {0} animName {1}.", target.name, animName);
                     }
                 }
             }
             else
             {
-                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.PlayAnimation : can not find obj with resId {0}.", resId);
             }
         }
         public void CrossFadeAnimation(uint resId, string animName, float fadeLength = 0.3f)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
+                Animation animation = target.GetComponent<Animation>();
+                if (null != animation)
                 {
-                    Animation animation = target.GetComponent<Animation>();
-                    if (null != animation)
-                    {
-                        animation.CrossFade(animName, 0.3f);
-                    }
+                    animation.CrossFade(animName, 0.3f);
                 }
             }
             else
             {
-                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.CrossFadeAnimation : can not find obj with resId {0}.", resId);
             }
         }
         public void PlayAnimation(uint resId, string animName, float speed, float weight, int layer, int wrapMode, int blendMode, int playMode, long crossFadeTime)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
+                Animation animation = target.GetComponent<Animation>();
+                if (null != animation)
                 {
-                    Animation animation = target.GetComponent<Animation>();
-                    if (null != animation)
+                    AnimationState state = animation[animName];
+                    if (null != state)
                     {
-                        AnimationState state = animation[animName];
-                        if (null != state)
-                        {
-                            state.speed = speed;
-                            state.weight = weight;
-                            state.layer = layer;
-                            state.wrapMode = (WrapMode)wrapMode;
-                            state.normalizedTime = 0;
-                            state.blendMode = (blendMode == 0) ? AnimationBlendMode.Blend : AnimationBlendMode.Additive;
-                            if (playMode == 0)
-                                animation.Play(animName);
-                            else
-                                animation.CrossFade(animName, crossFadeTime / 1000.0f);
-                        }
-                        animation.Play(animName);
+                        state.speed = speed;
+                        state.weight = weight;
+                        state.layer = layer;
+                        state.wrapMode = (WrapMode)wrapMode;
+                        state.normalizedTime = 0;
+                        state.blendMode = (blendMode == 0) ? AnimationBlendMode.Blend : AnimationBlendMode.Additive;
+                        if (playMode == 0)
+                            animation.Play(animName);
+                        else
+                            animation.CrossFade(animName, crossFadeTime / 1000.0f);
                     }
+                    animation.Play(animName);
                 }
             }
             else
             {
-                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.PlayAnimation : can not find obj with resId {0}.", resId);
             }
         }
         public bool IsKeyPressed(Keyboard.Code c)
@@ -244,56 +221,48 @@ namespace UnityDelegate
         }
         public void SetAnimationSpeed(uint resId, string animName, float speed)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
+                Animation animation = target.GetComponent<Animation>();
+                if (null != animation)
                 {
-                    Animation animation = target.GetComponent<Animation>();
-                    if (null != animation)
+                    AnimationState state = animation[animName];
+                    if (null != state)
                     {
-                        AnimationState state = animation[animName];
-                        if (null != state)
-                        {
-                            state.speed = speed;
-                        }
+                        state.speed = speed;
                     }
                 }
             }
             else
             {
-                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.SetAnimationSpeed : can not find obj with resId {0}.", resId);
             }
         }
         public void MoveChildToBone(uint resId, string childName, string boneName)
         {
-            int id = 0;
-            if (m_IdMapper.TryGetValue(resId, out id))
+            GameObject target = GetGameObject(resId);
+            if (null != target)
             {
-                GameObject target = ResourceSystem.GetObject(id) as UnityEngine.GameObject;
-                if (null != target)
+                Transform child = FindChildRecursive(target.transform, childName);
+                if (null == child)
                 {
-                    Transform child = FindChildRecursive(target.transform, childName);
-                    if (null == child)
-                    {
-                        LogUtil.Error("GfxMoudle.MoveChildToBone : child {0} not found.", childName);
-                        return;
-                    }
-                    Transform bone = FindChildRecursive(target.transform, boneName);
-                    if(null == bone)
-                    {
-                        LogUtil.Error("GfxMoudle.MoveChildToBone : bone {0} not found.", boneName);
-                        return;
-                    }
-                    child.parent = bone;
-                    child.localRotation = UnityEngine.Quaternion.identity;
-                    child.localPosition = UnityEngine.Vector3.zero;
+                    LogUtil.Error("GfxMoudle.MoveChildToBone : child {0} not found.", childName);
+                    return;
                 }
+                Transform bone = FindChildRecursive(target.transform, boneName);
+                if (null == bone)
+                {
+                    LogUtil.Error("GfxMoudle.MoveChildToBone : bone {0} not found.", boneName);
+                    return;
+                }
+                child.parent = bone;
+                child.localRotation = UnityEngine.Quaternion.identity;
+                child.localPosition = UnityEngine.Vector3.zero;
             }
             else
             {
-                LogUtil.Error("PlayAnimation : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.MoveChildToBone : can not find obj with resId {0}.", resId);
             }
         }
         public bool GetJoyStickDir(out float dir)
@@ -324,21 +293,54 @@ namespace UnityDelegate
             m_JoystickX = x;
             m_JoystickY = y;
         }
+
+        private GameObject GetGameObject(uint id)
+        {
+            GameObject ret = null;
+            m_GameObjects.TryGetValue(id, out ret);
+            return ret;
+        }
+        private void RememberGameObject(uint id, GameObject obj)
+        {
+            GameObject oldObj = null;
+            if (m_GameObjects.TryGetValue(id, out oldObj))
+            {
+                oldObj.SetActive(false);
+                m_GameObjectIds.Remove(oldObj);
+                if (oldObj != obj)
+                    GameObject.Destroy(oldObj);
+            }
+            else
+            {
+                m_GameObjects.AddLast(id, obj);
+            }
+            m_GameObjectIds[obj] = id;
+        }
+        private void ForgetGameObject(uint id, GameObject obj)
+        {
+            m_GameObjects.Remove(id);
+            m_GameObjectIds.Remove(obj);
+        }
         private Transform FindChildRecursive(Transform parent, string bonePath)
         {
-          Transform t = parent.Find(bonePath);
-          if (null != t) {
-            return t;
-          } else {
-            int ct = parent.childCount;
-            for (int i = 0; i < ct; ++i) {
-              t = FindChildRecursive(parent.GetChild(i), bonePath);
-              if (null != t) {
+            Transform t = parent.Find(bonePath);
+            if (null != t)
+            {
                 return t;
-              }
             }
-          }
-          return null;
+            else
+            {
+                int ct = parent.childCount;
+                for (int i = 0; i < ct; ++i)
+                {
+                    t = FindChildRecursive(parent.GetChild(i), bonePath);
+                    if (null != t)
+                    {
+                        return t;
+                    }
+                }
+            }
+            return null;
         }
 
         public void PublishLogicEvent<T1>(string evt, string group, T1 t1)
@@ -547,6 +549,8 @@ namespace UnityDelegate
 
         private PublishSubscribeSystem m_EventForLogic = new PublishSubscribeSystem();
         private IActionQueue m_LogicInvoker;
-        private Dictionary<uint, int> m_IdMapper = new Dictionary<uint, int>();
+
+        private LinkedListDictionary<uint, GameObject> m_GameObjects = new LinkedListDictionary<uint, GameObject>();
+        private Dictionary<GameObject, uint> m_GameObjectIds = new Dictionary<GameObject, uint>();
     }
 }
