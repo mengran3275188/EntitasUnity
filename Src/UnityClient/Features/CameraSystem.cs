@@ -14,7 +14,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Position, GameMatcher.MainPlayer));
+            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.MainPlayer, GameMatcher.Position));
         }
         protected override bool Filter(GameEntity entity)
         {
