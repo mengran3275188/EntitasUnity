@@ -36,16 +36,14 @@ namespace UnityClient
         public void Execute()
         {
             // keyboard
-            /*
             KeyHit kh = GetKeyboadHit();
 
             float moveDir = CalcMoveDir(kh);
             bool isMoving = moveDir >= 0;
-            */
 
+            if(!isMoving)
+                isMoving = GfxSystem.GetJoyStickDir(out moveDir);
 
-            float moveDir;
-            bool isMoving = GfxSystem.GetJoyStickDir(out moveDir);
 
             GameContext gameContext = Contexts.sharedInstance.game;
             gameContext.ReplaceInput(isMoving, moveDir);
