@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Entitas;
 using Entitas.Data;
+using Util;
 
 namespace UnityClient
 {
@@ -36,6 +37,14 @@ namespace UnityClient
         public void Execute()
         {
             m_World.Step(m_Context.timeInfo.DeltaTime, false);
+
+            DebugDrawer drawer = new DebugDrawer();
+
+            foreach(Jitter.Dynamics.RigidBody body in m_World.RigidBodies)
+            {
+                body.EnableDebugDraw = true;
+                body.DebugDraw(drawer);
+            }
         }
 
         private void PhysicsSystem_OnEntityAdded(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
@@ -48,15 +57,51 @@ namespace UnityClient
         }
         private void PhysicsSystem_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
-            throw new NotImplementedException();
+            PhysicsComponent physics = component as PhysicsComponent;
+            if(null != physics)
+            {
+                m_World.RemoveBody(physics.Rigid);
+            }
         }
         private void CollisionSystem_CollisionDetected(Jitter.Dynamics.RigidBody body1, Jitter.Dynamics.RigidBody body2, Util.Vector3 point1, Util.Vector3 point2, Util.Vector3 normal, float penetration)
         {
-            Util.LogUtil.Info("CollisionDetected {0} {1} {2} {3}", body1.Position, body2.Position, point1, point2);
+            RigidObject rigidObject1 = body1 as RigidObject;
+            RigidObject rigidObject2 = body2 as RigidObject;
+            if(null != rigidObject1 && null != rigidObject2)
+            {
+                var entity1 = m_Context.GetEntityWithId(rigidObject1.EntityId);
+                var entity2 = m_Context.GetEntityWithId(rigidObject2.EntityId);
+                if(null != entity1 && null != entity2)
+                {
+                    if(null != entity1.physics.OnCollision)
+                        entity1.physics.OnCollision(entity2.id.value);
+                    if(null != entity2.physics.OnCollision)
+                        entity2.physics.OnCollision(entity1.id.value);
+                }
+            }
+        }
+
+        private class DebugDrawer : Jitter.IDebugDrawer
+        {
+            public void DrawLine(Vector3 start, Vector3 end)
+            {
+                GfxSystem.DrawLine(start, end);
+            }
+            public void DrawPoint(Vector3 pos)
+            {
+                GfxSystem.DrawPoint(pos, 0.1f);
+            }
+            public void DrawTriangle(Vector3 pos1, Vector3 pos2, Vector3 pos3)
+            {
+                DrawLine(pos1, pos2);
+                DrawLine(pos2, pos3);
+                DrawLine(pos3, pos1);
+            }
         }
 
         private readonly GameContext m_Context;
 
         private readonly Jitter.World m_World;
     }
+
 }

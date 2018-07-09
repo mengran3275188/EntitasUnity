@@ -23,6 +23,7 @@ namespace Entitas.Data
     public sealed class PhysicsComponent : IComponent
     {
         public RigidObject Rigid;
+        public CollisionDelegate OnCollision;
     }
     public sealed class DestoryComponent : IComponent
     {
