@@ -1,12 +1,12 @@
 ﻿using Entitas.Data;
 using Util;
 
-namespace Entitas.Component
+namespace Entitas.Data
 {
     public sealed class MovementComponent : IComponent
     {
         public MoveState State;
-        public Vector3 Force;
+        public Vector3 Velocity;
     }
     public sealed class PositionComponent : IComponent
     {

@@ -3,7 +3,7 @@ using Entitas.Data;
 using Spatial;
 using Entitas.CodeGeneration.Attributes;
 
-namespace Entitas.Component
+namespace Entitas.Data
 {
     [Unique]
     public sealed class MainPlayerComponent : IComponent

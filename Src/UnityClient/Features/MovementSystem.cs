@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
+using Entitas.Data;
 using Util;
 
 namespace UnityClient
@@ -12,7 +13,7 @@ namespace UnityClient
         public MovementSystem(Contexts contexts)
         {
             m_GameContext = contexts.game;
-            m_MovingEntities = contexts.game.GetGroup(GameMatcher.Movement);
+            m_MovingEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Movement, GameMatcher.Physics));
         }
         public void Execute()
         {
@@ -22,20 +23,12 @@ namespace UnityClient
                 if(entity.hasPhysics)
                 {
                     Vector3 position = entity.physics.Rigid.Position;
-                    Vector3 velocity = entity.movement.Force;
+                    Vector3 velocity = entity.movement.Velocity;
 
-                    //entity.physics.Rigid.IsStatic = entity.movement.State == Entitas.Data.MoveState.Idle;
-                    //if(!entity.physics.Rigid.IsStatic)
-                    {
-                        if(entity.movement.State == Entitas.Data.MoveState.Idle)
-                        {
-                            entity.physics.Rigid.LinearVelocity = Vector3.zero;
-                        }
-                        else
-                        {
-                        entity.physics.Rigid.LinearVelocity = velocity;
-                        }
-                    }
+                    RigidObject rigid = entity.physics.Rigid;
+
+                    rigid.LinearVelocity = entity.movement.State == MoveState.Idle ? Vector3.zero : velocity;
+
                     entity.ReplacePosition(position);
                 }
             }

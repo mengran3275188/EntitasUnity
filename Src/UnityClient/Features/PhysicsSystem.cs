@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
-using Entitas.Component;
+using Entitas.Data;
 
 namespace UnityClient
 {

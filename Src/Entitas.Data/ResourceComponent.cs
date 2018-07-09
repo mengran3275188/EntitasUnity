@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using Util;
-using Entitas.Data;
 
-namespace Entitas.Component
+namespace Entitas.Data
 {
     public delegate void CollisionDelegate(uint targetEntityId);
 

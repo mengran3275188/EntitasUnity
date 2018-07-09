@@ -36,12 +36,12 @@ public partial class GameContext {
 public partial class GameContext {
 
     public GameEntity inputEntity { get { return GetGroup(GameMatcher.Input).GetSingleEntity(); } }
-    public Entitas.Component.InputComponent input { get { return inputEntity.input; } }
+    public Entitas.Data.InputComponent input { get { return inputEntity.input; } }
     public bool hasInput { get { return inputEntity != null; } }
 
     public GameEntity SetInput(bool newIsMoving, float newMovingDir) {
         if (hasInput) {
-            throw new Entitas.EntitasException("Could not set Input!\n" + this + " already has an entity with Entitas.Component.InputComponent!",
+            throw new Entitas.EntitasException("Could not set Input!\n" + this + " already has an entity with Entitas.Data.InputComponent!",
                 "You should check if the context already has a inputEntity before setting it or use context.ReplaceInput().");
         }
         var entity = CreateEntity();
@@ -74,12 +74,12 @@ public partial class GameContext {
 public partial class GameContext {
 
     public GameEntity timeInfoEntity { get { return GetGroup(GameMatcher.TimeInfo).GetSingleEntity(); } }
-    public Entitas.Component.TimeInfoComponent timeInfo { get { return timeInfoEntity.timeInfo; } }
+    public Entitas.Data.TimeInfoComponent timeInfo { get { return timeInfoEntity.timeInfo; } }
     public bool hasTimeInfo { get { return timeInfoEntity != null; } }
 
     public GameEntity SetTimeInfo(float newTime, float newDeltaTime) {
         if (hasTimeInfo) {
-            throw new Entitas.EntitasException("Could not set TimeInfo!\n" + this + " already has an entity with Entitas.Component.TimeInfoComponent!",
+            throw new Entitas.EntitasException("Could not set TimeInfo!\n" + this + " already has an entity with Entitas.Data.TimeInfoComponent!",
                 "You should check if the context already has a timeInfoEntity before setting it or use context.ReplaceTimeInfo().");
         }
         var entity = CreateEntity();
@@ -112,12 +112,12 @@ public partial class GameContext {
 public partial class GameContext {
 
     public GameEntity sceneEntity { get { return GetGroup(GameMatcher.Scene).GetSingleEntity(); } }
-    public Entitas.Component.SceneComponent scene { get { return sceneEntity.scene; } }
+    public Entitas.Data.SceneComponent scene { get { return sceneEntity.scene; } }
     public bool hasScene { get { return sceneEntity != null; } }
 
     public GameEntity SetScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         if (hasScene) {
-            throw new Entitas.EntitasException("Could not set Scene!\n" + this + " already has an entity with Entitas.Component.SceneComponent!",
+            throw new Entitas.EntitasException("Could not set Scene!\n" + this + " already has an entity with Entitas.Data.SceneComponent!",
                 "You should check if the context already has a sceneEntity before setting it or use context.ReplaceScene().");
         }
         var entity = CreateEntity();
@@ -149,22 +149,22 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.MovementComponent movement { get { return (Entitas.Component.MovementComponent)GetComponent(GameComponentsLookup.Movement); } }
+    public Entitas.Data.MovementComponent movement { get { return (Entitas.Data.MovementComponent)GetComponent(GameComponentsLookup.Movement); } }
     public bool hasMovement { get { return HasComponent(GameComponentsLookup.Movement); } }
 
-    public void AddMovement(Entitas.Data.MoveState newState, Util.Vector3 newForce) {
+    public void AddMovement(Entitas.Data.MoveState newState, Util.Vector3 newVelocity) {
         var index = GameComponentsLookup.Movement;
-        var component = CreateComponent<Entitas.Component.MovementComponent>(index);
+        var component = CreateComponent<Entitas.Data.MovementComponent>(index);
         component.State = newState;
-        component.Force = newForce;
+        component.Velocity = newVelocity;
         AddComponent(index, component);
     }
 
-    public void ReplaceMovement(Entitas.Data.MoveState newState, Util.Vector3 newForce) {
+    public void ReplaceMovement(Entitas.Data.MoveState newState, Util.Vector3 newVelocity) {
         var index = GameComponentsLookup.Movement;
-        var component = CreateComponent<Entitas.Component.MovementComponent>(index);
+        var component = CreateComponent<Entitas.Data.MovementComponent>(index);
         component.State = newState;
-        component.Force = newForce;
+        component.Velocity = newVelocity;
         ReplaceComponent(index, component);
     }
 
@@ -183,19 +183,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.PositionComponent position { get { return (Entitas.Component.PositionComponent)GetComponent(GameComponentsLookup.Position); } }
+    public Entitas.Data.PositionComponent position { get { return (Entitas.Data.PositionComponent)GetComponent(GameComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(GameComponentsLookup.Position); } }
 
     public void AddPosition(Util.Vector3 newValue) {
         var index = GameComponentsLookup.Position;
-        var component = CreateComponent<Entitas.Component.PositionComponent>(index);
+        var component = CreateComponent<Entitas.Data.PositionComponent>(index);
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplacePosition(Util.Vector3 newValue) {
         var index = GameComponentsLookup.Position;
-        var component = CreateComponent<Entitas.Component.PositionComponent>(index);
+        var component = CreateComponent<Entitas.Data.PositionComponent>(index);
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
@@ -215,12 +215,12 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.RotationComponent rotation { get { return (Entitas.Component.RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
+    public Entitas.Data.RotationComponent rotation { get { return (Entitas.Data.RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(GameComponentsLookup.Rotation); } }
 
     public void AddRotation(Entitas.Data.RotateState newState, float newRotateDir) {
         var index = GameComponentsLookup.Rotation;
-        var component = CreateComponent<Entitas.Component.RotationComponent>(index);
+        var component = CreateComponent<Entitas.Data.RotationComponent>(index);
         component.State = newState;
         component.RotateDir = newRotateDir;
         AddComponent(index, component);
@@ -228,7 +228,7 @@ public partial class GameEntity {
 
     public void ReplaceRotation(Entitas.Data.RotateState newState, float newRotateDir) {
         var index = GameComponentsLookup.Rotation;
-        var component = CreateComponent<Entitas.Component.RotationComponent>(index);
+        var component = CreateComponent<Entitas.Data.RotationComponent>(index);
         component.State = newState;
         component.RotateDir = newRotateDir;
         ReplaceComponent(index, component);
@@ -249,12 +249,12 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.AnimationComponent animation { get { return (Entitas.Component.AnimationComponent)GetComponent(GameComponentsLookup.Animation); } }
+    public Entitas.Data.AnimationComponent animation { get { return (Entitas.Data.AnimationComponent)GetComponent(GameComponentsLookup.Animation); } }
     public bool hasAnimation { get { return HasComponent(GameComponentsLookup.Animation); } }
 
     public void AddAnimation(int newActionId, string newPrefix) {
         var index = GameComponentsLookup.Animation;
-        var component = CreateComponent<Entitas.Component.AnimationComponent>(index);
+        var component = CreateComponent<Entitas.Data.AnimationComponent>(index);
         component.ActionId = newActionId;
         component.Prefix = newPrefix;
         AddComponent(index, component);
@@ -262,7 +262,7 @@ public partial class GameEntity {
 
     public void ReplaceAnimation(int newActionId, string newPrefix) {
         var index = GameComponentsLookup.Animation;
-        var component = CreateComponent<Entitas.Component.AnimationComponent>(index);
+        var component = CreateComponent<Entitas.Data.AnimationComponent>(index);
         component.ActionId = newActionId;
         component.Prefix = newPrefix;
         ReplaceComponent(index, component);
@@ -283,19 +283,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.ResourceComponent resource { get { return (Entitas.Component.ResourceComponent)GetComponent(GameComponentsLookup.Resource); } }
+    public Entitas.Data.ResourceComponent resource { get { return (Entitas.Data.ResourceComponent)GetComponent(GameComponentsLookup.Resource); } }
     public bool hasResource { get { return HasComponent(GameComponentsLookup.Resource); } }
 
     public void AddResource(uint newResourceId) {
         var index = GameComponentsLookup.Resource;
-        var component = CreateComponent<Entitas.Component.ResourceComponent>(index);
+        var component = CreateComponent<Entitas.Data.ResourceComponent>(index);
         component.ResourceId = newResourceId;
         AddComponent(index, component);
     }
 
     public void ReplaceResource(uint newResourceId) {
         var index = GameComponentsLookup.Resource;
-        var component = CreateComponent<Entitas.Component.ResourceComponent>(index);
+        var component = CreateComponent<Entitas.Data.ResourceComponent>(index);
         component.ResourceId = newResourceId;
         ReplaceComponent(index, component);
     }
@@ -315,19 +315,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.IdComponent id { get { return (Entitas.Component.IdComponent)GetComponent(GameComponentsLookup.Id); } }
+    public Entitas.Data.IdComponent id { get { return (Entitas.Data.IdComponent)GetComponent(GameComponentsLookup.Id); } }
     public bool hasId { get { return HasComponent(GameComponentsLookup.Id); } }
 
     public void AddId(uint newValue) {
         var index = GameComponentsLookup.Id;
-        var component = CreateComponent<Entitas.Component.IdComponent>(index);
+        var component = CreateComponent<Entitas.Data.IdComponent>(index);
         component.value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceId(uint newValue) {
         var index = GameComponentsLookup.Id;
-        var component = CreateComponent<Entitas.Component.IdComponent>(index);
+        var component = CreateComponent<Entitas.Data.IdComponent>(index);
         component.value = newValue;
         ReplaceComponent(index, component);
     }
@@ -347,19 +347,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.AIComponent aI { get { return (Entitas.Component.AIComponent)GetComponent(GameComponentsLookup.AI); } }
+    public Entitas.Data.AIComponent aI { get { return (Entitas.Data.AIComponent)GetComponent(GameComponentsLookup.AI); } }
     public bool hasAI { get { return HasComponent(GameComponentsLookup.AI); } }
 
     public void AddAI(behaviac.Agent newAgent) {
         var index = GameComponentsLookup.AI;
-        var component = CreateComponent<Entitas.Component.AIComponent>(index);
+        var component = CreateComponent<Entitas.Data.AIComponent>(index);
         component.Agent = newAgent;
         AddComponent(index, component);
     }
 
     public void ReplaceAI(behaviac.Agent newAgent) {
         var index = GameComponentsLookup.AI;
-        var component = CreateComponent<Entitas.Component.AIComponent>(index);
+        var component = CreateComponent<Entitas.Data.AIComponent>(index);
         component.Agent = newAgent;
         ReplaceComponent(index, component);
     }
@@ -379,19 +379,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.PhysicsComponent physics { get { return (Entitas.Component.PhysicsComponent)GetComponent(GameComponentsLookup.Physics); } }
+    public Entitas.Data.PhysicsComponent physics { get { return (Entitas.Data.PhysicsComponent)GetComponent(GameComponentsLookup.Physics); } }
     public bool hasPhysics { get { return HasComponent(GameComponentsLookup.Physics); } }
 
     public void AddPhysics(Entitas.Data.RigidObject newRigid) {
         var index = GameComponentsLookup.Physics;
-        var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
+        var component = CreateComponent<Entitas.Data.PhysicsComponent>(index);
         component.Rigid = newRigid;
         AddComponent(index, component);
     }
 
     public void ReplacePhysics(Entitas.Data.RigidObject newRigid) {
         var index = GameComponentsLookup.Physics;
-        var component = CreateComponent<Entitas.Component.PhysicsComponent>(index);
+        var component = CreateComponent<Entitas.Data.PhysicsComponent>(index);
         component.Rigid = newRigid;
         ReplaceComponent(index, component);
     }
@@ -411,7 +411,7 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Component.DestoryComponent destoryComponent = new Entitas.Component.DestoryComponent();
+    static readonly Entitas.Data.DestoryComponent destoryComponent = new Entitas.Data.DestoryComponent();
 
     public bool isDestory {
         get { return HasComponent(GameComponentsLookup.Destory); }
@@ -437,7 +437,7 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Component.SpatialComponent spatialComponent = new Entitas.Component.SpatialComponent();
+    static readonly Entitas.Data.SpatialComponent spatialComponent = new Entitas.Data.SpatialComponent();
 
     public bool isSpatial {
         get { return HasComponent(GameComponentsLookup.Spatial); }
@@ -463,7 +463,7 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Component.MainPlayerComponent mainPlayerComponent = new Entitas.Component.MainPlayerComponent();
+    static readonly Entitas.Data.MainPlayerComponent mainPlayerComponent = new Entitas.Data.MainPlayerComponent();
 
     public bool isMainPlayer {
         get { return HasComponent(GameComponentsLookup.MainPlayer); }
@@ -489,12 +489,12 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.InputComponent input { get { return (Entitas.Component.InputComponent)GetComponent(GameComponentsLookup.Input); } }
+    public Entitas.Data.InputComponent input { get { return (Entitas.Data.InputComponent)GetComponent(GameComponentsLookup.Input); } }
     public bool hasInput { get { return HasComponent(GameComponentsLookup.Input); } }
 
     public void AddInput(bool newIsMoving, float newMovingDir) {
         var index = GameComponentsLookup.Input;
-        var component = CreateComponent<Entitas.Component.InputComponent>(index);
+        var component = CreateComponent<Entitas.Data.InputComponent>(index);
         component.IsMoving = newIsMoving;
         component.MovingDir = newMovingDir;
         AddComponent(index, component);
@@ -502,7 +502,7 @@ public partial class GameEntity {
 
     public void ReplaceInput(bool newIsMoving, float newMovingDir) {
         var index = GameComponentsLookup.Input;
-        var component = CreateComponent<Entitas.Component.InputComponent>(index);
+        var component = CreateComponent<Entitas.Data.InputComponent>(index);
         component.IsMoving = newIsMoving;
         component.MovingDir = newMovingDir;
         ReplaceComponent(index, component);
@@ -523,12 +523,12 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.TimeInfoComponent timeInfo { get { return (Entitas.Component.TimeInfoComponent)GetComponent(GameComponentsLookup.TimeInfo); } }
+    public Entitas.Data.TimeInfoComponent timeInfo { get { return (Entitas.Data.TimeInfoComponent)GetComponent(GameComponentsLookup.TimeInfo); } }
     public bool hasTimeInfo { get { return HasComponent(GameComponentsLookup.TimeInfo); } }
 
     public void AddTimeInfo(float newTime, float newDeltaTime) {
         var index = GameComponentsLookup.TimeInfo;
-        var component = CreateComponent<Entitas.Component.TimeInfoComponent>(index);
+        var component = CreateComponent<Entitas.Data.TimeInfoComponent>(index);
         component.Time = newTime;
         component.DeltaTime = newDeltaTime;
         AddComponent(index, component);
@@ -536,7 +536,7 @@ public partial class GameEntity {
 
     public void ReplaceTimeInfo(float newTime, float newDeltaTime) {
         var index = GameComponentsLookup.TimeInfo;
-        var component = CreateComponent<Entitas.Component.TimeInfoComponent>(index);
+        var component = CreateComponent<Entitas.Data.TimeInfoComponent>(index);
         component.Time = newTime;
         component.DeltaTime = newDeltaTime;
         ReplaceComponent(index, component);
@@ -557,12 +557,12 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.SceneComponent scene { get { return (Entitas.Component.SceneComponent)GetComponent(GameComponentsLookup.Scene); } }
+    public Entitas.Data.SceneComponent scene { get { return (Entitas.Data.SceneComponent)GetComponent(GameComponentsLookup.Scene); } }
     public bool hasScene { get { return HasComponent(GameComponentsLookup.Scene); } }
 
     public void AddScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         var index = GameComponentsLookup.Scene;
-        var component = CreateComponent<Entitas.Component.SceneComponent>(index);
+        var component = CreateComponent<Entitas.Data.SceneComponent>(index);
         component.Config = newConfig;
         component.ScriptInstance = newScriptInstance;
         AddComponent(index, component);
@@ -570,7 +570,7 @@ public partial class GameEntity {
 
     public void ReplaceScene(Entitas.Data.SceneConfig newConfig, Entitas.Data.SceneInstanceInfo newScriptInstance) {
         var index = GameComponentsLookup.Scene;
-        var component = CreateComponent<Entitas.Component.SceneComponent>(index);
+        var component = CreateComponent<Entitas.Data.SceneComponent>(index);
         component.Config = newConfig;
         component.ScriptInstance = newScriptInstance;
         ReplaceComponent(index, component);
@@ -591,19 +591,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.SkillComponent skill { get { return (Entitas.Component.SkillComponent)GetComponent(GameComponentsLookup.Skill); } }
+    public Entitas.Data.SkillComponent skill { get { return (Entitas.Data.SkillComponent)GetComponent(GameComponentsLookup.Skill); } }
     public bool hasSkill { get { return HasComponent(GameComponentsLookup.Skill); } }
 
     public void AddSkill(Entitas.Data.SkillInstanceInfo newInstance) {
         var index = GameComponentsLookup.Skill;
-        var component = CreateComponent<Entitas.Component.SkillComponent>(index);
+        var component = CreateComponent<Entitas.Data.SkillComponent>(index);
         component.Instance = newInstance;
         AddComponent(index, component);
     }
 
     public void ReplaceSkill(Entitas.Data.SkillInstanceInfo newInstance) {
         var index = GameComponentsLookup.Skill;
-        var component = CreateComponent<Entitas.Component.SkillComponent>(index);
+        var component = CreateComponent<Entitas.Data.SkillComponent>(index);
         component.Instance = newInstance;
         ReplaceComponent(index, component);
     }
@@ -623,19 +623,19 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Entitas.Component.BuffComponent buff { get { return (Entitas.Component.BuffComponent)GetComponent(GameComponentsLookup.Buff); } }
+    public Entitas.Data.BuffComponent buff { get { return (Entitas.Data.BuffComponent)GetComponent(GameComponentsLookup.Buff); } }
     public bool hasBuff { get { return HasComponent(GameComponentsLookup.Buff); } }
 
     public void AddBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos) {
         var index = GameComponentsLookup.Buff;
-        var component = CreateComponent<Entitas.Component.BuffComponent>(index);
+        var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;
         AddComponent(index, component);
     }
 
     public void ReplaceBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos) {
         var index = GameComponentsLookup.Buff;
-        var component = CreateComponent<Entitas.Component.BuffComponent>(index);
+        var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;
         ReplaceComponent(index, component);
     }

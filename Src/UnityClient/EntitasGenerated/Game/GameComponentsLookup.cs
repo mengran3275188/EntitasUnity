@@ -47,21 +47,21 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Entitas.Component.AIComponent),
-        typeof(Entitas.Component.AnimationComponent),
-        typeof(Entitas.Component.BuffComponent),
-        typeof(Entitas.Component.DestoryComponent),
-        typeof(Entitas.Component.IdComponent),
-        typeof(Entitas.Component.InputComponent),
-        typeof(Entitas.Component.MainPlayerComponent),
-        typeof(Entitas.Component.MovementComponent),
-        typeof(Entitas.Component.PhysicsComponent),
-        typeof(Entitas.Component.PositionComponent),
-        typeof(Entitas.Component.ResourceComponent),
-        typeof(Entitas.Component.RotationComponent),
-        typeof(Entitas.Component.SceneComponent),
-        typeof(Entitas.Component.SkillComponent),
-        typeof(Entitas.Component.SpatialComponent),
-        typeof(Entitas.Component.TimeInfoComponent)
+        typeof(Entitas.Data.AIComponent),
+        typeof(Entitas.Data.AnimationComponent),
+        typeof(Entitas.Data.BuffComponent),
+        typeof(Entitas.Data.DestoryComponent),
+        typeof(Entitas.Data.IdComponent),
+        typeof(Entitas.Data.InputComponent),
+        typeof(Entitas.Data.MainPlayerComponent),
+        typeof(Entitas.Data.MovementComponent),
+        typeof(Entitas.Data.PhysicsComponent),
+        typeof(Entitas.Data.PositionComponent),
+        typeof(Entitas.Data.ResourceComponent),
+        typeof(Entitas.Data.RotationComponent),
+        typeof(Entitas.Data.SceneComponent),
+        typeof(Entitas.Data.SkillComponent),
+        typeof(Entitas.Data.SpatialComponent),
+        typeof(Entitas.Data.TimeInfoComponent)
     };
 }

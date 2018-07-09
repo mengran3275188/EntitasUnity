@@ -194,8 +194,9 @@ namespace SkillCommands
             }
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
+            Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
             obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
-            obj.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, speed);
+            obj.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, object_speed);
             /*
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;

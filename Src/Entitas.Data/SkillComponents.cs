@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Entitas.Data;
 
-namespace Entitas.Component
+namespace Entitas.Data
 {
     public sealed class SkillComponent : IComponent
     {

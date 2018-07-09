@@ -36,7 +36,7 @@ namespace UnityClient
             var entities = m_SkillEntities.GetEntities();
             foreach (GameEntity entity in entities)
             {
-                Entitas.Component.SkillComponent skillComponent = entity.skill;
+                SkillComponent skillComponent = entity.skill;
                 SkillInstanceInfo info = skillComponent.Instance;
                 if (null != info)
                 {
@@ -84,7 +84,7 @@ namespace UnityClient
         private void UpdateSkillControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
         {
             entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.SkillMoving : Entitas.Data.MoveState.Idle,
-                                   entity.hasMovement ? entity.movement.Force : Vector3.zero);
+                                   Vector3.zero);
             entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.SkillRotate : Entitas.Data.RotateState.UserRotate,
                                    entity.hasRotation ? entity.rotation.RotateDir : 0);
         }

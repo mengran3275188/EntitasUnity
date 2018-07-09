@@ -22,7 +22,7 @@ namespace UnityClient
             long time = (long)(m_GameContext.timeInfo.Time * 1000);
             foreach (GameEntity entity in m_ImpactEntities)
             {
-                Entitas.Component.BuffComponent buffComponent = entity.buff;
+                BuffComponent buffComponent = entity.buff;
                 for(int i = buffComponent.InstanceInfos.Count - 1; i >= 0; i --)
                 {
                     var info = buffComponent.InstanceInfos[i];
@@ -64,8 +64,7 @@ namespace UnityClient
 
         private void UpdateBuffControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
         {
-            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.ImpactMoving : Entitas.Data.MoveState.Idle,
-                                   entity.hasMovement ? entity.movement.Force : Vector3.zero);
+            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.ImpactMoving : Entitas.Data.MoveState.Idle, Vector3.zero);
             entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.ImpactRotate : Entitas.Data.RotateState.UserRotate,
                                    entity.hasRotation ? entity.rotation.RotateDir : 0);
         }
