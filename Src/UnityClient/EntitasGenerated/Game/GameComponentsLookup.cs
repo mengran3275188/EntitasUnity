@@ -11,26 +11,28 @@ public static class GameComponentsLookup {
     public const int AI = 0;
     public const int Animation = 1;
     public const int Buff = 2;
-    public const int Destory = 3;
-    public const int Id = 4;
-    public const int Input = 5;
-    public const int MainPlayer = 6;
-    public const int Movement = 7;
-    public const int Physics = 8;
-    public const int Position = 9;
-    public const int Resource = 10;
-    public const int Rotation = 11;
-    public const int Scene = 12;
-    public const int Skill = 13;
-    public const int Spatial = 14;
-    public const int TimeInfo = 15;
+    public const int Camp = 3;
+    public const int Destory = 4;
+    public const int Id = 5;
+    public const int Input = 6;
+    public const int MainPlayer = 7;
+    public const int Movement = 8;
+    public const int Physics = 9;
+    public const int Position = 10;
+    public const int Resource = 11;
+    public const int Rotation = 12;
+    public const int Scene = 13;
+    public const int Skill = 14;
+    public const int Spatial = 15;
+    public const int TimeInfo = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "AI",
         "Animation",
         "Buff",
+        "Camp",
         "Destory",
         "Id",
         "Input",
@@ -50,6 +52,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.AIComponent),
         typeof(Entitas.Data.AnimationComponent),
         typeof(Entitas.Data.BuffComponent),
+        typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.DestoryComponent),
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.InputComponent),

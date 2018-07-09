@@ -71,7 +71,7 @@ namespace UnityClient
             {
                 var entity1 = m_Context.GetEntityWithId(rigidObject1.EntityId);
                 var entity2 = m_Context.GetEntityWithId(rigidObject2.EntityId);
-                if(null != entity1 && null != entity2)
+                if(null != entity1 && null != entity2 && entity1.camp.Value != entity2.camp.Value)
                 {
                     if(null != entity1.physics.OnCollision)
                         entity1.physics.OnCollision(entity2.id.value);

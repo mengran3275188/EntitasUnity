@@ -32,4 +32,8 @@ namespace Entitas.Data
     public sealed class SpatialComponent : IComponent
     {
     }
+    public sealed class CampComponent : IComponent
+    {
+        public int Value;
+    }
 }

@@ -126,13 +126,18 @@ namespace SceneCommand
                     physicsMaterial.KineticFriction = 0;
                     physicsMaterial.StaticFriction = 0;
 
-                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial);
+                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, true);
                     rigid.Position = entity.position.Value + m_CollisionOffset;
                     //rigid.IsStatic = true;
 
                     entity.AddPhysics(rigid, m_CollisionOffset, null);
                 }
 
+                // camp id
+                int campId = entity.isMainPlayer ? (int)CampId.Red : (int)CampId.Blue;
+                if (target.hasCamp)
+                    campId = target.camp.Value;
+                entity.AddCamp(campId);
             }
             else
             {

@@ -33,6 +33,7 @@ namespace SkillCommands
             Target,
             SenderTarget,
             Sender,                 // 通常用在召唤物技能
+            TargetSender,
         }
         public override ICommand Clone()
         {
@@ -171,6 +172,9 @@ namespace SkillCommands
                         break;
                     case DirectionType.Target:
                         m_RotateDir = target.rotation.RotateDir;
+                        break;
+                    case DirectionType.TargetSender:
+                        m_RotateDir = Util.Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
                         break;
                 }
             }

@@ -26,4 +26,10 @@ namespace Entitas.Data
         Run = 2,
         Hurt = 3,
     }
+
+    public enum CampId
+    {
+        Red = 0,
+        Blue = 1,
+    }
 }

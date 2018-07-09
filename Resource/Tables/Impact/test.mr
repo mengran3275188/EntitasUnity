@@ -6,9 +6,9 @@ skill(1)
 		{
 			speed(10);
 		};
-		curvemove(true, 0.2, 0, 0, 10, 0, 0, -50)
+		curvemove(true, -0.2, 0, 0, -10, 0, 0, 50)
 		{
-			direction(1);
+			direction(3);
 		};
 		wait(200);
 		terminate();

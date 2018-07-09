@@ -77,9 +77,10 @@ namespace SkillCommands
             physicsMaterial.KineticFriction = 0;
             physicsMaterial.StaticFriction = 0;
 
-            RigidObject rigid = new RigidObject(target.id.value, shape, physicsMaterial);
+            RigidObject rigid = new RigidObject(target.id.value, shape, physicsMaterial, false);
             rigid.IsTrigger = true;
             rigid.Position = target.position.Value + m_Offset;
+            rigid.Orientation = Matrix3x3.CreateRotationY(target.rotation.RotateDir);
 
             target.AddPhysics(rigid, m_Offset, OnCollision);
 
