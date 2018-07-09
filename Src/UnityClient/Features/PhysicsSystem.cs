@@ -27,7 +27,7 @@ namespace UnityClient
 
             Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(new Util.Vector3(300, 1, 300));
             Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape);
-            rigid.Position = new Util.Vector3(0, -1.5f, 0);
+            rigid.Position = new Util.Vector3(0, -0.5f, 0);
             rigid.LinearVelocity = Util.Vector3.zero;
             rigid.IsStatic = true;
             rigid.Tag = false;

@@ -13,7 +13,7 @@ namespace Entitas.Data
         {
             get { return m_EntityId; }
         }
-        public RigidObject(uint id, Shape shape, Material material):base(shape, material, true)
+        public RigidObject(uint id, Shape shape, Material material) : base(shape, material, true)
         {
             m_EntityId = id;
         }

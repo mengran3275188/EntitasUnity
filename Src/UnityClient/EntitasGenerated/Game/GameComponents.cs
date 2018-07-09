@@ -382,17 +382,21 @@ public partial class GameEntity {
     public Entitas.Data.PhysicsComponent physics { get { return (Entitas.Data.PhysicsComponent)GetComponent(GameComponentsLookup.Physics); } }
     public bool hasPhysics { get { return HasComponent(GameComponentsLookup.Physics); } }
 
-    public void AddPhysics(Entitas.Data.RigidObject newRigid) {
+    public void AddPhysics(Entitas.Data.RigidObject newRigid, Util.Vector3 newOffset, Entitas.Data.CollisionDelegate newOnCollision) {
         var index = GameComponentsLookup.Physics;
         var component = CreateComponent<Entitas.Data.PhysicsComponent>(index);
         component.Rigid = newRigid;
+        component.Offset = newOffset;
+        component.OnCollision = newOnCollision;
         AddComponent(index, component);
     }
 
-    public void ReplacePhysics(Entitas.Data.RigidObject newRigid) {
+    public void ReplacePhysics(Entitas.Data.RigidObject newRigid, Util.Vector3 newOffset, Entitas.Data.CollisionDelegate newOnCollision) {
         var index = GameComponentsLookup.Physics;
         var component = CreateComponent<Entitas.Data.PhysicsComponent>(index);
         component.Rigid = newRigid;
+        component.Offset = newOffset;
+        component.OnCollision = newOnCollision;
         ReplaceComponent(index, component);
     }
 

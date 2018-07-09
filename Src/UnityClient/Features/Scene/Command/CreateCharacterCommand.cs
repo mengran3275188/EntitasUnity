@@ -55,7 +55,13 @@ namespace SceneCommand
                     {
                         m_HasCollision = true;
                         m_CollisionOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as CallData);
-                        m_CollisionSize = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
+                        m_CollisionLength = float.Parse(stCall.GetParamId(1));
+                        m_CollisionRadius = float.Parse(stCall.GetParamId(2));
+
+                        m_CollisionLength -= m_CollisionRadius * 2;
+
+                        if (m_CollisionLength < 0)
+                            m_CollisionLength = 0;
                     }
                 }
             }
@@ -114,17 +120,17 @@ namespace SceneCommand
                 // collision
                 if(m_HasCollision)
                 {
-                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(1, 0.5f);
+                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_CollisionLength, m_CollisionRadius);
 
                     Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
                     physicsMaterial.KineticFriction = 0;
                     physicsMaterial.StaticFriction = 0;
 
                     RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial);
-                    rigid.Position = entity.position.Value;
+                    rigid.Position = entity.position.Value + m_CollisionOffset;
                     //rigid.IsStatic = true;
 
-                    entity.AddPhysics(rigid);
+                    entity.AddPhysics(rigid, m_CollisionOffset, null);
                 }
 
             }
@@ -148,6 +154,7 @@ namespace SceneCommand
         private string m_AIScript = string.Empty;
         private bool m_HasCollision = false;
         private Vector3 m_CollisionOffset = Vector3.zero;
-        private Vector3 m_CollisionSize = Vector3.one;
+        private float m_CollisionLength = 0;
+        private float m_CollisionRadius = 0;
     }
 }

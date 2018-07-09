@@ -24,12 +24,13 @@ namespace UnityClient
                 {
                     Vector3 position = entity.physics.Rigid.Position;
                     Vector3 velocity = entity.movement.Velocity;
+                    Vector3 offset = entity.physics.Offset;
 
                     RigidObject rigid = entity.physics.Rigid;
 
                     rigid.LinearVelocity = entity.movement.State == MoveState.Idle ? Vector3.zero : velocity;
 
-                    entity.ReplacePosition(position);
+                    entity.ReplacePosition(position - offset);
                 }
             }
 
