@@ -95,7 +95,7 @@ namespace SceneCommand
 
                 // movement
                 entity.AddMovement(MoveState.Idle, Vector3.zero);
-                entity.AddPosition(target.position.Value + m_LocalPosition + Vector3.up);
+                entity.AddPosition(target.position.Value + m_LocalPosition);
                 entity.AddRotation(RotateState.UserRotate, m_LocalRotation.y + target.rotation.RotateDir);
 
                 // AI

@@ -422,7 +422,7 @@ namespace Jitter
             return RemoveBody(body, false);
         }
 
-        private bool RemoveBody(RigidBody body, bool removeMassPoints)
+        public bool RemoveBody(RigidBody body, bool removeMassPoints)
         {
             // Its very important to clean up, after removing a body
             if (!removeMassPoints && body.IsParticle) return false;

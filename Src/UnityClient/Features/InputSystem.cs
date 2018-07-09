@@ -38,6 +38,7 @@ namespace UnityClient
             // keyboard
             KeyHit kh = GetKeyboadHit();
 
+
             float moveDir = CalcMoveDir(kh);
             bool isMoving = moveDir >= 0;
 
@@ -47,6 +48,7 @@ namespace UnityClient
 
             GameContext gameContext = Contexts.sharedInstance.game;
             gameContext.ReplaceInput(isMoving, moveDir);
+
 
             GameEntity mainPlayer = gameContext.mainPlayerEntity;
             if (null != mainPlayer)

@@ -14,8 +14,7 @@ namespace SkillCommands
             ColliderDamageCommand copy = new ColliderDamageCommand();
             copy.m_BuffId = m_BuffId;
             copy.m_Offset = m_Offset;
-            copy.m_Length = m_Length;
-            copy.m_Radius = m_Radius;
+            copy.m_Size = m_Size;
 
             copy.m_HaveObjId = m_HaveObjId;
             copy.m_ObjIdVarName = m_ObjIdVarName.Clone();
@@ -39,12 +38,7 @@ namespace SkillCommands
             {
                 m_BuffId = int.Parse(callData.GetParamId(0));
                 m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
-                m_Length = float.Parse(callData.GetParamId(2));
-                m_Radius = float.Parse(callData.GetParamId(3));
-                m_Length -= m_Radius * 2;
-
-                if (m_Length < 0)
-                    m_Length = 0;
+                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
             }
         }
         protected override void Load(StatementData statementData)
@@ -77,13 +71,14 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
-            Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_Length, m_Radius);
+            Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_Size);
 
             Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
             physicsMaterial.KineticFriction = 0;
             physicsMaterial.StaticFriction = 0;
 
             RigidObject rigid = new RigidObject(target.id.value, shape, physicsMaterial);
+            rigid.IsTrigger = true;
             rigid.Position = target.position.Value + m_Offset;
 
             target.AddPhysics(rigid, m_Offset, OnCollision);
@@ -120,8 +115,7 @@ namespace SkillCommands
         // config
         private int m_BuffId = 0;
         private Vector3 m_Offset = Vector3.zero;
-        private float m_Radius = 0;
-        private float m_Length = 0;
+        private Vector3 m_Size = Vector3.one;
 
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();
         private bool m_HaveObjId = false;

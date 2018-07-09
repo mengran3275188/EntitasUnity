@@ -42,7 +42,6 @@ namespace UnityClient
 
             foreach(Jitter.Dynamics.RigidBody body in m_World.RigidBodies)
             {
-                body.EnableDebugDraw = true;
                 body.DebugDraw(drawer);
             }
         }
@@ -52,6 +51,7 @@ namespace UnityClient
             PhysicsComponent physics = component as PhysicsComponent;
             if(null != physics)
             {
+                physics.Rigid.EnableDebugDraw = true;
                 m_World.AddBody(physics.Rigid);
             }
         }
@@ -60,7 +60,7 @@ namespace UnityClient
             PhysicsComponent physics = component as PhysicsComponent;
             if(null != physics)
             {
-                m_World.RemoveBody(physics.Rigid);
+                m_World.RemoveBody(physics.Rigid, true);
             }
         }
         private void CollisionSystem_CollisionDetected(Jitter.Dynamics.RigidBody body1, Jitter.Dynamics.RigidBody body2, Util.Vector3 point1, Util.Vector3 point2, Util.Vector3 normal, float penetration)
