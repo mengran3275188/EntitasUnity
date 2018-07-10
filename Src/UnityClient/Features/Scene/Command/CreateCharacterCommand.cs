@@ -161,5 +161,9 @@ namespace SceneCommand
         private Vector3 m_CollisionOffset = Vector3.zero;
         private float m_CollisionLength = 0;
         private float m_CollisionRadius = 0;
+
+        private float m_CameraSpeed = 0;
+        private float m_MaxSpeed = 50;
+        private float m_MinSpeed = 20;
     }
 }

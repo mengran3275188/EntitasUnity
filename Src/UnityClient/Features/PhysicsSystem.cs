@@ -39,7 +39,6 @@ namespace UnityClient
             m_World.Step(m_Context.timeInfo.DeltaTime, false);
 
             DebugDrawer drawer = new DebugDrawer();
-
             foreach(Jitter.Dynamics.RigidBody body in m_World.RigidBodies)
             {
                 body.DebugDraw(drawer);

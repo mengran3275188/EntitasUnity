@@ -27,6 +27,8 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
             CommandManager.Instance.RegisterCommandFactory("colliderdamage", new CommandFactoryHelper<SkillCommands.ColliderDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("removecollider", new CommandFactoryHelper<SkillCommands.RemoveColliderCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
         }
 
         public void Execute()

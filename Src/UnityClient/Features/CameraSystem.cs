@@ -6,26 +6,17 @@ using Entitas;
 
 namespace UnityClient
 {
-    public class CameraSystem : ReactiveSystem<GameEntity>
+    public class CameraSystem : IExecuteSystem
     {
-        public CameraSystem(Contexts contexts) : base(contexts.game)
+        public CameraSystem(Contexts contexts)
         {
             m_Context = contexts.game;
         }
-        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+        public void Execute()
         {
-            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.MainPlayer, GameMatcher.Position));
-        }
-        protected override bool Filter(GameEntity entity)
-        {
-            return entity.isEnabled;
-        }
-        protected override void Execute(List<GameEntity> entities)
-        {
-            foreach(GameEntity e in entities)
-            {
+            var e = m_Context.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
+            if(null != e)
                 GfxSystem.UpdateCamera(e.position.Value.x, e.position.Value.y, e.position.Value.z);
-            }
         }
 
         private readonly GameContext m_Context;

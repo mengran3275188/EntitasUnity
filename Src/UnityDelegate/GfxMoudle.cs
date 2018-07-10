@@ -76,21 +76,30 @@ namespace UnityDelegate
                 LogUtil.Error("GfxMoudle.Instantiate new object failed. Resource path is {0}.", path);
             }
         }
-        public void DestroyResource(uint resId)
+        public void CreateGameObject(uint resId, string resource, float positionX, float positionY, float positionZ, 
+                                     float eularX, float eularY, float eularZ, 
+                                     float scaleX, float scaleY, float scaleZ,  float recycleTime)
         {
-            GameObject obj = GetGameObject(resId);
-            if (null != obj)
+            var obj = ResourceSystem.NewObject(resource, recycleTime) as GameObject;
+            if(null != obj)
             {
-                ResourceSystem.RecycleObject(obj);
+                UnityEngine.Quaternion rotation = UnityEngine.Quaternion.Euler(eularX, eularY, eularZ);
+
+                obj.transform.position = new UnityEngine.Vector3(positionX, positionY, positionZ);
+                obj.transform.rotation = rotation;
+                obj.transform.localScale = new UnityEngine.Vector3(scaleX, scaleY, scaleZ);
+                RememberGameObject(resId, obj);
             }
             else
             {
-                LogUtil.Error("GfxMoudle.DestroyResource : can not find obj with resId {0}.", resId);
+                LogUtil.Error("GfxMoudle.CreateGameObject new object failed. Resource path is {0}.", resource);
             }
         }
-        public void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)
+        public void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, bool isAttach,
+                                              float positionX, float positionY, float positionZ, float eularX, float eularY, float eularZ,
+                                              float scaleX, float scaleY, float scaleZ, float recycleTime)
         {
-            GameObject parent = GetGameObject(resId);
+            GameObject parent = GetGameObject(parentId);
             if (null != parent)
             {
                 Transform t = FindChildRecursive(parent.transform, path);
@@ -99,11 +108,14 @@ namespace UnityDelegate
                     GameObject obj = ResourceManager.Instance.NewObject(resource, recycleTime) as GameObject;
                     if (null != obj)
                     {
-                        RememberGameObject(resId, obj);
                         obj.transform.parent = t;
-                        obj.transform.localPosition = UnityEngine.Vector3.zero;
-                        if (isAttach)
+                        obj.transform.localPosition = new UnityEngine.Vector3(positionX, positionY, positionZ);
+                        obj.transform.localRotation = UnityEngine.Quaternion.Euler(eularX, eularY, eularZ);
+                        obj.transform.localScale = new UnityEngine.Vector3(scaleX, scaleY, scaleZ);
+                        if (!isAttach)
                             obj.transform.parent = null;
+
+                        RememberGameObject(resId, obj);
                     }
                     else
                     {
@@ -118,6 +130,22 @@ namespace UnityDelegate
             else
             {
                 LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: can not find parent  object with resId. parentId = {0}.", parentId);
+            }
+        }
+        public void DestroyResource(uint resId)
+        {
+            GameObject obj = GetGameObject(resId);
+            if (null != obj)
+            {
+                ForgetGameObject(resId, obj);
+                if(!ResourceManager.Instance.RecycleObject(obj))
+                    GameObject.Destroy(obj);
+                else
+                    ResourceManager.Instance.SetActiveOptim(obj, false);
+            }
+            else
+            {
+                LogUtil.Error("GfxMoudle.DestroyResource : can not find obj with resId {0}.", resId);
             }
         }
         public void UpdatePosition(uint resId, float x, float y, float z)

@@ -40,9 +40,17 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.DestroyResource(resId);
         }
-        public static void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, float recycleTime, bool isAttach)
+        public static void CreateGameObject(uint resId, string resource, Vector3 position, Vector3 eular, Vector3 scale, float recycleTime = -1)
         {
-            GfxSystemImpl.Gfx.CreateAndAttachGameObject(resId, resource, parentId, path, recycleTime, isAttach);
+            GfxSystemImpl.Gfx.CreateGameObject(resId, resource, position.x, position.y, position.z,
+                                               eular.x, eular.y, eular.z,
+                                               scale.x, scale.y, scale.z, recycleTime);
+        }
+        public static void CreateAndAttachGameObject(uint resId, string resource, uint parentId, string path, bool isAttach,
+                                                     Vector3 position, Vector3 eular, Vector3 scale, float recycleTime = -1)
+        {
+            GfxSystemImpl.Gfx.CreateAndAttachGameObject(resId, resource, parentId, path, isAttach,
+                                                        position.x, position.y, position.z, eular.x, eular.y, eular.z, scale.x, scale.y, scale.z, recycleTime);
         }
         public static void UpdatePosition(uint resId, float x, float y, float z)
         {
