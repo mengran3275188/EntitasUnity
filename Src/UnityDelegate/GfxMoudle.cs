@@ -15,6 +15,8 @@ namespace UnityDelegate
         }
         public void OnStart(IActionQueue processor)
         {
+            Application.targetFrameRate = 30;
+
             LogUtil.OnOutput += (Log_Type type, string msg) =>
             {
                 switch (type)
