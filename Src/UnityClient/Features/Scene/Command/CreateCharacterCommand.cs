@@ -49,6 +49,13 @@ namespace SceneCommand
                         m_AIScript = stCall.GetParamId(0);
                     }
                 }
+                if(stCall.GetId() == "attr")
+                {
+                    if(stCall.GetParamNum() >= 1)
+                    {
+                        m_AttrId = int.Parse(stCall.GetParamId(0));
+                    }
+                }
                 if(stCall.GetId() == "collision")
                 {
                     if(stCall.GetParamNum() >= 2)
@@ -138,6 +145,18 @@ namespace SceneCommand
                 if (target.hasCamp)
                     campId = target.camp.Value;
                 entity.AddCamp(campId);
+
+                // attribute
+                if(m_AttrId > 0)
+                {
+                    AttributeConfig attrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(m_AttrId);
+                    if(null != attrConfig)
+                    {
+                        AttributeData attrData = new AttributeData();
+                        attrData.InitByConfig(attrConfig);
+                        entity.AddAttr(attrData);
+                    }
+                }
             }
             else
             {
@@ -146,24 +165,16 @@ namespace SceneCommand
 
             return ExecResult.Finished;
         }
-        private void LogCollision(uint targetId)
-        {
-            LogUtil.Info("LogCollision {0}.", targetId);
-        }
-
         private int m_CharacterId;
         private bool m_MainPlayer = false;
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
         private string m_AIScript = string.Empty;
+        private int m_AttrId = 0;
         private bool m_HasCollision = false;
         private Vector3 m_CollisionOffset = Vector3.zero;
         private float m_CollisionLength = 0;
         private float m_CollisionRadius = 0;
-
-        private float m_CameraSpeed = 0;
-        private float m_MaxSpeed = 50;
-        private float m_MinSpeed = 20;
     }
 }

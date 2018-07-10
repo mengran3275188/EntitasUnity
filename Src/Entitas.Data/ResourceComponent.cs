@@ -36,4 +36,8 @@ namespace Entitas.Data
     {
         public int Value;
     }
+    public sealed class AttrComponent : IComponent
+    {
+        public AttributeData Value;
+    }
 }

@@ -46,6 +46,7 @@ namespace UnityClient.Kernel
             Entitas.Data.SceneConfigProvider.Instance.LoadForClient();
             Entitas.Data.CharacterConfigProvider.Instance.LoadForClient();
             Entitas.Data.SkillConfigProvider.Instance.LoadForClient();
+            Entitas.Data.AttributeConfigProvider.Instance.LoadForClient();
         }
 
 

@@ -1259,17 +1259,17 @@ namespace TableReaderGenerator
                             {
                                 name = name.Substring("Add".Length);
                             }
-                            sw.WriteLine("\t\tpublic void Set{0}(Operate_Type opType, {1} tVal)", name, type);
+                            sw.WriteLine("\t\tpublic void Set{0}(Operate_Type opType, float tVal)", name);
                             sw.WriteLine("\t\t{");
-                            sw.WriteLine("\t\t\tm_{0} = ({1})UpdateAttr(m_{2}, m_{3}, opType, tVal);", name, type, name, name);
+                            sw.WriteLine("\t\t\tm_{0} = UpdateAttr(m_{0}, m_{0}, opType, tVal);", name);
                             sw.WriteLine("\t\t}");
-                            sw.WriteLine("\t\tpublic {0} {1}", type, name);
+                            sw.WriteLine("\t\tpublic float {0}", name);
                             sw.WriteLine("\t\t{");
                             sw.Write("\t\t\tget { return m_");
                             sw.Write("{0}", name);
                             sw.WriteLine(" / s_Key; }");
                             sw.WriteLine("\t\t}");
-                            sw.WriteLine("\t\tprivate {0} m_{1};", type, name);
+                            sw.WriteLine("\t\tprivate float m_{0};", name);
                             sw.WriteLine();
                         }
 
@@ -1356,6 +1356,39 @@ namespace TableReaderGenerator
                         sw.WriteLine("\t\t\t\tret = t;");
                         sw.WriteLine("\t\t\t}");
                         sw.WriteLine("\t\t\treturn ret;");
+                        sw.WriteLine("\t\t}");
+
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t// 属性初始化接口");
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\tpublic void InitByConfig(AttributeConfig attr)");
+                        sw.WriteLine("\t\t{");
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_MemberName;
+                            string type = memberDef.m_Type;
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\tfloat a{0} = attr.Get{0}(0, 0);", name);
+                        }
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_MemberName;
+                            string type = memberDef.m_Type;
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\tSet{0}(Operate_Type.OT_Absolute, a{0});", name);
+                        }
                         sw.WriteLine("\t\t}");
 
                         sw.WriteLine("\t\t//------------------------------------------------------------------------");

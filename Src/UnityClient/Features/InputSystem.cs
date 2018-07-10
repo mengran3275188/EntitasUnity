@@ -23,7 +23,6 @@ namespace UnityClient
         }
         public InputSystem(Contexts contexts)
         {
-            m_MainPlayers = contexts.game.GetGroup(GameMatcher.MainPlayer);
         }
         public void Initialize()
         {
@@ -55,7 +54,11 @@ namespace UnityClient
             {
                 if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving)
                 {
-                    mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * 10);
+                    if(mainPlayer.hasAttr)
+                    {
+                        float moveSpeed = mainPlayer.attr.Value.MoveSpeed;
+                        mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * moveSpeed);
+                    }
                 }
                 if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && mainPlayer.rotation.State != RotateState.ImpactRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
                 {
@@ -86,7 +89,6 @@ namespace UnityClient
 
         private static readonly float[] s_MoveDirs = new float[] { -1,  0, (float)Math.PI, -1, 3*(float)Math.PI/2, 7*(float)Math.PI/4, 5*(float)Math.PI/4,
                             3*(float)Math.PI/2, (float)Math.PI/2, (float)Math.PI/4, 3*(float)Math.PI/4, (float)Math.PI/2, -1, 0,   (float)Math.PI, -1 };
-        private readonly IGroup<GameEntity> m_MainPlayers;
 
         private const float c_2PI = (float)Math.PI * 2;
     }
