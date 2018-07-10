@@ -1,0 +1,10 @@
+Id	Describe	AddEnergyRecover	AddEnergyMax	AddMaxAd	AddMinAd	AddCritical	AddCriticalFactor	AddMetalFactor	AddWoodFactor	AddWaterFactor	AddFireFactor	AddEarthFactor	AddFullDamageFactor	AddHpMax	AddArmor	AddMiss	AddMetalResist	AddWoodResist	AddWaterResist	AddFireResist	AddEarthResist	AddAccuracyRecover	AddDamageDerate	AddMoveSpeed	AddFullElementResist	AddFullElementFactor	AddHpFactor
+int	string	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int
+# 索引	描述	能量恢复	能量上限	最大伤害	最小伤害	暴击等级	暴伤加成	金属性加成	木属性加成	水属性加成	火属性加成	土属性加成	全伤害加成	生命上限	护甲	闪避等级	金属性抗性	木属性抗性	水属性抗性	火属性抗性	土属性抗性	击中回血	全伤害减免	移动速度	全抗性提高	元素伤害提高	生命上限百分比
+# 填表规则																											
+# 1、0～1000000000，表示此值为直接添加到属性上的值，用整数表示2位精度浮点数，实际值为表格中的值/100（如9999表示99.99，这个值直接加到对应属性值）																											
+# 2、1000000000~2000000000，表示此值为百分比加成，用整数表示4位精度浮点百分数值，实际值为表格中的值/10000（如:9999表示99.99%，实际值为0.9999，这个值将乘以对应属性后再加到对应属性值）																											
+# 3、AddHpMax填表固定加成部分不再除100，血量上限为10亿。百分比部分与规则2一致。（如:9999表示血上限加成9999；1000000050表示加成50%，实际值为0.005）																											
+# 4、规则1～2中对应范围值的负值表示与1～2规则相同																											
+#角色																											
+1000	标准0级怪			300	100									100										520			

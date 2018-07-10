@@ -565,7 +565,7 @@ namespace TableReaderGenerator
                 string table = tablePair.Key;
                 TableDef tableDef = tablePair.Value;
                 file = tableDef.m_CsFileName + ".cs";
-                if(tableHeaders.Add(file))
+                if (tableHeaders.Add(file))
                 {
                     try
                     {
@@ -587,6 +587,11 @@ namespace TableReaderGenerator
                     {
                         Console.WriteLine(ex);
                     }
+                }
+                if (table == "AttributeConfig")
+                {
+                    tableDef.m_HookAfterCollectData = true;
+                    GenAttributeData(table, "AttributeConfigProvider.cs", "AttributeEnum.cs", "AttributeData.cs");
                 }
                 GenReader(table, file, true);
             }
@@ -1058,6 +1063,326 @@ namespace TableReaderGenerator
             }
         }
 
+        internal void GenAttributeData(string table, string providerFile, string enumFile, string dataFile)
+        {
+            string attributeEnumName = "AttrbuteEnum";
+            List<string> ignoreFileds = new List<string> { "Id", "Describe" };
+            TableDef tableDef;
+            if (m_Tables.TryGetValue(table, out tableDef))
+            {
+                try
+                {
+                    using(StreamWriter sw = new StreamWriter(providerFile, false))
+                    {
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("//！！！不要手动修改此文件，此文件由LogicDataGenerator按AttributeConfig.txt生成！！！");
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("using System;");
+                        sw.WriteLine("using System.Collections.Generic;");
+                        sw.WriteLine("using Util;");
+                        sw.WriteLine("");
+                        sw.WriteLine("namespace Entitas.Data");
+                        sw.WriteLine("{");
+                        sw.WriteLine("\tpublic sealed partial class AttributeConfig : IData2");
+                        sw.WriteLine("\t{");
+                        sw.WriteLine("\tprivate enum ValueType : int");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tAbsoluteValue = 0,");
+                        sw.WriteLine("\t\t\tPercentValue,");
+                        sw.WriteLine("\t\t\tLevelRateValue,");
+                        sw.WriteLine("\t\t}");
+                        sw.WriteLine("\t\tpublic const int c_MaxAbsoluteValue = 1000000000;");
+                        sw.WriteLine("\t\tpublic const int c_MaxPercentValue = 2000000000;");
+                        sw.WriteLine("\t\tpublic const float c_Rate = 100.0f;");
+                        sw.WriteLine("");
+                        foreach (var member in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(member.m_FieldName))
+                                continue;
+                            string name = member.m_FieldName;
+
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\tprivate float m_Add{0} = 0;", name);
+                            sw.WriteLine("\t\tprivate int m_{0}Type = 0;", name);
+                        }
+                        sw.WriteLine("");
+
+                        sw.WriteLine("\t\tprivate void AfterCollectData()");
+                        sw.WriteLine("\t\t{");
+                        foreach (var member in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(member.m_FieldName))
+                                continue;
+                            string name = member.m_FieldName;
+
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\tm_Add{0} = CalcRealValue(Add{0}, out m_{0}Type);", name);
+                        }
+                        sw.WriteLine("\t\t}");
+                        sw.WriteLine("");
+
+                        foreach (var member in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(member.m_FieldName))
+                                continue;
+                            string name = member.m_FieldName;
+
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\tpublic float Get{0}(float refVal, int refLevel)", name);
+                            sw.WriteLine("\t\t{");
+                            sw.WriteLine("\t\t\treturn CalcAddedAttrValue(refVal, refLevel, m_Add{0}, m_{0}Type);", name);
+                            sw.WriteLine("\t\t}");
+                        }
+                        sw.WriteLine("");
+
+                        sw.WriteLine("\t\tprivate float CalcRealValue(int tableValue, out int type)");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tfloat retVal = 0;");
+                        sw.WriteLine("\t\t\tint val = tableValue;");
+                        sw.WriteLine("\t\t\tbool isNegative = false;");
+                        sw.WriteLine("\t\t\tif(tableValue < 0){;");
+                        sw.WriteLine("\t\t\t\tisNegative =true;");
+                        sw.WriteLine("\t\t\t\tval = -val;");
+                        sw.WriteLine("\t\t\t};");
+                        sw.WriteLine("\t\t\tif(val < c_MaxAbsoluteValue) {");
+                        sw.WriteLine("\t\t\t\tretVal = val / c_Rate;");
+                        sw.WriteLine("\t\t\t\ttype = (int)ValueType.AbsoluteValue;");
+                        sw.WriteLine("\t\t\t}else if(val < c_MaxPercentValue) {");
+                        sw.WriteLine("\t\t\t\tretVal = (val - c_MaxAbsoluteValue) / c_Rate / 100;");
+                        sw.WriteLine("\t\t\t\ttype = (int)ValueType.PercentValue;");
+                        sw.WriteLine("\t\t\t}else{");
+                        sw.WriteLine("\t\t\t\tretVal = (val - c_MaxPercentValue) / c_Rate / 100;");
+                        sw.WriteLine("\t\t\t\ttype = (int)ValueType.LevelRateValue;");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t\tif(isNegative)");
+                        sw.WriteLine("\t\t\t\tretVal = -retVal;");
+                        sw.WriteLine("\t\t\treturn retVal;");
+                        sw.WriteLine("\t\t}");
+                        sw.WriteLine("");
+
+                        sw.WriteLine("\t\tprivate float CalcAddedAttrValue(float refVal, int refLevel, float addVal, int type)");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tfloat retVal = 0;");
+                        sw.WriteLine("\t\t\tswitch(type){");
+                        sw.WriteLine("\t\t\t\tcase (int)ValueType.AbsoluteValue:");
+                        sw.WriteLine("\t\t\t\t\tretVal = addVal;");
+                        sw.WriteLine("\t\t\t\t\tbreak;");
+                        sw.WriteLine("\t\t\t\tcase (int)ValueType.PercentValue:");
+                        sw.WriteLine("\t\t\t\t\tretVal = refVal * addVal;");
+                        sw.WriteLine("\t\t\t\t\tbreak;");
+                        sw.WriteLine("\t\t\t\tcase (int)ValueType.LevelRateValue:");
+                        sw.WriteLine("\t\t\t\t\tretVal = refLevel * addVal;");
+                        sw.WriteLine("\t\t\t\t\tbreak;");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t\treturn retVal;");
+                        sw.WriteLine("\t\t}");
+
+
+                        sw.WriteLine("\t}");
+                        sw.WriteLine("}");
+                        sw.WriteLine("");
+                        sw.Close();
+                    }
+                    using (StreamWriter sw = new StreamWriter(enumFile, false))
+                    {
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("//！！！不要手动修改此文件，此文件由LogicDataGenerator按AttributeConfig.txt生成！！！");
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("using System;");
+                        sw.WriteLine("using System.Collections.Generic;");
+                        sw.WriteLine("");
+                        sw.WriteLine("namespace Entitas.Data");
+                        sw.WriteLine("{");
+
+                        sw.WriteLine("\tpublic enum {0}", attributeEnumName);
+                        sw.WriteLine("\t{");
+                        sw.WriteLine("\t\tActual_Invalid = -1,");
+                        foreach (var member in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(member.m_FieldName))
+                                continue;
+                            string name = member.m_FieldName;
+
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+
+                            sw.WriteLine("\t\tActual_{0},", name);
+                        }
+
+                        sw.WriteLine("\t\tActual_Max");
+                        sw.WriteLine("\t}");
+
+                        sw.WriteLine("}");
+                        sw.WriteLine("");
+                        sw.Close();
+
+                    }
+
+                    using (StreamWriter sw = new StreamWriter(dataFile, true))
+                    {
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("//！！！不要手动修改此文件，此文件由LogicDataGenerator按AttributeConfig.txt生成！！！");
+                        sw.WriteLine("//----------------------------------------------------------------------------");
+                        sw.WriteLine("using System;");
+                        sw.WriteLine("using System.Collections.Generic;");
+
+                        sw.WriteLine();
+                        sw.WriteLine("namespace Entitas.Data");
+                        sw.WriteLine("{");
+                        sw.WriteLine("\tpublic sealed class AttributeData");
+                        sw.WriteLine("\t{");
+
+                        sw.WriteLine("\t\t//----------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t//基础属性以及读写接口");
+                        sw.WriteLine("\t\t//----------------------------------------------------------------------------");
+
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_FieldName;
+                            string type = memberDef.m_Type;
+
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\tpublic void Set{0}(Operate_Type opType, {1} tVal)", name, type);
+                            sw.WriteLine("\t\t{");
+                            sw.WriteLine("\t\t\tm_{0} = ({1})UpdateAttr(m_{2}, m_{3}, opType, tVal);", name, type, name, name);
+                            sw.WriteLine("\t\t}");
+                            sw.WriteLine("\t\tpublic {0} {1}", type, name);
+                            sw.WriteLine("\t\t{");
+                            sw.Write("\t\t\tget { return m_");
+                            sw.Write("{0}", name);
+                            sw.WriteLine(" / s_Key; }");
+                            sw.WriteLine("\t\t}");
+                            sw.WriteLine("\t\tprivate {0} m_{1};", type, name);
+                            sw.WriteLine();
+                        }
+
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t//指定属性枚举获取属性值，全部转化为float类型,返回值需要自行转换类型");
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\tpublic float GetAttributeByType({0} attrType)", attributeEnumName);
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tfloat attValue = 0;");
+                        sw.WriteLine("\t\t\tswitch (attrType) {");
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_MemberName;
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\t\tcase {0}.Actual_{1}:", attributeEnumName, name);
+                            sw.WriteLine("\t\t\t\t\tattValue = {0};", name);
+                            sw.WriteLine("\t\t\t\t\tbreak;");
+                        }
+                        sw.WriteLine("\t\t\t\tdefault:");
+                        sw.WriteLine("\t\t\t\t\tattValue = -1;");
+                        sw.WriteLine("\t\t\t\t\tbreak;");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t\treturn attValue;");
+                        sw.WriteLine("\t\t}");
+
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t//指定属性枚举值设置属性值,属性值参数为float类型，内部根据属性类型自行转换");
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\tpublic void SetAttributeByType({0} attrType, Operate_Type opType, float tVal)", attributeEnumName);
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tswitch (attrType) {");
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_MemberName;
+                            string type = memberDef.m_Type;
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\t\tcase {0}.Actual_{1}:", attributeEnumName, name);
+                            sw.WriteLine("\t\t\t\t\tSet{0}(opType, ({1})tVal);", name, type);
+                            sw.WriteLine("\t\t\t\t\tbreak;");
+                        }
+                        sw.WriteLine("\t\t\tdefault:");
+                        sw.WriteLine("\t\t\t\tbreak;");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t}"); sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t//属性修改接口");
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\tpublic static float UpdateAttr(float val, float maxVal, Operate_Type opType, float tVal)");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tfloat ret = val;");
+                        sw.WriteLine("\t\t\tif (opType == Operate_Type.OT_PercentMax) {");
+                        sw.WriteLine("\t\t\t\tfloat t = maxVal * (tVal / 100.0f);");
+                        sw.WriteLine("\t\t\t\tret = t;");
+                        sw.WriteLine("\t\t\t} else {");
+                        sw.WriteLine("\t\t\t\tret = UpdateAttr(val, opType, tVal);");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t\treturn ret;");
+                        sw.WriteLine("\t\t}");
+                        sw.WriteLine();
+                        sw.WriteLine("\t\tpublic static float UpdateAttr(float val, Operate_Type opType, float tVal)");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tfloat ret = val;");
+                        sw.WriteLine("\t\t\tif (opType == Operate_Type.OT_Absolute) {");
+                        sw.WriteLine("\t\t\t\tret = tVal * s_Key;");
+                        sw.WriteLine("\t\t\t} else if (opType == Operate_Type.OT_Relative) {");
+                        sw.WriteLine("\t\t\t\tfloat t = (ret + tVal * s_Key);");
+                        sw.WriteLine("\t\t\t\tif (t < 0) {");
+                        sw.WriteLine("\t\t\t\t\tt = 0;");
+                        sw.WriteLine("\t\t\t\t}");
+                        sw.WriteLine("\t\t\t\tret = t;");
+                        sw.WriteLine("\t\t\t} else if (opType == Operate_Type.OT_PercentCurrent) {");
+                        sw.WriteLine("\t\t\t\tfloat t = (ret * (tVal / 100.0f));");
+                        sw.WriteLine("\t\t\t\tret = t;");
+                        sw.WriteLine("\t\t\t}");
+                        sw.WriteLine("\t\t\treturn ret;");
+                        sw.WriteLine("\t\t}");
+
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\t//注意：Key的修改应该在所有对象创建前执行，否则属性会乱！！！");
+                        sw.WriteLine("\t\t//------------------------------------------------------------------------");
+                        sw.WriteLine("\t\tpublic static int Key");
+                        sw.WriteLine("\t\t{");
+                        sw.WriteLine("\t\t\tget { return s_Key; }");
+                        sw.WriteLine("\t\t\tset { s_Key = value; }");
+                        sw.WriteLine("\t\t}");
+                        sw.WriteLine("\t\tprivate static int s_Key = 1;");
+                        sw.WriteLine();
+                        sw.WriteLine("\t}");
+                        sw.WriteLine("}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Can't find table {0}'s definition !", table);
+            }
+        }
+
         private string GetRecordType(string type)
         {
             if (0 == type.CompareTo("int") ||
@@ -1138,10 +1463,10 @@ namespace TableReaderGenerator
             try
             {
                 DirectoryInfo folder = new DirectoryInfo(basePath);
-                foreach(FileInfo file in folder.GetFiles("*.txt"))
+                foreach (FileInfo file in folder.GetFiles("*.txt"))
                 {
                     string fileName = Path.GetFileNameWithoutExtension(file.FullName);
-                    if(dict.ContainsKey(fileName))
+                    if (dict.ContainsKey(fileName))
                     {
                         LogUtil.Error("File name duplication, fileName: {0}", fileName);
                     }
@@ -1161,7 +1486,7 @@ namespace TableReaderGenerator
             {
                 File.Delete("table.dsl");
                 DirectoryInfo folder = new DirectoryInfo(basePath);
-                foreach(FileInfo file in folder.GetFiles("*.txt"))
+                foreach (FileInfo file in folder.GetFiles("*.txt"))
                 {
                     GenDsl(file.FullName);
                 }

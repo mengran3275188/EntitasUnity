@@ -12,6 +12,7 @@ namespace Entitas.Data
 	internal class FilePathDefine_Client
 	{
 		public const string C_ActionConfig = "Tables/ActionConfig.txt";
+		public const string C_AttributeConfig = "Tables/AttributeConfig.txt";
 		public const string C_CharacterConfig = "Tables/CharacterConfig.txt";
 		public const string C_SceneConfig = "Tables/SceneConfig.txt";
 		public const string C_SkillConfig = "Tables/SkillConfig.txt";
@@ -19,6 +20,7 @@ namespace Entitas.Data
 	internal class FilePathDefine_Server
 	{
 		public const string C_ActionConfig = "Tables/ActionConfig.txt";
+		public const string C_AttributeConfig = "Tables/AttributeConfig.txt";
 		public const string C_CharacterConfig = "Tables/CharacterConfig.txt";
 		public const string C_SceneConfig = "Tables/SceneConfig.txt";
 		public const string C_SkillConfig = "Tables/SkillConfig.txt";

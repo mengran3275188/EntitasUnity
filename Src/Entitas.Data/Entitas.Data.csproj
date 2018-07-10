@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeData.cs" />
+    <Compile Include="AttributeEnum.cs" />
+    <Compile Include="DataReader\AttributeConfigProvider.cs" />
     <Compile Include="DataReader\DataReader.cs" />
     <Compile Include="DataReader\FilePathDefine.cs" />
     <Compile Include="Define\GameDefine.cs" />
