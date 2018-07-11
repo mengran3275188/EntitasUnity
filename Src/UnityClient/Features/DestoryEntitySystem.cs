@@ -25,7 +25,6 @@ namespace UnityClient
                 entity.Destroy();
             }
         }
-
         private readonly IGroup<GameEntity> m_NeedDestroyEntities;
     }
 }

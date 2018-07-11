@@ -63,7 +63,9 @@
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="Features\AISystem.cs" />
+    <Compile Include="Features\AttrSystem.cs" />
     <Compile Include="Features\DestoryEntitySystem.cs" />
+    <Compile Include="Features\HpSystem.cs" />
     <Compile Include="Features\IdSystem.cs" />
     <Compile Include="Features\PhysicsSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />

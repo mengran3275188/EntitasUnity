@@ -10,32 +10,36 @@ public static class GameComponentsLookup {
 
     public const int AI = 0;
     public const int Animation = 1;
-    public const int Attr = 2;
-    public const int Buff = 3;
-    public const int Camp = 4;
-    public const int Destory = 5;
-    public const int Id = 6;
-    public const int Input = 7;
-    public const int MainPlayer = 8;
-    public const int Movement = 9;
-    public const int Physics = 10;
-    public const int Position = 11;
-    public const int Resource = 12;
-    public const int Rotation = 13;
-    public const int Scene = 14;
-    public const int Skill = 15;
-    public const int Spatial = 16;
-    public const int TimeInfo = 17;
+    public const int AttrChanged = 2;
+    public const int Attr = 3;
+    public const int Buff = 4;
+    public const int Camp = 5;
+    public const int Destory = 6;
+    public const int Hp = 7;
+    public const int Id = 8;
+    public const int Input = 9;
+    public const int MainPlayer = 10;
+    public const int Movement = 11;
+    public const int Physics = 12;
+    public const int Position = 13;
+    public const int Resource = 14;
+    public const int Rotation = 15;
+    public const int Scene = 16;
+    public const int Skill = 17;
+    public const int Spatial = 18;
+    public const int TimeInfo = 19;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "AI",
         "Animation",
+        "AttrChanged",
         "Attr",
         "Buff",
         "Camp",
         "Destory",
+        "Hp",
         "Id",
         "Input",
         "MainPlayer",
@@ -53,10 +57,12 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Entitas.Data.AIComponent),
         typeof(Entitas.Data.AnimationComponent),
+        typeof(Entitas.Data.AttrChangedComponent),
         typeof(Entitas.Data.AttrComponent),
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.DestoryComponent),
+        typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.InputComponent),
         typeof(Entitas.Data.MainPlayerComponent),

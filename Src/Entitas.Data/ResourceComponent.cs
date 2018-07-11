@@ -40,4 +40,11 @@ namespace Entitas.Data
     {
         public AttributeData Value;
     }
+    public sealed class HpComponent : IComponent
+    {
+        public float Value;
+    }
+    public sealed class AttrChangedComponent : IComponent
+    {
+    }
 }
