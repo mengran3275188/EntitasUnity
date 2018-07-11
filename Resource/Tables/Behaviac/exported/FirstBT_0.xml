@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: FirstBT_0.xml-->
+<behavior name="FirstBT_0" agenttype="CharacterAgent" version="5">
+  <node class="Sequence" id="1">
+    <node class="IfElse" id="6">
+      <node class="Condition" id="7">
+        <property Operator="Less" />
+        <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+        <property Opr="const float 4" />
+      </node>
+      <node class="IfElse" id="2">
+        <node class="Action" id="3">
+          <property Method="Self.CharacterAgent::CanUseSkill()" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Action" id="4">
+          <property Method="Self.CharacterAgent::UseSkill(100201)" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Noop" id="5" />
+      </node>
+      <node class="Action" id="8">
+        <property Method="Self.CharacterAgent::MoveToPlayer()" />
+        <property ResultOption="BT_INVALID" />
+      </node>
+    </node>
+    <node class="Wait" id="0">
+      <property Time="const float 100" />
+    </node>
+  </node>
+</behavior>
