@@ -43,6 +43,7 @@ namespace UnityDelegate
         public void OnTick()
         {
             InputManager.Instance.HandleInput();
+            ResourceManager.Instance.Tick();
         }
         public void OnQuit()
         {
