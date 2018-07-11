@@ -40,6 +40,7 @@ xcopy %workdir%\Bin\*.dll %plugindir% /y /q
 xcopy %workdir%\Bin\*.mdb %plugindir% /y /q
 
 del /a /f %plugindir%\UnityEngine.dll
+del /a /f %plugindir%\UnityEngine.UI.dll
 
 if NOT %ERRORLEVEL% EQU 0 (
   echo copy failed, exclusive access error? check your running process and retry.
