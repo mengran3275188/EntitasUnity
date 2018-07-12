@@ -2,7 +2,10 @@ skill(1)
 {
 	onmessage("start")
 	{
-		animation("hurt_m");
+		animation("hurt_m")
+        {
+            playmode(1);
+        };
 		animationspeed("hurt_m", 6);
         damage(10);
 		wait(66);
@@ -22,7 +25,10 @@ skill(100201)
 {
 	onmessage("start")
 	{
-		animation("hurt_m");
+		animation("hurt_m")
+        {
+            playmode(1);
+        };
 		animationspeed("hurt_m", 6);
 		wait(66);
 		animationspeed("hurt_m", 1);
@@ -41,7 +47,10 @@ skill(100202)
 {
 	onmessage("start")
 	{
-		animation("hurt_m");
+		animation("hurt_m")
+        {
+            playmode(1);
+        };
 		animationspeed("hurt_m", 6);
 		wait(66);
 		animationspeed("hurt_m", 1);
