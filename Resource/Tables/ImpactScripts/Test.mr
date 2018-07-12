@@ -52,6 +52,7 @@ skill(100202)
             playmode(1);
         };
 		animationspeed("hurt_m", 6);
+        damage(10);
 		wait(66);
 		animationspeed("hurt_m", 1);
 		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)

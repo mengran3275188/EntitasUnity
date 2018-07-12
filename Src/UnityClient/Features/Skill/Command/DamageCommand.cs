@@ -29,6 +29,8 @@ namespace SkillCommands
                 damage = m_Damage;
 
                 obj.ReplaceHp(obj.hp.Value - damage);
+
+                GfxSystem.AddDamageText(obj.resource.ResourceId, "-10", 3000);
             }
             return ExecResult.Finished;
         }

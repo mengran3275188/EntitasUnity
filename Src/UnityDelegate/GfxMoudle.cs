@@ -298,12 +298,12 @@ namespace UnityDelegate
                 LogUtil.Error("GfxMoudle.MoveChildToBone : can not find obj with resId {0}.", resId);
             }
         }
-        public void CreateHudText(uint resId, string text, long remainTime)
+        public void AddDamageText(uint resId, string text, long remainTime)
         {
             GameObject target = GetGameObject(resId);
             if (null != target)
             {
-                HudMgr.Instance.AddHudText(text, target.transform, remainTime);
+                HudMgr.Instance.AddDamageText(text, target.transform, remainTime);
             }
             else
             {

@@ -88,9 +88,9 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
         }
-        public static void CreateHudText(uint resId, string text, long remainTime)
+        public static void AddDamageText(uint resId, string text, long remainTime)
         {
-            GfxSystemImpl.Gfx.CreateHudText(resId, text, remainTime);
+            GfxSystemImpl.Gfx.AddDamageText(resId, text, remainTime);
         }
         public static void CreateHudHead(uint resId)
         {
