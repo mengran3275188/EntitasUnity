@@ -111,6 +111,7 @@ namespace SkillCommands
             }
             if (!m_IsCurveMoving)
             {
+                target.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, Vector3.zero);
                 return ExecResult.Finished;
             }
             if (!m_IsInited)
@@ -120,6 +121,7 @@ namespace SkillCommands
             if (m_SectionListCopy.Count == 0)
             {
                 m_IsCurveMoving = false;
+                target.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, Vector3.zero);
                 return ExecResult.Finished;
             }
 
