@@ -21,6 +21,10 @@ namespace UnityClient
                 {
                     GfxSystem.DestoryResource(entity.resource.ResourceId);
                 }
+                if(entity.hasAttr)
+                {
+                    GfxSystem.RemoveHudHead(entity.resource.ResourceId);
+                }
 
                 entity.Destroy();
             }

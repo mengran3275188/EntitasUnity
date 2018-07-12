@@ -386,6 +386,128 @@ namespace Entitas.Data
 
 namespace Entitas.Data
 {
+	public sealed partial class BuffConfig : IData2
+	{
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 12)]
+		private struct BuffConfigRecord
+		{
+			internal int Id;
+			internal int Description;
+			internal int Script;
+		}
+
+		public int Id;
+		public string Description;
+		public string Script;
+
+		public bool CollectDataFromDBC(DBC_Row node)
+		{
+			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
+			Description = DBCUtil.ExtractString(node, "Description", "");
+			Script = DBCUtil.ExtractString(node, "Script", "");
+			return true;
+		}
+
+		public bool CollectDataFromBinary(BinaryTable table, int index)
+		{
+			BuffConfigRecord record = GetRecord(table,index);
+			Id = DBCUtil.ExtractInt(table, record.Id, 0);
+			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Script = DBCUtil.ExtractString(table, record.Script, "");
+			return true;
+		}
+
+		public void AddToBinary(BinaryTable table)
+		{
+			BuffConfigRecord record = new BuffConfigRecord();
+			record.Id = DBCUtil.SetValue(table, Id, 0);
+			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Script = DBCUtil.SetValue(table, Script, "");
+			byte[] bytes = GetRecordBytes(record);
+			table.Records.Add(bytes);
+		}
+
+		public int GetId()
+		{
+			return Id;
+		}
+
+		private unsafe BuffConfigRecord GetRecord(BinaryTable table, int index)
+		{
+			BuffConfigRecord record;
+			byte[] bytes = table.Records[index];
+			fixed (byte* p = bytes) {
+				record = *(BuffConfigRecord*)p;
+			}
+			return record;
+		}
+		private static unsafe byte[] GetRecordBytes(BuffConfigRecord record)
+		{
+			byte[] bytes = new byte[sizeof(BuffConfigRecord)];
+			fixed (byte* p = bytes) {
+				BuffConfigRecord* temp = (BuffConfigRecord*)p;
+				*temp = record;
+			}
+			return bytes;
+		}
+	}
+
+	public sealed partial class BuffConfigProvider
+	{
+		public void LoadForClient()
+		{
+			Load(FilePathDefine_Client.C_BuffConfig);
+		}
+		public void LoadForServer()
+		{
+			Load(FilePathDefine_Server.C_BuffConfig);
+		}
+		public void Load(string file)
+		{
+			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
+				m_BuffConfigMgr.CollectDataFromBinary(file);
+			} else {
+				m_BuffConfigMgr.CollectDataFromDBC(file);
+			}
+		}
+		public void Save(string file)
+		{
+		#if DEBUG
+			m_BuffConfigMgr.SaveToBinary(file);
+		#endif
+		}
+		public void Clear()
+		{
+			m_BuffConfigMgr.Clear();
+		}
+
+		public DataDictionaryMgr2<BuffConfig> BuffConfigMgr
+		{
+			get { return m_BuffConfigMgr; }
+		}
+
+		public int GetBuffConfigCount()
+		{
+			return m_BuffConfigMgr.GetDataCount();
+		}
+
+		public BuffConfig GetBuffConfig(int id)
+		{
+			return m_BuffConfigMgr.GetDataById(id);
+		}
+
+		private DataDictionaryMgr2<BuffConfig> m_BuffConfigMgr = new DataDictionaryMgr2<BuffConfig>();
+
+		public static BuffConfigProvider Instance
+		{
+			get { return s_Instance; }
+		}
+		private static BuffConfigProvider s_Instance = new BuffConfigProvider();
+	}
+}
+
+namespace Entitas.Data
+{
 	public sealed partial class CharacterConfig : IData2
 	{
 		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 24)]

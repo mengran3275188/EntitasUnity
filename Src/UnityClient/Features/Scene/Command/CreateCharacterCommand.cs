@@ -149,6 +149,8 @@ namespace SceneCommand
                 // attribute
                 if(m_AttrId > 0)
                 {
+                    GfxSystem.CreateHudHead(entity.resource.ResourceId);
+
                     AttributeConfig attrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(m_AttrId);
                     if(null != attrConfig)
                     {
@@ -158,6 +160,7 @@ namespace SceneCommand
                         entity.isAttrChanged = false;
                         entity.ReplaceHp(attrData.HpMax);
                     }
+
                 }
             }
             else

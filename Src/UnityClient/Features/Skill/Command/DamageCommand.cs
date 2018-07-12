@@ -23,9 +23,10 @@ namespace SkillCommands
         {
             GameEntity obj = instance.Target as GameEntity;
             GameEntity sender = instance.Sender as GameEntity;
-            if(null != obj && null != sender)
+            if(null != obj && null != sender && obj.hasHp)
             {
                 float damage = AttrSystem.CalcDamage();
+                damage = m_Damage;
 
                 obj.ReplaceHp(obj.hp.Value - damage);
             }

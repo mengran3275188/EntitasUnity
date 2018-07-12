@@ -74,7 +74,9 @@ namespace UnityClient
             BuffInstanceInfo instanceInfo = GetUnusedBuffInstanceInfoFromPool(buffId);
             if(null == instanceInfo)
             {
-                ConfigManager.Instance.LoadIfNotExist(buffId, 2, HomePath.Instance.GetAbsolutePath("Tables/Impact/test.mr"));
+                BuffConfig config = BuffConfigProvider.Instance.GetBuffConfig(buffId);
+                if(null != config)
+                    ConfigManager.Instance.LoadIfNotExist(buffId, 2, HomePath.Instance.GetAbsolutePath(config.Script));
                 Instance instance = ConfigManager.Instance.NewInstance(buffId, 2);
                 if(null == instance)
                 {

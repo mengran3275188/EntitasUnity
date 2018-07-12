@@ -13,10 +13,7 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            m_Context.GetGroup(GameMatcher.Hp).OnEntityAdded += HpSystem_OnEntityAdded;
-            m_Context.GetGroup(GameMatcher.Hp).OnEntityRemoved += HpSystem_OnEntityRemoved;
         }
-
 
         protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context)
         {
@@ -35,17 +32,6 @@ namespace UnityClient
                 GfxSystem.UpdateHudHead(entity.resource.ResourceId, entity.hp.Value, entity.attr.Value.HpMax);
             }
         }
-        private void HpSystem_OnEntityAdded(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
-        {
-            // add hp hud;
-            GfxSystem.CreateHudHead(entity.resource.ResourceId);
-        }
-
-        private void HpSystem_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
-        {
-            // remove hp hud;
-        }
-
         private readonly GameContext m_Context;
     }
 }

@@ -1,0 +1,5 @@
+Id	Description	Script
+int	string	string
+1	Ö÷½ÇÆÕ¹¥	Tables/ImpactScripts/Test.mr
+100201	ºüÀêÉä¼ı	Tables/ImpactScripts/Test.mr
+100202	ºüÀêÉäµÄ¼ı	Tables/ImpactScripts/Test.mr
