@@ -8,6 +8,13 @@ namespace UnityDelegate
 {
     internal class CameraManager : Util.Singleton<CameraManager>
     {
+        public Camera GetMainCamera()
+        {
+            if (m_MainCamera == null)
+                m_MainCamera = Camera.main;
+            return m_MainCamera;
+        }
+
         public void UpdateCamera(float x, float y, float z)
         {
             Transform t = GetMainCamera().transform;
@@ -21,12 +28,6 @@ namespace UnityDelegate
             t.transform.LookAt(new UnityEngine.Vector3(x, y, z));
         }
 
-        private Camera GetMainCamera()
-        {
-            if (m_MainCamera == null)
-                m_MainCamera = Camera.main;
-            return m_MainCamera;
-        }
 
         private UnityEngine.Camera m_MainCamera;
 

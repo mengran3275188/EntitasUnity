@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Features\Skill\Command\AreaDamageCommand.cs" />
     <Compile Include="Features\Skill\Command\ColliderDamageCommand.cs" />
+    <Compile Include="Features\Skill\Command\DamageCommand.cs" />
     <Compile Include="Features\Skill\Command\DestroySelfCommand.cs" />
     <Compile Include="Features\Skill\Command\GeneralCommand.cs" />
     <Compile Include="Features\Skill\Command\ScriptableDataUtility.cs" />

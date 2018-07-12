@@ -37,13 +37,15 @@ namespace UnityDelegate
 
             HomePath.Instance.SetHomePath(Application.streamingAssetsPath);
 
-
             m_LogicInvoker = processor;
+
+            HudMgr.Instance.OnStart();
         }
         public void OnTick()
         {
             InputManager.Instance.HandleInput();
             ResourceManager.Instance.Tick();
+            HudMgr.Instance.Tick();
         }
         public void OnQuit()
         {
@@ -295,6 +297,38 @@ namespace UnityDelegate
             {
                 LogUtil.Error("GfxMoudle.MoveChildToBone : can not find obj with resId {0}.", resId);
             }
+        }
+        public void CreateHudText(uint resId, string text, long remainTime)
+        {
+            GameObject target = GetGameObject(resId);
+            if (null != target)
+            {
+                HudMgr.Instance.AddHudText(text, target.transform, remainTime);
+            }
+            else
+            {
+                LogUtil.Error("GfxMoudle.CreateHudText : can not find obj with resId {0}.", resId);
+            }
+        }
+        public void CreateHudHead(uint resId)
+        {
+            GameObject target = GetGameObject(resId);
+            if (null != target)
+            {
+                HudMgr.Instance.AddHudHead(resId, target.transform);
+            }
+            else
+            {
+                LogUtil.Error("GfxMoudle.CreateHudText : can not find obj with resId {0}.", resId);
+            }
+        }
+        public void UpdateHudHead(uint resId, float curHp, float maxHp)
+        {
+            HudMgr.Instance.UpdateHudHead(resId, curHp, maxHp);
+        }
+        public void RemoveHudHead(uint resId)
+        {
+            HudMgr.Instance.RemoveHudHead(resId);
         }
         public bool GetJoyStickDir(out float dir)
         {

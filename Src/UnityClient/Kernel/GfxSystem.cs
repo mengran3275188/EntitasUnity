@@ -88,6 +88,22 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
         }
+        public static void CreateHudText(uint resId, string text, long remainTime)
+        {
+            GfxSystemImpl.Gfx.CreateHudText(resId, text, remainTime);
+        }
+        public static void CreateHudHead(uint resId)
+        {
+            GfxSystemImpl.Gfx.CreateHudHead(resId);
+        }
+        public static void UpdateHudHead(uint resId, float curHp, float maxHp)
+        {
+            GfxSystemImpl.Gfx.UpdateHudHead(resId, curHp, maxHp);
+        }
+        public static void RemoveHudHead(uint resId)
+        {
+            GfxSystemImpl.Gfx.RemoveHudHead(resId);
+        }
 
         // 线程安全的方法允许返回值
         public static bool GetJoyStickDir(out float dir)
