@@ -2,15 +2,17 @@ skill(1)
 {
 	onmessage("start")
 	{
-		animation("hurt_l")
-		{
-			speed(10);
-		};
-		curvemove(true, -0.2, 0, 0, -10, 0, 0, 50)
+		animation("hurt_m");
+		animationspeed("hurt_m", 6);
+		wait(66);
+		animationspeed("hurt_m", 1);
+		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)
 		{
 			direction(3);
 		};
 		wait(200);
+		animationspeed("hurt_m", 3);
+		wait(66);
 		terminate();
 	};
 };
