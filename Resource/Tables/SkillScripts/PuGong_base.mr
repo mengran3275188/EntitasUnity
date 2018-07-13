@@ -73,5 +73,4 @@ skill(1)
         log("onbreak");
         terminate();
     };
-	
 };

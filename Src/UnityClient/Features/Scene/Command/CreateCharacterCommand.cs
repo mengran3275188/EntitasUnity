@@ -115,7 +115,7 @@ namespace SceneCommand
                     entity.AddAI(agent);
                 }
                 // skill
-                entity.AddSkill(null);
+                entity.AddSkill(null, null);
                 entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>());
 
                 // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。

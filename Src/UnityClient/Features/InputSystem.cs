@@ -88,6 +88,7 @@ namespace UnityClient
                 var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
                 if(null != mainPlayer)
                 {
+                    SkillSystem.Instance.BreakSkill(mainPlayer);
                     SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
                 }
             }

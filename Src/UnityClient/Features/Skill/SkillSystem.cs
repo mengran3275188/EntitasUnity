@@ -49,33 +49,51 @@ namespace UnityClient
                     {
                         RecycleSkillInstance(info);
 
-                        entity.ReplaceSkill(null);
+                        skillComponent.Instance = null;
 
                         UpdateSkillControlMoveAndRotation(entity, false, false);
+                    }
+                }
+                if(null != skillComponent.StartParam)
+                {
+                    if(skillComponent.Instance == null)
+                    {
+                        SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
+                        if(null != instance)
+                        {
+                            instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                            instance.m_SkillInstance.Target = entity;
+                            instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
+                            instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
+                            instance.m_SkillInstance.Context = null;
+                            instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
+                            instance.m_SkillInstance.Start();
+
+                            entity.ReplaceSkill(instance, null);
+
+                            UpdateSkillControlMoveAndRotation(entity, true, true);
+                        }
+                    }
+                    else
+                    {
+                        skillComponent.StartParam = null;
                     }
                 }
             }
         }
         public void StartSkill(GameEntity sender, GameEntity target, int skillId, Vector3 senderPosition, float direction)
         {
-            if(target.hasSkill && target.skill.Instance == null)
+            StartSkillParam param = new StartSkillParam();
+            param.SkillId = skillId;
+            param.SenderId = sender.id.value;
+            param.SenderPosition = senderPosition;
+            param.SenderDirection = direction;
+
+            if(target.hasSkill)
             {
-                SkillInstanceInfo instance = NewSkillInstance(skillId);
-                if(null != instance)
-                {
-                    instance.m_SkillInstance.Sender = sender;
-                    instance.m_SkillInstance.Target = target;
-                    instance.m_SkillInstance.SenderPosition = senderPosition;
-                    instance.m_SkillInstance.SenderDirection = direction;
-                    instance.m_SkillInstance.Context = null;
-                    instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
-                    instance.m_SkillInstance.Start();
-
-                    target.ReplaceSkill(instance);
-
-                    UpdateSkillControlMoveAndRotation(target, true, true);
-                }
+                target.skill.StartParam = param;
             }
+
         }
         public void BreakSkill(GameEntity target)
         {

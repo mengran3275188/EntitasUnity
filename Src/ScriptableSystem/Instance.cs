@@ -383,6 +383,22 @@ namespace ScriptableSystem
                 m_LastTickTime = curTime;
                 m_CurTime += delta;
             }
+            foreach(MessageHandler handler in m_MessageHandlers)
+            {
+                string msgId = handler.MessageId;
+                Queue<MessageInfo> queue;
+                if (m_MessageQueues.TryGetValue(msgId, out queue))
+                {
+                    for (int msgCt = 0; msgCt < c_MaxMsgCountPerTick && queue.Count > 0; ++msgCt)
+                    {
+                        MessageInfo info = queue.Dequeue();
+                        MessageHandler activeHandler = handler.Clone();
+                        activeHandler.Trigger(this, info.m_Args);
+                        m_ActiveHandlers.Add(activeHandler);
+                    }
+                }
+            }
+
             int ct = m_ParallelCommands.Count;
             for(int ix = ct - 1; ix >= 0; --ix)
             {
@@ -402,21 +418,6 @@ namespace ScriptableSystem
                 if (handler.IsFinished())
                     m_ActiveHandlers.RemoveAt(ix);
 
-            }
-            foreach(MessageHandler handler in m_MessageHandlers)
-            {
-                string msgId = handler.MessageId;
-                Queue<MessageInfo> queue;
-                if (m_MessageQueues.TryGetValue(msgId, out queue))
-                {
-                    for (int msgCt = 0; msgCt < c_MaxMsgCountPerTick && queue.Count > 0; ++msgCt)
-                    {
-                        MessageInfo info = queue.Dequeue();
-                        MessageHandler activeHandler = handler.Clone();
-                        activeHandler.Trigger(this, info.m_Args);
-                        m_ActiveHandlers.Add(activeHandler);
-                    }
-                }
             }
         }
         public void Analyze()

@@ -726,17 +726,19 @@ public partial class GameEntity {
     public Entitas.Data.SkillComponent skill { get { return (Entitas.Data.SkillComponent)GetComponent(GameComponentsLookup.Skill); } }
     public bool hasSkill { get { return HasComponent(GameComponentsLookup.Skill); } }
 
-    public void AddSkill(Entitas.Data.SkillInstanceInfo newInstance) {
+    public void AddSkill(Entitas.Data.SkillInstanceInfo newInstance, Entitas.Data.StartSkillParam newStartParam) {
         var index = GameComponentsLookup.Skill;
         var component = CreateComponent<Entitas.Data.SkillComponent>(index);
         component.Instance = newInstance;
+        component.StartParam = newStartParam;
         AddComponent(index, component);
     }
 
-    public void ReplaceSkill(Entitas.Data.SkillInstanceInfo newInstance) {
+    public void ReplaceSkill(Entitas.Data.SkillInstanceInfo newInstance, Entitas.Data.StartSkillParam newStartParam) {
         var index = GameComponentsLookup.Skill;
         var component = CreateComponent<Entitas.Data.SkillComponent>(index);
         component.Instance = newInstance;
+        component.StartParam = newStartParam;
         ReplaceComponent(index, component);
     }
 
