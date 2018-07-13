@@ -42,6 +42,7 @@ namespace UnityClient.Kernel
         }
         private static void LoadConfig()
         {
+            Entitas.Data.CameraConfigProvider.Instance.LoadForClient();
             Entitas.Data.ActionConfigProvider.Instance.LoadForClient();
             Entitas.Data.SceneConfigProvider.Instance.LoadForClient();
             Entitas.Data.CharacterConfigProvider.Instance.LoadForClient();

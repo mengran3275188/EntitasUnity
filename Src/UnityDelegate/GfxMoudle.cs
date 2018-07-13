@@ -19,7 +19,7 @@ namespace UnityDelegate
         }
         public void OnStart(IActionQueue processor)
         {
-            Application.targetFrameRate = 30;
+            //Application.targetFrameRate = 30;
 
             LogUtil.OnOutput += (Log_Type type, string msg) =>
             {
@@ -43,10 +43,12 @@ namespace UnityDelegate
 
             m_LogicInvoker = processor;
 
+            CameraManager.Instance.OnStart();
             HudMgr.Instance.OnStart();
         }
         public void OnTick()
         {
+            CameraManager.Instance.Tick();
             InputManager.Instance.HandleInput();
             ResourceManager.Instance.Tick();
             HudMgr.Instance.Tick();

@@ -513,6 +513,138 @@ namespace Entitas.Data
 
 namespace Entitas.Data
 {
+	public sealed partial class CameraConfig : IData2
+	{
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
+		private struct CameraConfigRecord
+		{
+			internal int Id;
+			internal int Description;
+			internal float Pitch;
+			internal float Yaw;
+			internal float Distance;
+		}
+
+		public int Id;
+		public string Description;
+		public float Pitch;
+		public float Yaw;
+		public float Distance;
+
+		public bool CollectDataFromDBC(DBC_Row node)
+		{
+			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
+			Description = DBCUtil.ExtractString(node, "Description", "");
+			Pitch = DBCUtil.ExtractNumeric<float>(node, "Pitch", 0);
+			Yaw = DBCUtil.ExtractNumeric<float>(node, "Yaw", 0);
+			Distance = DBCUtil.ExtractNumeric<float>(node, "Distance", 0);
+			return true;
+		}
+
+		public bool CollectDataFromBinary(BinaryTable table, int index)
+		{
+			CameraConfigRecord record = GetRecord(table,index);
+			Id = DBCUtil.ExtractInt(table, record.Id, 0);
+			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Pitch = DBCUtil.ExtractFloat(table, record.Pitch, 0);
+			Yaw = DBCUtil.ExtractFloat(table, record.Yaw, 0);
+			Distance = DBCUtil.ExtractFloat(table, record.Distance, 0);
+			return true;
+		}
+
+		public void AddToBinary(BinaryTable table)
+		{
+			CameraConfigRecord record = new CameraConfigRecord();
+			record.Id = DBCUtil.SetValue(table, Id, 0);
+			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Pitch = DBCUtil.SetValue(table, Pitch, 0);
+			record.Yaw = DBCUtil.SetValue(table, Yaw, 0);
+			record.Distance = DBCUtil.SetValue(table, Distance, 0);
+			byte[] bytes = GetRecordBytes(record);
+			table.Records.Add(bytes);
+		}
+
+		public int GetId()
+		{
+			return Id;
+		}
+
+		private unsafe CameraConfigRecord GetRecord(BinaryTable table, int index)
+		{
+			CameraConfigRecord record;
+			byte[] bytes = table.Records[index];
+			fixed (byte* p = bytes) {
+				record = *(CameraConfigRecord*)p;
+			}
+			return record;
+		}
+		private static unsafe byte[] GetRecordBytes(CameraConfigRecord record)
+		{
+			byte[] bytes = new byte[sizeof(CameraConfigRecord)];
+			fixed (byte* p = bytes) {
+				CameraConfigRecord* temp = (CameraConfigRecord*)p;
+				*temp = record;
+			}
+			return bytes;
+		}
+	}
+
+	public sealed partial class CameraConfigProvider
+	{
+		public void LoadForClient()
+		{
+			Load(FilePathDefine_Client.C_CameraConfig);
+		}
+		public void LoadForServer()
+		{
+			Load(FilePathDefine_Server.C_CameraConfig);
+		}
+		public void Load(string file)
+		{
+			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
+				m_CameraConfigMgr.CollectDataFromBinary(file);
+			} else {
+				m_CameraConfigMgr.CollectDataFromDBC(file);
+			}
+		}
+		public void Save(string file)
+		{
+		#if DEBUG
+			m_CameraConfigMgr.SaveToBinary(file);
+		#endif
+		}
+		public void Clear()
+		{
+			m_CameraConfigMgr.Clear();
+		}
+
+		public DataDictionaryMgr2<CameraConfig> CameraConfigMgr
+		{
+			get { return m_CameraConfigMgr; }
+		}
+
+		public int GetCameraConfigCount()
+		{
+			return m_CameraConfigMgr.GetDataCount();
+		}
+
+		public CameraConfig GetCameraConfig(int id)
+		{
+			return m_CameraConfigMgr.GetDataById(id);
+		}
+
+		private DataDictionaryMgr2<CameraConfig> m_CameraConfigMgr = new DataDictionaryMgr2<CameraConfig>();
+
+		public static CameraConfigProvider Instance
+		{
+			get { return s_Instance; }
+		}
+		private static CameraConfigProvider s_Instance = new CameraConfigProvider();
+	}
+}
+
+namespace Entitas.Data
+{
 	public sealed partial class CharacterConfig : IData2
 	{
 		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 24)]
