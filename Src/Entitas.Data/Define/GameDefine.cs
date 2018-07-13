@@ -25,6 +25,7 @@ namespace Entitas.Data
         Idle = 1,
         Run = 2,
         Hurt = 3,
+        Dead = 4,
     }
 
     public enum CampId

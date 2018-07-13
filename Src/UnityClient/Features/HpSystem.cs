@@ -29,6 +29,13 @@ namespace UnityClient
         {
             foreach(var entity in entities)
             {
+                if (entity.hp.Value <= 0)
+                {
+                    if (entity.isMainPlayer)
+                        entity.ReplaceHp(entity.attr.Value.HpMax);
+                    else
+                        entity.ReplaceDead(m_Context.timeInfo.Time);
+                }
                 GfxSystem.UpdateHudHead(entity.resource.ResourceId, entity.hp.Value, entity.attr.Value.HpMax);
             }
         }

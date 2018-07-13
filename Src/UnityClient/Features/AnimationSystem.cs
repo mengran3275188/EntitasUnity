@@ -13,7 +13,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Animation, GameMatcher.Movement));
+            return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.Animation, GameMatcher.Movement, GameMatcher.Dead));
         }
         protected override bool Filter(GameEntity entity)
         {
@@ -25,13 +25,20 @@ namespace UnityClient
             {
                 var animation = entity.animation;
 
-                if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
+                if (entity.hasDead)
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
                 }
                 else
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                    if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
+                    {
+                        GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                    }
+                    else
+                    {
+                        GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                    }
                 }
             }
         }
@@ -49,6 +56,9 @@ namespace UnityClient
                         break;
                     case AnimationType.Run:
                         animationName = string.Format("{0}{1}", prefix, config.Run);
+                        break;
+                    case AnimationType.Dead:
+                        animationName = string.Format("{0}{1}", prefix, config.Dead);
                         break;
                 }
             }

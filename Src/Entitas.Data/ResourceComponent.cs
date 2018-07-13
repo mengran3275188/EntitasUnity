@@ -44,7 +44,8 @@ namespace Entitas.Data
     {
         public float Value;
     }
-    public sealed class AttrChangedComponent : IComponent
+    public sealed class DeadComponent : IComponent
     {
+        public float DeadTime;
     }
 }

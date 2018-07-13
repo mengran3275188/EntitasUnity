@@ -96,7 +96,12 @@ namespace UnityDelegate
         }
         public void RemoveHudHead(uint resId)
         {
-            m_HudHeadInfos.Remove(resId);
+            HudInfo hudInfo;
+            if(m_HudHeadInfos.TryGetValue(resId, out hudInfo))
+            {
+                ResourceSystem.RecycleObject(hudInfo.Obj);
+                m_HudHeadInfos.Remove(resId);
+            }
         }
         public void Tick()
         {

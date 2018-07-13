@@ -563,19 +563,25 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Data.AttrChangedComponent attrChangedComponent = new Entitas.Data.AttrChangedComponent();
+    public Entitas.Data.DeadComponent dead { get { return (Entitas.Data.DeadComponent)GetComponent(GameComponentsLookup.Dead); } }
+    public bool hasDead { get { return HasComponent(GameComponentsLookup.Dead); } }
 
-    public bool isAttrChanged {
-        get { return HasComponent(GameComponentsLookup.AttrChanged); }
-        set {
-            if (value != isAttrChanged) {
-                if (value) {
-                    AddComponent(GameComponentsLookup.AttrChanged, attrChangedComponent);
-                } else {
-                    RemoveComponent(GameComponentsLookup.AttrChanged);
-                }
-            }
-        }
+    public void AddDead(float newDeadTime) {
+        var index = GameComponentsLookup.Dead;
+        var component = CreateComponent<Entitas.Data.DeadComponent>(index);
+        component.DeadTime = newDeadTime;
+        AddComponent(index, component);
+    }
+
+    public void ReplaceDead(float newDeadTime) {
+        var index = GameComponentsLookup.Dead;
+        var component = CreateComponent<Entitas.Data.DeadComponent>(index);
+        component.DeadTime = newDeadTime;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveDead() {
+        RemoveComponent(GameComponentsLookup.Dead);
     }
 }
 
@@ -1106,17 +1112,17 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherAttrChanged;
+    static Entitas.IMatcher<GameEntity> _matcherDead;
 
-    public static Entitas.IMatcher<GameEntity> AttrChanged {
+    public static Entitas.IMatcher<GameEntity> Dead {
         get {
-            if (_matcherAttrChanged == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.AttrChanged);
+            if (_matcherDead == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Dead);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherAttrChanged = matcher;
+                _matcherDead = matcher;
             }
 
-            return _matcherAttrChanged;
+            return _matcherDead;
         }
     }
 }

@@ -43,6 +43,7 @@ namespace UnityClient.Kernel
             systems.Add(SpatialSystem.Instance);
             systems.Add(new AttrSystem(contexts));
             systems.Add(new HpSystem(contexts));
+            systems.Add(new DeadSystem(contexts));
             systems.Add(new PhysicsSystem(contexts));
             systems.Add(new MovementSystem(contexts));
             systems.Add(new PositionSystem(contexts));

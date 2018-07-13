@@ -10,10 +10,10 @@ public static class GameComponentsLookup {
 
     public const int AI = 0;
     public const int Animation = 1;
-    public const int AttrChanged = 2;
-    public const int Attr = 3;
-    public const int Buff = 4;
-    public const int Camp = 5;
+    public const int Attr = 2;
+    public const int Buff = 3;
+    public const int Camp = 4;
+    public const int Dead = 5;
     public const int Destory = 6;
     public const int Hp = 7;
     public const int Id = 8;
@@ -34,10 +34,10 @@ public static class GameComponentsLookup {
     public static readonly string[] componentNames = {
         "AI",
         "Animation",
-        "AttrChanged",
         "Attr",
         "Buff",
         "Camp",
+        "Dead",
         "Destory",
         "Hp",
         "Id",
@@ -57,10 +57,10 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Entitas.Data.AIComponent),
         typeof(Entitas.Data.AnimationComponent),
-        typeof(Entitas.Data.AttrChangedComponent),
         typeof(Entitas.Data.AttrComponent),
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
+        typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
         typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.IdComponent),
