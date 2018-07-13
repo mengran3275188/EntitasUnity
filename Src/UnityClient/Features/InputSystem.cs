@@ -31,6 +31,9 @@ namespace UnityClient
                 Keyboard.Code.A,
                 Keyboard.Code.S,
                 Keyboard.Code.D);
+
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
         {
@@ -67,6 +70,28 @@ namespace UnityClient
             }
         }
 
+        private void MainPlayerUseSkillJ(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != mainPlayer)
+                {
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 1, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                }
+            }
+        }
+        private void MainPlayerUseSkillSpace(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != mainPlayer)
+                {
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                }
+            }
+        }
         private KeyHit GetKeyboadHit()
         {
             KeyHit kh = KeyHit.None;

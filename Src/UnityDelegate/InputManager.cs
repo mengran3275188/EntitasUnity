@@ -22,6 +22,14 @@ namespace UnityDelegate
                     m_KeysForListen.Add((int)code);
             }
         }
+        public void ListenKeyboardEvent(Keyboard.Code c, MyAction<int, int> handler)
+        {
+            if (!m_KeysForListen.Contains((int)c))
+                m_KeysForListen.Add((int)c);
+
+            m_KeyboardHandlers[(int)c] = handler;
+
+        }
 
         public void HandleInput()
         {
@@ -44,21 +52,23 @@ namespace UnityDelegate
         }
         private void FireKeyboard(int c, int e)
         {
-            Action<int, int> handler;
+            MyAction<int, int> handler;
             if (m_KeyboardHandlers.TryGetValue(c, out handler))
-                handler(c, e);
+                if(null != GfxMoudle.Instance.LogicInvoker)
+                    GfxMoudle.Instance.LogicInvoker.QueueAction<int, int>(handler, c, e);
         }
         private void FireMouse(int c, int e)
         {
-            Action<int, int> handler;
+            MyAction<int, int> handler;
             if (m_MouseHandlers.TryGetValue(c, out handler))
-                handler(c, e);
+                if(null != GfxMoudle.Instance.LogicInvoker)
+                    GfxMoudle.Instance.LogicInvoker.QueueAction<int, int>(handler, c, e);
         }
 
         private bool[] m_KeyPressed = new bool[(int)Keyboard.Code.MaxNum];
         private HashSet<int> m_KeysForListen = new HashSet<int>();
 
-        private Dictionary<int, Action<int, int>> m_KeyboardHandlers = new Dictionary<int, Action<int, int>>();
-        private Dictionary<int, Action<int, int>> m_MouseHandlers = new Dictionary<int, Action<int, int>>();
+        private Dictionary<int, MyAction<int, int>> m_KeyboardHandlers = new Dictionary<int, MyAction<int, int>>();
+        private Dictionary<int, MyAction<int, int>> m_MouseHandlers = new Dictionary<int, MyAction<int, int>>();
     }
 }

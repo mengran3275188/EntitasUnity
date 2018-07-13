@@ -76,6 +76,10 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.ListenKeyPressState(codes);
         }
+        public static void ListenKeyboardEvent(Keyboard.Code c, MyAction<int, int> handler)
+        {
+            GfxSystemImpl.Gfx.ListenKeyPressEvent(c, handler);
+        }
         public static void UpdateCamera(float x, float y, float z)
         {
             GfxSystemImpl.Gfx.UpdateCamera(x, y, z);

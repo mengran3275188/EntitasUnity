@@ -13,6 +13,10 @@ namespace UnityDelegate
         {
             get { return m_EventForLogic; }
         }
+        public IActionQueue LogicInvoker
+        {
+            get { return m_LogicInvoker; }
+        }
         public void OnStart(IActionQueue processor)
         {
             Application.targetFrameRate = 30;
@@ -247,6 +251,10 @@ namespace UnityDelegate
         public void ListenKeyPressState(Keyboard.Code[] codes)
         {
             InputManager.Instance.ListenKeyPressState(codes);
+        }
+        public void ListenKeyPressEvent(Keyboard.Code c, MyAction<int, int> handler)
+        {
+            InputManager.Instance.ListenKeyboardEvent(c, handler);
         }
         public void UpdateCamera(float x, float y, float z)
         {
