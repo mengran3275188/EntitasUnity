@@ -305,7 +305,7 @@ namespace UnityDelegate
                     body.isKinematic = true;
                 }
                 if (null != gameObj.transform.parent)
-                    gameObj.transform.parent = null;
+                    gameObj.transform.SetParent(null, false);
                 if (gameObj.activeSelf)
                     SetActiveOptim(gameObj, false);
             }

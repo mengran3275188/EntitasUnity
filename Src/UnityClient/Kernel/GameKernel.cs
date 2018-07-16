@@ -39,6 +39,9 @@ namespace UnityClient.Kernel
         }
         public static void OnQuit()
         {
+            GfxMoudle.Instance.OnQuit();
+
+            s_Logic.OnQuit();
         }
         private static void LoadConfig()
         {

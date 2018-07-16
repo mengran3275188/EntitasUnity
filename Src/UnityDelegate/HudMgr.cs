@@ -49,7 +49,7 @@ namespace UnityDelegate
         public void AddDamageText(string text, Transform owner, long remainTime)
         {
             var hudObject = ResourceSystem.NewObject("HudText") as GameObject;
-            hudObject.transform.parent = m_UIRoot.transform;
+            hudObject.transform.SetParent(m_UIRoot.transform, false);
             hudObject.transform.localPosition = Vector3.zero;
 
             DamageInfo hudInfo = new DamageInfo();
@@ -71,7 +71,7 @@ namespace UnityDelegate
         public void AddHudHead(uint resId, Transform owner)
         {
             var hudHeadObject = ResourceSystem.NewObject("HudHead") as GameObject;
-            hudHeadObject.transform.parent = m_UIRoot.transform;
+            hudHeadObject.transform.SetParent(m_UIRoot.transform, false);
 
             HudInfo hudInfo = new HudInfo();
             hudInfo.Obj = hudHeadObject;

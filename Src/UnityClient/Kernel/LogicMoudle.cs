@@ -30,6 +30,12 @@ namespace UnityClient.Kernel
         }
         public void OnQuit()
         {
+            systems.ClearReactiveSystems();
+            systems.TearDown();
+            systems.Cleanup();
+
+            Contexts.sharedInstance.Reset();
+
         }
         private static Systems CreateSystems(Contexts contexts)
         {

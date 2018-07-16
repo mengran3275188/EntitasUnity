@@ -14,4 +14,9 @@ public class GameLogic : MonoBehaviour {
 	void Update () {
         GameKernel.OnTick();
 	}
+
+    private void OnDestroy()
+    {
+        GameKernel.OnQuit();
+    }
 }
