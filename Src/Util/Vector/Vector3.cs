@@ -210,6 +210,10 @@ namespace Util
             Vector3 vec = new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
             return Mathf.Sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
         }
+        public static float DistanceXZ(Vector3 a, Vector3 b)
+        {
+            return Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.z - b.z) * (a.z - b.z));
+        }
 
         // Returns a copy of /vector/ with its magnitude clamped to /maxLength/.
         public static Vector3 ClampMagnitude(Vector3 vector, float maxLength)

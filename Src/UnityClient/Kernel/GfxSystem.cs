@@ -32,6 +32,10 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.DrawPoint(pos.x, pos.y, pos.z, radius);
         }
+        public static void DrawCircle(Vector3 center, float radius, float remainTime)
+        {
+            GfxSystemImpl.Gfx.DrawCircle(center.x, center.y, center.z, radius, remainTime);
+        }
         public static void Instantiate(uint resId, string path)
         {
             GfxSystemImpl.Gfx.Instantiate(resId, path);

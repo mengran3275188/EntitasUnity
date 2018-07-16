@@ -73,6 +73,31 @@ namespace UnityDelegate
         {
             // Gizmos.DrawSphere(new UnityEngine.Vector3(pointx, pointy, pointz), radius);
         }
+        public void DrawCircle(float centerX, float centerY, float centerZ, float radius, float remainTime, float degreeStep = 0.5f)
+        {
+            UnityEngine.Vector3 center = new UnityEngine.Vector3(centerX, centerY, centerZ);
+
+            int count = (int)(2 * UnityEngine.Mathf.PI / degreeStep);
+
+            List<UnityEngine.Vector3> points = new List<UnityEngine.Vector3>();
+
+            for(int i = 0; i < count + 1; ++i)
+            {
+                float degree = 2 * UnityEngine.Mathf.PI / count * i;
+                UnityEngine.Vector3 point = center + new UnityEngine.Vector3(UnityEngine.Mathf.Cos(degree), 0, UnityEngine.Mathf.Sin(degree)) * radius;
+                points.Add(point);
+            }
+
+            if(points.Count > 1)
+            {
+                UnityEngine.Vector3 firstPoint = points[0];
+
+                for(int i = 0; i < points.Count; ++i)
+                {
+                    Debug.DrawLine(points[i], points[(i + 1) % points.Count], Color.red, remainTime);
+                }
+            }
+        }
         public void Instantiate(uint resId, string path)
         {
             var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;

@@ -35,7 +35,6 @@ namespace UnityClient.Kernel
             systems.Cleanup();
 
             Contexts.sharedInstance.Reset();
-
         }
         private static Systems CreateSystems(Contexts contexts)
         {

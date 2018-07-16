@@ -28,6 +28,8 @@ namespace SkillCommands
                 Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.RotateDir, 0, 0);
                 Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
 
+                UnityClient.GfxSystem.DrawCircle(center, m_Range, 2.0f);
+
                 var entities = Contexts.sharedInstance.game.GetGroup(GameMatcher.Position);
                 foreach(var entity in entities)
                 {
@@ -38,7 +40,6 @@ namespace SkillCommands
                     {
                         if(!entity.hasDead)
                         {
-                            LogUtil.Debug("AreaDamageCommand.ExecCommand : find damage target {0}", entity.ToString());
                             UnityClient.BuffSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.RotateDir);
                         }
                     }
@@ -49,7 +50,7 @@ namespace SkillCommands
 
         private bool InCircle(Vector3 point, float range, PositionComponent position)
         {
-            return Vector3.Distance(point, position.Value) < range;
+            return Vector3.DistanceXZ(point, position.Value) < range;
         }
 
         private Vector3 m_RelativeCenter;
