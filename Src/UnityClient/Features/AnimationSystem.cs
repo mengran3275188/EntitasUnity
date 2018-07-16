@@ -27,20 +27,20 @@ namespace UnityClient
 
                 if (entity.hasDead)
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
+                    GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
                 }else if(entity.hasBorn)
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
+                    GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
                 }
                 else
                 {
                     if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
                     }
                     else
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
                     }
                 }
             }

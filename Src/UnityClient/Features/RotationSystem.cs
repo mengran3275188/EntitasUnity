@@ -26,7 +26,7 @@ namespace UnityClient
         {
             foreach(GameEntity entity in entities)
             {
-                GfxSystem.UpdateRotation(entity.resource.ResourceId, entity.rotation.RotateDir);
+                GfxSystem.UpdateRotation(entity.resource.Value, entity.rotation.RotateDir);
             }
         }
 

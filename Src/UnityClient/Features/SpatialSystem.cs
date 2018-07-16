@@ -8,38 +8,8 @@ using Spatial;
 
 namespace UnityClient
 {
-    public class SpatialSystem : Singleton<SpatialSystem>, IInitializeSystem, IExecuteSystem
+    public class SpatialSystem : Singleton<SpatialSystem>
     {
-        public void Initialize()
-        {
-            var context = Contexts.sharedInstance.game;
-            m_SpatialEntities = context.GetGroup(GameMatcher.AllOf(GameMatcher.Spatial, GameMatcher.Position));
-        }
-        public void Execute()
-        {
-
-            m_CellMgr.ClearDynamic();
-
-            var entities = m_SpatialEntities.GetEntities();
-
-            foreach(var entity in entities)
-            {
-                Vector3 min = entity.position.Value - new Vector3(0.5f, 0.0f, 0.5f);
-                Vector3 max = entity.position.Value + new Vector3(0.5f, 0.0f, 0.5f);
-                int minRow, minCol, maxRow, maxCol;
-
-                m_CellMgr.GetCell(min, out minRow, out minCol);
-                m_CellMgr.GetCell(max, out maxRow, out maxCol);
-
-                for(int i = minRow; i <=maxRow; ++i)
-                {
-                    for(int j = minCol; j <= maxCol; ++j)
-                    {
-                        m_CellMgr.SetCellStatus(i, j, BlockType.DYNAMIC_BLOCK);
-                    }
-                }
-            }
-        }
         public void Load(string navmesh)
         {
             var gameContext = Contexts.sharedInstance.game;
@@ -114,8 +84,6 @@ namespace UnityClient
                 return m_CellMgr.GetCellCenter(cell.row, cell.col);
             return pos;
         }
-
-        private IGroup<GameEntity> m_SpatialEntities;
         private CellManager m_CellMgr;
     }
 }

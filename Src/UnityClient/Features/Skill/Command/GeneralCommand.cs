@@ -25,7 +25,7 @@ namespace SkillCommands
             GameEntity entity = instance.Target as GameEntity;
             if (null != entity)
             {
-                UnityClient.GfxSystem.MoveChildToBone(entity.resource.ResourceId, m_ChildName, m_NodeName);
+                UnityClient.GfxSystem.MoveChildToBone(entity.resource.Value, m_ChildName, m_NodeName);
             }
             return ExecResult.Finished;
         }

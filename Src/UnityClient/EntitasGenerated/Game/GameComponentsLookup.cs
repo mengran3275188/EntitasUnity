@@ -27,10 +27,9 @@ public static class GameComponentsLookup {
     public const int Rotation = 16;
     public const int Scene = 17;
     public const int Skill = 18;
-    public const int Spatial = 19;
-    public const int TimeInfo = 20;
+    public const int TimeInfo = 19;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -52,7 +51,6 @@ public static class GameComponentsLookup {
         "Rotation",
         "Scene",
         "Skill",
-        "Spatial",
         "TimeInfo"
     };
 
@@ -76,7 +74,6 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.RotationComponent),
         typeof(Entitas.Data.SceneComponent),
         typeof(Entitas.Data.SkillComponent),
-        typeof(Entitas.Data.SpatialComponent),
         typeof(Entitas.Data.TimeInfoComponent)
     };
 }

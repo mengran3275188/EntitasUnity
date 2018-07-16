@@ -28,7 +28,6 @@ namespace SkillCommands
                 {
                     obj.physics.Rigid.Position = targetPostion + obj.physics.Offset;
                 }
-                obj.ReplacePosition(targetPostion);
             }
             return ExecResult.Finished;
         }

@@ -36,7 +36,7 @@ namespace SkillCommands
                 }
                 else
                 {
-                    GfxSystem.CreateAndAttachGameObject(resId, effectPath, obj.resource.ResourceId, m_AttachPath, m_IsAttach, m_Pos, m_Euler, m_Scale, m_DeleteTime);
+                    GfxSystem.CreateAndAttachGameObject(resId, effectPath, obj.resource.Value, m_AttachPath, m_IsAttach, m_Pos, m_Euler, m_Scale, m_DeleteTime);
                 }
             }
             return ExecResult.Finished;

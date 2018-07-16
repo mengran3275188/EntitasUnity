@@ -19,11 +19,11 @@ namespace UnityClient
                 // 一些资源的处理临时放在这里
                 if(entity.hasResource)
                 {
-                    GfxSystem.DestoryResource(entity.resource.ResourceId);
+                    GfxSystem.DestoryResource(entity.resource.Value);
                 }
                 if(entity.hasAttr)
                 {
-                    GfxSystem.RemoveHudHead(entity.resource.ResourceId);
+                    GfxSystem.RemoveHudHead(entity.resource.Value);
                 }
 
                 entity.Destroy();

@@ -89,8 +89,6 @@ namespace SceneCommand
                 entity.AddId(entityId);
 
                 entity.isMainPlayer = m_MainPlayer;
-                entity.isSpatial = !entity.isMainPlayer;
-
 
                 // res
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
@@ -149,7 +147,7 @@ namespace SceneCommand
                 // attribute
                 if(m_AttrId > 0)
                 {
-                    GfxSystem.CreateHudHead(entity.resource.ResourceId);
+                    GfxSystem.CreateHudHead(entity.resource.Value);
 
                     AttributeConfig attrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(m_AttrId);
                     if(null != attrConfig)

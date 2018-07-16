@@ -5,7 +5,7 @@ using Util;
 
 namespace UnityClient
 {
-    public class AISystem : IInitializeSystem, IExecuteSystem, ITearDownSystem
+    public class AISystem : IInitializeSystem, IExecuteSystem
     {
         public AISystem(Contexts contexts)
         {
@@ -15,8 +15,6 @@ namespace UnityClient
         {
             InitBehavic();
 
-            m_Context.GetGroup(GameMatcher.AI).OnEntityAdded += AISystem_OnEntityAdded;
-            m_Context.GetGroup(GameMatcher.AI).OnEntityRemoved += AISystem_OnEntityRemoved;
         }
         public void Execute()
         {
@@ -27,18 +25,6 @@ namespace UnityClient
                     entity.aI.Agent.btexec();
             }
         }
-        public void TearDown()
-        {
-            m_Context.GetGroup(GameMatcher.AI).OnEntityAdded -= AISystem_OnEntityAdded;
-            m_Context.GetGroup(GameMatcher.AI).OnEntityRemoved -= AISystem_OnEntityRemoved;
-        }
-        private void AISystem_OnEntityAdded(Entitas.IGroup<GameEntity> group, GameEntity entity, int index, Entitas.IComponent component)
-        {
-        }
-        private void AISystem_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
-        {
-        }
-
         #region behaviac
         private bool InitBehavic()
         {

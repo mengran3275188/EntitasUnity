@@ -19,7 +19,6 @@ namespace UnityClient
         public void Initialize()
         {
             SceneSystem.Instance.Load(1);
-
         }
     }
 }
