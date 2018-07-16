@@ -1,4 +1,4 @@
-ModelId	Description	Stand	Run	Dead
-int	string	string	string	string
-1	测试主角动作表	ready	run	dead
-2	测试小怪动作表	stand	run	dead
+ModelId	Description	Stand	Run	Dead	Born
+int	string	string	string	string	string
+1	测试主角动作表	ready	run	dead	born
+2	测试小怪动作表	stand	run	dead	born

@@ -46,6 +46,10 @@ namespace UnityClient
                 scene.ScriptInstance.m_SceneInstance.Tick(time);
             }
         }
+        public void SendMessage(string messageId)
+        {
+            Contexts.sharedInstance.game.scene.ScriptInstance.m_SceneInstance.SendMessage(messageId);
+        }
 
         private SceneInstanceInfo NewSceneInstance(int sceneId, string scriptPath)
         {

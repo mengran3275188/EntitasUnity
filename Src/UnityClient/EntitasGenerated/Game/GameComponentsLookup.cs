@@ -11,30 +11,32 @@ public static class GameComponentsLookup {
     public const int AI = 0;
     public const int Animation = 1;
     public const int Attr = 2;
-    public const int Buff = 3;
-    public const int Camp = 4;
-    public const int Dead = 5;
-    public const int Destory = 6;
-    public const int Hp = 7;
-    public const int Id = 8;
-    public const int Input = 9;
-    public const int MainPlayer = 10;
-    public const int Movement = 11;
-    public const int Physics = 12;
-    public const int Position = 13;
-    public const int Resource = 14;
-    public const int Rotation = 15;
-    public const int Scene = 16;
-    public const int Skill = 17;
-    public const int Spatial = 18;
-    public const int TimeInfo = 19;
+    public const int Born = 3;
+    public const int Buff = 4;
+    public const int Camp = 5;
+    public const int Dead = 6;
+    public const int Destory = 7;
+    public const int Hp = 8;
+    public const int Id = 9;
+    public const int Input = 10;
+    public const int MainPlayer = 11;
+    public const int Movement = 12;
+    public const int Physics = 13;
+    public const int Position = 14;
+    public const int Resource = 15;
+    public const int Rotation = 16;
+    public const int Scene = 17;
+    public const int Skill = 18;
+    public const int Spatial = 19;
+    public const int TimeInfo = 20;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "AI",
         "Animation",
         "Attr",
+        "Born",
         "Buff",
         "Camp",
         "Dead",
@@ -58,6 +60,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.AIComponent),
         typeof(Entitas.Data.AnimationComponent),
         typeof(Entitas.Data.AttrComponent),
+        typeof(Entitas.Data.BornComponent),
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.DeadComponent),

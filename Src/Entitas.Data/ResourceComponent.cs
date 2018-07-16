@@ -48,4 +48,8 @@ namespace Entitas.Data
     {
         public float DeadTime;
     }
+    public sealed class BornComponent : IComponent
+    {
+        public float BornTime;
+    }
 }

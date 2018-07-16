@@ -58,6 +58,7 @@ namespace UnityClient
                 {
                     if(skillComponent.Instance == null)
                     {
+
                         SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
                         if(null != instance)
                         {

@@ -13,7 +13,7 @@ namespace UnityClient
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.Animation, GameMatcher.Movement, GameMatcher.Dead));
+            return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.Animation, GameMatcher.Movement, GameMatcher.Dead, GameMatcher.Born));
         }
         protected override bool Filter(GameEntity entity)
         {
@@ -28,6 +28,9 @@ namespace UnityClient
                 if (entity.hasDead)
                 {
                     GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
+                }else if(entity.hasBorn)
+                {
+                    GfxSystem.CrossFadeAnimation(entity.resource.ResourceId, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
                 }
                 else
                 {
@@ -59,6 +62,9 @@ namespace UnityClient
                         break;
                     case AnimationType.Dead:
                         animationName = string.Format("{0}{1}", prefix, config.Dead);
+                        break;
+                    case AnimationType.Born:
+                        animationName = string.Format("{0}{1}", prefix, config.Born);
                         break;
                 }
             }

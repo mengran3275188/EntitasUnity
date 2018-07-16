@@ -23,7 +23,7 @@ namespace UnityClient
             var entities = m_Context.GetGroup(GameMatcher.AI).GetEntities();
             foreach(GameEntity entity in entities)
             {
-                if(!entity.hasDead)
+                if(!entity.hasDead && !entity.hasBorn)
                     entity.aI.Agent.btexec();
             }
         }

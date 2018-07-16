@@ -160,6 +160,9 @@ namespace SceneCommand
                         entity.ReplaceHp(attrData.HpMax);
                     }
                 }
+
+                if(!entity.isMainPlayer)
+                    entity.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);
             }
             else
             {

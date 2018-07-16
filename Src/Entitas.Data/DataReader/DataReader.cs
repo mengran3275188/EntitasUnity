@@ -12,7 +12,7 @@ namespace Entitas.Data
 {
 	public sealed partial class ActionConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 24)]
 		private struct ActionConfigRecord
 		{
 			internal int ModelId;
@@ -20,6 +20,7 @@ namespace Entitas.Data
 			internal int Stand;
 			internal int Run;
 			internal int Dead;
+			internal int Born;
 		}
 
 		public int ModelId;
@@ -27,6 +28,7 @@ namespace Entitas.Data
 		public string Stand;
 		public string Run;
 		public string Dead;
+		public string Born;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -35,6 +37,7 @@ namespace Entitas.Data
 			Stand = DBCUtil.ExtractString(node, "Stand", "");
 			Run = DBCUtil.ExtractString(node, "Run", "");
 			Dead = DBCUtil.ExtractString(node, "Dead", "");
+			Born = DBCUtil.ExtractString(node, "Born", "");
 			return true;
 		}
 
@@ -46,6 +49,7 @@ namespace Entitas.Data
 			Stand = DBCUtil.ExtractString(table, record.Stand, "");
 			Run = DBCUtil.ExtractString(table, record.Run, "");
 			Dead = DBCUtil.ExtractString(table, record.Dead, "");
+			Born = DBCUtil.ExtractString(table, record.Born, "");
 			return true;
 		}
 
@@ -57,6 +61,7 @@ namespace Entitas.Data
 			record.Stand = DBCUtil.SetValue(table, Stand, "");
 			record.Run = DBCUtil.SetValue(table, Run, "");
 			record.Dead = DBCUtil.SetValue(table, Dead, "");
+			record.Born = DBCUtil.SetValue(table, Born, "");
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}
