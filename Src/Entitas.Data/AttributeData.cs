@@ -485,7 +485,7 @@ namespace Entitas.Data
 		//------------------------------------------------------------------------
 		// 属性初始化接口
 		//------------------------------------------------------------------------
-		public void InitByConfig(AttributeConfig attr)
+		public void SetAbsoluteByConfig(AttributeConfig attr)
 		{
 			float aEnergyRecover = attr.GetEnergyRecover(0, 0);
 			float aEnergyMax = attr.GetEnergyMax(0, 0);
@@ -539,6 +539,35 @@ namespace Entitas.Data
 			SetFullElementResist(Operate_Type.OT_Absolute, aFullElementResist);
 			SetFullElementFactor(Operate_Type.OT_Absolute, aFullElementFactor);
 			SetHpFactor(Operate_Type.OT_Absolute, aHpFactor);
+		}
+		public void SetRelativeByConfig(AttributeConfig attr)
+		{
+			SetEnergyRecover(Operate_Type.OT_Relative, attr.GetEnergyRecover(EnergyRecover, 0));
+			SetEnergyMax(Operate_Type.OT_Relative, attr.GetEnergyMax(EnergyMax, 0));
+			SetMaxAd(Operate_Type.OT_Relative, attr.GetMaxAd(MaxAd, 0));
+			SetMinAd(Operate_Type.OT_Relative, attr.GetMinAd(MinAd, 0));
+			SetCritical(Operate_Type.OT_Relative, attr.GetCritical(Critical, 0));
+			SetCriticalFactor(Operate_Type.OT_Relative, attr.GetCriticalFactor(CriticalFactor, 0));
+			SetMetalFactor(Operate_Type.OT_Relative, attr.GetMetalFactor(MetalFactor, 0));
+			SetWoodFactor(Operate_Type.OT_Relative, attr.GetWoodFactor(WoodFactor, 0));
+			SetWaterFactor(Operate_Type.OT_Relative, attr.GetWaterFactor(WaterFactor, 0));
+			SetFireFactor(Operate_Type.OT_Relative, attr.GetFireFactor(FireFactor, 0));
+			SetEarthFactor(Operate_Type.OT_Relative, attr.GetEarthFactor(EarthFactor, 0));
+			SetFullDamageFactor(Operate_Type.OT_Relative, attr.GetFullDamageFactor(FullDamageFactor, 0));
+			SetHpMax(Operate_Type.OT_Relative, attr.GetHpMax(HpMax, 0));
+			SetArmor(Operate_Type.OT_Relative, attr.GetArmor(Armor, 0));
+			SetMiss(Operate_Type.OT_Relative, attr.GetMiss(Miss, 0));
+			SetMetalResist(Operate_Type.OT_Relative, attr.GetMetalResist(MetalResist, 0));
+			SetWoodResist(Operate_Type.OT_Relative, attr.GetWoodResist(WoodResist, 0));
+			SetWaterResist(Operate_Type.OT_Relative, attr.GetWaterResist(WaterResist, 0));
+			SetFireResist(Operate_Type.OT_Relative, attr.GetFireResist(FireResist, 0));
+			SetEarthResist(Operate_Type.OT_Relative, attr.GetEarthResist(EarthResist, 0));
+			SetAccuracyRecover(Operate_Type.OT_Relative, attr.GetAccuracyRecover(AccuracyRecover, 0));
+			SetDamageDerate(Operate_Type.OT_Relative, attr.GetDamageDerate(DamageDerate, 0));
+			SetMoveSpeed(Operate_Type.OT_Relative, attr.GetMoveSpeed(MoveSpeed, 0));
+			SetFullElementResist(Operate_Type.OT_Relative, attr.GetFullElementResist(FullElementResist, 0));
+			SetFullElementFactor(Operate_Type.OT_Relative, attr.GetFullElementFactor(FullElementFactor, 0));
+			SetHpFactor(Operate_Type.OT_Relative, attr.GetHpFactor(HpFactor, 0));
 		}
 		//------------------------------------------------------------------------
 		//注意：Key的修改应该在所有对象创建前执行，否则属性会乱！！！

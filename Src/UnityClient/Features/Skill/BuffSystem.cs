@@ -31,9 +31,12 @@ namespace UnityClient
                     {
                         RecycleImpactInstance(info);
 
+                        entity.isBuffAttrChanged = true;
+
                         buffComponent.InstanceInfos.Remove(info);
 
                         UpdateBuffControlMoveAndRotation(entity, false, false);
+
                     }
                 }
             }
@@ -57,7 +60,9 @@ namespace UnityClient
 
                     target.buff.InstanceInfos.Add(instance);
 
-                    UpdateBuffControlMoveAndRotation(target, true, true);
+                    target.isBuffAttrChanged = true;
+
+                    UpdateBuffControlMoveAndRotation(target, false, false);
                 }
             }
         }

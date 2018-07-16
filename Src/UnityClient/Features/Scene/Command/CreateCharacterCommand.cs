@@ -153,8 +153,8 @@ namespace SceneCommand
                     if(null != attrConfig)
                     {
                         AttributeData attrData = new AttributeData();
-                        attrData.InitByConfig(attrConfig);
-                        entity.AddAttr(attrData);
+                        attrData.SetAbsoluteByConfig(attrConfig);
+                        entity.AddAttr(m_AttrId, attrData);
                         entity.ReplaceHp(attrData.HpMax);
                     }
                 }

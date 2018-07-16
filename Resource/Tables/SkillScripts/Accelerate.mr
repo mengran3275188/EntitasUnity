@@ -1,8 +1,8 @@
-skill(5)
+skill(2)
 {
 	onmessage("start")
 	{
-        teleport(vector3(0, 0, 5));
+        selfbuff(2);
         terminate();
 	};
 };

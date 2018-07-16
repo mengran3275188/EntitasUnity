@@ -32,7 +32,10 @@ namespace UnityClient
                 Keyboard.Code.S,
                 Keyboard.Code.D);
 
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.H, this.MainPlayerUseSkillH);
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
@@ -70,7 +73,7 @@ namespace UnityClient
             }
         }
 
-        private void MainPlayerUseSkillJ(int keyCode, int what)
+        private void MainPlayerUseSkillH(int keyCode, int what)
         {
             if((int)Keyboard.Event.Down == what)
             {
@@ -78,6 +81,39 @@ namespace UnityClient
                 if(null != mainPlayer)
                 {
                     SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 1, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                }
+            }
+        }
+        private void MainPlayerUseSkillJ(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != mainPlayer)
+                {
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                }
+            }
+        }
+        private void MainPlayerUseSkillK(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != mainPlayer)
+                {
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 3, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                }
+            }
+        }
+        private void MainPlayerUseSkillL(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != mainPlayer)
+                {
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 4, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
                 }
             }
         }
@@ -89,7 +125,7 @@ namespace UnityClient
                 if(null != mainPlayer)
                 {
                     SkillSystem.Instance.BreakSkill(mainPlayer);
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 5, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
                 }
             }
         }

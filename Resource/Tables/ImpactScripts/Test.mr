@@ -20,6 +20,14 @@ skill(1)
 		terminate();
 	};
 };
+skill(2)
+{
+	onmessage("start")
+	{
+		wait(1666);
+		terminate();
+	};
+};
 
 skill(100201)
 {

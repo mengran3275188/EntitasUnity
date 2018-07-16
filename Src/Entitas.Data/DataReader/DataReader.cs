@@ -398,23 +398,26 @@ namespace Entitas.Data
 {
 	public sealed partial class BuffConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 12)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
 		private struct BuffConfigRecord
 		{
 			internal int Id;
 			internal int Description;
 			internal int Script;
+			internal int AttrId;
 		}
 
 		public int Id;
 		public string Description;
 		public string Script;
+		public int AttrId;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
 			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
 			Description = DBCUtil.ExtractString(node, "Description", "");
 			Script = DBCUtil.ExtractString(node, "Script", "");
+			AttrId = DBCUtil.ExtractNumeric<int>(node, "AttrId", 0);
 			return true;
 		}
 
@@ -424,6 +427,7 @@ namespace Entitas.Data
 			Id = DBCUtil.ExtractInt(table, record.Id, 0);
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Script = DBCUtil.ExtractString(table, record.Script, "");
+			AttrId = DBCUtil.ExtractInt(table, record.AttrId, 0);
 			return true;
 		}
 
@@ -433,6 +437,7 @@ namespace Entitas.Data
 			record.Id = DBCUtil.SetValue(table, Id, 0);
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Script = DBCUtil.SetValue(table, Script, "");
+			record.AttrId = DBCUtil.SetValue(table, AttrId, 0);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

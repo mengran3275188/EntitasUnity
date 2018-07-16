@@ -1361,7 +1361,7 @@ namespace TableReaderGenerator
                         sw.WriteLine("\t\t//------------------------------------------------------------------------");
                         sw.WriteLine("\t\t// 属性初始化接口");
                         sw.WriteLine("\t\t//------------------------------------------------------------------------");
-                        sw.WriteLine("\t\tpublic void InitByConfig(AttributeConfig attr)");
+                        sw.WriteLine("\t\tpublic void SetAbsoluteByConfig(AttributeConfig attr)");
                         sw.WriteLine("\t\t{");
                         foreach (var memberDef in tableDef.m_Fields)
                         {
@@ -1388,6 +1388,23 @@ namespace TableReaderGenerator
                                 name = name.Substring("Add".Length);
                             }
                             sw.WriteLine("\t\t\tSet{0}(Operate_Type.OT_Absolute, a{0});", name);
+                        }
+                        sw.WriteLine("\t\t}");
+
+                        sw.WriteLine("\t\tpublic void SetRelativeByConfig(AttributeConfig attr)");
+                        sw.WriteLine("\t\t{");
+                        foreach (var memberDef in tableDef.m_Fields)
+                        {
+                            if (ignoreFileds.Contains(memberDef.m_FieldName))
+                                continue;
+
+                            string name = memberDef.m_MemberName;
+                            string type = memberDef.m_Type;
+                            if(name.StartsWith("Add"))
+                            {
+                                name = name.Substring("Add".Length);
+                            }
+                            sw.WriteLine("\t\t\tSet{0}(Operate_Type.OT_Relative, attr.Get{0}({0}, 0));", name);
                         }
                         sw.WriteLine("\t\t}");
 

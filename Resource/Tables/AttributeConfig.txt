@@ -9,3 +9,4 @@ int	string	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	int	i
 #角色																											
 1	标准0级主角			300	100									100000										920			
 1000	标准0级怪			300	100									10000										520			
+10001	超级加速buff																							1000005000			

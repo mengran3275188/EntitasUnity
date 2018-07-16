@@ -36,7 +36,11 @@ namespace Entitas.Data
     }
     public sealed class AttrComponent : IComponent
     {
+        public int Id;
         public AttributeData Value;
+    }
+    public sealed class BuffAttrChangedComponent : IComponent
+    {
     }
     public sealed class HpComponent : IComponent
     {

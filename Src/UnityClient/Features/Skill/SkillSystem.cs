@@ -31,6 +31,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
             CommandManager.Instance.RegisterCommandFactory("damage", new CommandFactoryHelper<SkillCommands.DamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
+            CommandManager.Instance.RegisterCommandFactory("selfbuff", new CommandFactoryHelper<SkillCommands.SelfBuffCommand>());
         }
 
         public void Execute()
@@ -62,17 +63,24 @@ namespace UnityClient
                         SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
                         if(null != instance)
                         {
-                            instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
-                            instance.m_SkillInstance.Target = entity;
-                            instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
-                            instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                            instance.m_SkillInstance.Context = null;
-                            instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
-                            instance.m_SkillInstance.Start();
+                            if(null != instance.m_SkillInstance)
+                            {
+                                instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                                instance.m_SkillInstance.Target = entity;
+                                instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
+                                instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
+                                instance.m_SkillInstance.Context = null;
+                                instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
+                                instance.m_SkillInstance.Start();
 
-                            entity.ReplaceSkill(instance, null);
+                                UpdateSkillControlMoveAndRotation(entity, true, true);
+                                entity.ReplaceSkill(instance, null);
+                            }
+                            else
+                            {
+                                entity.ReplaceSkill(null, null);
+                            }
 
-                            UpdateSkillControlMoveAndRotation(entity, true, true);
                         }
                     }
                     else
