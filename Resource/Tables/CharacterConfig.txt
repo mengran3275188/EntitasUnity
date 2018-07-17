@@ -7,3 +7,4 @@ int	string	string	float	int	string
 1004	第一只小怪的第二只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_02	1	-1	
 1005	第一只小怪的第三只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_03	1	-1	
 1006	第一只小怪的第四只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_04	1	-1	
+1007	第一只类似主角的小怪	Monster/ChangAn/5_Npc_Private_03	1	1	

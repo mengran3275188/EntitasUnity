@@ -15,7 +15,7 @@
           <property ResultOption="BT_SUCCESS" />
         </node>
         <node class="Action" id="4">
-          <property Method="Self.CharacterAgent::UseSkill(100201)" />
+          <property Method="Self.CharacterAgent::UseSkill(1)" />
           <property ResultOption="BT_SUCCESS" />
         </node>
         <node class="Noop" id="5" />
