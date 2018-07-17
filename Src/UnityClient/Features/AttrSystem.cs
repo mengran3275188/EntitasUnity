@@ -29,14 +29,19 @@ namespace UnityClient
                     AttributeData attrData = entity.attr.Value;
                     attrData.SetAbsoluteByConfig(attrConfig);
 
-                    foreach(var buff in entity.buff.InstanceInfos)
+                    foreach(var pair in entity.buff.InstanceInfos)
                     {
-                        BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(buff.m_BuffId);
+                        int buffId = pair.Key;
+                        List<BuffInstanceInfo> buffInstances = pair.Value;
+                        BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(buffId);
                         if(null != buffConfig)
                         {
-                            AttributeConfig buffAttrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(buffConfig.AttrId);
-                            if (null != buffAttrConfig)
-                                attrData.SetRelativeByConfig(buffAttrConfig);
+                            foreach(var instanceInfo in buffInstances)
+                            {
+                                AttributeConfig buffAttrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(buffConfig.AttrId);
+                                if (null != buffAttrConfig)
+                                    attrData.SetRelativeByConfig(buffAttrConfig);
+                            }
                         }
                     }
                 }

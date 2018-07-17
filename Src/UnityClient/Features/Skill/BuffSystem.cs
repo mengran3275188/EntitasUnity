@@ -23,40 +23,70 @@ namespace UnityClient
             foreach (GameEntity entity in m_ImpactEntities)
             {
                 BuffComponent buffComponent = entity.buff;
-                for(int i = buffComponent.InstanceInfos.Count - 1; i >= 0; i --)
+                foreach (var pair in buffComponent.InstanceInfos)
                 {
-                    var info = buffComponent.InstanceInfos[i];
-                    info.m_BuffInstance.Tick(time);
-                    if(info.m_BuffInstance.IsTerminated)
+                    int buffId = pair.Key;
+                    var infos = pair.Value;
+                    for (int i = infos.Count - 1; i >= 0; i--)
                     {
-                        RecycleImpactInstance(info);
+                        var info = infos[i];
+                        info.m_BuffInstance.Tick(time);
+                        if (info.m_BuffInstance.IsTerminated)
+                        {
+                            RecycleImpactInstance(info);
 
-                        entity.isBuffAttrChanged = true;
+                            entity.isBuffAttrChanged = true;
 
-                        buffComponent.InstanceInfos.Remove(info);
+                            infos.Remove(info);
 
+                        }
                     }
                 }
                 foreach (var startParam in buffComponent.StartParams)
                 {
                     SkillSystem.Instance.BreakSkill(entity);
 
-                    BuffInstanceInfo instance = NewBuffInstance(startParam.BuffId);
-                    if (null != instance)
+                    BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(startParam.BuffId);
+                    if (null != buffConfig)
                     {
-                        instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
-                        instance.m_BuffInstance.SenderPosition = startParam.SenderPosition;
-                        instance.m_BuffInstance.SenderDirection = startParam.SenderDirection;
-                        instance.m_BuffInstance.Target = entity;
-                        instance.m_BuffInstance.Context = null;
-                        instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
-                        instance.m_BuffInstance.Start();
+                        int maxCount = buffConfig.MaxCount;
 
-                        buffComponent.InstanceInfos.Add(instance);
 
-                        entity.isBuffAttrChanged = true;
+                        List<BuffInstanceInfo> infos;
+                        if (!buffComponent.InstanceInfos.TryGetValue(startParam.BuffId, out infos))
+                        {
+                            infos = new List<BuffInstanceInfo>();
+                            buffComponent.InstanceInfos.Add(startParam.BuffId, infos);
+                        }
+                        if(maxCount > 0 && infos.Count >= maxCount)
+                        {
+                            for(int i = 0; i < infos.Count - maxCount + 1; ++i)
+                            {
+                                if(!infos[i].m_BuffInstance.IsTerminated)
+                                {
+                                    infos[i].m_BuffInstance.SendMessage("onbreak");
+                                    infos[i].m_BuffInstance.IsTerminated = true;
+                                }
+                            }
+                        }
 
+                        BuffInstanceInfo instance = NewBuffInstance(startParam.BuffId);
+                        if (null != instance)
+                        {
+                            instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
+                            instance.m_BuffInstance.SenderPosition = startParam.SenderPosition;
+                            instance.m_BuffInstance.SenderDirection = startParam.SenderDirection;
+                            instance.m_BuffInstance.Target = entity;
+                            instance.m_BuffInstance.Context = null;
+                            instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
+                            instance.m_BuffInstance.Start();
+
+                            infos.Add(instance);
+
+                            entity.isBuffAttrChanged = true;
+                        }
                     }
+
                 }
                 buffComponent.StartParams.Clear();
             }
@@ -70,7 +100,7 @@ namespace UnityClient
             param.SenderPosition = senderPosition;
             param.SenderDirection = direction;
 
-            if(target.hasBuff)
+            if (target.hasBuff)
             {
                 target.buff.StartParams.Add(param);
             }
@@ -80,13 +110,13 @@ namespace UnityClient
         private BuffInstanceInfo NewBuffInstance(int buffId)
         {
             BuffInstanceInfo instanceInfo = GetUnusedBuffInstanceInfoFromPool(buffId);
-            if(null == instanceInfo)
+            if (null == instanceInfo)
             {
                 BuffConfig config = BuffConfigProvider.Instance.GetBuffConfig(buffId);
-                if(null != config)
+                if (null != config)
                     ConfigManager.Instance.LoadIfNotExist(buffId, 2, HomePath.Instance.GetAbsolutePath(config.Script));
                 Instance instance = ConfigManager.Instance.NewInstance(buffId, 2);
-                if(null == instance)
+                if (null == instance)
                 {
                     LogUtil.Error("ImpactSystem.NewImpactInstance : Can't load impact config, impact:{0}.", buffId);
                 }
@@ -112,7 +142,7 @@ namespace UnityClient
         private void AddImpactInstanceInfoToPool(int buffId, BuffInstanceInfo info)
         {
             List<BuffInstanceInfo> infos;
-            if(m_BuffInstancePool.TryGetValue(buffId, out infos))
+            if (m_BuffInstancePool.TryGetValue(buffId, out infos))
             {
                 infos.Add(info);
             }
@@ -127,11 +157,11 @@ namespace UnityClient
         {
             BuffInstanceInfo info = null;
             List<BuffInstanceInfo> infos;
-            if(m_BuffInstancePool.TryGetValue(buffId, out infos))
+            if (m_BuffInstancePool.TryGetValue(buffId, out infos))
             {
-                foreach(var buffInfo in infos)
+                foreach (var buffInfo in infos)
                 {
-                    if(!buffInfo.m_IsUsed)
+                    if (!buffInfo.m_IsUsed)
                     {
                         info = buffInfo;
                         break;
