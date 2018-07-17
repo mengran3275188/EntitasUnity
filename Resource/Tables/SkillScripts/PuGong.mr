@@ -9,7 +9,7 @@ skill(1)
 	animationspeed("attack_01", 1);
 	wait(133);
 	animationspeed("attack_01", 2);
-	curvemove(true, 0.05, 0, 0, 4, 0, 0, 80);
+	//curvemove(true, 0.05, 0, 0, 4, 0, 0, 80);
     effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
 	wait(33);
 	areadamage(vector3(0, 1.7, 1), 2, 1);
@@ -21,7 +21,7 @@ skill(1)
 	animationspeed("attack_02", 1);
 	wait(133);
 	animationspeed("attack_02", 2);
-	curvemove(true, 0.05, 0, 0, 4, 0, 0, 80);
+	//curvemove(true, 0.05, 0, 0, 4, 0, 0, 80);
     effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_02", 3000, "", false);
 	wait(33);
 	areadamage(vector3(0, 1.7, 1), 2, 1);

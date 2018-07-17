@@ -12,13 +12,13 @@ skill(1)
         damage(10);
 		wait(66);
 		animationspeed("hurt_m", 1);
-		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)
+		curvemove(true, 0.05, 0, 0, -10, 0, 0, 100)
 		{
 			direction(3);
 		};
 		wait(200);
-		animationspeed("hurt_m", 3);
-		wait(66);
+		animationspeed("hurt_m", 1);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();
@@ -46,13 +46,13 @@ skill(100201)
 		animationspeed("hurt_m", 6);
 		wait(66);
 		animationspeed("hurt_m", 1);
-		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)
+		curvemove(true, 0.05, 0, 0, -10, 0, 0, 100)
 		{
 			direction(3);
 		};
 		wait(200);
-		animationspeed("hurt_m", 3);
-		wait(66);
+		animationspeed("hurt_m", 1);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();
@@ -73,13 +73,13 @@ skill(100202)
         damage(10);
 		wait(66);
 		animationspeed("hurt_m", 1);
-		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)
+		curvemove(true, 0.05, 0, 0, -10, 0, 0, 100)
 		{
 			direction(3);
 		};
 		wait(200);
-		animationspeed("hurt_m", 3);
-		wait(66);
+		animationspeed("hurt_m", 1);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();
