@@ -80,7 +80,7 @@ namespace SkillCommands
             RigidObject rigid = new RigidObject(target.id.value, shape, physicsMaterial, false);
             rigid.IsTrigger = true;
             rigid.Position = target.position.Value + m_Offset;
-            rigid.Orientation = Matrix3x3.CreateRotationY(target.rotation.RotateDir);
+            rigid.Orientation = Matrix3x3.CreateRotationY(target.rotation.Value);
 
             target.AddPhysics(rigid, m_Offset, OnCollision);
 
@@ -107,7 +107,7 @@ namespace SkillCommands
             GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget && !collideTarget.hasDead)
             {
-                UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, m_BuffId, target.position.Value, target.rotation.RotateDir);
+                UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, m_BuffId, target.position.Value, target.rotation.Value);
                 m_Instance.SendMessage("oncollision");
             }
         }

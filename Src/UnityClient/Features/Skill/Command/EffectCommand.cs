@@ -32,7 +32,7 @@ namespace SkillCommands
 
                 if(string.IsNullOrEmpty(m_AttachPath))
                 {
-                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + m_Pos, m_Euler + new Vector3(0, (obj.rotation.RotateDir * Mathf.Rad2Deg), 0), m_Scale, m_DeleteTime);
+                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + m_Pos, m_Euler + new Vector3(0, (obj.rotation.Value * Mathf.Rad2Deg), 0), m_Scale, m_DeleteTime);
                 }
                 else
                 {

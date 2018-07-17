@@ -115,7 +115,7 @@ namespace UnityClient
         {
             var mainPlayer = m_GameContext.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.Value);
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {

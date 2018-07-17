@@ -101,7 +101,7 @@ namespace SceneCommand
                 // movement
                 entity.AddMovement(Vector3.zero);
                 entity.AddPosition(target.position.Value + m_LocalPosition);
-                entity.AddRotation(m_LocalRotation.y + target.rotation.RotateDir);
+                entity.AddRotation(m_LocalRotation.y + target.rotation.Value);
 
                 // AI
                 if(!string.IsNullOrEmpty(m_AIScript))
@@ -119,7 +119,7 @@ namespace SceneCommand
                 // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。
                 if(m_SkillId > 0)
                 {
-                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
                 }
 
                 // collision

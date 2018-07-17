@@ -66,7 +66,7 @@ namespace UnityClient
                         }
                     }
                 }
-                if(isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
+                if(isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
                 {
                     if(!mainPlayer.isDisableRotationControl)
                         mainPlayer.ReplaceRotation(moveDir);
@@ -81,7 +81,7 @@ namespace UnityClient
                 var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
                 if(null != mainPlayer)
                 {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 1, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 1, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace UnityClient
                 var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
                 if(null != mainPlayer)
                 {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace UnityClient
                 var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
                 if(null != mainPlayer)
                 {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 3, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 3, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace UnityClient
                 var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
                 if(null != mainPlayer)
                 {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 4, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 4, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace UnityClient
                 if(null != mainPlayer)
                 {
                     SkillSystem.Instance.BreakSkill(mainPlayer);
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 5, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 5, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
             }
         }

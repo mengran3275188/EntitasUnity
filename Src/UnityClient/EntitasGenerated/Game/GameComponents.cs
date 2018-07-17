@@ -178,17 +178,17 @@ public partial class GameEntity {
     public Entitas.Data.RotationComponent rotation { get { return (Entitas.Data.RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(GameComponentsLookup.Rotation); } }
 
-    public void AddRotation(float newRotateDir) {
+    public void AddRotation(float newValue) {
         var index = GameComponentsLookup.Rotation;
         var component = CreateComponent<Entitas.Data.RotationComponent>(index);
-        component.RotateDir = newRotateDir;
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceRotation(float newRotateDir) {
+    public void ReplaceRotation(float newValue) {
         var index = GameComponentsLookup.Rotation;
         var component = CreateComponent<Entitas.Data.RotationComponent>(index);
-        component.RotateDir = newRotateDir;
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

@@ -22,7 +22,7 @@ namespace SkillCommands
 
             if(null != obj)
             {
-                BuffSystem.Instance.StartBuff(obj, obj, m_BuffId, obj.position.Value, obj.rotation.RotateDir);
+                BuffSystem.Instance.StartBuff(obj, obj, m_BuffId, obj.position.Value, obj.rotation.Value);
             }
             return ExecResult.Finished;
         }

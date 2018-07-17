@@ -173,7 +173,7 @@ namespace SkillCommands
                         m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
                         break;
                     case DirectionType.Target:
-                        m_RotateDir = target.rotation.RotateDir;
+                        m_RotateDir = target.rotation.Value;
                         break;
                     case DirectionType.TargetSender:
                         m_RotateDir = Util.Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
@@ -196,7 +196,7 @@ namespace SkillCommands
         {
             if (!m_IsLockRotate)
             {
-                m_RotateDir = obj.rotation.RotateDir;
+                m_RotateDir = obj.rotation.Value;
             }
 
             Vector3 speed = speed_vect + accel_vect * time / 2;

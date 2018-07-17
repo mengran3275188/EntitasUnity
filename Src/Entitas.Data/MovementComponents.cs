@@ -13,7 +13,7 @@ namespace Entitas.Data
     }
     public sealed class RotationComponent : IComponent
     {
-        public float RotateDir;
+        public float Value;
     }
 
     public sealed class AnimationComponent : IComponent
