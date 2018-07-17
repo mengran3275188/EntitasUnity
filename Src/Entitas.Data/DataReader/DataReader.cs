@@ -398,19 +398,21 @@ namespace Entitas.Data
 {
 	public sealed partial class BuffConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
 		private struct BuffConfigRecord
 		{
 			internal int Id;
 			internal int Description;
 			internal int Script;
 			internal int AttrId;
+			internal int MaxCount;
 		}
 
 		public int Id;
 		public string Description;
 		public string Script;
 		public int AttrId;
+		public int MaxCount;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -418,6 +420,7 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(node, "Description", "");
 			Script = DBCUtil.ExtractString(node, "Script", "");
 			AttrId = DBCUtil.ExtractNumeric<int>(node, "AttrId", 0);
+			MaxCount = DBCUtil.ExtractNumeric<int>(node, "MaxCount", 0);
 			return true;
 		}
 
@@ -428,6 +431,7 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Script = DBCUtil.ExtractString(table, record.Script, "");
 			AttrId = DBCUtil.ExtractInt(table, record.AttrId, 0);
+			MaxCount = DBCUtil.ExtractInt(table, record.MaxCount, 0);
 			return true;
 		}
 
@@ -438,6 +442,7 @@ namespace Entitas.Data
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Script = DBCUtil.SetValue(table, Script, "");
 			record.AttrId = DBCUtil.SetValue(table, AttrId, 0);
+			record.MaxCount = DBCUtil.SetValue(table, MaxCount, 0);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

@@ -9,7 +9,7 @@ namespace Entitas.Data
     }
     public sealed class BuffComponent : IComponent
     {
-        public List<BuffInstanceInfo> InstanceInfos;
+        public Dictionary<int, List<BuffInstanceInfo>> InstanceInfos;
         public List<StartBuffParam> StartParams;
     }
 }

@@ -770,7 +770,7 @@ public partial class GameEntity {
     public Entitas.Data.BuffComponent buff { get { return (Entitas.Data.BuffComponent)GetComponent(GameComponentsLookup.Buff); } }
     public bool hasBuff { get { return HasComponent(GameComponentsLookup.Buff); } }
 
-    public void AddBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
+    public void AddBuff(System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo>> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
         var index = GameComponentsLookup.Buff;
         var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;
@@ -778,7 +778,7 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
+    public void ReplaceBuff(System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo>> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
         var index = GameComponentsLookup.Buff;
         var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;

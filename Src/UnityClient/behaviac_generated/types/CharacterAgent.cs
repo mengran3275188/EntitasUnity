@@ -125,7 +125,12 @@ public class CharacterAgent : behaviac.Agent
     private bool IsBuffActivite()
     {
         GameEntity self = GetOwner();
-        return self.hasBuff && self.buff.InstanceInfos.Count > 0;
+        foreach(var pair in self.buff.InstanceInfos)
+        {
+            if (pair.Value.Count > 0)
+                return true;
+        }
+        return false;
     }
     private uint m_EntityId;
 
