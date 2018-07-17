@@ -10,9 +10,10 @@
         <property Opr="const float 4" />
       </node>
       <node class="IfElse" id="2">
-        <node class="Action" id="3">
-          <property Method="Self.CharacterAgent::CanUseSkill()" />
-          <property ResultOption="BT_SUCCESS" />
+        <node class="Condition" id="3">
+          <property Operator="Equal" />
+          <property Opl="Self.CharacterAgent::CanUseSkill()" />
+          <property Opr="const bool true" />
         </node>
         <node class="Action" id="4">
           <property Method="Self.CharacterAgent::UseSkill(1)" />

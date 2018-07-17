@@ -18,7 +18,7 @@
               <Node Class="PluginBehaviac.Nodes.IfElse" Enable="true" HasOwnPrefabData="false" Id="2" PrefabName="" PrefabNodeId="-1">
                 <Comment Background="NoColor" Text="" />
                 <Connector Identifier="_condition">
-                  <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="3" Method="Self.CharacterAgent::CanUseSkill()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
+                  <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="3" Operator="Equal" Opl="Self.CharacterAgent::CanUseSkill()" Opr="const bool true" PrefabName="" PrefabNodeId="-1">
                     <Comment Background="NoColor" Text="" />
                   </Node>
                 </Connector>
