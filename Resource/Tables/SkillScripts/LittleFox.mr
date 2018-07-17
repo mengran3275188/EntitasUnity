@@ -2,6 +2,8 @@ skill(100201)
 {
 	onmessage("start")
 	{
+        enablemove(true);
+        enablerotation(true);
 		animation("attack_01");
 		wait(500);
 		createcharacter(1003, vector3(0, 1.2, 0.15), vector3(0, 0, 0))
@@ -9,6 +11,8 @@ skill(100201)
 			skill(100202);
 		};
 		wait(666);
+        enablemove(false);
+        enablerotation(false);
 		terminate();
 	};
 

@@ -17,7 +17,7 @@ namespace UnityClient
         }
         protected override bool Filter(GameEntity entity)
         {
-            return entity.isEnabled && entity.movement.State != Entitas.Data.MoveState.SkillMoving && entity.movement.State != MoveState.ImpactMoving;
+            return entity.isEnabled && !entity.isDisableMoveControl;
         }
         protected override void Execute(List<GameEntity> entities)
         {
@@ -34,13 +34,13 @@ namespace UnityClient
                 }
                 else
                 {
-                    if(entity.movement.State == Entitas.Data.MoveState.UserMoving)
+                    if(entity.movement.Velocity.IsNearlyZero())
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
                     }
                     else
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
                     }
                 }
             }

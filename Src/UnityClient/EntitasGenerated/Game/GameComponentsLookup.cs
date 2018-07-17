@@ -17,20 +17,21 @@ public static class GameComponentsLookup {
     public const int Camp = 6;
     public const int Dead = 7;
     public const int Destory = 8;
-    public const int Hp = 9;
-    public const int Id = 10;
-    public const int Input = 11;
-    public const int MainPlayer = 12;
-    public const int Movement = 13;
-    public const int Physics = 14;
-    public const int Position = 15;
-    public const int Resource = 16;
-    public const int Rotation = 17;
-    public const int Scene = 18;
-    public const int Skill = 19;
-    public const int TimeInfo = 20;
+    public const int DisableMoveControl = 9;
+    public const int DisableRotationControl = 10;
+    public const int Hp = 11;
+    public const int Id = 12;
+    public const int MainPlayer = 13;
+    public const int Movement = 14;
+    public const int Physics = 15;
+    public const int Position = 16;
+    public const int Resource = 17;
+    public const int Rotation = 18;
+    public const int Scene = 19;
+    public const int Skill = 20;
+    public const int TimeInfo = 21;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -42,9 +43,10 @@ public static class GameComponentsLookup {
         "Camp",
         "Dead",
         "Destory",
+        "DisableMoveControl",
+        "DisableRotationControl",
         "Hp",
         "Id",
-        "Input",
         "MainPlayer",
         "Movement",
         "Physics",
@@ -66,9 +68,10 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
+        typeof(Entitas.Data.DisableMoveControlComponent),
+        typeof(Entitas.Data.DisableRotationControlComponent),
         typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.IdComponent),
-        typeof(Entitas.Data.InputComponent),
         typeof(Entitas.Data.MainPlayerComponent),
         typeof(Entitas.Data.MovementComponent),
         typeof(Entitas.Data.PhysicsComponent),

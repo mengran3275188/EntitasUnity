@@ -28,7 +28,7 @@ namespace UnityClient
 
                     RigidObject rigid = entity.physics.Rigid;
 
-                    rigid.LinearVelocity = entity.movement.State == MoveState.Idle ? Vector3.zero : velocity;
+                    rigid.LinearVelocity = velocity;
 
                     entity.ReplacePosition(position - offset);
                 }

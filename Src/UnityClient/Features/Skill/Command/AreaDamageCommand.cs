@@ -25,7 +25,7 @@ namespace SkillCommands
             GameEntity obj = instance.Target as GameEntity;
             if(null != obj)
             {
-                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.RotateDir, 0, 0);
+                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
                 Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
 
                 UnityClient.GfxSystem.DrawCircle(center, m_Range, 2.0f);
@@ -40,7 +40,7 @@ namespace SkillCommands
                     {
                         if(!entity.hasDead)
                         {
-                            UnityClient.BuffSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.RotateDir);
+                            UnityClient.BuffSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.Value);
                         }
                     }
                 }

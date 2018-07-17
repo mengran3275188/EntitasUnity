@@ -2,6 +2,8 @@ skill(1)
 {
 	onmessage("start")
 	{
+	enablemove(true);
+    enablerotation(true);
 	// 1
 	animation("attack_01");
 	animationspeed("attack_01", 1);
@@ -28,12 +30,16 @@ skill(1)
 
     effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_12_01", 3000, "Bip001", true);
 	wait(100);
+	enablemove(false);
+    enablerotation(false);
 	terminate();
     };
 	
     onmessage("onbreak")
     {
         log("onbreak");
+		enablemove(false);
+		enablerotation(false);
         terminate();
     };
 	

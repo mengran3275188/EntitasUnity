@@ -21,7 +21,7 @@ namespace SkillCommands
             GameEntity obj = instance.Target as GameEntity;
             if(null != obj)
             {
-                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.RotateDir, 0, 0);
+                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
                 Vector3 targetPostion = obj.position.Value + quaternion * m_Offset;
 
                 if(obj.hasPhysics)

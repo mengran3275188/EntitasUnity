@@ -32,6 +32,9 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("damage", new CommandFactoryHelper<SkillCommands.DamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
             CommandManager.Instance.RegisterCommandFactory("selfbuff", new CommandFactoryHelper<SkillCommands.SelfBuffCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("enablemove", new CommandFactoryHelper<SkillCommands.EnableMoveCommand>());
+            CommandManager.Instance.RegisterCommandFactory("enablerotation", new CommandFactoryHelper<SkillCommands.EnableRotationCommand>());
         }
 
         public void Execute()
@@ -51,8 +54,6 @@ namespace UnityClient
                         RecycleSkillInstance(info);
 
                         skillComponent.Instance = null;
-
-                        UpdateSkillControlMoveAndRotation(entity, false, false);
                     }
                 }
                 if(null != skillComponent.StartParam)
@@ -61,26 +62,22 @@ namespace UnityClient
                     {
 
                         SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
-                        if(null != instance)
+                        if (null != instance && null != instance.m_SkillInstance)
                         {
-                            if(null != instance.m_SkillInstance)
-                            {
-                                instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
-                                instance.m_SkillInstance.Target = entity;
-                                instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
-                                instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                                instance.m_SkillInstance.Context = null;
-                                instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
-                                instance.m_SkillInstance.Start();
+                            instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                            instance.m_SkillInstance.Target = entity;
+                            instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
+                            instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
+                            instance.m_SkillInstance.Context = null;
+                            instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
+                            instance.m_SkillInstance.Start();
 
-                                UpdateSkillControlMoveAndRotation(entity, true, true);
-                                entity.ReplaceSkill(instance, null);
-                            }
-                            else
-                            {
-                                entity.ReplaceSkill(null, null);
-                            }
+                            entity.ReplaceSkill(instance, null);
 
+                        }
+                        else
+                        {
+                            entity.ReplaceSkill(null, null);
                         }
                     }
                     else
@@ -111,19 +108,11 @@ namespace UnityClient
                 target.skill.Instance.m_SkillInstance.SendMessage("onbreak");
             }
         }
-
-        private void UpdateSkillControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
-        {
-            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.SkillMoving : Entitas.Data.MoveState.Idle,
-                                   Vector3.zero);
-            entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.SkillRotate : Entitas.Data.RotateState.UserRotate,
-                                   entity.hasRotation ? entity.rotation.RotateDir : 0);
-        }
         private void PlayUseSkill(int skillId)
         {
             var mainPlayer = m_GameContext.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.RotateDir);
+                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.Value);
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {
