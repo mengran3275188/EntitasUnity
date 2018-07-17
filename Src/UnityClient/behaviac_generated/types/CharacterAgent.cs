@@ -19,7 +19,7 @@ public class CharacterAgent : behaviac.Agent
 	public bool CanUseSkill()
 	{
 ///<<< BEGIN WRITING YOUR CODE CanUseSkill
-        return null == GetOwner().skill.Instance;
+        return !IsSkillActivite() && !IsBuffActivite();
 ///<<< END WRITING YOUR CODE
 	}
 
