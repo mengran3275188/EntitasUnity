@@ -62,25 +62,22 @@ namespace UnityClient
                     {
 
                         SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
-                        if(null != instance)
+                        if (null != instance && null != instance.m_SkillInstance)
                         {
-                            if(null != instance.m_SkillInstance)
-                            {
-                                instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
-                                instance.m_SkillInstance.Target = entity;
-                                instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
-                                instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                                instance.m_SkillInstance.Context = null;
-                                instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
-                                instance.m_SkillInstance.Start();
+                            instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                            instance.m_SkillInstance.Target = entity;
+                            instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
+                            instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
+                            instance.m_SkillInstance.Context = null;
+                            instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
+                            instance.m_SkillInstance.Start();
 
-                                entity.ReplaceSkill(instance, null);
-                            }
-                            else
-                            {
-                                entity.ReplaceSkill(null, null);
-                            }
+                            entity.ReplaceSkill(instance, null);
 
+                        }
+                        else
+                        {
+                            entity.ReplaceSkill(null, null);
                         }
                     }
                     else

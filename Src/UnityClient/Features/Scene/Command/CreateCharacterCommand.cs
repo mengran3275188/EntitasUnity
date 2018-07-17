@@ -114,7 +114,7 @@ namespace SceneCommand
                 }
                 // skill
                 entity.AddSkill(null, null);
-                entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>());
+                entity.AddBuff(new System.Collections.Generic.List<BuffInstanceInfo>(), null);
 
                 // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。
                 if(m_SkillId > 0)

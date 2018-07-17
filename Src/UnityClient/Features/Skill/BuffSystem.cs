@@ -36,20 +36,52 @@ namespace UnityClient
                         buffComponent.InstanceInfos.Remove(info);
 
                     }
+                    if(null != buffComponent.StartParam)
+                    {
+
+                        SkillSystem.Instance.BreakSkill(entity);
+
+                        BuffInstanceInfo instance = NewBuffInstance(buffComponent.StartParam.BuffId);
+                        if (null != instance)
+                        {
+                            instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(buffComponent.StartParam.SenderId);
+                            instance.m_BuffInstance.SenderPosition = buffComponent.StartParam.SenderPosition;
+                            instance.m_BuffInstance.SenderDirection = buffComponent.StartParam.SenderDirection;
+                            instance.m_BuffInstance.Target = entity;
+                            instance.m_BuffInstance.Context = null;
+                            instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
+                            instance.m_BuffInstance.Start();
+
+                            buffComponent.InstanceInfos.Add(instance);
+
+                            entity.isBuffAttrChanged = true;
+
+                        }
+                        buffComponent.StartParam = null;
+                    }
                 }
             }
         }
-        public void StartBuff(GameEntity sender, GameEntity target, int impactId, Vector3 position, float direction)
+        public void StartBuff(GameEntity sender, GameEntity target, int buffId, Vector3 senderPosition, float direction)
         {
+
+            StartBuffParam param = new StartBuffParam();
+            param.BuffId = buffId;
+            param.SenderId = sender.id.value;
+            param.SenderPosition = senderPosition;
+            param.SenderDirection = direction;
+
             if(target.hasBuff)
             {
+                target.buff.StartParam = param;
+
                 SkillSystem.Instance.BreakSkill(target);
 
-                BuffInstanceInfo instance = NewBuffInstance(impactId);
+                BuffInstanceInfo instance = NewBuffInstance(buffId);
                 if(null != instance)
                 {
                     instance.m_BuffInstance.Sender = sender;
-                    instance.m_BuffInstance.SenderPosition = position;
+                    instance.m_BuffInstance.SenderPosition = senderPosition;
                     instance.m_BuffInstance.SenderDirection = direction;
                     instance.m_BuffInstance.Target = target;
                     instance.m_BuffInstance.Context = null;
