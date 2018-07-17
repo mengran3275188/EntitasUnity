@@ -111,7 +111,7 @@ namespace SkillCommands
             }
             if (!m_IsCurveMoving)
             {
-                target.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, Vector3.zero);
+                target.ReplaceMovement(Vector3.zero);
                 return ExecResult.Finished;
             }
             if (!m_IsInited)
@@ -121,7 +121,7 @@ namespace SkillCommands
             if (m_SectionListCopy.Count == 0)
             {
                 m_IsCurveMoving = false;
-                target.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, Vector3.zero);
+                target.ReplaceMovement(Vector3.zero);
                 return ExecResult.Finished;
             }
 
@@ -201,8 +201,8 @@ namespace SkillCommands
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
             Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
-            obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
-            obj.ReplaceMovement(Entitas.Data.MoveState.SkillMoving, object_speed);
+            obj.ReplaceRotation(m_RotateDir);
+            obj.ReplaceMovement(object_speed);
             /*
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
@@ -222,5 +222,50 @@ namespace SkillCommands
 
         private bool m_IsInited = false;
         private float m_ElapsedTime;
+    }
+
+    public class EnableMoveCommand : AbstractCommand
+    {
+        protected override ExecResult ExecCommand(Instance instance, long delta)
+        {
+            GameEntity obj = instance.Target as GameEntity;
+            if(null != obj)
+            {
+                obj.isDisableMoveControl = m_Enable;
+                obj.ReplaceMovement(Vector3.zero);
+            }
+            return ExecResult.Finished;
+        }
+        protected override void Load(CallData callData)
+        {
+            int num = callData.GetParamNum();
+            if(num >= 1)
+            {
+                m_Enable = bool.Parse(callData.GetParamId(0));
+            }
+        }
+        private bool m_Enable;
+    }
+
+    public class EnableRotationCommand : AbstractCommand
+    {
+        protected override ExecResult ExecCommand(Instance instance, long delta)
+        {
+            GameEntity obj = instance.Target as GameEntity;
+            if(null != obj)
+            {
+                obj.isDisableRotationControl = m_Enable;
+            }
+            return ExecResult.Finished;
+        }
+        protected override void Load(CallData callData)
+        {
+            int num = callData.GetParamNum();
+            if(num >= 1)
+            {
+                m_Enable = bool.Parse(callData.GetParamId(0));
+            }
+        }
+        private bool m_Enable;
     }
 }

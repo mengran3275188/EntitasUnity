@@ -43,7 +43,6 @@ namespace UnityClient
             // keyboard
             KeyHit kh = GetKeyboadHit();
 
-
             float moveDir = CalcMoveDir(kh);
             bool isMoving = moveDir >= 0;
 
@@ -52,23 +51,25 @@ namespace UnityClient
 
 
             GameContext gameContext = Contexts.sharedInstance.game;
-            gameContext.ReplaceInput(isMoving, moveDir);
-
 
             GameEntity mainPlayer = gameContext.mainPlayerEntity;
             if (null != mainPlayer)
             {
-                if(mainPlayer.hasMovement && mainPlayer.movement.State != MoveState.SkillMoving && mainPlayer.movement.State != MoveState.ImpactMoving)
+                if(mainPlayer.hasMovement)
                 {
-                    if(mainPlayer.hasAttr)
+                    if(!mainPlayer.isDisableMoveControl)
                     {
-                        float moveSpeed = mainPlayer.attr.Value.MoveSpeed;
-                        mainPlayer.ReplaceMovement(isMoving ? MoveState.UserMoving : MoveState.Idle, new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * moveSpeed);
+                        if(mainPlayer.hasAttr)
+                        {
+                            float moveSpeed = isMoving ? mainPlayer.attr.Value.MoveSpeed : 0;
+                            mainPlayer.ReplaceMovement(new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * moveSpeed);
+                        }
                     }
                 }
-                if(isMoving && mainPlayer.hasRotation && mainPlayer.rotation.State != RotateState.SkillRotate && mainPlayer.rotation.State != RotateState.ImpactRotate && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
+                if(isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.RotateDir))
                 {
-                    mainPlayer.ReplaceRotation(RotateState.UserRotate, moveDir);
+                    if(!mainPlayer.isDisableRotationControl)
+                        mainPlayer.ReplaceRotation(moveDir);
                 }
             }
         }

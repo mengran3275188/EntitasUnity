@@ -35,8 +35,6 @@ namespace UnityClient
 
                         buffComponent.InstanceInfos.Remove(info);
 
-                        UpdateBuffControlMoveAndRotation(entity, false, false);
-
                     }
                 }
             }
@@ -61,18 +59,10 @@ namespace UnityClient
                     target.buff.InstanceInfos.Add(instance);
 
                     target.isBuffAttrChanged = true;
-
-                    UpdateBuffControlMoveAndRotation(target, false, false);
                 }
             }
         }
 
-        private void UpdateBuffControlMoveAndRotation(GameEntity entity, bool controlMove, bool controlRotation)
-        {
-            entity.ReplaceMovement(controlMove ? Entitas.Data.MoveState.ImpactMoving : Entitas.Data.MoveState.Idle, Vector3.zero);
-            entity.ReplaceRotation(controlRotation ? Entitas.Data.RotateState.ImpactRotate : Entitas.Data.RotateState.UserRotate,
-                                   entity.hasRotation ? entity.rotation.RotateDir : 0);
-        }
 
         private BuffInstanceInfo NewBuffInstance(int buffId)
         {

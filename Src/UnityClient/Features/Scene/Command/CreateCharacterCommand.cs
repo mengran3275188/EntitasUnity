@@ -99,9 +99,9 @@ namespace SceneCommand
                 entity.AddAnimation(config.ActionId, config.ActionPrefix);
 
                 // movement
-                entity.AddMovement(MoveState.Idle, Vector3.zero);
+                entity.AddMovement(Vector3.zero);
                 entity.AddPosition(target.position.Value + m_LocalPosition);
-                entity.AddRotation(RotateState.UserRotate, m_LocalRotation.y + target.rotation.RotateDir);
+                entity.AddRotation(m_LocalRotation.y + target.rotation.RotateDir);
 
                 // AI
                 if(!string.IsNullOrEmpty(m_AIScript))

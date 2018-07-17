@@ -5,7 +5,6 @@ namespace Entitas.Data
 {
     public sealed class MovementComponent : IComponent
     {
-        public MoveState State;
         public Vector3 Velocity;
     }
     public sealed class PositionComponent : IComponent
@@ -14,7 +13,6 @@ namespace Entitas.Data
     }
     public sealed class RotationComponent : IComponent
     {
-        public RotateState State;
         public float RotateDir;
     }
 
@@ -22,6 +20,12 @@ namespace Entitas.Data
     {
         public int ActionId;
         public string Prefix;
+    }
+    public sealed class DisableMoveControlComponent : IComponent
+    {
+    }
+    public sealed class DisableRotationControlComponent : IComponent
+    {
     }
 }
 

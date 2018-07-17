@@ -17,7 +17,7 @@ namespace UnityClient
             // script system 依赖一个拥有transform 信息的entity.
             Contexts.sharedInstance.game.SetScene(null, null);
             Contexts.sharedInstance.game.sceneEntity.AddPosition(Vector3.zero);
-            Contexts.sharedInstance.game.sceneEntity.AddRotation(RotateState.UserRotate, 0);
+            Contexts.sharedInstance.game.sceneEntity.AddRotation(0);
         }
         public void Load(int id)
         {

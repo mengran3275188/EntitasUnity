@@ -10,12 +10,6 @@ namespace Entitas.Data
     {
     }
     [Unique]
-    public sealed class InputComponent : IComponent
-    {
-        public bool IsMoving;
-        public float MovingDir;
-    }
-    [Unique]
     public sealed class TimeInfoComponent : IComponent
     {
         public float Time;
