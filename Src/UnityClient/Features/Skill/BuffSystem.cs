@@ -36,30 +36,29 @@ namespace UnityClient
                         buffComponent.InstanceInfos.Remove(info);
 
                     }
-                    if(null != buffComponent.StartParam)
+                }
+                foreach (var startParam in buffComponent.StartParams)
+                {
+                    SkillSystem.Instance.BreakSkill(entity);
+
+                    BuffInstanceInfo instance = NewBuffInstance(startParam.BuffId);
+                    if (null != instance)
                     {
+                        instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
+                        instance.m_BuffInstance.SenderPosition = startParam.SenderPosition;
+                        instance.m_BuffInstance.SenderDirection = startParam.SenderDirection;
+                        instance.m_BuffInstance.Target = entity;
+                        instance.m_BuffInstance.Context = null;
+                        instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
+                        instance.m_BuffInstance.Start();
 
-                        SkillSystem.Instance.BreakSkill(entity);
+                        buffComponent.InstanceInfos.Add(instance);
 
-                        BuffInstanceInfo instance = NewBuffInstance(buffComponent.StartParam.BuffId);
-                        if (null != instance)
-                        {
-                            instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(buffComponent.StartParam.SenderId);
-                            instance.m_BuffInstance.SenderPosition = buffComponent.StartParam.SenderPosition;
-                            instance.m_BuffInstance.SenderDirection = buffComponent.StartParam.SenderDirection;
-                            instance.m_BuffInstance.Target = entity;
-                            instance.m_BuffInstance.Context = null;
-                            instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
-                            instance.m_BuffInstance.Start();
+                        entity.isBuffAttrChanged = true;
 
-                            buffComponent.InstanceInfos.Add(instance);
-
-                            entity.isBuffAttrChanged = true;
-
-                        }
-                        buffComponent.StartParam = null;
                     }
                 }
+                buffComponent.StartParams.Clear();
             }
         }
         public void StartBuff(GameEntity sender, GameEntity target, int buffId, Vector3 senderPosition, float direction)
@@ -73,25 +72,7 @@ namespace UnityClient
 
             if(target.hasBuff)
             {
-                target.buff.StartParam = param;
-
-                SkillSystem.Instance.BreakSkill(target);
-
-                BuffInstanceInfo instance = NewBuffInstance(buffId);
-                if(null != instance)
-                {
-                    instance.m_BuffInstance.Sender = sender;
-                    instance.m_BuffInstance.SenderPosition = senderPosition;
-                    instance.m_BuffInstance.SenderDirection = direction;
-                    instance.m_BuffInstance.Target = target;
-                    instance.m_BuffInstance.Context = null;
-                    instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
-                    instance.m_BuffInstance.Start();
-
-                    target.buff.InstanceInfos.Add(instance);
-
-                    target.isBuffAttrChanged = true;
-                }
+                target.buff.StartParams.Add(param);
             }
         }
 
