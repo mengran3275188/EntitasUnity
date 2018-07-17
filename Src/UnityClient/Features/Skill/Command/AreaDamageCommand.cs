@@ -35,6 +35,8 @@ namespace SkillCommands
                 {
                     if (entity == obj)
                         continue;
+                    if (entity.hasCamp && obj.hasCamp && entity.camp.Value == obj.camp.Value)
+                        continue;
 
                     if(InCircle(center, m_Range, entity.position))
                     {

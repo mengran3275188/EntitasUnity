@@ -770,19 +770,19 @@ public partial class GameEntity {
     public Entitas.Data.BuffComponent buff { get { return (Entitas.Data.BuffComponent)GetComponent(GameComponentsLookup.Buff); } }
     public bool hasBuff { get { return HasComponent(GameComponentsLookup.Buff); } }
 
-    public void AddBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, Entitas.Data.StartBuffParam newStartParam) {
+    public void AddBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
         var index = GameComponentsLookup.Buff;
         var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;
-        component.StartParam = newStartParam;
+        component.StartParams = newStartParams;
         AddComponent(index, component);
     }
 
-    public void ReplaceBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, Entitas.Data.StartBuffParam newStartParam) {
+    public void ReplaceBuff(System.Collections.Generic.List<Entitas.Data.BuffInstanceInfo> newInstanceInfos, System.Collections.Generic.List<Entitas.Data.StartBuffParam> newStartParams) {
         var index = GameComponentsLookup.Buff;
         var component = CreateComponent<Entitas.Data.BuffComponent>(index);
         component.InstanceInfos = newInstanceInfos;
-        component.StartParam = newStartParam;
+        component.StartParams = newStartParams;
         ReplaceComponent(index, component);
     }
 
