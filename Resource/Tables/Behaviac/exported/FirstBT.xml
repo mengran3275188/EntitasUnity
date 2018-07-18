@@ -53,7 +53,7 @@
             <property ResultOption="BT_SUCCESS" />
           </node>
           <node class="DecoratorLoop" id="22">
-            <property Count="const int 20" />
+            <property Count="const int 40" />
             <property DecorateWhenChildEnds="true" />
             <property DoneWithinFrame="false" />
             <node class="Sequence" id="23">

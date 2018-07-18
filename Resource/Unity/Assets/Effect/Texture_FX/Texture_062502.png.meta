@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: a7ee54009ee700247b6f50d99db4e5b4
+guid: 3867378b3004131498f9f89e85a01dd0
+timeCreated: 1494834610
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -25,12 +27,12 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 128
+  maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
-    aniso: 0
+    filterMode: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 1
   lightmap: 0
   rGBM: 0
@@ -47,12 +49,12 @@ TextureImporter:
   textureType: 5
   buildTargetSettings:
   - buildTarget: Android
-    maxTextureSize: 128
+    maxTextureSize: 2048
     textureFormat: -1
     compressionQuality: 50
     allowsAlphaSplitting: 0
   - buildTarget: iPhone
-    maxTextureSize: 128
+    maxTextureSize: 2048
     textureFormat: -1
     compressionQuality: 50
     allowsAlphaSplitting: 0

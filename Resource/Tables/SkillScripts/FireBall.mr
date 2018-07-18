@@ -2,19 +2,22 @@ skill(3)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
-		animation("cast");
+        //enablemove(true);
+        //enablerotation(true);
+		//animation("cast");
 		wait(100);
-		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false);
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,1));
+		};
 		wait(100);
 		createcharacter(1008, vector3(0, 1.2, 1), vector3(0, 0, 0))
 		{
 			skill(4);
 		};
-		wait(200);
-        enablemove(false);
-        enablerotation(false);
+		//wait(200);
+        //enablemove(false);
+        //enablerotation(false);
 		terminate();
 	};
 
@@ -24,7 +27,7 @@ skill(4)
 	onmessage("start")
 	{
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
-		colliderdamage(vector3(0,0,0), vector3(0.1, 0.1, 1.5))
+		colliderdamage(vector3(0,0,0), vector3(1, 1, 1.5))
         {
             direction(2);
 			statebuff("Default", 100202);
