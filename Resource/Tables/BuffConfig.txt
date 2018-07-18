@@ -2,5 +2,6 @@ Id	Description	Script	AttrId	MaxCount
 int	string	string	int	int
 1	Ö÷½ÇÆÕ¹¥	Tables/ImpactScripts/Test.mr	-1	-1
 2	Ö÷½Ç¼ÓËÙ	Tables/ImpactScripts/Test.mr	10001	2
+3	Ö÷½ÇÆÕ¹¥_¼¼ÄÜ×´Ì¬	Tables/ImpactScripts/Test.mr	-1	-1
 100201	ºüÀêÉä¼ı	Tables/ImpactScripts/Test.mr	-1	-1
 100202	ºüÀêÉäµÄ¼ı	Tables/ImpactScripts/Test.mr	-1	-1

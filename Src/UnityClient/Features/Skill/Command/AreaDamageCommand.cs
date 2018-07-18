@@ -5,19 +5,53 @@ using ScriptableSystem;
 using Entitas;
 using Entitas.Data;
 using Util;
+using UnityClient;
 
 namespace SkillCommands
 {
     internal class AreaDamageCommand : AbstractCommand
     {
+        public override ICommand Clone()
+        {
+            AreaDamageCommand command = new AreaDamageCommand();
+            command.m_RelativeCenter = m_RelativeCenter;
+            command.m_Range = m_Range;
+
+            foreach(var pair in m_StateImpacts)
+            {
+                command.m_StateImpacts[pair.Key] = pair.Value;
+            }
+            return command;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 3)
+            if(num >= 2)
             {
                 m_RelativeCenter = ScriptableDataUtility.CalcVector3(callData.GetParam(0) as ScriptableData.CallData);
                 m_Range = float.Parse(callData.GetParamId(1));
-                m_ImpactId = int.Parse(callData.GetParamId(2));
+            }
+        }
+        protected override void Load(FunctionData funcData)
+        {
+            CallData callData = funcData.Call;
+            if(null != callData)
+            {
+                Load(callData);
+
+                for(int i = 0; i < funcData.Statements.Count; ++i)
+                {
+                    CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
+                    if(null != stCall)
+                    {
+                        string id = stCall.GetId();
+                        if(id == "statebuff")
+                        {
+                            StateBuff stateBuff = ScriptableDataUtility.CalcStateBuff(stCall);
+                            m_StateImpacts[stateBuff.m_State] = stateBuff;
+                        }
+                    }
+                }
             }
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
@@ -38,11 +72,25 @@ namespace SkillCommands
                     if (entity.hasCamp && obj.hasCamp && entity.camp.Value == obj.camp.Value)
                         continue;
 
-                    if(InCircle(center, m_Range, entity.position))
+                    if (InCircle(center, m_Range, entity.position))
                     {
-                        if(!entity.hasDead)
+                        if (!entity.hasDead)
                         {
-                            UnityClient.BuffSystem.Instance.StartBuff(obj, entity, 1, obj.position.Value, obj.rotation.Value);
+
+                            StateBuff_State state = GetState(entity);
+
+                            StateBuff stateBuff;
+                            if (!m_StateImpacts.TryGetValue(state, out stateBuff))
+                            {
+                                m_StateImpacts.TryGetValue(StateBuff_State.Default, out stateBuff);
+                            }
+                            if (null != stateBuff)
+                            {
+                                foreach (int buffId in stateBuff.m_Buffs)
+                                    UnityClient.BuffSystem.Instance.StartBuff(obj, entity, buffId, obj.position.Value, obj.rotation.Value);
+                            }
+
+
                         }
                     }
                 }
@@ -55,8 +103,15 @@ namespace SkillCommands
             return Vector3.DistanceXZ(point, position.Value) < range;
         }
 
+        private StateBuff_State GetState(GameEntity obj)
+        {
+            return obj.skill.Instance == null ? StateBuff_State.Default : StateBuff_State.Skill;
+        }
+
         private Vector3 m_RelativeCenter;
         private float m_Range;
         private int m_ImpactId;
+
+        private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
     }
 }

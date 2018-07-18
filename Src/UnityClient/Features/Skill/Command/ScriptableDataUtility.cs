@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityClient;
 using Util;
 
 namespace ScriptableData
@@ -125,5 +126,23 @@ namespace ScriptableData
         //    return Vector3.zero;
         //  }
         //}
+        internal static StateBuff CalcStateBuff(ScriptableData.CallData stCall)
+        {
+            StateBuff stateBuff = new StateBuff();
+            stateBuff.m_State = CaclStateFromStr(stCall.GetParamId(0));
+            for(int i = 1; i < stCall.GetParamNum(); i++)
+            {
+                int buffId = int.Parse(stCall.GetParamId(i));
+                stateBuff.m_Buffs.Add(buffId);
+            }
+            return stateBuff;
+        }
+        internal static StateBuff_State CaclStateFromStr(string str)
+        {
+            StateBuff_State result = StateBuff_State.Default;
+            if (str.Equals("Skill"))
+                result = StateBuff_State.Skill;
+            return result;
+        }
     }
 }
