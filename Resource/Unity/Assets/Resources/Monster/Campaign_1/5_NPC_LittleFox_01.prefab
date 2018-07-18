@@ -1694,6 +1694,9 @@ Animation:
   - {fileID: 7400044, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
   - {fileID: 7400046, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
   - {fileID: 7400048, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
+  - {fileID: 7400050, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
+  - {fileID: 7400052, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
+  - {fileID: 7400054, guid: a410d76147ee1a64ab8489763f999be2, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1707,11 +1710,9 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b731730a52ab4884d9227b03c24d1bf1, type: 2}
   m_StaticBatchInfo:
@@ -1724,7 +1725,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1758,11 +1758,9 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b731730a52ab4884d9227b03c24d1bf1, type: 2}
   m_StaticBatchInfo:
@@ -1775,7 +1773,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
