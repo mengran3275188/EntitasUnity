@@ -32,14 +32,7 @@
             <property ResultOption="BT_SUCCESS" />
           </node>
           <node class="Wait" id="15">
-            <property Time="const float 400" />
-          </node>
-          <node class="Action" id="12">
-            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
-            <property ResultOption="BT_SUCCESS" />
-          </node>
-          <node class="Wait" id="14">
-            <property Time="const float 10" />
+            <property Time="const float 200" />
           </node>
           <node class="Action" id="4">
             <property Method="Self.CharacterAgent::UseSkill(10)" />
