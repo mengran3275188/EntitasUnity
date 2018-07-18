@@ -4,6 +4,7 @@ using ScriptableSystem;
 using ScriptableData;
 using Entitas.Data;
 using Util;
+using UnityClient;
 
 namespace SkillCommands
 {
@@ -12,12 +13,16 @@ namespace SkillCommands
         public override ICommand Clone()
         {
             ColliderDamageCommand copy = new ColliderDamageCommand();
-            copy.m_BuffId = m_BuffId;
             copy.m_Offset = m_Offset;
             copy.m_Size = m_Size;
 
             copy.m_HaveObjId = m_HaveObjId;
             copy.m_ObjIdVarName = m_ObjIdVarName.Clone();
+
+            foreach(var pair in m_StateImpacts)
+            {
+                copy.m_StateImpacts[pair.Key] = pair.Value;
+            }
 
             return copy;
         }
@@ -34,11 +39,32 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 3)
+            if(num >= 2)
             {
-                m_BuffId = int.Parse(callData.GetParamId(0));
-                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
-                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
+                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(0) as ScriptableData.CallData);
+                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
+            }
+        }
+        protected override void Load(FunctionData funcData)
+        {
+            CallData callData = funcData.Call;
+            if(null != callData)
+            {
+                Load(callData);
+
+                for(int i = 0; i < funcData.Statements.Count; ++i)
+                {
+                    CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
+                    if(null != stCall)
+                    {
+                        string id = stCall.GetId();
+                        if(id == "statebuff")
+                        {
+                            StateBuff stateBuff = ScriptableDataUtility.CalcStateBuff(stCall);
+                            m_StateImpacts[stateBuff.m_State] = stateBuff;
+                        }
+                    }
+                }
             }
         }
         protected override void Load(StatementData statementData)
@@ -49,7 +75,7 @@ namespace SkillCommands
                 FunctionData second = statementData.Second;
                 if(null != first && null != first.Call && null != second && null != second.Call)
                 {
-                    Load(first.Call);
+                    Load(first);
                     LoadVarName(second.Call);
                 }
             }
@@ -107,16 +133,32 @@ namespace SkillCommands
             GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget && !collideTarget.hasDead)
             {
-                UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, m_BuffId, target.position.Value, target.rotation.Value);
+                StateBuff_State state = GetState(collideTarget);
+
+                StateBuff stateBuff;
+                if (!m_StateImpacts.TryGetValue(state, out stateBuff))
+                {
+                    m_StateImpacts.TryGetValue(StateBuff_State.Default, out stateBuff);
+                }
+                if(null != stateBuff)
+                {
+                    foreach (int buffId in stateBuff.m_Buffs)
+                        UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, buffId, target.position.Value, target.rotation.Value);
+                }
                 m_Instance.SendMessage("oncollision");
             }
+        }
+        private StateBuff_State GetState(GameEntity obj)
+        {
+            return obj.skill.Instance == null ? StateBuff_State.Default : StateBuff_State.Skill;
         }
 
 
         // config
-        private int m_BuffId = 0;
         private Vector3 m_Offset = Vector3.zero;
         private Vector3 m_Size = Vector3.one;
+
+        private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
 
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();
         private bool m_HaveObjId = false;
@@ -124,6 +166,7 @@ namespace SkillCommands
         private GameEntity m_Target = null;
 
         private Instance m_Instance = null;
+
     }
 
     internal class RemoveColliderCommand : AbstractCommand
