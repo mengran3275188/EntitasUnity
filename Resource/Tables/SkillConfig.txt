@@ -5,3 +5,4 @@ int	string	string
 5	Ö÷½ÇÉÁÏÖ	Tables/SkillScripts/Teleport.mr
 100201	ºüÀêÉä¼ı	Tables/SkillScripts/LittleFox.mr
 100202	ºüÀêÉäµÄ¼ı	Tables/SkillScripts/LittleFox.mr
+10	Ö÷½ÇNPC	Tables/SkillScripts/Private_03.mr
