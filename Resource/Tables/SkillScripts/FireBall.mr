@@ -2,22 +2,21 @@ skill(3)
 {
 	onmessage("start")
 	{
-        //enablemove(true);
-        //enablerotation(true);
+        enablemove(true);
+        enablerotation(true);
 		//animation("cast");
-		wait(100);
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
 		{
-			transform(vector3(0,1.2,1));
+			transform(vector3(0,1.2,1.5));
 		};
 		wait(100);
-		createcharacter(1008, vector3(0, 1.2, 1), vector3(0, 0, 0))
+		createcharacter(1008, vector3(0, 1.2, 1.5), vector3(0, 0, 0))
 		{
 			skill(1004);
 		};
 		//wait(200);
-        //enablemove(false);
-        //enablerotation(false);
+        enablemove(false);
+        enablerotation(false);
 		terminate();
 	};
 
