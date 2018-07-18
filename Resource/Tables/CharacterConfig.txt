@@ -8,3 +8,4 @@ int	string	string	float	int	string
 1005	第一只小怪的第三只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_03	1	-1	
 1006	第一只小怪的第四只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_04	1	-1	
 1007	第一只类似主角的小怪	Monster/ChangAn/5_Npc_Private_03	1	1	
+1008	火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_fly	1	-1	
