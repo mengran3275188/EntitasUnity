@@ -16,6 +16,13 @@
           <property Opr="const bool true" />
         </node>
         <node class="Sequence" id="9">
+          <custom>
+            <node class="Condition" id="17">
+              <property Operator="NotEqual" />
+              <property Opl="Self.CharacterAgent::CanUseSkill()" />
+              <property Opr="const bool true" />
+            </node>
+          </custom>
           <node class="Action" id="10">
             <property Method="Self.CharacterAgent::StopMove()" />
             <property ResultOption="BT_SUCCESS" />
