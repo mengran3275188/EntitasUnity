@@ -9,7 +9,7 @@ skill(10)
 	animationspeed("attack_01", 0.125);
 	effect("Scene_FX/7_Scene_Gantanhao_01", 500, "", false)
 	{
-		transform(vector3(0,2,0.5));
+		transform(vector3(0,2.5,0));
 	};
 	wait(266);
 	animationspeed("attack_01", 2);

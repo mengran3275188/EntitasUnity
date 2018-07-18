@@ -8,7 +8,7 @@ skill(100201)
 		animationspeed("attack_01_03", 0.33);
 		effect("Scene_FX/7_Scene_Gantanhao_01", 500, "", false)
 		{
-			transform(vector3(0,2,0.5));
+			transform(vector3(0,3,0));
 		};
 		wait(200);
 		createcharacter(1003, vector3(0, 1.2, 0), vector3(0, 0, 0))

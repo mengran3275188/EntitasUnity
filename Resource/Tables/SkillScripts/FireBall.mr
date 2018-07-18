@@ -22,7 +22,7 @@ skill(3)
 	};
 
 };
-skill(4)
+skill(1004)
 {
 	onmessage("start")
 	{
