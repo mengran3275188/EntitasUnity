@@ -34,19 +34,37 @@
             <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
             <property ResultOption="BT_SUCCESS" />
           </node>
-          <node class="Wait" id="19">
-            <property Time="const float 500" />
-          </node>
-          <node class="Action" id="21">
-            <property Method="Self.CharacterAgent::FaceToTarget()" />
-            <property ResultOption="BT_SUCCESS" />
+          <node class="DecoratorLoop" id="24">
+            <property Count="const int 50" />
+            <property DecorateWhenChildEnds="true" />
+            <property DoneWithinFrame="false" />
+            <node class="Sequence" id="25">
+              <node class="Action" id="26">
+                <property Method="Self.CharacterAgent::FaceToTarget()" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+              <node class="Wait" id="19">
+                <property Time="const float 10" />
+              </node>
+            </node>
           </node>
           <node class="Action" id="15">
             <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
             <property ResultOption="BT_SUCCESS" />
           </node>
-          <node class="Wait" id="16">
-            <property Time="const float 200" />
+          <node class="DecoratorLoop" id="22">
+            <property Count="const int 20" />
+            <property DecorateWhenChildEnds="true" />
+            <property DoneWithinFrame="false" />
+            <node class="Sequence" id="23">
+              <node class="Action" id="21">
+                <property Method="Self.CharacterAgent::FaceToTarget()" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+              <node class="Wait" id="16">
+                <property Time="const float 10" />
+              </node>
+            </node>
           </node>
           <node class="Action" id="4">
             <property Method="Self.CharacterAgent::UseSkill(100201)" />

@@ -6,7 +6,7 @@ skill(1)
     enablerotation(true);
 	// 1
 	animation("attack_01");
-	animationspeed("attack_01", 1);
+	animationspeed("attack_01", 0.25);
 	wait(133);
 	animationspeed("attack_01", 2);
 	//curvemove(true, 0.05, 0, 0, 4, 0, 0, 80);

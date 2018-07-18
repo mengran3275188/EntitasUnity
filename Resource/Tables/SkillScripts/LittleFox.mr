@@ -5,11 +5,16 @@ skill(100201)
         enablemove(true);
         enablerotation(true);
 		animation("attack_01_03");
+		animationspeed("attack_01_03", 0.33);
+		wait(200);
 		createcharacter(1003, vector3(0, 1.2, 0), vector3(0, 0, 0))
 		{
 			skill(100202);
 		};
-		wait(666);
+		animationspeed("attack_01_03", 3);
+		wait(100);
+		animationspeed("attack_01_03", 1);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();

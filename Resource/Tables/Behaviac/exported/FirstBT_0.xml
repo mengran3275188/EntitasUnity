@@ -24,15 +24,22 @@
             <property Method="Self.CharacterAgent::FaceToTarget()" />
             <property ResultOption="BT_SUCCESS" />
           </node>
-          <node class="Wait" id="15">
+          <node class="Wait" id="16">
             <property Time="const float 50" />
+          </node>
+          <node class="Action" id="13">
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="15">
+            <property Time="const float 400" />
           </node>
           <node class="Action" id="12">
             <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
             <property ResultOption="BT_SUCCESS" />
           </node>
           <node class="Wait" id="14">
-            <property Time="const float 300" />
+            <property Time="const float 10" />
           </node>
           <node class="Action" id="4">
             <property Method="Self.CharacterAgent::UseSkill(10)" />
