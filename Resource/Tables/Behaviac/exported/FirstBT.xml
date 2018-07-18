@@ -22,60 +22,71 @@
           <property Opl="Self.CharacterAgent::CanUseSkill()" />
           <property Opr="const bool true" />
         </node>
-        <node class="Sequence" id="14">
-          <custom>
+        <node class="SelectorLoop" id="28">
+          <property ResetChildren="false" />
+          <node class="WithPrecondition" id="4">
+            <node class="Condition" id="32">
+              <property Operator="Equal" />
+              <property Opl="Self.CharacterAgent::CanUseSkill()" />
+              <property Opr="const bool true" />
+            </node>
+            <node class="Sequence" id="14">
+              <node class="Action" id="17">
+                <property Method="Self.CharacterAgent::StopMove()" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+              <node class="Wait" id="18">
+                <property Time="const float 50" />
+              </node>
+              <node class="Action" id="20">
+                <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+              <node class="DecoratorLoop" id="24">
+                <property Count="const int 50" />
+                <property DecorateWhenChildEnds="true" />
+                <property DoneWithinFrame="false" />
+                <node class="Sequence" id="25">
+                  <node class="Action" id="26">
+                    <property Method="Self.CharacterAgent::FaceToTarget()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Wait" id="19">
+                    <property Time="const float 10" />
+                  </node>
+                </node>
+              </node>
+              <node class="Action" id="15">
+                <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+              <node class="DecoratorLoop" id="22">
+                <property Count="const int 40" />
+                <property DecorateWhenChildEnds="true" />
+                <property DoneWithinFrame="false" />
+                <node class="Sequence" id="23">
+                  <node class="Action" id="21">
+                    <property Method="Self.CharacterAgent::FaceToTarget()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Wait" id="16">
+                    <property Time="const float 10" />
+                  </node>
+                </node>
+              </node>
+              <node class="Action" id="29">
+                <property Method="Self.CharacterAgent::UseSkill(100201)" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+            </node>
+          </node>
+          <node class="WithPrecondition" id="30">
             <node class="Condition" id="27">
               <property Operator="NotEqual" />
               <property Opl="Self.CharacterAgent::CanUseSkill()" />
               <property Opr="const bool true" />
             </node>
-          </custom>
-          <node class="Action" id="17">
-            <property Method="Self.CharacterAgent::StopMove()" />
-            <property ResultOption="BT_SUCCESS" />
-          </node>
-          <node class="Wait" id="18">
-            <property Time="const float 50" />
-          </node>
-          <node class="Action" id="20">
-            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
-            <property ResultOption="BT_SUCCESS" />
-          </node>
-          <node class="DecoratorLoop" id="24">
-            <property Count="const int 50" />
-            <property DecorateWhenChildEnds="true" />
-            <property DoneWithinFrame="false" />
-            <node class="Sequence" id="25">
-              <node class="Action" id="26">
-                <property Method="Self.CharacterAgent::FaceToTarget()" />
-                <property ResultOption="BT_SUCCESS" />
-              </node>
-              <node class="Wait" id="19">
-                <property Time="const float 10" />
-              </node>
-            </node>
-          </node>
-          <node class="Action" id="15">
-            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
-            <property ResultOption="BT_SUCCESS" />
-          </node>
-          <node class="DecoratorLoop" id="22">
-            <property Count="const int 20" />
-            <property DecorateWhenChildEnds="true" />
-            <property DoneWithinFrame="false" />
-            <node class="Sequence" id="23">
-              <node class="Action" id="21">
-                <property Method="Self.CharacterAgent::FaceToTarget()" />
-                <property ResultOption="BT_SUCCESS" />
-              </node>
-              <node class="Wait" id="16">
-                <property Time="const float 10" />
-              </node>
-            </node>
-          </node>
-          <node class="Action" id="4">
-            <property Method="Self.CharacterAgent::UseSkill(100201)" />
-            <property ResultOption="BT_SUCCESS" />
+            <node class="Noop" id="31" />
           </node>
         </node>
         <node class="Noop" id="5" />

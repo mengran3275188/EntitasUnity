@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Behavior Version="5">
+<Behavior Version="5" NoError="true">
   <Node Class="Behaviac.Design.Nodes.Behavior" AgentType="CharacterAgent" Domains="" Enable="true" HasOwnPrefabData="false" Id="-1" PrefabName="" PrefabNodeId="-1">
     <Comment Background="NoColor" Text="" />
     <DescriptorRefs value="0:" />
@@ -34,7 +34,7 @@
                           </Node>
                         </Connector>
                         <Connector Identifier="GenericChildren">
-                          <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="10" Method="Self.CharacterAgent::StopMove()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
+                          <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="20" Method="Self.CharacterAgent::StopMove()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
                             <Comment Background="NoColor" Text="" />
                           </Node>
                           <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="11" Method="Self.CharacterAgent::FaceToTarget()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
@@ -70,7 +70,7 @@
                       </Node>
                     </Connector>
                     <Connector Identifier="Action">
-                      <Node Class="PluginBehaviac.Nodes.DecoratorAlwaysFailure" DecorateWhenChildEnds="false" Enable="true" HasOwnPrefabData="false" Id="18" PrefabName="" PrefabNodeId="-1">
+                      <Node Class="PluginBehaviac.Nodes.Noop" Enable="true" HasOwnPrefabData="false" Id="18" PrefabName="" PrefabNodeId="-1">
                         <Comment Background="NoColor" Text="" />
                       </Node>
                     </Connector>
