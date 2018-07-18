@@ -43,6 +43,7 @@ namespace SkillCommands
             copy.m_DirectionType = m_DirectionType;
             copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_IsCurveMoving = true;
+            copy.m_Append = m_Append;
             return copy;
         }
         protected override void Load(ScriptableData.CallData callData)
@@ -92,6 +93,10 @@ namespace SkillCommands
                             if (m_DirectionType == DirectionType.SenderTarget)
                                 m_IsLockRotate = true;
                         }
+                    }
+                    if(id == "append")
+                    {
+                        m_Append = true;
                     }
                 }
             }
@@ -202,7 +207,11 @@ namespace SkillCommands
             Vector3 speed = speed_vect + accel_vect * time / 2;
             Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
             obj.ReplaceRotation(m_RotateDir);
-            obj.ReplaceMovement(object_speed);
+            if(m_Append)
+                obj.ReplaceMovement(object_speed + obj.movement.Velocity);
+            else
+                obj.ReplaceMovement(object_speed);
+
             /*
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
             Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
@@ -214,6 +223,7 @@ namespace SkillCommands
         }
 
         private bool m_IsLockRotate = false;
+        private bool m_Append = false;
         private DirectionType m_DirectionType = DirectionType.Target;
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
         private List<MoveSectionInfo> m_SectionListCopy = new List<MoveSectionInfo>();

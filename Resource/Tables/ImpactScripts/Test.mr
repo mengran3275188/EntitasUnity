@@ -33,6 +33,19 @@ skill(2)
 	};
 };
 
+skill(3)
+{
+
+    onmessage("start")
+    {
+		curvemove(true, 0.05, 0, 0, -10, 0, 0, 100)
+		{
+			direction(3);
+		};
+		terminate();
+    }
+};
+
 skill(100201)
 {
 	onmessage("start")

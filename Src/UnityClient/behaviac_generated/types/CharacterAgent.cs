@@ -85,10 +85,19 @@ public class CharacterAgent : behaviac.Agent
 ///<<< END WRITING YOUR CODE
 	}
 
+	public void PlayAnimation(string animName)
+	{
+///<<< BEGIN WRITING YOUR CODE PlayAnimation
+
+        var self = GetOwner();
+
+        UnityClient.GfxSystem.PlayAnimation(self.resource.Value, animName);
+///<<< END WRITING YOUR CODE
+	}
+
 	public void StopMove()
 	{
 ///<<< BEGIN WRITING YOUR CODE StopMove
-        if (IsSkillActivite() || IsBuffActivite())
         {
             var self = GetOwner();
             self.ReplaceMovement(Util.Vector3.zero);

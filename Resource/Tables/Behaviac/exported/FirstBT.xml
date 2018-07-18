@@ -17,13 +17,30 @@
         </node>
       </node>
       <node class="IfElse" id="2">
-        <node class="Action" id="3">
-          <property Method="Self.CharacterAgent::CanUseSkill()" />
-          <property ResultOption="BT_SUCCESS" />
+        <node class="Condition" id="3">
+          <property Operator="Equal" />
+          <property Opl="Self.CharacterAgent::CanUseSkill()" />
+          <property Opr="const bool true" />
         </node>
-        <node class="Action" id="4">
-          <property Method="Self.CharacterAgent::UseSkill(100201)" />
-          <property ResultOption="BT_SUCCESS" />
+        <node class="Sequence" id="14">
+          <node class="Action" id="17">
+            <property Method="Self.CharacterAgent::StopMove()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="18">
+            <property Time="const float 50" />
+          </node>
+          <node class="Action" id="15">
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;born&quot;)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="16">
+            <property Time="const float 1333" />
+          </node>
+          <node class="Action" id="4">
+            <property Method="Self.CharacterAgent::UseSkill(100201)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
         </node>
         <node class="Noop" id="5" />
       </node>

@@ -35,6 +35,9 @@
       <Method Name="EscapeFromPlayer" DisplayName="EscapeFromPlayer" Desc="逃离目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="StopMove" DisplayName="StopMove" Desc="停止移动" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="FaceToTarget" DisplayName="FaceToTarget" Desc="转向目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="PlayAnimation" DisplayName="PlayAnimation" Desc="PlayAnimation" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
+        <Param Name="animName" Type="string" TypeFullName="System.String" DisplayName="animName" Desc="animName" />
+      </Method>
     </agent>
   </agents>
   <instances />
