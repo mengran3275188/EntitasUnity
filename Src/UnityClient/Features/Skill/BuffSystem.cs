@@ -44,7 +44,7 @@ namespace UnityClient
                 }
                 foreach (var startParam in buffComponent.StartParams)
                 {
-                    SkillSystem.Instance.BreakSkill(entity);
+                    //SkillSystem.Instance.BreakSkill(entity);
 
                     BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(startParam.BuffId);
                     if (null != buffConfig)

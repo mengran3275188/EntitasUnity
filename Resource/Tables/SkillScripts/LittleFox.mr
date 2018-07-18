@@ -26,7 +26,7 @@ skill(100202)
 	onmessage("start")
 	{
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
-		colliderdamage(100202, vector3(0,0,0), vector3(0.1, 0.1, 1.5))
+		colliderdamage(vector3(0,0,0), vector3(0.1, 0.1, 1.5))
         {
             direction(2);
 			statebuff("Default", 100202);
