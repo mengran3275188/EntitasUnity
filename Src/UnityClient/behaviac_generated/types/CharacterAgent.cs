@@ -111,7 +111,6 @@ public class CharacterAgent : behaviac.Agent
         GameEntity self = GetOwner();
         if (!CanUseSkill())
             return;
-        FaceToTarget();
         UnityClient.SkillSystem.Instance.StartSkill(self, self, SkillId, self.position.Value, self.rotation.Value);
 ///<<< END WRITING YOUR CODE
 	}
