@@ -30,12 +30,23 @@
           <node class="Wait" id="18">
             <property Time="const float 50" />
           </node>
+          <node class="Action" id="20">
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="19">
+            <property Time="const float 500" />
+          </node>
+          <node class="Action" id="21">
+            <property Method="Self.CharacterAgent::FaceToTarget()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
           <node class="Action" id="15">
-            <property Method="Self.CharacterAgent::PlayAnimation(&quot;born&quot;)" />
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
             <property ResultOption="BT_SUCCESS" />
           </node>
           <node class="Wait" id="16">
-            <property Time="const float 1333" />
+            <property Time="const float 200" />
           </node>
           <node class="Action" id="4">
             <property Method="Self.CharacterAgent::UseSkill(100201)" />
