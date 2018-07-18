@@ -102,13 +102,38 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0);
 ```
 ### areadamage
 ```
-areadamage(vector3(offsetx, offsety, offsetz), radius, buff_id);
+areadamage(vector3(offsetx, offsety, offsetz), radius)
+{
+    statebuff("Default", default_buff);
+    statebuff("Skill", skill_buff);
+}
 ```
 ```
-areadamage(vector3(0, 0, 0), 3, 0);
+areadamage(vector3(0, 0, 0), 3)
+{
+    statebuff("Default", 1001);
+}
 ```
 
 ### movechild
 ```
 movechild("1_JianShi_w_01", "ef_backweapon01"); // 将子节点1_JianShi_w_01移动到挂点ef_backweapon01
+```
+
+### effect
+```
+effect(res_path, delete_time, attach_bone, is_attach);
+effect(res_path, delete_time, attach_bone, is_attach)
+{
+    transform(vector3(offsetx, offsety, offsetz), vector3(rotationx, rotationy, rotationz));
+};
+
+```
+```
+effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
+effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
+{
+  transform(vector3(1, 1, 1));  
+};
+
 ```
