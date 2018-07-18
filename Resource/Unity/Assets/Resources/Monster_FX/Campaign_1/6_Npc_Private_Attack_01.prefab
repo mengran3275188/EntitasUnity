@@ -244,7 +244,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 273312667
+  randomSeed: -338554554
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -396,7 +396,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.44
+      scalar: 0.66
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3375,7 +3375,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1954319811
+  randomSeed: -480660715
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3527,7 +3527,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6500,7 +6500,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 628868692
+  randomSeed: 2060578829
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6652,7 +6652,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.38
+      scalar: 0.57
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9631,7 +9631,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1210420967
+  randomSeed: 337875989
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -12757,7 +12757,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 588139275
+  randomSeed: -1675581891
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -15883,7 +15883,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1226781891
+  randomSeed: -1289315247
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16035,7 +16035,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.435
+      scalar: 0.65
       minScalar: 1
       maxCurve:
         serializedVersion: 2
