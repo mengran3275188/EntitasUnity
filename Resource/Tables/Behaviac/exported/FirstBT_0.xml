@@ -39,7 +39,7 @@
             <property ResultOption="BT_SUCCESS" />
           </node>
           <node class="Wait" id="14">
-            <property Time="const float 300" />
+            <property Time="const float 100" />
           </node>
           <node class="Action" id="4">
             <property Method="Self.CharacterAgent::UseSkill(10)" />
