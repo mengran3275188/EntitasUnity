@@ -30,13 +30,15 @@ namespace SkillCommands
                 string effectPath = m_EffectPath;
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
 
+                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
+
                 if(string.IsNullOrEmpty(m_AttachPath))
                 {
-                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + m_Pos, m_Euler + new Vector3(0, (obj.rotation.Value * Mathf.Rad2Deg), 0), m_Scale, m_DeleteTime);
+                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + quaternion * m_Pos, m_Euler + new Vector3(0, (obj.rotation.Value * Mathf.Rad2Deg), 0), m_Scale, m_DeleteTime);
                 }
                 else
                 {
-                    GfxSystem.CreateAndAttachGameObject(resId, effectPath, obj.resource.Value, m_AttachPath, m_IsAttach, m_Pos, m_Euler, m_Scale, m_DeleteTime);
+                    GfxSystem.CreateAndAttachGameObject(resId, effectPath, obj.resource.Value, m_AttachPath, m_IsAttach, quaternion * m_Pos, m_Euler, m_Scale, m_DeleteTime);
                 }
             }
             return ExecResult.Finished;

@@ -99,8 +99,9 @@ namespace SceneCommand
                 entity.AddAnimation(config.ActionId, config.ActionPrefix);
 
                 // movement
+                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(target.rotation.Value, 0, 0);
                 entity.AddMovement(Vector3.zero);
-                entity.AddPosition(target.position.Value + m_LocalPosition);
+                entity.AddPosition(target.position.Value + quaternion * m_LocalPosition);
                 entity.AddRotation(m_LocalRotation.y + target.rotation.Value);
 
                 // AI
