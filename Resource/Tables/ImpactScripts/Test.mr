@@ -13,13 +13,13 @@ skill(1)
 		effect("Hero_FX/1_Berserker/1_hero_Berserker_shouji_xue_01", 3000, "", false);
 		wait(66);
 		animationspeed("hurt_m", 1);
-		curvemove(true, 0.2, 0, 0, -10, 0, 0, 40)
+		curvemove(true, 0.2, 0, 0, -10, 0, 0, 50)
 		{
-			direction(2);
+			direction(3);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
-		//wait(200);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();
@@ -41,7 +41,7 @@ skill(3)
     {
 		curvemove(true, 0.03, 0, 5, -10, 0, 0, 100, 0.03, 0, -5, 10, 0, 0, -100)
 		{
-			direction(2);
+			direction(3);
 		};
 		effect("Hero_FX/1_Berserker/1_hero_Berserker_shouji_xue_02", 3000, "", false);
         damage(10);
@@ -65,7 +65,7 @@ skill(100201)
 		animationspeed("hurt_m", 1);
 		curvemove(true, 0.03, 0, 5, -10, 0, 0, 100, 0.03, 0, -5, 10, 0, 0, -100)
 		{
-			direction(2);
+			direction(3);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
@@ -91,13 +91,13 @@ skill(100202)
 		effect("Hero_FX/1_Berserker/1_hero_Berserker_shouji_xue_01", 3000, "", false);
 		wait(66);
 		animationspeed("hurt_m", 1);
-		curvemove(true, 0.2, 0, 0, -10, 0, 0, 40)
+		curvemove(true, 0.03, 0, 5, -10, 0, 0, 100, 0.03, 0, -5, 10, 0, 0, -100)
 		{
-			direction(2);
+			direction(3);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
-		//wait(200);
+		wait(200);
         enablemove(false);
         enablerotation(false);
 		terminate();
