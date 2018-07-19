@@ -8,4 +8,7 @@ int	string	string
 100201	狐狸射箭	Tables/SkillScripts/LittleFox.mr
 100202	狐狸射的箭	Tables/SkillScripts/LittleFox.mr
 100203	狐狸射的箭2	Tables/SkillScripts/LittleFox.mr
-10	主角NPC	Tables/SkillScripts/Private_03.mr
+10	近战刀兵	Tables/SkillScripts/Private_03.mr
+20	近战枪兵	Tables/SkillScripts/Private_04.mr
+21	近战枪兵的枪	Tables/SkillScripts/Private_04.mr
+30	近战小陀螺	Tables/SkillScripts/Private_06.mr

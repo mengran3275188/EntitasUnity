@@ -1,0 +1,66 @@
+skill(20)
+{
+    onmessage("start")
+    {
+        disablemoveinput(true);
+        disablerotationinput(true);
+        // 1
+        animation("attack_01");
+        animationspeed("attack_01", 0.0833);
+        effect("Scene_FX/7_Scene_Gantanhao_01", 500, "", false)
+        {
+            transform(vector3(0,3,0));
+        };
+        wait(400);
+        animationspeed("attack_01", 1);
+        curvemove(true, 0.133, 0, 0, 6, 0, 0, 270);
+		createcharacter(1011, vector3(0, 0, 0), vector3(0, 0, 0))
+		{
+			skill(21);
+		};
+        wait(133);
+        animationspeed("attack_01", 0.5);
+        wait(133);
+        animationspeed("attack_01", 1);
+        wait(500);
+        disablemoveinput(false);
+        disablerotationinput(false);
+        terminate();
+    };
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        enablemove(false);
+        enablerotation(false);
+        terminate();
+    };
+
+};
+
+skill(21)
+{
+	onmessage("start")
+	{
+		curvemove(true, 0.066, 0, 0, 6, 0, 0, 270, 0.1, 0, 0, 24, 0, 0, 400);
+		colliderdamage(vector3(0,1,1.5), vector3(1, 1, 3.5))
+        {
+            direction(2);
+			statebuff("Default", 100202);
+        }objid("@colliderId");
+		wait(200);
+		removecollider();
+		wait(1000);
+		destroyself();
+		terminate();
+	};
+	/*
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		removecollider();
+		destroyself();
+		terminate();
+	};
+	*/
+}
