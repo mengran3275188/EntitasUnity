@@ -17,10 +17,8 @@ namespace UnityDelegate
         {
             get { return m_LogicInvoker; }
         }
-        public void OnStart(IActionQueue processor)
+        public void RegisteLog()
         {
-            //Application.targetFrameRate = 30;
-
             LogUtil.OnOutput += (Log_Type type, string msg) =>
             {
                 switch (type)
@@ -38,8 +36,11 @@ namespace UnityDelegate
                         break;
                 }
             };
+        }
+        public void OnStart(IActionQueue processor)
+        {
+            //Application.targetFrameRate = 30;
 
-            HomePath.Instance.SetHomePath(Application.streamingAssetsPath);
 
             m_LogicInvoker = processor;
 

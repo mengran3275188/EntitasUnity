@@ -10,6 +10,8 @@ namespace UnityClient.Kernel
     {
         public static void OnStart(string dataPath)
         {
+            GfxMoudle.Instance.RegisteLog();
+
             HomePath.Instance.SetHomePath(dataPath);
 
             FileReaderProxy.RegisterReadFileHandler((string filePath) =>
