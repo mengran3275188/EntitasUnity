@@ -7,7 +7,7 @@
       <node class="Condition" id="7">
         <property Operator="Less" />
         <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
-        <property Opr="const float 4" />
+        <property Opr="const float 3" />
       </node>
       <node class="SelectorLoop" id="2">
         <property ResetChildren="false" />
