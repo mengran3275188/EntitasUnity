@@ -7,8 +7,40 @@ skill(3)
 		{
 			transform(vector3(0,1.2,1.5));
 		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-1,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-2,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(1,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(2,1.2,1.5));
+		};
 		wait(100);
 		createcharacter(1008, vector3(0, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1008, vector3(-1, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1008, vector3(-2, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1008, vector3(1, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1008, vector3(2, 1.2, 1.5), vector3(0, 0, 0))
 		{
 			skill(1004);
 		};
@@ -22,7 +54,7 @@ skill(1004)
 	onmessage("start")
 	{
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
-		colliderdamage(vector3(0,0,0), vector3(1, 1, 1.5))
+		colliderdamage(vector3(0,0,0), vector3(0.5, 0.5, 1.5))
         {
             direction(2);
 			statebuff("Default", 100202);
