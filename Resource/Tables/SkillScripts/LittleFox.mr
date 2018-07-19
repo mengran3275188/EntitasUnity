@@ -2,8 +2,8 @@ skill(100201)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
+        disablemoveinput(true);
+        disablerotationinput(true);
 		animation("attack_01_03");
 		animationspeed("attack_01_03", 0.167);
 		effect("Scene_FX/7_Scene_Gantanhao_01", 500, "", false)
@@ -19,8 +19,8 @@ skill(100201)
 		wait(100);
 		animationspeed("attack_01_03", 1);
 		wait(200);
-        enablemove(false);
-        enablerotation(false);
+        disablemoveinput(false);
+        disablerotationinput(false);
 		terminate();
 	};
 

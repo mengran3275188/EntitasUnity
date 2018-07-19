@@ -2,8 +2,8 @@ skill(1)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
+        disablemoveinput(true);
+        disablerotationinput(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -15,13 +15,13 @@ skill(1)
 		animationspeed("hurt_m", 1);
 		curvemove(true, 0.066, 0, 0, -6, 0, 0, -90, 0.067, 0, 0, -12, 0, 0, 90)
 		{
-			direction(2);
+			direction(4);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
 		//wait(200);
-        enablemove(false);
-        enablerotation(false);
+        disablemoveinput(false);
+        disablerotationinput(false);
 		terminate();
 	};
 };
@@ -41,7 +41,7 @@ skill(3)
     {
 		curvemove(true, 0.03, 0, 5, -10, 0, 0, 100, 0.03, 0, -5, 10, 0, 0, -100)
 		{
-			direction(2);
+			direction(4);
 		};
 		effect("Hero_FX/1_Berserker/1_hero_Berserker_shouji_xue_02", 3000, "", false);
         damage(10);
@@ -54,8 +54,6 @@ skill(100201)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -65,13 +63,11 @@ skill(100201)
 		animationspeed("hurt_m", 1);
 		curvemove(true, 0.066, 0, 0, -6, 0, 0, -90, 0.067, 0, 0, -12, 0, 0, 90)
 		{
-			direction(2);
+			direction(4);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
 		wait(200);
-        enablemove(false);
-        enablerotation(false);
 		terminate();
 	};
 };
@@ -80,8 +76,8 @@ skill(100202)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
+        disablemoveinput(true);
+        disablerotationinput(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -93,13 +89,13 @@ skill(100202)
 		animationspeed("hurt_m", 1);
 		curvemove(true, 0.066, 0, 0, -6, 0, 0, -90, 0.067, 0, 0, -12, 0, 0, 90)
 		{
-			direction(2);
+			direction(4);
 		};
 		wait(200);
 		animationspeed("hurt_m", 1);
 		//wait(200);
-        enablemove(false);
-        enablerotation(false);
+        disablemoveinput(false);
+        disablerotationinput(false);
 		terminate();
 	};
 };
