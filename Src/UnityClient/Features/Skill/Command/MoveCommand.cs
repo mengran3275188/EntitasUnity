@@ -34,14 +34,13 @@ namespace SkillCommands
             SenderTarget,
             Sender,                 // 通常用在召唤物技能
             TargetSender,
+            SenderOpposite,
         }
         public override ICommand Clone()
         {
             CurveMoveCommand copy = new CurveMoveCommand();
-            copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_SectionList.AddRange(m_SectionList);
             copy.m_DirectionType = m_DirectionType;
-            copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_IsCurveMoving = true;
             return copy;
         }
@@ -49,7 +48,7 @@ namespace SkillCommands
         {
             if (callData.GetParamNum() > 0)
             {
-                m_IsLockRotate = bool.Parse(callData.GetParamId(0));
+               // m_IsLockRotate = bool.Parse(callData.GetParamId(0));
             }
             m_SectionList.Clear();
             int section_num = 0;
@@ -89,8 +88,6 @@ namespace SkillCommands
                         if(stCall.GetParamNum() >= 1)
                         {
                             m_DirectionType = (DirectionType)int.Parse(stCall.GetParamId(0));
-                            if (m_DirectionType == DirectionType.SenderTarget)
-                                m_IsLockRotate = true;
                         }
                     }
                 }
@@ -162,23 +159,23 @@ namespace SkillCommands
             m_SectionListCopy[0].lastUpdateTime = m_ElapsedTime;
             m_SectionListCopy[0].curSpeedVect = m_SectionListCopy[0].speedVect;
 
-            if(m_IsLockRotate)
+            switch(m_DirectionType)
             {
-                switch(m_DirectionType)
-                {
-                    case DirectionType.Sender:
-                        m_RotateDir = instance.SenderDirection;
-                        break;
-                    case DirectionType.SenderTarget:
-                        m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
-                        break;
-                    case DirectionType.Target:
-                        m_RotateDir = target.rotation.Value;
-                        break;
-                    case DirectionType.TargetSender:
-                        m_RotateDir = Util.Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
-                        break;
-                }
+                case DirectionType.Sender:
+                    m_RotateDir = instance.SenderDirection;
+                    break;
+                case DirectionType.SenderTarget:
+                    m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
+                    break;
+                case DirectionType.Target:
+                    m_RotateDir = target.rotation.Value;
+                    break;
+                case DirectionType.TargetSender:
+                    m_RotateDir = Util.Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
+                    break;
+                case DirectionType.SenderOpposite:
+                    m_RotateDir = instance.SenderDirection + Mathf.PI;
+                    break;
             }
 
             m_IsInited = true;
@@ -194,10 +191,6 @@ namespace SkillCommands
         }
         private Vector3 Move(Instance instance, GameEntity obj, Vector3 speed_vect, Vector3 accel_vect, float time)
         {
-            if (!m_IsLockRotate)
-            {
-                m_RotateDir = obj.rotation.Value;
-            }
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
             Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
@@ -214,7 +207,6 @@ namespace SkillCommands
             return (speed_vect + accel_vect * time);
         }
 
-        private bool m_IsLockRotate = false;
         private DirectionType m_DirectionType = DirectionType.Target;
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
         private List<MoveSectionInfo> m_SectionListCopy = new List<MoveSectionInfo>();
