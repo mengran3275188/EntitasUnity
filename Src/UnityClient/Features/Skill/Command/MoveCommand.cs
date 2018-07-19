@@ -43,7 +43,6 @@ namespace SkillCommands
             copy.m_DirectionType = m_DirectionType;
             copy.m_IsLockRotate = m_IsLockRotate;
             copy.m_IsCurveMoving = true;
-            copy.m_Append = m_Append;
             return copy;
         }
         protected override void Load(ScriptableData.CallData callData)
@@ -94,10 +93,6 @@ namespace SkillCommands
                                 m_IsLockRotate = true;
                         }
                     }
-                    if(id == "append")
-                    {
-                        m_Append = true;
-                    }
                 }
             }
         }
@@ -116,7 +111,7 @@ namespace SkillCommands
             }
             if (!m_IsCurveMoving)
             {
-                target.ReplaceMovement(Vector3.zero);
+                instance.Velocity = Vector3.zero;
                 return ExecResult.Finished;
             }
             if (!m_IsInited)
@@ -126,7 +121,7 @@ namespace SkillCommands
             if (m_SectionListCopy.Count == 0)
             {
                 m_IsCurveMoving = false;
-                target.ReplaceMovement(Vector3.zero);
+                instance.Velocity = Vector3.zero;
                 return ExecResult.Finished;
             }
 
@@ -137,7 +132,7 @@ namespace SkillCommands
             {
                 float end_time = cur_section.startTime + cur_section.moveTime;
                 float used_time = end_time - cur_section.lastUpdateTime;
-                cur_section.curSpeedVect = Move(target, cur_section.curSpeedVect, cur_section.accelVect, used_time);
+                cur_section.curSpeedVect = Move(instance, target, cur_section.curSpeedVect, cur_section.accelVect, used_time);
                 m_SectionListCopy.RemoveAt(0);
                 if (m_SectionListCopy.Count > 0)
                 {
@@ -153,7 +148,7 @@ namespace SkillCommands
             }
             else
             {
-                cur_section.curSpeedVect = Move(target, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
+                cur_section.curSpeedVect = Move(instance, target, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
                 cur_section.lastUpdateTime = realTime;
             }
             return ExecResult.Parallel;
@@ -197,7 +192,7 @@ namespace SkillCommands
                 m_SectionListCopy.Add(m_SectionList[i].Clone());
             }
         }
-        private Vector3 Move(GameEntity obj, Vector3 speed_vect, Vector3 accel_vect, float time)
+        private Vector3 Move(Instance instance, GameEntity obj, Vector3 speed_vect, Vector3 accel_vect, float time)
         {
             if (!m_IsLockRotate)
             {
@@ -206,11 +201,8 @@ namespace SkillCommands
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
             Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
+            instance.Velocity = object_speed;
             obj.ReplaceRotation(m_RotateDir);
-            if(m_Append)
-                obj.ReplaceMovement(object_speed + obj.movement.Velocity);
-            else
-                obj.ReplaceMovement(object_speed);
 
             /*
             Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
@@ -223,7 +215,6 @@ namespace SkillCommands
         }
 
         private bool m_IsLockRotate = false;
-        private bool m_Append = false;
         private DirectionType m_DirectionType = DirectionType.Target;
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
         private List<MoveSectionInfo> m_SectionListCopy = new List<MoveSectionInfo>();
@@ -234,15 +225,15 @@ namespace SkillCommands
         private float m_ElapsedTime;
     }
 
-    public class EnableMoveCommand : AbstractCommand
+    public class DisableMoveInputCommand : AbstractCommand
     {
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            if(null != obj)
+            GameEntity target = instance.Target as GameEntity;
+            if(null != target)
             {
-                obj.isDisableMoveControl = m_Enable;
-                obj.ReplaceMovement(Vector3.zero);
+                target.isDisableMoveInput = m_Value;
+                target.ReplaceMovement(Vector3.zero);
             }
             return ExecResult.Finished;
         }
@@ -251,20 +242,20 @@ namespace SkillCommands
             int num = callData.GetParamNum();
             if(num >= 1)
             {
-                m_Enable = bool.Parse(callData.GetParamId(0));
+                m_Value = bool.Parse(callData.GetParamId(0));
             }
         }
-        private bool m_Enable;
+        private bool m_Value;
     }
 
-    public class EnableRotationCommand : AbstractCommand
+    public class DisableRotationInputCommand : AbstractCommand
     {
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            if(null != obj)
+            GameEntity target = instance.Target as GameEntity;
+            if(null != target)
             {
-                obj.isDisableRotationControl = m_Enable;
+                target.isDisableRotationInput = m_Value;
             }
             return ExecResult.Finished;
         }
@@ -273,9 +264,9 @@ namespace SkillCommands
             int num = callData.GetParamNum();
             if(num >= 1)
             {
-                m_Enable = bool.Parse(callData.GetParamId(0));
+                m_Value = bool.Parse(callData.GetParamId(0));
             }
         }
-        private bool m_Enable;
+        private bool m_Value;
     }
 }

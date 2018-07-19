@@ -241,16 +241,16 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Data.DisableMoveControlComponent disableMoveControlComponent = new Entitas.Data.DisableMoveControlComponent();
+    static readonly Entitas.Data.DisableMoveInputComponent disableMoveInputComponent = new Entitas.Data.DisableMoveInputComponent();
 
-    public bool isDisableMoveControl {
-        get { return HasComponent(GameComponentsLookup.DisableMoveControl); }
+    public bool isDisableMoveInput {
+        get { return HasComponent(GameComponentsLookup.DisableMoveInput); }
         set {
-            if (value != isDisableMoveControl) {
+            if (value != isDisableMoveInput) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.DisableMoveControl, disableMoveControlComponent);
+                    AddComponent(GameComponentsLookup.DisableMoveInput, disableMoveInputComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.DisableMoveControl);
+                    RemoveComponent(GameComponentsLookup.DisableMoveInput);
                 }
             }
         }
@@ -267,16 +267,16 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Entitas.Data.DisableRotationControlComponent disableRotationControlComponent = new Entitas.Data.DisableRotationControlComponent();
+    static readonly Entitas.Data.DisableRotationInputComponent disableRotationInputComponent = new Entitas.Data.DisableRotationInputComponent();
 
-    public bool isDisableRotationControl {
-        get { return HasComponent(GameComponentsLookup.DisableRotationControl); }
+    public bool isDisableRotationInput {
+        get { return HasComponent(GameComponentsLookup.DisableRotationInput); }
         set {
-            if (value != isDisableRotationControl) {
+            if (value != isDisableRotationInput) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.DisableRotationControl, disableRotationControlComponent);
+                    AddComponent(GameComponentsLookup.DisableRotationInput, disableRotationInputComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.DisableRotationControl);
+                    RemoveComponent(GameComponentsLookup.DisableRotationInput);
                 }
             }
         }
@@ -901,17 +901,17 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDisableMoveControl;
+    static Entitas.IMatcher<GameEntity> _matcherDisableMoveInput;
 
-    public static Entitas.IMatcher<GameEntity> DisableMoveControl {
+    public static Entitas.IMatcher<GameEntity> DisableMoveInput {
         get {
-            if (_matcherDisableMoveControl == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DisableMoveControl);
+            if (_matcherDisableMoveInput == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DisableMoveInput);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDisableMoveControl = matcher;
+                _matcherDisableMoveInput = matcher;
             }
 
-            return _matcherDisableMoveControl;
+            return _matcherDisableMoveInput;
         }
     }
 }
@@ -926,17 +926,17 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDisableRotationControl;
+    static Entitas.IMatcher<GameEntity> _matcherDisableRotationInput;
 
-    public static Entitas.IMatcher<GameEntity> DisableRotationControl {
+    public static Entitas.IMatcher<GameEntity> DisableRotationInput {
         get {
-            if (_matcherDisableRotationControl == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DisableRotationControl);
+            if (_matcherDisableRotationInput == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DisableRotationInput);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDisableRotationControl = matcher;
+                _matcherDisableRotationInput = matcher;
             }
 
-            return _matcherDisableRotationControl;
+            return _matcherDisableRotationInput;
         }
     }
 }
