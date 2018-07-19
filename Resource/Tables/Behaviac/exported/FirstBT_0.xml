@@ -47,8 +47,8 @@
               <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
               <property ResultOption="BT_SUCCESS" />
             </node>
-            <node class="Wait" id="23">
-              <property Time="const float 200" />
+            <node class="Wait" id="14">
+              <property Time="const float 300" />
             </node>
             <node class="Action" id="4">
               <property Method="Self.CharacterAgent::UseSkill(10)" />
@@ -62,10 +62,7 @@
             <property Opl="Self.CharacterAgent::CanUseSkill()" />
             <property Opr="const bool true" />
           </node>
-          <node class="DecoratorAlwaysFailure" id="18">
-            <property DecorateWhenChildEnds="false" />
-            <node class="Noop" id="21" />
-          </node>
+          <node class="Noop" id="18" />
         </node>
       </node>
       <node class="Action" id="8">
