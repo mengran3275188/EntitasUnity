@@ -2,8 +2,6 @@ skill(3)
 {
 	onmessage("start")
 	{
-        enablemove(true);
-        enablerotation(true);
 		//animation("cast");
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
 		{
@@ -47,8 +45,6 @@ skill(3)
 			skill(1004);
 		};
 		//wait(200);
-        enablemove(false);
-        enablerotation(false);
 		terminate();
 	};
 

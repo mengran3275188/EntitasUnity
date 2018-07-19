@@ -33,8 +33,8 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
             CommandManager.Instance.RegisterCommandFactory("selfbuff", new CommandFactoryHelper<SkillCommands.SelfBuffCommand>());
 
-            CommandManager.Instance.RegisterCommandFactory("enablemove", new CommandFactoryHelper<SkillCommands.EnableMoveCommand>());
-            CommandManager.Instance.RegisterCommandFactory("enablerotation", new CommandFactoryHelper<SkillCommands.EnableRotationCommand>());
+            CommandManager.Instance.RegisterCommandFactory("disablemoveinput", new CommandFactoryHelper<SkillCommands.DisableMoveInputCommand>());
+            CommandManager.Instance.RegisterCommandFactory("disablerotationinput", new CommandFactoryHelper<SkillCommands.DisableRotationInputCommand>());
         }
 
         public void Execute()
@@ -107,6 +107,15 @@ namespace UnityClient
             {
                 target.skill.Instance.m_SkillInstance.SendMessage("onbreak");
             }
+        }
+        public Vector3 GetSkillVelocity(GameEntity entity)
+        {
+            Vector3 velocity = Vector3.zero;
+            if(entity.hasSkill && null != entity.skill.Instance)
+            {
+                velocity = entity.skill.Instance.m_SkillInstance.Velocity;
+            }
+            return velocity;
         }
         private void PlayUseSkill(int skillId)
         {
