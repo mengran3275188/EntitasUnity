@@ -21,10 +21,10 @@ namespace Entitas.Data
         public int ActionId;
         public string Prefix;
     }
-    public sealed class DisableMoveInputComponent : IComponent
+    public sealed class DisableMoveControlComponent : IComponent
     {
     }
-    public sealed class DisableRotationInputComponent : IComponent
+    public sealed class DisableRotationControlComponent : IComponent
     {
     }
 }

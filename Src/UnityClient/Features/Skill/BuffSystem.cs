@@ -106,24 +106,6 @@ namespace UnityClient
             }
         }
 
-        public Vector3 GetBuffVelocity(GameEntity entity)
-        {
-            Vector3 velocity = Vector3.zero;
-            if(entity.hasBuff)
-            {
-                foreach (var pair in entity.buff.InstanceInfos)
-                {
-                    int buffId = pair.Key;
-                    var infos = pair.Value;
-                    for (int i = infos.Count - 1; i >= 0; i--)
-                    {
-                        var info = infos[i];
-                        velocity += info.m_BuffInstance.Velocity;
-                    }
-                }
-            }
-            return velocity;
-        }
 
         private BuffInstanceInfo NewBuffInstance(int buffId)
         {

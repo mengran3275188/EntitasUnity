@@ -55,20 +55,20 @@ namespace UnityClient
             GameEntity mainPlayer = gameContext.mainPlayerEntity;
             if (null != mainPlayer)
             {
-                if (mainPlayer.hasMovement)
+                if(mainPlayer.hasMovement)
                 {
-                    if(!mainPlayer.isDisableMoveInput)
+                    if(!mainPlayer.isDisableMoveControl)
                     {
-                        if (mainPlayer.hasAttr)
+                        if(mainPlayer.hasAttr)
                         {
                             float moveSpeed = isMoving ? mainPlayer.attr.Value.MoveSpeed : 0;
                             mainPlayer.ReplaceMovement(new Vector3(Mathf.Sin(moveDir), 0, Mathf.Cos(moveDir)) * moveSpeed);
                         }
                     }
                 }
-                if (isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
+                if(isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
                 {
-                    if(!mainPlayer.isDisableRotationInput)
+                    if(!mainPlayer.isDisableRotationControl)
                         mainPlayer.ReplaceRotation(moveDir);
                 }
             }

@@ -17,8 +17,8 @@ public static class GameComponentsLookup {
     public const int Camp = 6;
     public const int Dead = 7;
     public const int Destory = 8;
-    public const int DisableMoveInput = 9;
-    public const int DisableRotationInput = 10;
+    public const int DisableMoveControl = 9;
+    public const int DisableRotationControl = 10;
     public const int Hp = 11;
     public const int Id = 12;
     public const int MainPlayer = 13;
@@ -43,8 +43,8 @@ public static class GameComponentsLookup {
         "Camp",
         "Dead",
         "Destory",
-        "DisableMoveInput",
-        "DisableRotationInput",
+        "DisableMoveControl",
+        "DisableRotationControl",
         "Hp",
         "Id",
         "MainPlayer",
@@ -68,8 +68,8 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
-        typeof(Entitas.Data.DisableMoveInputComponent),
-        typeof(Entitas.Data.DisableRotationInputComponent),
+        typeof(Entitas.Data.DisableMoveControlComponent),
+        typeof(Entitas.Data.DisableRotationControlComponent),
         typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.MainPlayerComponent),

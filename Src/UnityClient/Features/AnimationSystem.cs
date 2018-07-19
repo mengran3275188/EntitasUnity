@@ -17,7 +17,7 @@ namespace UnityClient
         }
         protected override bool Filter(GameEntity entity)
         {
-            return entity.isEnabled && !entity.isDisableMoveInput;
+            return entity.isEnabled && !entity.isDisableMoveControl;
         }
         protected override void Execute(List<GameEntity> entities)
         {

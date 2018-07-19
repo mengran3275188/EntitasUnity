@@ -25,13 +25,10 @@ namespace UnityClient
                     Vector3 position = entity.physics.Rigid.Position;
                     Vector3 velocity = entity.movement.Velocity;
                     Vector3 offset = entity.physics.Offset;
+
                     RigidObject rigid = entity.physics.Rigid;
 
-
-                    Vector3 skillVelocity = SkillSystem.Instance.GetSkillVelocity(entity);
-                    Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
-
-                    rigid.LinearVelocity = velocity + skillVelocity + buffVelocity;
+                    rigid.LinearVelocity = velocity;
 
                     entity.ReplacePosition(position - offset);
                 }

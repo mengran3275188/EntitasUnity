@@ -148,11 +148,6 @@ namespace ScriptableSystem
             get { return m_Context; }
             set { m_Context = value; }
         }
-        public Vector3 Velocity
-        {
-            get { return m_Velocity; }
-            set { m_Velocity = value; }
-        }
         public Dictionary<string, object> LocalVariables
         {
             get { return m_LocalVariables; }
@@ -473,8 +468,6 @@ namespace ScriptableSystem
         private object m_Target = null;
         private Vector3 m_SenderPosition = Vector3.zero;
         private float m_SenderDir = 0;
-        private Vector3 m_Velocity = Vector3.zero;
-
         private Dictionary<string, Queue<MessageInfo>> m_MessageQueues = new Dictionary<string, Queue<MessageInfo>>();
         private List<MessageHandler> m_ActiveHandlers = new List<MessageHandler>();
         private List<MessageHandler> m_MessageHandlers = new List<MessageHandler>();

@@ -2,8 +2,8 @@ skill(1)
 {
 	onmessage("start")
 	{
-        disablemoveinput(true);
-        disablerotationinput(true);
+        enablemove(true);
+        enablerotation(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -20,8 +20,8 @@ skill(1)
 		wait(200);
 		animationspeed("hurt_m", 1);
 		//wait(200);
-        disablemoveinput(false);
-        disablerotationinput(false);
+        enablemove(false);
+        enablerotation(false);
 		terminate();
 	};
 };
@@ -54,6 +54,8 @@ skill(100201)
 {
 	onmessage("start")
 	{
+        enablemove(true);
+        enablerotation(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -68,6 +70,8 @@ skill(100201)
 		wait(200);
 		animationspeed("hurt_m", 1);
 		wait(200);
+        enablemove(false);
+        enablerotation(false);
 		terminate();
 	};
 };
@@ -76,8 +80,8 @@ skill(100202)
 {
 	onmessage("start")
 	{
-        disablemoveinput(true);
-        disablerotationinput(true);
+        enablemove(true);
+        enablerotation(true);
 		animation("hurt_m")
         {
             playmode(1);
@@ -94,8 +98,8 @@ skill(100202)
 		wait(200);
 		animationspeed("hurt_m", 1);
 		//wait(200);
-        disablemoveinput(false);
-        disablerotationinput(false);
+        enablemove(false);
+        enablerotation(false);
 		terminate();
 	};
 };
