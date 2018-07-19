@@ -95,10 +95,26 @@ animationspeed("skill_01_animation", 2);
 ```
 ### curvemove
 ```
-curvemove(is_lock_rotate, [movetime, speedx, speedy, speedz, accelx, accely, accelz]+);
+enum direction_type
+{
+    target = 0,
+    sender_target = 1,
+    sender = 2,
+    target_sender = 3,
+    sender_opposite = 4,
+}
+
+
+curvemove(is_lock_rotate, [movetime, speedx, speedy, speedz, accelx, accely, accelz]+)
+{
+    direction(direction_type);
+};
 ```
 ```
-curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0);
+curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
+{
+    direction(0);
+};
 ```
 ### areadamage
 ```
