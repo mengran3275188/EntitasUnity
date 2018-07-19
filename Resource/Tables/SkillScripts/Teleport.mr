@@ -2,17 +2,17 @@ skill(5)
 {
 	onmessage("start")
 	{
-		enablemove(true);
-		enablerotation(true);
+		//enablemove(true);
+		//enablerotation(true);
 		//animation("teleport_01");
 		//animationspeed("teleport_01", 2);
-		curvemove(true, 0.2, 0, 0, 8, 0, 0, 0);
-		wait(200);
+		//curvemove(true, 0.2, 0, 0, 8, 0, 0, 0);
+		//wait(200);
         teleport(vector3(0, 0, 3));
-		curvemove(true, 0.2, 0, 0, 8, 0, 0, 0);
-		wait(200);
-		enablemove(false);
-		enablerotation(false);
+		//curvemove(true, 0.2, 0, 0, 8, 0, 0, 0);
+		//wait(200);
+		//enablemove(false);
+		//enablerotation(false);
         terminate();
 	};
 };
