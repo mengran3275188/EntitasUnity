@@ -58,15 +58,16 @@ script(1)
 		createcharacter(1007, vector3(65, 0, 60), vector3(0, 0, 0))
 		{
 			ai("FirstBT_0");
-            attr(1000);
+            attr(1001);
 			collision(vector3(0,1,0), 2, 0.5);
 		};
 		createcharacter(1007, vector3(60, 0, 65), vector3(0, 0, 0))
 		{
 			ai("FirstBT_0");
-            attr(1000);
+            attr(1001);
 			collision(vector3(0,1,0), 2, 0.5);
 		};
+		
 		wait(3000);
 		log("scene stoped");
 	};
