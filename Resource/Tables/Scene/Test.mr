@@ -16,38 +16,6 @@ script(1)
             attr(1000);
 			collision(vector3(0,1,0), 2, 0.5);
 		};
-		/*
-		createcharacter(1002, vector3(40, 0, 40), vector3(0, 0, 0))
-		{
-			ai("FirstBT");
-            attr(1000);
-			collision(vector3(0,1,0), 2, 0.5);
-		};
-		createcharacter(1002, vector3(45, 0, 45), vector3(0, 0, 0))
-		{
-			ai("FirstBT");
-            attr(1000);
-			collision(vector3(0,1,0), 2, 0.5);
-		};
-		createcharacter(1002, vector3(45, 0, 55), vector3(0, 0, 0))
-		{
-			ai("FirstBT");
-            attr(1000);
-			collision(vector3(0,1,0), 2, 0.5);
-		};
-		createcharacter(1002, vector3(55, 0, 60), vector3(0, 0, 0))
-		{
-			ai("FirstBT");
-            attr(1000);
-			collision(vector3(0,1,0), 2, 0.5);
-		};
-		createcharacter(1002, vector3(60, 0, 55), vector3(0, 0, 0))
-		{
-			ai("FirstBT");
-            attr(1000);
-			collision(vector3(0,1,0), 2, 0.5);
-		};
-        */
 		createcharacter(1002, vector3(55, 0, 55), vector3(0, 0, 0))
 		{
 			ai("FirstBT");
@@ -65,6 +33,30 @@ script(1)
 		{
 			ai("FirstBT_0");
             attr(1001);
+			collision(vector3(0,1,0), 2, 0.5);
+		};
+		createcharacter(1009, vector3(70, 0, 65), vector3(0, 0, 0))
+		{
+			ai("FirstBT_1");
+            attr(1002);
+			collision(vector3(0,1,0), 2, 0.5);
+		};
+		createcharacter(1009, vector3(65, 0, 70), vector3(0, 0, 0))
+		{
+			ai("FirstBT_1");
+            attr(1002);
+			collision(vector3(0,1,0), 2, 0.5);
+		};
+		createcharacter(1010, vector3(75, 0, 70), vector3(0, 0, 0))
+		{
+			ai("FirstBT_2");
+            attr(1003);
+			collision(vector3(0,1,0), 2, 0.5);
+		};
+		createcharacter(1010, vector3(70, 0, 75), vector3(0, 0, 0))
+		{
+			ai("FirstBT_2");
+            attr(1003);
 			collision(vector3(0,1,0), 2, 0.5);
 		};
 		

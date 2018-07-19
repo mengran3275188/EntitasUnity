@@ -1,0 +1,44 @@
+skill(30)
+{
+    onmessage("start")
+    {
+        disablemoveinput(true);
+        disablerotationinput(true);
+        // 1
+        animation("attack_01_03");
+        animationspeed("attack_01_03", 0.0833);
+        effect("Scene_FX/7_Scene_Gantanhao_01", 500, "", false)
+        {
+            transform(vector3(0,3,0));
+        };
+        wait(400);
+        animationspeed("attack_01_03", 1);
+        curvemove(true, 0.1, 0, 0, 3, 0, 0, 90, 0.8, 0, 0, 12, 0, 0, 0, 0.1, 0, 0, 12, 0, 0, -90);
+        effect("Boss_FX/Boss_WangHuaiDe_xuanfengchui_04", 1000, "", true);		
+		/*
+		colliderdamage(vector3(0,0,0), vector3(2, 1, 2))
+        {
+            direction(2);
+			statebuff("Default", 1);
+        }objid("@colliderId");
+		*/
+        wait(166);
+        animation("attack_01_04");
+        wait(667);
+		removecollider();
+        animation("attack_01_05");
+        wait(1033);
+        disablemoveinput(false);
+        disablerotationinput(false);
+        terminate();
+    };
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        enablemove(false);
+        enablerotation(false);
+        terminate();
+    };
+
+};

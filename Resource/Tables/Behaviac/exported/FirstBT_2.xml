@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: FirstBT_2.xml-->
+<behavior name="FirstBT_2" agenttype="CharacterAgent" version="5">
+  <node class="Sequence" id="1">
+    <node class="IfElse" id="6">
+      <node class="Condition" id="7">
+        <property Operator="Less" />
+        <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+        <property Opr="const float 10" />
+      </node>
+      <node class="SelectorLoop" id="2">
+        <property ResetChildren="false" />
+        <node class="WithPrecondition" id="10">
+          <node class="Condition" id="5">
+            <property Operator="Equal" />
+            <property Opl="Self.CharacterAgent::CanUseSkill()" />
+            <property Opr="const bool true" />
+          </node>
+          <node class="Sequence" id="9">
+            <custom>
+              <node class="Condition" id="17">
+                <property Operator="NotEqual" />
+                <property Opl="Self.CharacterAgent::CanUseSkill()" />
+                <property Opr="const bool true" />
+              </node>
+            </custom>
+            <node class="Action" id="20">
+              <property Method="Self.CharacterAgent::StopMove()" />
+              <property ResultOption="BT_SUCCESS" />
+            </node>
+            <node class="Action" id="11">
+              <property Method="Self.CharacterAgent::FaceToTarget()" />
+              <property ResultOption="BT_SUCCESS" />
+            </node>
+            <node class="Wait" id="16">
+              <property Time="const float 50" />
+            </node>
+            <node class="Action" id="13">
+              <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
+              <property ResultOption="BT_SUCCESS" />
+            </node>
+            <node class="Wait" id="15">
+              <property Time="const float 700" />
+            </node>
+            <node class="Action" id="12">
+              <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
+              <property ResultOption="BT_SUCCESS" />
+            </node>
+            <node class="Wait" id="23">
+              <property Time="const float 0" />
+            </node>
+            <node class="Action" id="4">
+              <property Method="Self.CharacterAgent::UseSkill(30)" />
+              <property ResultOption="BT_SUCCESS" />
+            </node>
+          </node>
+        </node>
+        <node class="WithPrecondition" id="3">
+          <node class="Condition" id="19">
+            <property Operator="NotEqual" />
+            <property Opl="Self.CharacterAgent::CanUseSkill()" />
+            <property Opr="const bool true" />
+          </node>
+          <node class="DecoratorAlwaysFailure" id="18">
+            <property DecorateWhenChildEnds="false" />
+            <node class="Noop" id="21" />
+          </node>
+        </node>
+      </node>
+      <node class="Action" id="8">
+        <property Method="Self.CharacterAgent::MoveToPlayer()" />
+        <property ResultOption="BT_INVALID" />
+      </node>
+    </node>
+    <node class="Wait" id="0">
+      <property Time="const float 100" />
+    </node>
+  </node>
+</behavior>
