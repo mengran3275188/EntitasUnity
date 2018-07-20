@@ -56,19 +56,27 @@ namespace SceneCommand
                         m_AttrId = int.Parse(stCall.GetParamId(0));
                     }
                 }
-                if(stCall.GetId() == "collision")
+                if(stCall.GetId() == "physics")
                 {
-                    if(stCall.GetParamNum() >= 2)
+                    if(stCall.GetParamNum() == 3)
                     {
-                        m_HasCollision = true;
-                        m_CollisionOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as CallData);
-                        m_CollisionLength = float.Parse(stCall.GetParamId(1));
-                        m_CollisionRadius = float.Parse(stCall.GetParamId(2));
+                        m_PhysicsType = PhysicsType.Box;
+                        m_PhysicsIsTrigger = bool.Parse(stCall.GetParamId(0));
+                        m_PhysicsOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
+                        m_PhysicsSize = ScriptableDataUtility.CalcVector3(stCall.GetParam(2) as CallData);
 
-                        m_CollisionLength -= m_CollisionRadius * 2;
+                    }else if(stCall.GetParamNum() == 4)
+                    {
+                        m_PhysicsType = PhysicsType.Capsule;
+                        m_PhysicsIsTrigger = bool.Parse(stCall.GetParamId(0));
+                        m_PhysicsOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
 
-                        if (m_CollisionLength < 0)
-                            m_CollisionLength = 0;
+                        m_PhysicsLength = float.Parse(stCall.GetParamId(2));
+                        m_PhysicsRadius = float.Parse(stCall.GetParamId(3));
+                        m_PhysicsLength -= m_PhysicsRadius * 2;
+
+                        if (m_PhysicsLength < 0)
+                            m_PhysicsLength = 0;
                     }
                 }
             }
@@ -123,20 +131,32 @@ namespace SceneCommand
                     SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
                 }
 
-                // collision
-                if(m_HasCollision)
+                if(m_PhysicsType == PhysicsType.Box)
                 {
-                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_CollisionLength, m_CollisionRadius);
+                    Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_PhysicsSize);
 
                     Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
                     physicsMaterial.KineticFriction = 0;
                     physicsMaterial.StaticFriction = 0;
 
-                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, true);
-                    rigid.Position = entity.position.Value + m_CollisionOffset;
-                    //rigid.IsStatic = true;
+                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, false);
+                    rigid.IsTrigger = m_PhysicsIsTrigger;
+                    rigid.Position = entity.position.Value + m_PhysicsOffset;
 
-                    entity.AddPhysics(rigid, m_CollisionOffset, null);
+                    entity.AddPhysics(rigid, m_PhysicsOffset);
+                }else if(m_PhysicsType == PhysicsType.Capsule)
+                {
+                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_PhysicsLength, m_PhysicsRadius);
+
+                    Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
+                    physicsMaterial.KineticFriction = 0;
+                    physicsMaterial.StaticFriction = 0;
+
+                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, false);
+                    rigid.IsTrigger = m_PhysicsIsTrigger;
+                    rigid.Position = entity.position.Value + m_PhysicsOffset;
+
+                    entity.AddPhysics(rigid, m_PhysicsOffset);
                 }
 
                 // camp id
@@ -177,9 +197,19 @@ namespace SceneCommand
         private int m_SkillId = 0;
         private string m_AIScript = string.Empty;
         private int m_AttrId = 0;
-        private bool m_HasCollision = false;
-        private Vector3 m_CollisionOffset = Vector3.zero;
-        private float m_CollisionLength = 0;
-        private float m_CollisionRadius = 0;
+
+        private Vector3 m_PhysicsOffset = Vector3.zero;
+        private Vector3 m_PhysicsSize = Vector3.one;
+        private float m_PhysicsLength = 0;
+        private float m_PhysicsRadius = 0;
+        private PhysicsType m_PhysicsType = PhysicsType.Invalid;
+        private bool m_PhysicsIsTrigger = false;
+
+        private enum PhysicsType
+        {
+            Invalid,
+            Box,
+            Capsule,
+        }
     }
 }

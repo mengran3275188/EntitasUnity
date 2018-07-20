@@ -15,23 +15,24 @@ public static class GameComponentsLookup {
     public const int BuffAttrChanged = 4;
     public const int Buff = 5;
     public const int Camp = 6;
-    public const int Dead = 7;
-    public const int Destory = 8;
-    public const int DisableMoveInput = 9;
-    public const int DisableRotationInput = 10;
-    public const int Hp = 11;
-    public const int Id = 12;
-    public const int MainPlayer = 13;
-    public const int Movement = 14;
-    public const int Physics = 15;
-    public const int Position = 16;
-    public const int Resource = 17;
-    public const int Rotation = 18;
-    public const int Scene = 19;
-    public const int Skill = 20;
-    public const int TimeInfo = 21;
+    public const int Collision = 7;
+    public const int Dead = 8;
+    public const int Destory = 9;
+    public const int DisableMoveInput = 10;
+    public const int DisableRotationInput = 11;
+    public const int Hp = 12;
+    public const int Id = 13;
+    public const int MainPlayer = 14;
+    public const int Movement = 15;
+    public const int Physics = 16;
+    public const int Position = 17;
+    public const int Resource = 18;
+    public const int Rotation = 19;
+    public const int Scene = 20;
+    public const int Skill = 21;
+    public const int TimeInfo = 22;
 
-    public const int TotalComponents = 22;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -41,6 +42,7 @@ public static class GameComponentsLookup {
         "BuffAttrChanged",
         "Buff",
         "Camp",
+        "Collision",
         "Dead",
         "Destory",
         "DisableMoveInput",
@@ -66,6 +68,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.BuffAttrChangedComponent),
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
+        typeof(Entitas.Data.CollisionComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
         typeof(Entitas.Data.DisableMoveInputComponent),

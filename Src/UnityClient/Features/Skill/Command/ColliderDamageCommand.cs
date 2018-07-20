@@ -108,7 +108,7 @@ namespace SkillCommands
             rigid.Position = target.position.Value + m_Offset;
             rigid.Orientation = Matrix3x3.CreateRotationY(target.rotation.Value);
 
-            target.AddPhysics(rigid, m_Offset, OnCollision);
+            target.AddCollision(rigid, m_Offset, OnCollision);
 
             if (m_HaveObjId)
             {

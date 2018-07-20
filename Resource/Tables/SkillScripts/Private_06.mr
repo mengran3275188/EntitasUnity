@@ -35,7 +35,7 @@ skill(30)
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
 			};
-        wait(83);
+            wait(83);
 		};
         animation("attack_01_05");
         wait(1033);

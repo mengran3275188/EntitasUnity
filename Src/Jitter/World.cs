@@ -822,7 +822,7 @@ namespace Jitter
 
             if (!(body.isParticle))
             {
-
+                /*
                 //exponential map
                 Vector3 axis;
                 float angle = body.angularVelocity.magnitude;
@@ -845,6 +845,7 @@ namespace Jitter
                 Quaternion.Multiply(ref dorn, ref ornA, out dorn);
 
                 dorn.Normalize(); Matrix3x3.CreateFromQuaternion(ref dorn, out body.orientation);
+                */
             }
 
             if ((body.Damping & RigidBody.DampingType.Linear) != 0)

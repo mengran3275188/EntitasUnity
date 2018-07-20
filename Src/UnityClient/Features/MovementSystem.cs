@@ -27,13 +27,23 @@ namespace UnityClient
                     Vector3 offset = entity.physics.Offset;
                     RigidObject rigid = entity.physics.Rigid;
 
+                    Matrix3x3 orientation = Matrix3x3.CreateRotationY(entity.rotation.Value);
+
 
                     Vector3 skillVelocity = SkillSystem.Instance.GetSkillVelocity(entity);
                     Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
 
                     rigid.LinearVelocity = velocity + skillVelocity + buffVelocity;
+                    rigid.Orientation = orientation;
 
                     entity.ReplacePosition(position - offset);
+
+                    if(entity.hasCollision)
+                    {
+                        Vector3 collisionOffset = entity.collision.Offset;
+                        entity.collision.Rigid.Position = position - offset + collisionOffset;
+                        entity.collision.Rigid.Orientation = orientation;
+                    }
                 }
             }
 

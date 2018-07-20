@@ -13,6 +13,7 @@ skill(100201)
 		wait(400);
 		createcharacter(1003, vector3(0, 1.2, 0), vector3(0, 0, 0))
 		{
+            physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(100202);
 		};
 		animationspeed("attack_01_03", 3);

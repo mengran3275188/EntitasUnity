@@ -24,6 +24,11 @@ namespace Entitas.Data
     {
         public RigidObject Rigid;
         public Vector3 Offset;
+    }
+    public sealed class CollisionComponent : IComponent
+    {
+        public RigidObject Rigid;
+        public Vector3 Offset;
         public CollisionDelegate OnCollision;
     }
     public sealed class CampComponent : IComponent
