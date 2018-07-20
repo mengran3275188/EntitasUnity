@@ -320,8 +320,7 @@ namespace Util
         #region public static JVector Transform(JVector position, JMatrix matrix)
         public static Vector3 Transform(Vector3 position, Matrix3x3 matrix)
         {
-            Vector3 result;
-            Vector3.Transform(ref position, ref matrix, out result);
+            Vector3.Transform(ref position, ref matrix, out Vector3 result);
             return result;
         }
 
@@ -393,8 +392,7 @@ namespace Util
         #region public static void Add(JVector value1, JVector value2)
         public static Vector3 Add(Vector3 value1, Vector3 value2)
         {
-            Vector3 result;
-            Vector3.Add(ref value1, ref value2, out result);
+            Vector3.Add(ref value1, ref value2, out Vector3 result);
             return result;
         }
 
@@ -425,8 +423,7 @@ namespace Util
         #region public static JVector Subtract(JVector value1, JVector value2)
         public static Vector3 Subtract(Vector3 value1, Vector3 value2)
         {
-            Vector3 result;
-            Vector3.Subtract(ref value1, ref value2, out result);
+            Subtract(ref value1, ref value2, out Vector3 result);
             return result;
         }
 
@@ -457,8 +454,7 @@ namespace Util
         #region public static JVector Cross(JVector vector1, JVector vector2)
         public static Vector3 Cross(Vector3 vector1, Vector3 vector2)
         {
-            Vector3 result;
-            Vector3.Cross(ref vector1, ref vector2, out result);
+            Vector3.Cross(ref vector1, ref vector2, out Vector3 result);
             return result;
         }
 
@@ -501,8 +497,7 @@ namespace Util
         /// <returns>The negated vector.</returns>
         public static Vector3 Negate(Vector3 value)
         {
-            Vector3 result;
-            Vector3.Negate(ref value,out result);
+            Negate(ref value, out Vector3 result);
             return result;
         }
 
@@ -555,8 +550,7 @@ namespace Util
         #region public static JVector Multiply(JVector value1, float scaleFactor)
         public static Vector3 Multiply(Vector3 value1, float scaleFactor)
         {
-            Vector3 result;
-            Vector3.Multiply(ref value1, scaleFactor, out result);
+            Vector3.Multiply(ref value1, scaleFactor, out Vector3 result);
             return result;
         }
 
@@ -582,7 +576,7 @@ namespace Util
         #region public static JVector operator %(JVector value1, JVector value2)
         public static Vector3 operator %(Vector3 value1, Vector3 value2)
         {
-            Vector3 result; Vector3.Cross(ref value1, ref value2, out result);
+            Vector3.Cross(ref value1, ref value2, out Vector3 result);
             return result;
         }
         #endregion
@@ -596,8 +590,7 @@ namespace Util
 
         public static Vector3 Min(Vector3 value1, Vector3 value2)
         {
-            Vector3 result;
-            Vector3.Min(ref value1, ref value2, out result);
+            Vector3.Min(ref value1, ref value2, out Vector3 result);
             return result;
         }
 
@@ -624,8 +617,7 @@ namespace Util
         #region public static Vector3 Max(Vector3 value1, Vector3 value2)
         public static Vector3 Max(Vector3 value1, Vector3 value2)
         {
-            Vector3 result;
-            Vector3.Max(ref value1, ref value2, out result);
+            Vector3.Max(ref value1, ref value2, out Vector3 result);
             return result;
         }
 
@@ -650,8 +642,7 @@ namespace Util
         #region public static JVector Normalize(JVector value)
         public static Vector3 Normalize(Vector3 value)
         {
-            Vector3 result;
-            Vector3.Normalize(ref value, out result);
+            Vector3.Normalize(ref value, out Vector3 result);
             return result;
         }
         /// <summary>

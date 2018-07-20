@@ -245,7 +245,7 @@ namespace UnityClient.Kernel
             m_ActionQueue.QueueAction(action, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
         }
 
-        private int m_ActionNumPerTick = 1024;
+        private const int m_ActionNumPerTick = 1024;
 
         private ClientAsyncActionProcessor m_ActionQueue = new ClientAsyncActionProcessor();
     }

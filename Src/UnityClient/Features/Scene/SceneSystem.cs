@@ -116,7 +116,7 @@ namespace UnityClient
             return info;
         }
 
-        private List<SceneInstanceInfo> m_SceneLogicInfos = new List<SceneInstanceInfo>();
+        private readonly List<SceneInstanceInfo> m_SceneLogicInfos = new List<SceneInstanceInfo>();
         private Dictionary<int, List<SceneInstanceInfo>> m_SceneInstancePool = new Dictionary<int, List<SceneInstanceInfo>>();
     }
 }

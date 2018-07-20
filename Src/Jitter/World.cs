@@ -686,7 +686,7 @@ namespace Jitter
                 }
                 else
                 {
-                    Vector3 diff; Vector3.Subtract(ref c.p1, ref c.p2, out diff);
+                    Vector3.Subtract(ref c.p1, ref c.p2, out Vector3 diff);
                     float distance = Vector3.Dot(ref diff, ref c.normal);
 
                     diff = diff - distance * c.normal;
@@ -789,8 +789,7 @@ namespace Jitter
             {
                 if (!body.isStatic && body.IsActive)
                 {
-                    Vector3 temp;
-                    Vector3.Multiply(ref body.force, body.inverseMass * timestep, out temp);
+                    Vector3.Multiply(ref body.force, body.inverseMass * timestep, out Vector3 temp);
                     Vector3.Add(ref temp, ref body.linearVelocity, out body.linearVelocity);
 
                     if (!(body.isParticle))
@@ -818,8 +817,7 @@ namespace Jitter
         {
             RigidBody body = obj as RigidBody;
 
-            Vector3 temp;
-            Vector3.Multiply(ref body.linearVelocity, timestep, out temp);
+            Vector3.Multiply(ref body.linearVelocity, timestep, out Vector3 temp);
             Vector3.Add(ref temp, ref body.position, out body.position);
 
             if (!(body.isParticle))
@@ -842,7 +840,7 @@ namespace Jitter
                 }
 
                 Quaternion dorn = new Quaternion(axis.x, axis.y, axis.z, (float)Math.Cos(angle * timestep * 0.5f));
-                Quaternion ornA; Quaternion.CreateFromMatrix(ref body.orientation, out ornA);
+                Quaternion.CreateFromMatrix(ref body.orientation, out Quaternion ornA);
 
                 Quaternion.Multiply(ref dorn, ref ornA, out dorn);
 

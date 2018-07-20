@@ -14,23 +14,24 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 1)
+            if (num >= 1)
             {
                 m_Damage = float.Parse(callData.GetParamId(0));
             }
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            GameEntity sender = instance.Sender as GameEntity;
-            if(null != obj && null != sender && obj.hasHp)
+            if (instance.Target is GameEntity obj && instance.Sender is GameEntity sender)
             {
-                float damage = AttrSystem.CalcDamage();
-                damage = m_Damage;
+                if (obj.hasHp)
+                {
+                    float damage = AttrSystem.CalcDamage();
+                    damage = m_Damage;
 
-                obj.ReplaceHp(obj.hp.Value - damage);
+                    obj.ReplaceHp(obj.hp.Value - damage);
 
-                GfxSystem.AddDamageText(obj.resource.Value, "-10", 3000);
+                    GfxSystem.AddDamageText(obj.resource.Value, "-10", 3000);
+                }
             }
             return ExecResult.Finished;
         }

@@ -66,7 +66,7 @@ namespace ScriptableData
         return s_Instance;
       }
     }
-    private static NullSyntax s_Instance = new NullSyntax();
+    private readonly static NullSyntax s_Instance = new NullSyntax();
   }
   /// <summary>
   /// 用于描述变量、常量与无参命令语句。可能会出现在函数调用参数表与函数语句列表中。
@@ -620,7 +620,7 @@ namespace ScriptableData
         return s_NullFunctionData;
       }
     }
-    private static FunctionData s_NullFunctionData = new FunctionData();
+    private readonly static FunctionData s_NullFunctionData = new FunctionData();
   }
   /// <summary>
   /// 语句数据，由多个函数数据连接而成。
@@ -745,7 +745,7 @@ namespace ScriptableData
         return s_NullStatementData;
       }
     }
-    private static StatementData s_NullStatementData = new StatementData();
+    private readonly static StatementData s_NullStatementData = new StatementData();
   }
 
   public class ScriptableDataInfo : StatementData
@@ -934,8 +934,8 @@ namespace ScriptableData
       s = str.ToString();
       byte[] bytes = Convert.FromBase64String(s);
       s = Encoding.UTF8.GetString(bytes);
-      string s0;
-      if (!decodeTable.TryGetValue(s, out s0))
+
+      if (!decodeTable.TryGetValue(s, out string s0))
         s0 = s;
       return s0;
     }

@@ -90,9 +90,9 @@ namespace Jitter.Collision.Shapes
         /// <param name="box">The axis aligned bounding box of the shape.</param>
         public override void GetBoundingBox(ref Matrix3x3 orientation, out BBox box)
         {
-            Matrix3x3 abs; Mathf.Abs(ref orientation, out abs);
-            Vector3 temp;
-            Vector3.Transform(ref halfSize, ref abs, out temp);
+            Mathf.Abs(ref orientation, out Matrix3x3 abs);
+
+            Vector3.Transform(ref halfSize, ref abs, out Vector3 temp);
 
             box.Max = temp;
             Vector3.Negate(ref temp, out box.Min);

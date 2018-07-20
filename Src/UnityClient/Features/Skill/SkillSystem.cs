@@ -89,13 +89,15 @@ namespace UnityClient
         }
         public void StartSkill(GameEntity sender, GameEntity target, int skillId, Vector3 senderPosition, float direction)
         {
-            StartSkillParam param = new StartSkillParam();
-            param.SkillId = skillId;
-            param.SenderId = sender.id.value;
-            param.SenderPosition = senderPosition;
-            param.SenderDirection = direction;
+            StartSkillParam param = new StartSkillParam
+            {
+                SkillId = skillId,
+                SenderId = sender.id.value,
+                SenderPosition = senderPosition,
+                SenderDirection = direction
+            };
 
-            if(target.hasSkill)
+            if (target.hasSkill)
             {
                 target.skill.StartParam = param;
             }
@@ -138,10 +140,12 @@ namespace UnityClient
                 {
                     LogUtil.Error("Can't load skill config, skill:{0}!", skillId);
                 }
-                SkillInstanceInfo res = new SkillInstanceInfo();
-                res.m_SkillId = skillId;
-                res.m_SkillInstance = instance;
-                res.m_IsUsed = true;
+                SkillInstanceInfo res = new SkillInstanceInfo
+                {
+                    m_SkillId = skillId,
+                    m_SkillInstance = instance,
+                    m_IsUsed = true
+                };
 
                 AddStoryInstanceInfoToPool(skillId, res);
                 return res;
@@ -159,23 +163,20 @@ namespace UnityClient
         }
         private void AddStoryInstanceInfoToPool(int skillId, SkillInstanceInfo info)
         {
-            List<SkillInstanceInfo> infos;
-            if(m_SkillInstancePool.TryGetValue(skillId, out infos))
+            if(m_SkillInstancePool.TryGetValue(skillId, out List<SkillInstanceInfo> infos))
             {
                 infos.Add(info);
             }
             else
             {
-                infos = new List<SkillInstanceInfo>();
-                infos.Add(info);
+                infos = new List<SkillInstanceInfo> { info };
                 m_SkillInstancePool.Add(skillId, infos);
             }
         }
         private SkillInstanceInfo GetUnusedSkillInstanceInfoFromPool(int skillId)
         {
             SkillInstanceInfo info = null;
-            List<SkillInstanceInfo> infos;
-            if(m_SkillInstancePool.TryGetValue(skillId, out infos))
+            if(m_SkillInstancePool.TryGetValue(skillId, out List<SkillInstanceInfo> infos))
             {
                 foreach(var skillInfo in infos)
                 {
@@ -188,8 +189,7 @@ namespace UnityClient
             }
             return info;
         }
-        private Dictionary<string, object> m_GlobalVariables = new Dictionary<string, object>();
-        private List<SkillInstanceInfo> m_SkillLogicInfos = new List<SkillInstanceInfo>();
+        private readonly Dictionary<string, object> m_GlobalVariables = new Dictionary<string, object>();
         private Dictionary<int, List<SkillInstanceInfo>> m_SkillInstancePool = new Dictionary<int, List<SkillInstanceInfo>>();
 
         private readonly IGroup<GameEntity> m_SkillEntities;

@@ -22,8 +22,7 @@ namespace SkillCommands
 
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity entity = instance.Target as GameEntity;
-            if (null != entity)
+            if (instance.Target is GameEntity entity)
             {
                 UnityClient.GfxSystem.MoveChildToBone(entity.resource.Value, m_ChildName, m_NodeName);
             }

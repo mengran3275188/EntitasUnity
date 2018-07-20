@@ -12,6 +12,6 @@ namespace UnityClient
         {
             get { return s_Gfx; }
         }
-        private static GfxMoudle s_Gfx =  GfxMoudle.Instance;
+        private readonly static GfxMoudle s_Gfx =  GfxMoudle.Instance;
     }
 }

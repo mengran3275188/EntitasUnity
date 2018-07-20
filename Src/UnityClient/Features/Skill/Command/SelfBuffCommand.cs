@@ -18,9 +18,8 @@ namespace SkillCommands
 
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
 
-            if(null != obj)
+            if(instance.Target is GameEntity obj)
             {
                 BuffSystem.Instance.StartBuff(obj, obj, m_BuffId, obj.position.Value, obj.rotation.Value);
             }

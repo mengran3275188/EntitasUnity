@@ -26,11 +26,13 @@ namespace UnityClient
             m_Context.GetGroup(GameMatcher.Physics).OnEntityRemoved += PhysicsSystem_OnEntityRemoved;
 
             Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(new Util.Vector3(300, 1, 300));
-            Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape);
-            rigid.Position = new Util.Vector3(0, -0.5f, 0);
-            rigid.LinearVelocity = Util.Vector3.zero;
-            rigid.IsStatic = true;
-            rigid.Tag = false;
+            Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape)
+            {
+                Position = new Util.Vector3(0, -0.5f, 0),
+                LinearVelocity = Util.Vector3.zero,
+                IsStatic = true,
+                Tag = false
+            };
             m_World.AddBody(rigid);
         }
 
@@ -47,8 +49,7 @@ namespace UnityClient
 
         private void PhysicsSystem_OnEntityAdded(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
-            PhysicsComponent physics = component as PhysicsComponent;
-            if(null != physics)
+            if (component is PhysicsComponent physics)
             {
                 physics.Rigid.EnableDebugDraw = true;
                 m_World.AddBody(physics.Rigid);
@@ -56,26 +57,21 @@ namespace UnityClient
         }
         private void PhysicsSystem_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
-            PhysicsComponent physics = component as PhysicsComponent;
-            if(null != physics)
+            if (component is PhysicsComponent physics)
             {
                 m_World.RemoveBody(physics.Rigid, true);
             }
         }
         private void CollisionSystem_CollisionDetected(Jitter.Dynamics.RigidBody body1, Jitter.Dynamics.RigidBody body2, Util.Vector3 point1, Util.Vector3 point2, Util.Vector3 normal, float penetration)
         {
-            RigidObject rigidObject1 = body1 as RigidObject;
-            RigidObject rigidObject2 = body2 as RigidObject;
-            if(null != rigidObject1 && null != rigidObject2)
+            if (body1 is RigidObject rigidObject1 && body2 is RigidObject rigidObject2)
             {
                 var entity1 = m_Context.GetEntityWithId(rigidObject1.EntityId);
                 var entity2 = m_Context.GetEntityWithId(rigidObject2.EntityId);
-                if(null != entity1 && null != entity2 && entity1.camp.Value != entity2.camp.Value)
+                if (null != entity1 && null != entity2 && entity1.camp.Value != entity2.camp.Value)
                 {
-                    if(null != entity1.physics.OnCollision)
-                        entity1.physics.OnCollision(entity2.id.value);
-                    if(null != entity2.physics.OnCollision)
-                        entity2.physics.OnCollision(entity1.id.value);
+                    entity1.physics.OnCollision?.Invoke(entity2.id.value);
+                    entity2.physics.OnCollision?.Invoke(entity1.id.value);
                 }
             }
         }

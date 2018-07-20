@@ -13,11 +13,13 @@ namespace SkillCommands
     {
         public override ICommand Clone()
         {
-            AreaDamageCommand command = new AreaDamageCommand();
-            command.m_RelativeCenter = m_RelativeCenter;
-            command.m_Range = m_Range;
+            AreaDamageCommand command = new AreaDamageCommand
+            {
+                m_RelativeCenter = m_RelativeCenter,
+                m_Range = m_Range
+            };
 
-            foreach(var pair in m_StateImpacts)
+            foreach (var pair in m_StateImpacts)
             {
                 command.m_StateImpacts[pair.Key] = pair.Value;
             }
@@ -41,11 +43,10 @@ namespace SkillCommands
 
                 for(int i = 0; i < funcData.Statements.Count; ++i)
                 {
-                    CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
-                    if(null != stCall)
+                    if (funcData.Statements[i] is ScriptableData.CallData stCall)
                     {
                         string id = stCall.GetId();
-                        if(id == "statebuff")
+                        if (id == "statebuff")
                         {
                             StateBuff stateBuff = ScriptableDataUtility.CalcStateBuff(stCall);
                             m_StateImpacts[stateBuff.m_State] = stateBuff;
@@ -56,8 +57,7 @@ namespace SkillCommands
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            if(null != obj)
+            if (instance.Target is GameEntity obj)
             {
                 Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
                 Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
@@ -65,7 +65,7 @@ namespace SkillCommands
                 UnityClient.GfxSystem.DrawCircle(center, m_Range, 2.0f);
 
                 var entities = Contexts.sharedInstance.game.GetGroup(GameMatcher.Position);
-                foreach(var entity in entities)
+                foreach (var entity in entities)
                 {
                     if (entity == obj)
                         continue;
@@ -79,8 +79,7 @@ namespace SkillCommands
 
                             StateBuff_State state = GetState(entity);
 
-                            StateBuff stateBuff;
-                            if (!m_StateImpacts.TryGetValue(state, out stateBuff))
+                            if (!m_StateImpacts.TryGetValue(state, out StateBuff stateBuff))
                             {
                                 m_StateImpacts.TryGetValue(StateBuff_State.Default, out stateBuff);
                             }
@@ -110,7 +109,6 @@ namespace SkillCommands
 
         private Vector3 m_RelativeCenter;
         private float m_Range;
-        private int m_ImpactId;
 
         private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
     }

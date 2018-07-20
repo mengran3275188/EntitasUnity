@@ -51,9 +51,7 @@ namespace UnityClient
                     {
                         int maxCount = buffConfig.MaxCount;
 
-
-                        List<BuffInstanceInfo> infos;
-                        if (!buffComponent.InstanceInfos.TryGetValue(startParam.BuffId, out infos))
+                        if (!buffComponent.InstanceInfos.TryGetValue(startParam.BuffId, out List<BuffInstanceInfo> infos))
                         {
                             infos = new List<BuffInstanceInfo>();
                             buffComponent.InstanceInfos.Add(startParam.BuffId, infos);
@@ -94,11 +92,13 @@ namespace UnityClient
         public void StartBuff(GameEntity sender, GameEntity target, int buffId, Vector3 senderPosition, float direction)
         {
 
-            StartBuffParam param = new StartBuffParam();
-            param.BuffId = buffId;
-            param.SenderId = sender.id.value;
-            param.SenderPosition = senderPosition;
-            param.SenderDirection = direction;
+            StartBuffParam param = new StartBuffParam
+            {
+                BuffId = buffId,
+                SenderId = sender.id.value,
+                SenderPosition = senderPosition,
+                SenderDirection = direction
+            };
 
             if (target.hasBuff)
             {
@@ -138,10 +138,12 @@ namespace UnityClient
                 {
                     LogUtil.Error("ImpactSystem.NewImpactInstance : Can't load impact config, impact:{0}.", buffId);
                 }
-                BuffInstanceInfo res = new BuffInstanceInfo();
-                res.m_BuffId = buffId;
-                res.m_BuffInstance = instance;
-                res.m_IsUsed = true;
+                BuffInstanceInfo res = new BuffInstanceInfo
+                {
+                    m_BuffId = buffId,
+                    m_BuffInstance = instance,
+                    m_IsUsed = true
+                };
 
                 AddImpactInstanceInfoToPool(buffId, res);
                 return res;
@@ -159,8 +161,7 @@ namespace UnityClient
         }
         private void AddImpactInstanceInfoToPool(int buffId, BuffInstanceInfo info)
         {
-            List<BuffInstanceInfo> infos;
-            if (m_BuffInstancePool.TryGetValue(buffId, out infos))
+            if (m_BuffInstancePool.TryGetValue(buffId, out List<BuffInstanceInfo> infos))
             {
                 infos.Add(info);
             }
@@ -174,8 +175,7 @@ namespace UnityClient
         private BuffInstanceInfo GetUnusedBuffInstanceInfoFromPool(int buffId)
         {
             BuffInstanceInfo info = null;
-            List<BuffInstanceInfo> infos;
-            if (m_BuffInstancePool.TryGetValue(buffId, out infos))
+            if (m_BuffInstancePool.TryGetValue(buffId, out List<BuffInstanceInfo> infos))
             {
                 foreach (var buffInfo in infos)
                 {

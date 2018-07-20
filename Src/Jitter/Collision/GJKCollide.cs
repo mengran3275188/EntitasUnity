@@ -74,12 +74,10 @@ namespace Jitter.Collision
         /// <returns>Returns true if the point is within the shape, otherwise false.</returns>
         public static bool Pointcast(ISupportMappable support, ref Matrix3x3 orientation,ref Vector3 position,ref Vector3 point)
         {
-            Vector3 arbitraryPoint; 
-
-            SupportMapTransformed(support, ref orientation, ref position, ref point, out arbitraryPoint);
+            SupportMapTransformed(support, ref orientation, ref position, ref point, out Vector3 arbitraryPoint);
             Vector3.Subtract(ref point, ref arbitraryPoint, out arbitraryPoint);
 
-            Vector3 r; support.SupportCenter(out r);
+            support.SupportCenter(out Vector3 r);
             Vector3.Transform(ref r, ref orientation, out r);
             Vector3.Add(ref position, ref r, out r);
             Vector3.Subtract(ref point, ref r, out r);
@@ -482,9 +480,9 @@ namespace Jitter.Collision
 
             private int _numVertices;
 
-            private Vector3[] _simplexVectorW = new Vector3[VoronoiSimplexMaxVerts];
-            private Vector3[] _simplexPointsP = new Vector3[VoronoiSimplexMaxVerts];
-            private Vector3[] _simplexPointsQ = new Vector3[VoronoiSimplexMaxVerts];
+            private readonly Vector3[] _simplexVectorW = new Vector3[VoronoiSimplexMaxVerts];
+            private readonly Vector3[] _simplexPointsP = new Vector3[VoronoiSimplexMaxVerts];
+            private readonly Vector3[] _simplexPointsQ = new Vector3[VoronoiSimplexMaxVerts];
 
             private Vector3 _cachedPA;
             private Vector3 _cachedPB;

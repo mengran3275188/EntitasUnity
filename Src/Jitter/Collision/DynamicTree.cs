@@ -85,7 +85,7 @@ namespace Jitter.Collision
 
         // Added by 'noone' to prevent highly symmetric cases to
         // update the whole tree at once.
-        private float settingsRndExtension = 0.1f;
+        private readonly float settingsRndExtension = 0.1f;
 
         private int _root;
 

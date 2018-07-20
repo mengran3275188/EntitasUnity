@@ -156,8 +156,7 @@ namespace Util
         #region public static Quaternion Multiply(Quaternion quaternion1, Quaternion quaternion2)
         public static Quaternion Multiply(Quaternion quaternion1, Quaternion quaternion2)
         {
-            Quaternion result;
-            Quaternion.Multiply(ref quaternion1, ref quaternion2, out result);
+            Quaternion.Multiply(ref quaternion1, ref quaternion2, out Quaternion result);
             return result;
         }
 
@@ -195,8 +194,7 @@ namespace Util
         #region public static JQuaternion CreateFromMatrix(JMatrix matrix)
         public static Quaternion CreateFromMatrix(Matrix3x3 matrix)
         {
-            Quaternion result;
-            Quaternion.CreateFromMatrix(ref matrix, out result);
+            Quaternion.CreateFromMatrix(ref matrix, out Quaternion result);
             return result;
         }
 

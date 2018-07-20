@@ -47,7 +47,7 @@ namespace Jitter.Collision
             }
         }
 
-        private IBroadphaseEntityXCompare xComparer;
+        private readonly IBroadphaseEntityXCompare xComparer;
 
         private bool swapOrder = false;
 
@@ -84,7 +84,7 @@ namespace Jitter.Collision
             bodyList.Add(body);
         }
 
-        Action<object> detectCallback;
+        readonly Action<object> detectCallback;
 
         /// <summary>
         /// Tells the collisionsystem to check all bodies for collisions. Hook into the

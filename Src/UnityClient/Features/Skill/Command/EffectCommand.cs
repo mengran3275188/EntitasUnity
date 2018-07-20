@@ -24,8 +24,7 @@ namespace SkillCommands
 
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            GameEntity obj = instance.Target as GameEntity;
-            if (null != obj)
+            if(instance.Target is GameEntity obj)
             {
                 string effectPath = m_EffectPath;
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
@@ -74,28 +73,24 @@ namespace SkillCommands
 
                 for (int i = 0; i < funcData.Statements.Count; ++i)
                 {
-                    ScriptableData.CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
-                    if (null != stCall)
+                    if (funcData.Statements[i] is ScriptableData.CallData stCall)
                     {
                         string id = stCall.GetId();
                         if (id == "transform")
                         {
                             if (stCall.GetParamNum() > 0)
                             {
-                                ScriptableData.CallData param0 = stCall.GetParam(0) as ScriptableData.CallData;
-                                if (null != param0)
+                                if (stCall.GetParam(0) is ScriptableData.CallData param0)
                                     m_Pos = ScriptableDataUtility.CalcVector3(param0);
                             }
                             if (stCall.GetParamNum() > 1)
                             {
-                                ScriptableData.CallData param1 = stCall.GetParam(1) as ScriptableData.CallData;
-                                if (null != param1)
+                                if (stCall.GetParam(1) is ScriptableData.CallData param1)
                                     m_Euler = ScriptableDataUtility.CalcEularRotation(param1);
                             }
                             if (stCall.GetParamNum() > 2)
                             {
-                                ScriptableData.CallData param2 = stCall.GetParam(2) as ScriptableData.CallData;
-                                if (null != param2)
+                                if (stCall.GetParam(2) is ScriptableData.CallData param2)
                                     m_Scale = ScriptableDataUtility.CalcVector3(param2);
                             }
                         }
@@ -108,11 +103,9 @@ namespace SkillCommands
         private string m_AttachPath = "";
         private float m_DeleteTime = 0;
         private bool m_IsAttach = true;
-        private bool m_SpeedInfuence = false;
 
         private Vector3 m_Pos = Vector3.zero;
         private Vector3 m_Euler = Vector3.zero;
         private Vector3 m_Scale = Vector3.one;
-        private bool useAsync = true;
     }
 }

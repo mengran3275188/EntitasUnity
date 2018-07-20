@@ -36,7 +36,7 @@ namespace Jitter.Collision
     public class CollisionSystemBrute : CollisionSystem
     {
         private List<IBroadphaseEntity> bodyList = new List<IBroadphaseEntity>();
-        private Action<object> detectCallback;
+        private readonly Action<object> detectCallback;
 
         /// <summary>
         /// Creates a new instance of the CollisionSystemBrute class.
