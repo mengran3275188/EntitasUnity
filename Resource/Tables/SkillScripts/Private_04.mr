@@ -14,14 +14,16 @@ skill(20)
         wait(400);
         animationspeed("attack_01", 1);
         curvemove(true, 0.133, 0, 0, 6, 0, 0, 270);
-		createcharacter(1011, vector3(0, 0, 0), vector3(0, 0, 0))
-		{
-			skill(21);
-		};
+		colliderdamage(vector3(0,1,1.5), vector3(1, 1, 3.5))
+        {
+            direction(2);
+			statebuff("Default", 100202);
+        }objid("@colliderId");
         wait(133);
         animationspeed("attack_01", 0.5);
         wait(133);
         animationspeed("attack_01", 1);
+		removecollider();
         wait(500);
         disablemoveinput(false);
         disablerotationinput(false);
