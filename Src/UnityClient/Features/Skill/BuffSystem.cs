@@ -56,7 +56,10 @@ namespace UnityClient
                             infos = new List<BuffInstanceInfo>();
                             buffComponent.InstanceInfos.Add(startParam.BuffId, infos);
                         }
-                        if(maxCount > 0 && infos.Count >= maxCount)
+                        if(maxCount == 0 && infos.Count > 0)
+                        {
+                            continue;
+                        }else if(maxCount > 0 && infos.Count >= maxCount)
                         {
                             for(int i = 0; i < infos.Count - maxCount + 1; ++i)
                             {

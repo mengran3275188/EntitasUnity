@@ -2,6 +2,6 @@ Id	Description	Script	AttrId	MaxCount
 int	string	string	int	int
 1	主角普攻	Tables/ImpactScripts/Test.mr	-1	-1
 2	主角加速	Tables/ImpactScripts/Test.mr	10001	2
-3	主角普攻_技能状态	Tables/ImpactScripts/Test.mr	-1	-1
+3	主角普攻_技能状态	Tables/ImpactScripts/Test.mr	-1	0
 100201	狐狸射箭	Tables/ImpactScripts/Test.mr	-1	-1
 100202	狐狸射的箭	Tables/ImpactScripts/Test.mr	-1	-1
