@@ -39,7 +39,7 @@ namespace UnityDelegate
         }
         public void OnStart(IActionQueue processor)
         {
-            //Application.targetFrameRate = 30;
+            Application.targetFrameRate = 60;
 
 
             m_LogicInvoker = processor;

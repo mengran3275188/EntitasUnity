@@ -15,6 +15,7 @@ namespace SkillCommands
             ColliderDamageCommand copy = new ColliderDamageCommand();
             copy.m_Offset = m_Offset;
             copy.m_Size = m_Size;
+            copy.m_Interval = m_Interval;
 
             copy.m_HaveObjId = m_HaveObjId;
             copy.m_ObjIdVarName = m_ObjIdVarName.Clone();
@@ -39,10 +40,11 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 2)
+            if(num >= 3)
             {
-                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(0) as ScriptableData.CallData);
-                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
+                m_Interval = long.Parse(callData.GetParamId(0));
+                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
+                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
             }
         }
         protected override void Load(FunctionData funcData)
@@ -129,10 +131,25 @@ namespace SkillCommands
 
         private void OnCollision(uint targetEntityId)
         {
+            float time = Contexts.sharedInstance.game.timeInfo.Time;
+
+            long lastHitTime = -1;
+
+            if (m_Interval > 0 && m_DamagedEntities.TryGetValue(targetEntityId, out lastHitTime))
+            {
+                if(time * 1000 < lastHitTime + m_Interval)
+                {
+                    LogUtil.Info("ColliderDamage.OnCollision drop collide event due to interval.");
+                    return;
+                }
+            }
+
             GameEntity target = m_Instance.Target as GameEntity;
             GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget && !collideTarget.hasDead)
             {
+
+
                 StateBuff_State state = GetState(collideTarget);
 
                 StateBuff stateBuff;
@@ -145,6 +162,9 @@ namespace SkillCommands
                     foreach (int buffId in stateBuff.m_Buffs)
                         UnityClient.BuffSystem.Instance.StartBuff(target, collideTarget, buffId, target.position.Value, target.rotation.Value);
                 }
+
+                m_DamagedEntities[targetEntityId] = (long)(time * 1000);
+
                 m_Instance.SendMessage("oncollision");
             }
         }
@@ -153,19 +173,17 @@ namespace SkillCommands
             return obj.skill.Instance == null ? StateBuff_State.Default : StateBuff_State.Skill;
         }
 
-
         // config
         private Vector3 m_Offset = Vector3.zero;
         private Vector3 m_Size = Vector3.one;
-
+        private long m_Interval = -1;
         private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
 
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();
         private bool m_HaveObjId = false;
-
         private GameEntity m_Target = null;
-
         private Instance m_Instance = null;
+        private Dictionary<uint, long> m_DamagedEntities = new Dictionary<uint, long>();
 
     }
 

@@ -1,4 +1,5 @@
-﻿using ScriptableSystem;
+﻿using System.Collections.Generic;
+using ScriptableSystem;
 
 namespace Entitas.Data
 {

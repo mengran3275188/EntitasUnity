@@ -34,9 +34,21 @@ namespace UnityClient
                 Position = new Util.Vector3(0, -0.5f, 0),
                 LinearVelocity = Util.Vector3.zero,
                 IsStatic = true,
-                Tag = false
+                Tag = false,
+                EnableDebugDraw = true,
             };
             m_World.AddBody(rigid);
+
+            Jitter.Collision.Shapes.BoxShape littleBox = new Jitter.Collision.Shapes.BoxShape(new Vector3(0.4f, 0.8f, 0.4f));
+            Jitter.Dynamics.RigidBody littleBoxRigid = new Jitter.Dynamics.RigidBody(littleBox)
+            {
+                Position = new Util.Vector3(50, 0.1f, 50),
+                LinearVelocity = Util.Vector3.zero,
+                IsStatic = true,
+                Tag = false,
+                EnableDebugDraw = true,
+            };
+            m_World.AddBody(littleBoxRigid);
         }
 
 

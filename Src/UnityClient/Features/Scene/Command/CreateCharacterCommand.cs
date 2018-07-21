@@ -146,7 +146,7 @@ namespace SceneCommand
                     entity.AddPhysics(rigid, m_PhysicsOffset);
                 }else if(m_PhysicsType == PhysicsType.Capsule)
                 {
-                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_PhysicsLength, m_PhysicsRadius);
+                    Jitter.Collision.Shapes.CylinderShape shape = new Jitter.Collision.Shapes.CylinderShape(m_PhysicsLength, m_PhysicsRadius);
 
                     Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
                     physicsMaterial.KineticFriction = 0;

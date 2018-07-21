@@ -130,6 +130,25 @@ areadamage(vector3(0, 0, 0), 3)
     statebuff("Default", 1001);
 }
 ```
+### colliderdamage
+```
+colliderdamage(damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
+{
+    statebuff("Default", default_buff);
+    statebuff("Skill", skill_buff);
+};
+```
+```
+colliderdamage(100, vector3(0, 0, 0), vector3(1, 1, 1))
+{
+    statebuff("Default", 1001);
+    statebuff("Skill", 1002);
+};
+```
+### removecollider
+```
+removecollider();
+```
 
 ### movechild
 ```
