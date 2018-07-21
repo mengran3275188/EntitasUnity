@@ -119,6 +119,22 @@ namespace UnityClient
             }
             return velocity;
         }
+        public bool IsDisableMoveInput(GameEntity entity)
+        {
+            if(entity.hasSkill && null != entity.skill.Instance)
+            {
+                return entity.skill.Instance.m_SkillInstance.DisableMoveInput;
+            }
+            return false;
+        }
+        public bool IsDisableRotationInput(GameEntity entity)
+        {
+            if(entity.hasSkill && null != entity.skill.Instance)
+            {
+                return entity.skill.Instance.m_SkillInstance.DisableRotationInput;
+            }
+            return false;
+        }
         private void PlayUseSkill(int skillId)
         {
             var mainPlayer = m_GameContext.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();

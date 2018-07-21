@@ -127,6 +127,42 @@ namespace UnityClient
             }
             return velocity;
         }
+        public bool IsDisableMoveInput(GameEntity entity)
+        {
+            if(entity.hasBuff)
+            {
+                foreach (var pair in entity.buff.InstanceInfos)
+                {
+                    int buffId = pair.Key;
+                    var infos = pair.Value;
+                    for (int i = infos.Count - 1; i >= 0; i--)
+                    {
+                        var info = infos[i];
+                        if (info.m_BuffInstance.DisableMoveInput)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool IsDisableRotationInput(GameEntity entity)
+        {
+            if(entity.hasBuff)
+            {
+                foreach (var pair in entity.buff.InstanceInfos)
+                {
+                    int buffId = pair.Key;
+                    var infos = pair.Value;
+                    for (int i = infos.Count - 1; i >= 0; i--)
+                    {
+                        var info = infos[i];
+                        if (info.m_BuffInstance.DisableRotationInput)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
 
         private BuffInstanceInfo NewBuffInstance(int buffId)
         {

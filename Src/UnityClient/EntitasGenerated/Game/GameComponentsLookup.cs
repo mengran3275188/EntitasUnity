@@ -18,21 +18,19 @@ public static class GameComponentsLookup {
     public const int Collision = 7;
     public const int Dead = 8;
     public const int Destory = 9;
-    public const int DisableMoveInput = 10;
-    public const int DisableRotationInput = 11;
-    public const int Hp = 12;
-    public const int Id = 13;
-    public const int MainPlayer = 14;
-    public const int Movement = 15;
-    public const int Physics = 16;
-    public const int Position = 17;
-    public const int Resource = 18;
-    public const int Rotation = 19;
-    public const int Scene = 20;
-    public const int Skill = 21;
-    public const int TimeInfo = 22;
+    public const int Hp = 10;
+    public const int Id = 11;
+    public const int MainPlayer = 12;
+    public const int Movement = 13;
+    public const int Physics = 14;
+    public const int Position = 15;
+    public const int Resource = 16;
+    public const int Rotation = 17;
+    public const int Scene = 18;
+    public const int Skill = 19;
+    public const int TimeInfo = 20;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -45,8 +43,6 @@ public static class GameComponentsLookup {
         "Collision",
         "Dead",
         "Destory",
-        "DisableMoveInput",
-        "DisableRotationInput",
         "Hp",
         "Id",
         "MainPlayer",
@@ -71,8 +67,6 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.CollisionComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
-        typeof(Entitas.Data.DisableMoveInputComponent),
-        typeof(Entitas.Data.DisableRotationInputComponent),
         typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.MainPlayerComponent),

@@ -21,11 +21,5 @@ namespace Entitas.Data
         public int ActionId;
         public string Prefix;
     }
-    public sealed class DisableMoveInputComponent : IComponent
-    {
-    }
-    public sealed class DisableRotationInputComponent : IComponent
-    {
-    }
 }
 

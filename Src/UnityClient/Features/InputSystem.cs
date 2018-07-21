@@ -57,7 +57,7 @@ namespace UnityClient
             {
                 if (mainPlayer.hasMovement)
                 {
-                    if(!mainPlayer.isDisableMoveInput)
+                    if(!(SkillSystem.Instance.IsDisableMoveInput(mainPlayer) || BuffSystem.Instance.IsDisableMoveInput(mainPlayer)))
                     {
                         if (mainPlayer.hasAttr)
                         {
@@ -68,7 +68,7 @@ namespace UnityClient
                 }
                 if (isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
                 {
-                    if(!mainPlayer.isDisableRotationInput)
+                    if(!(SkillSystem.Instance.IsDisableRotationInput(mainPlayer) || BuffSystem.Instance.IsDisableRotationInput(mainPlayer)))
                         mainPlayer.ReplaceRotation(moveDir);
                 }
             }

@@ -153,6 +153,16 @@ namespace ScriptableSystem
             get { return m_Velocity; }
             set { m_Velocity = value; }
         }
+        public bool DisableMoveInput
+        {
+            get { return m_DisableMoveInput; }
+            set { m_DisableMoveInput = value; }
+        }
+        public bool DisableRotationInput
+        {
+            get { return m_DisableRotationInput; }
+            set { m_DisableRotationInput = value; }
+        }
         public Dictionary<string, object> LocalVariables
         {
             get { return m_LocalVariables; }
@@ -322,6 +332,11 @@ namespace ScriptableSystem
                     queue.Clear();
                 }
             }
+
+            m_DisableMoveInput = false;
+            m_DisableRotationInput = false;
+            m_Velocity = Vector3.zero;
+
             m_ActiveHandlers.Clear();
             m_ParallelCommands.Clear();
             m_LocalVariables.Clear();
@@ -474,6 +489,8 @@ namespace ScriptableSystem
         private Vector3 m_SenderPosition = Vector3.zero;
         private float m_SenderDir = 0;
         private Vector3 m_Velocity = Vector3.zero;
+        private bool m_DisableRotationInput = false;
+        private bool m_DisableMoveInput = false;
 
         private Dictionary<string, Queue<MessageInfo>> m_MessageQueues = new Dictionary<string, Queue<MessageInfo>>();
         private List<MessageHandler> m_ActiveHandlers = new List<MessageHandler>();

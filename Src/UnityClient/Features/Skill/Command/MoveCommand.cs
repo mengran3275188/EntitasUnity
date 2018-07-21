@@ -224,7 +224,7 @@ namespace SkillCommands
             GameEntity target = instance.Target as GameEntity;
             if(null != target)
             {
-                target.isDisableMoveInput = m_Value;
+                instance.DisableMoveInput = m_Value;
                 target.ReplaceMovement(Vector3.zero);
             }
             return ExecResult.Finished;
@@ -247,7 +247,7 @@ namespace SkillCommands
             GameEntity target = instance.Target as GameEntity;
             if(null != target)
             {
-                target.isDisableRotationInput = m_Value;
+                instance.DisableRotationInput = m_Value;
             }
             return ExecResult.Finished;
         }
