@@ -4,10 +4,17 @@
 <behavior name="FirstBT_2" agenttype="CharacterAgent" version="5">
   <node class="Sequence" id="1">
     <node class="IfElse" id="6">
-      <node class="Condition" id="7">
-        <property Operator="Less" />
-        <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
-        <property Opr="const float 10" />
+      <node class="And" id="7">
+        <node class="Condition" id="14">
+          <property Operator="Less" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 10" />
+        </node>
+        <node class="Condition" id="22">
+          <property Operator="Greater" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 5" />
+        </node>
       </node>
       <node class="SelectorLoop" id="2">
         <property ResetChildren="false" />
@@ -48,7 +55,7 @@
               <property ResultOption="BT_SUCCESS" />
             </node>
             <node class="Wait" id="23">
-              <property Time="const float 0" />
+              <property Time="const float 500" />
             </node>
             <node class="Action" id="4">
               <property Method="Self.CharacterAgent::UseSkill(30)" />
@@ -68,9 +75,20 @@
           </node>
         </node>
       </node>
-      <node class="Action" id="8">
-        <property Method="Self.CharacterAgent::MoveToPlayer()" />
-        <property ResultOption="BT_INVALID" />
+      <node class="IfElse" id="24">
+        <node class="Condition" id="25">
+          <property Operator="LessEqual" />
+          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opr="const float 6" />
+        </node>
+        <node class="Action" id="26">
+          <property Method="Self.CharacterAgent::EscapeFromPlayer()" />
+          <property ResultOption="BT_SUCCESS" />
+        </node>
+        <node class="Action" id="8">
+          <property Method="Self.CharacterAgent::MoveToPlayer()" />
+          <property ResultOption="BT_INVALID" />
+        </node>
       </node>
     </node>
     <node class="Wait" id="0">

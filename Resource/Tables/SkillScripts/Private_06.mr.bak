@@ -20,13 +20,10 @@ skill(30)
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
         }objid("@colliderId");
-        wait(167);
         animation("attack_01_04")
-		{
-			wrapmode(2); 
-		};
-        wait(667);
-			removecollider();
+				{
+				wrapmode(2); 
+				};
         animation("attack_01_05");
         wait(1033);
         disablemoveinput(false);

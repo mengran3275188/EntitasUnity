@@ -23,6 +23,7 @@ skill(20)
         animationspeed("attack_01", 0.5);
         wait(133);
         animationspeed("attack_01", 1);
+		removecollider();
         wait(500);
         disablemoveinput(false);
         disablerotationinput(false);

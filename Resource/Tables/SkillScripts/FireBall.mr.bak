@@ -61,8 +61,7 @@ skill(1004)
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
 		colliderdamage(100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
         {
-				statebuff("Default", 1);
-				statebuff("Skill", 3);
+			statebuff("Default", 100202);
         }objid("@colliderId");
 		wait(700);
 		removecollider();

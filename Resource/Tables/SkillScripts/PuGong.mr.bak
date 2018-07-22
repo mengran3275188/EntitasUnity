@@ -33,7 +33,7 @@ skill(1)
             statebuff("Default", 1);
             statebuff("Skill", 3);
         };
-        wait(100);
+        wait(67);
         animationspeed("attack_02", 1);
 
         //effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_12_01", 3000, "Bip001", true);

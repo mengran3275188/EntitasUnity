@@ -10,8 +10,16 @@
           <Node Class="PluginBehaviac.Nodes.IfElse" Enable="true" HasOwnPrefabData="false" Id="6" PrefabName="" PrefabNodeId="-1">
             <Comment Background="NoColor" Text="" />
             <Connector Identifier="_condition">
-              <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="7" Operator="Less" Opl="Self.CharacterAgent::DistanceToPlayer()" Opr="const float 10" PrefabName="" PrefabNodeId="-1">
+              <Node Class="PluginBehaviac.Nodes.And" Enable="true" HasOwnPrefabData="false" Id="7" PrefabName="" PrefabNodeId="-1">
                 <Comment Background="NoColor" Text="" />
+                <Connector Identifier="Conditions">
+                  <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="14" Operator="Less" Opl="Self.CharacterAgent::DistanceToPlayer()" Opr="const float 10" PrefabName="" PrefabNodeId="-1">
+                    <Comment Background="NoColor" Text="" />
+                  </Node>
+                  <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="22" Operator="Greater" Opl="Self.CharacterAgent::DistanceToPlayer()" Opr="const float 5" PrefabName="" PrefabNodeId="-1">
+                    <Comment Background="NoColor" Text="" />
+                  </Node>
+                </Connector>
               </Node>
             </Connector>
             <Connector Identifier="_if">
@@ -52,7 +60,7 @@
                           <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="12" Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
                             <Comment Background="NoColor" Text="" />
                           </Node>
-                          <Node Class="PluginBehaviac.Nodes.Wait" Enable="true" HasOwnPrefabData="false" Id="23" PrefabName="" PrefabNodeId="-1" Time="const float 0">
+                          <Node Class="PluginBehaviac.Nodes.Wait" Enable="true" HasOwnPrefabData="false" Id="23" PrefabName="" PrefabNodeId="-1" Time="const float 500">
                             <Comment Background="NoColor" Text="" />
                           </Node>
                           <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="4" Method="Self.CharacterAgent::UseSkill(30)" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
@@ -84,8 +92,23 @@
               </Node>
             </Connector>
             <Connector Identifier="_else">
-              <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="8" Method="Self.CharacterAgent::MoveToPlayer()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_INVALID">
+              <Node Class="PluginBehaviac.Nodes.IfElse" Enable="true" HasOwnPrefabData="false" Id="24" PrefabName="" PrefabNodeId="-1">
                 <Comment Background="NoColor" Text="" />
+                <Connector Identifier="_condition">
+                  <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="25" Operator="LessEqual" Opl="Self.CharacterAgent::DistanceToPlayer()" Opr="const float 6" PrefabName="" PrefabNodeId="-1">
+                    <Comment Background="NoColor" Text="" />
+                  </Node>
+                </Connector>
+                <Connector Identifier="_if">
+                  <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="26" Method="Self.CharacterAgent::EscapeFromPlayer()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_SUCCESS">
+                    <Comment Background="NoColor" Text="" />
+                  </Node>
+                </Connector>
+                <Connector Identifier="_else">
+                  <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="8" Method="Self.CharacterAgent::MoveToPlayer()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_INVALID">
+                    <Comment Background="NoColor" Text="" />
+                  </Node>
+                </Connector>
               </Node>
             </Connector>
           </Node>
