@@ -396,6 +396,183 @@ namespace Entitas.Data
 
 namespace Entitas.Data
 {
+	public sealed partial class Blocks : IData2
+	{
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 56)]
+		private struct BlocksRecord
+		{
+			internal int Id;
+			internal int Description;
+			internal float Length;
+			internal float Width;
+			internal int Type;
+			internal int PortCount;
+			internal int PortType0;
+			internal int PortOffset0;
+			internal int PortType1;
+			internal int PortOffset1;
+			internal int PortType2;
+			internal int PortOffset2;
+			internal int PortType3;
+			internal int PortOffset3;
+		}
+
+		public int Id;
+		public string Description;
+		public float Length;
+		public float Width;
+		public int Type;
+		public int PortCount;
+		public int PortType0;
+		public float[] PortOffset0;
+		public int PortType1;
+		public float[] PortOffset1;
+		public int PortType2;
+		public float[] PortOffset2;
+		public int PortType3;
+		public float[] PortOffset3;
+
+		public bool CollectDataFromDBC(DBC_Row node)
+		{
+			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
+			Description = DBCUtil.ExtractString(node, "Description", "");
+			Length = DBCUtil.ExtractNumeric<float>(node, "Length", 0);
+			Width = DBCUtil.ExtractNumeric<float>(node, "Width", 0);
+			Type = DBCUtil.ExtractNumeric<int>(node, "Type", 0);
+			PortCount = DBCUtil.ExtractNumeric<int>(node, "PortCount", 0);
+			PortType0 = DBCUtil.ExtractNumeric<int>(node, "PortType0", 0);
+			PortOffset0 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset0", null);
+			PortType1 = DBCUtil.ExtractNumeric<int>(node, "PortType1", 0);
+			PortOffset1 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset1", null);
+			PortType2 = DBCUtil.ExtractNumeric<int>(node, "PortType2", 0);
+			PortOffset2 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset2", null);
+			PortType3 = DBCUtil.ExtractNumeric<int>(node, "PortType3", 0);
+			PortOffset3 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset3", null);
+			return true;
+		}
+
+		public bool CollectDataFromBinary(BinaryTable table, int index)
+		{
+			BlocksRecord record = GetRecord(table,index);
+			Id = DBCUtil.ExtractInt(table, record.Id, 0);
+			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Length = DBCUtil.ExtractFloat(table, record.Length, 0);
+			Width = DBCUtil.ExtractFloat(table, record.Width, 0);
+			Type = DBCUtil.ExtractInt(table, record.Type, 0);
+			PortCount = DBCUtil.ExtractInt(table, record.PortCount, 0);
+			PortType0 = DBCUtil.ExtractInt(table, record.PortType0, 0);
+			PortOffset0 = DBCUtil.ExtractFloatArray(table, record.PortOffset0, null);
+			PortType1 = DBCUtil.ExtractInt(table, record.PortType1, 0);
+			PortOffset1 = DBCUtil.ExtractFloatArray(table, record.PortOffset1, null);
+			PortType2 = DBCUtil.ExtractInt(table, record.PortType2, 0);
+			PortOffset2 = DBCUtil.ExtractFloatArray(table, record.PortOffset2, null);
+			PortType3 = DBCUtil.ExtractInt(table, record.PortType3, 0);
+			PortOffset3 = DBCUtil.ExtractFloatArray(table, record.PortOffset3, null);
+			return true;
+		}
+
+		public void AddToBinary(BinaryTable table)
+		{
+			BlocksRecord record = new BlocksRecord();
+			record.Id = DBCUtil.SetValue(table, Id, 0);
+			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Length = DBCUtil.SetValue(table, Length, 0);
+			record.Width = DBCUtil.SetValue(table, Width, 0);
+			record.Type = DBCUtil.SetValue(table, Type, 0);
+			record.PortCount = DBCUtil.SetValue(table, PortCount, 0);
+			record.PortType0 = DBCUtil.SetValue(table, PortType0, 0);
+			record.PortOffset0 = DBCUtil.SetValue(table, PortOffset0, null);
+			record.PortType1 = DBCUtil.SetValue(table, PortType1, 0);
+			record.PortOffset1 = DBCUtil.SetValue(table, PortOffset1, null);
+			record.PortType2 = DBCUtil.SetValue(table, PortType2, 0);
+			record.PortOffset2 = DBCUtil.SetValue(table, PortOffset2, null);
+			record.PortType3 = DBCUtil.SetValue(table, PortType3, 0);
+			record.PortOffset3 = DBCUtil.SetValue(table, PortOffset3, null);
+			byte[] bytes = GetRecordBytes(record);
+			table.Records.Add(bytes);
+		}
+
+		public int GetId()
+		{
+			return Id;
+		}
+
+		private unsafe BlocksRecord GetRecord(BinaryTable table, int index)
+		{
+			BlocksRecord record;
+			byte[] bytes = table.Records[index];
+			fixed (byte* p = bytes) {
+				record = *(BlocksRecord*)p;
+			}
+			return record;
+		}
+		private static unsafe byte[] GetRecordBytes(BlocksRecord record)
+		{
+			byte[] bytes = new byte[sizeof(BlocksRecord)];
+			fixed (byte* p = bytes) {
+				BlocksRecord* temp = (BlocksRecord*)p;
+				*temp = record;
+			}
+			return bytes;
+		}
+	}
+
+	public sealed partial class BlocksProvider
+	{
+		public void LoadForClient()
+		{
+			Load(FilePathDefine_Client.C_Blocks);
+		}
+		public void LoadForServer()
+		{
+			Load(FilePathDefine_Server.C_Blocks);
+		}
+		public void Load(string file)
+		{
+			if (BinaryTable.IsValid(HomePath.Instance.GetAbsolutePath(file))) {
+				m_BlocksMgr.CollectDataFromBinary(file);
+			} else {
+				m_BlocksMgr.CollectDataFromDBC(file);
+			}
+		}
+		public void Save(string file)
+		{
+		#if DEBUG
+			m_BlocksMgr.SaveToBinary(file);
+		#endif
+		}
+		public void Clear()
+		{
+			m_BlocksMgr.Clear();
+		}
+
+		public DataDictionaryMgr2<Blocks> BlocksMgr
+		{
+			get { return m_BlocksMgr; }
+		}
+
+		public int GetBlocksCount()
+		{
+			return m_BlocksMgr.GetDataCount();
+		}
+
+		public Blocks GetBlocks(int id)
+		{
+			return m_BlocksMgr.GetDataById(id);
+		}
+
+		private DataDictionaryMgr2<Blocks> m_BlocksMgr = new DataDictionaryMgr2<Blocks>();
+
+		public static BlocksProvider Instance
+		{
+			get { return s_Instance; }
+		}
+		private static BlocksProvider s_Instance = new BlocksProvider();
+	}
+}
+
+namespace Entitas.Data
+{
 	public sealed partial class BuffConfig : IData2
 	{
 		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
