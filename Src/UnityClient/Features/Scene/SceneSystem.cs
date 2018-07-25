@@ -24,10 +24,11 @@ namespace UnityClient
             var config = SceneConfigProvider.Instance.GetSceneConfig(id);
             if(null != config)
             {
-                SpatialSystem.Instance.Load(config.Navmesh);
+                //SpatialSystem.Instance.Load(config.Navmesh);
                 var sceneInstance = NewSceneInstance(id, config.Script);
                 sceneInstance.m_SceneInstance.Start();
                 Contexts.sharedInstance.game.ReplaceScene(config, sceneInstance);
+
 
             }
             else

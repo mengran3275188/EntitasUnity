@@ -140,6 +140,7 @@ namespace SceneCommand
                     physicsMaterial.StaticFriction = 0;
 
                     RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, false);
+                    rigid.Mass = 1000;
                     rigid.IsTrigger = m_PhysicsIsTrigger;
                     rigid.Position = entity.position.Value + m_PhysicsOffset;
 

@@ -1,0 +1,11 @@
+Id	Description	Length	Width	Res	Type	LeftPortType	LeftOffeset	RightPortType	RightOffset	ForwardPortType	ForwardOffset	BackPortType	BackOffset
+int	string	float	float	string	int	int	float_array	int	float_array	int	float_array	int	float_array
+1	≤‚ ‘1	20	20	Blocks/milao_fangjian_01_A	1	-1		-1		-1		1	0|0|0
+2	≤‚ ‘1	20	20	Blocks/milao_fangjian_01_B	1	-1		-1		-1		1	0|0|0
+3	≤‚ ‘1	20	20	Blocks/milao_fangjian_01_C	1	-1		-1		1	0|0|0	-1	
+4	≤‚ ‘1	20	20	Blocks/milao_fangjian_02_A	1	1	0|0|0	-1		-1		-1	
+5	≤‚ ‘1	20	20	Blocks/milao_fangjian_02_B	1	1	0|0|0	-1		-1		-1	
+6	≤‚ ‘1	20	20	Blocks/milao_fangjian_02_C	1	1	0|0|0	-1		-1		-1	
+7	≤‚ ‘1	20	20	Blocks/milao_fangjian_03_A	1	-1		-1		1	0|0|0	-1	
+8	≤‚ ‘1	20	20	Blocks/milao_fangjian_03_B	1	-1		-1		1	0|0|0	-1	
+9	≤‚ ‘1	20	20	Blocks/milao_taizi_01_A	1	1	-14.94|0|-14.1	1	14.44|0|-14.53	1	0|0|0	1	0|0|-29.16

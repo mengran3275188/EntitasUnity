@@ -16,6 +16,8 @@ namespace UnityClient
             m_World = new Jitter.World(new Jitter.Collision.CollisionSystemSAP());
 
             m_World.CollisionSystem.CollisionDetected += CollisionSystem_CollisionDetected;
+
+            GfxSystem.EventForLogic.Subscribe<float, float, float, float, float, float, float, float, float>("add_box", "physics_system", this.AddBoxRigidBody);
         }
 
 
@@ -51,7 +53,6 @@ namespace UnityClient
             m_World.AddBody(littleBoxRigid);
         }
 
-
         public void Execute()
         {
             m_World.Step(m_Context.timeInfo.DeltaTime, false);
@@ -63,6 +64,20 @@ namespace UnityClient
             }
         }
 
+        private void AddBoxRigidBody(float posX, float posY, float posZ, float eulerX, float eulerY, float eulerZ, float sizeX, float sizeY, float sizeZ)
+        {
+            Jitter.Collision.Shapes.BoxShape box = new Jitter.Collision.Shapes.BoxShape(new Vector3(sizeX, sizeY, sizeZ));
+            Jitter.Dynamics.RigidBody boxRigid = new Jitter.Dynamics.RigidBody(box)
+            {
+                Position = new Util.Vector3(posX, posY, posZ),
+                Orientation = Matrix3x3.CreateFromYawPitchRoll(eulerY, eulerX, eulerZ),
+                LinearVelocity = Util.Vector3.zero,
+                IsStatic = true,
+                Tag = false,
+                EnableDebugDraw = true,
+            };
+            m_World.AddBody(boxRigid);
+        }
         private void PhysicsSystem_OnEntityAdded(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
             if (component is PhysicsComponent physics)

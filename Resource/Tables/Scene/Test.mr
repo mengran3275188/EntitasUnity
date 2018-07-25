@@ -3,13 +3,13 @@ script(1)
 	onmessage("start")
 	{
 		log("scene start");
-		createcharacter(1, vector3(50, 0, 50), vector3(0, 0, 0))
+		createcharacter(1, vector3(150, 0, 22), vector3(0, 0, 0))
 		{
 			mainplayer();
             attr(1);
 			physics(false, vector3(0,1,0), 2, 0.5);
 		};
-        
+        /*
 		createcharacter(1002, vector3(60, 0, 60), vector3(0, 0, 0))
 		{
 			ai("FirstBT");
@@ -59,6 +59,7 @@ script(1)
             attr(1003);
 			physics(false, vector3(0,1,0), 2, 0.5);
 		};
+		*/
 		
 		wait(3000);
 		log("scene stoped");

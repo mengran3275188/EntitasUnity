@@ -405,32 +405,32 @@ namespace Entitas.Data
 			internal int Description;
 			internal float Length;
 			internal float Width;
+			internal int Res;
 			internal int Type;
-			internal int PortCount;
-			internal int PortType0;
-			internal int PortOffset0;
-			internal int PortType1;
-			internal int PortOffset1;
-			internal int PortType2;
-			internal int PortOffset2;
-			internal int PortType3;
-			internal int PortOffset3;
+			internal int LeftPortType;
+			internal int LeftOffeset;
+			internal int RightPortType;
+			internal int RightOffset;
+			internal int ForwardPortType;
+			internal int ForwardOffset;
+			internal int BackPortType;
+			internal int BackOffset;
 		}
 
 		public int Id;
 		public string Description;
 		public float Length;
 		public float Width;
+		public string Res;
 		public int Type;
-		public int PortCount;
-		public int PortType0;
-		public float[] PortOffset0;
-		public int PortType1;
-		public float[] PortOffset1;
-		public int PortType2;
-		public float[] PortOffset2;
-		public int PortType3;
-		public float[] PortOffset3;
+		public int LeftPortType;
+		public float[] LeftOffeset;
+		public int RightPortType;
+		public float[] RightOffset;
+		public int ForwardPortType;
+		public float[] ForwardOffset;
+		public int BackPortType;
+		public float[] BackOffset;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -438,16 +438,16 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(node, "Description", "");
 			Length = DBCUtil.ExtractNumeric<float>(node, "Length", 0);
 			Width = DBCUtil.ExtractNumeric<float>(node, "Width", 0);
+			Res = DBCUtil.ExtractString(node, "Res", "");
 			Type = DBCUtil.ExtractNumeric<int>(node, "Type", 0);
-			PortCount = DBCUtil.ExtractNumeric<int>(node, "PortCount", 0);
-			PortType0 = DBCUtil.ExtractNumeric<int>(node, "PortType0", 0);
-			PortOffset0 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset0", null);
-			PortType1 = DBCUtil.ExtractNumeric<int>(node, "PortType1", 0);
-			PortOffset1 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset1", null);
-			PortType2 = DBCUtil.ExtractNumeric<int>(node, "PortType2", 0);
-			PortOffset2 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset2", null);
-			PortType3 = DBCUtil.ExtractNumeric<int>(node, "PortType3", 0);
-			PortOffset3 = DBCUtil.ExtractNumericArray<float>(node, "PortOffset3", null);
+			LeftPortType = DBCUtil.ExtractNumeric<int>(node, "LeftPortType", 0);
+			LeftOffeset = DBCUtil.ExtractNumericArray<float>(node, "LeftOffeset", null);
+			RightPortType = DBCUtil.ExtractNumeric<int>(node, "RightPortType", 0);
+			RightOffset = DBCUtil.ExtractNumericArray<float>(node, "RightOffset", null);
+			ForwardPortType = DBCUtil.ExtractNumeric<int>(node, "ForwardPortType", 0);
+			ForwardOffset = DBCUtil.ExtractNumericArray<float>(node, "ForwardOffset", null);
+			BackPortType = DBCUtil.ExtractNumeric<int>(node, "BackPortType", 0);
+			BackOffset = DBCUtil.ExtractNumericArray<float>(node, "BackOffset", null);
 			return true;
 		}
 
@@ -458,16 +458,16 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Length = DBCUtil.ExtractFloat(table, record.Length, 0);
 			Width = DBCUtil.ExtractFloat(table, record.Width, 0);
+			Res = DBCUtil.ExtractString(table, record.Res, "");
 			Type = DBCUtil.ExtractInt(table, record.Type, 0);
-			PortCount = DBCUtil.ExtractInt(table, record.PortCount, 0);
-			PortType0 = DBCUtil.ExtractInt(table, record.PortType0, 0);
-			PortOffset0 = DBCUtil.ExtractFloatArray(table, record.PortOffset0, null);
-			PortType1 = DBCUtil.ExtractInt(table, record.PortType1, 0);
-			PortOffset1 = DBCUtil.ExtractFloatArray(table, record.PortOffset1, null);
-			PortType2 = DBCUtil.ExtractInt(table, record.PortType2, 0);
-			PortOffset2 = DBCUtil.ExtractFloatArray(table, record.PortOffset2, null);
-			PortType3 = DBCUtil.ExtractInt(table, record.PortType3, 0);
-			PortOffset3 = DBCUtil.ExtractFloatArray(table, record.PortOffset3, null);
+			LeftPortType = DBCUtil.ExtractInt(table, record.LeftPortType, 0);
+			LeftOffeset = DBCUtil.ExtractFloatArray(table, record.LeftOffeset, null);
+			RightPortType = DBCUtil.ExtractInt(table, record.RightPortType, 0);
+			RightOffset = DBCUtil.ExtractFloatArray(table, record.RightOffset, null);
+			ForwardPortType = DBCUtil.ExtractInt(table, record.ForwardPortType, 0);
+			ForwardOffset = DBCUtil.ExtractFloatArray(table, record.ForwardOffset, null);
+			BackPortType = DBCUtil.ExtractInt(table, record.BackPortType, 0);
+			BackOffset = DBCUtil.ExtractFloatArray(table, record.BackOffset, null);
 			return true;
 		}
 
@@ -478,16 +478,16 @@ namespace Entitas.Data
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Length = DBCUtil.SetValue(table, Length, 0);
 			record.Width = DBCUtil.SetValue(table, Width, 0);
+			record.Res = DBCUtil.SetValue(table, Res, "");
 			record.Type = DBCUtil.SetValue(table, Type, 0);
-			record.PortCount = DBCUtil.SetValue(table, PortCount, 0);
-			record.PortType0 = DBCUtil.SetValue(table, PortType0, 0);
-			record.PortOffset0 = DBCUtil.SetValue(table, PortOffset0, null);
-			record.PortType1 = DBCUtil.SetValue(table, PortType1, 0);
-			record.PortOffset1 = DBCUtil.SetValue(table, PortOffset1, null);
-			record.PortType2 = DBCUtil.SetValue(table, PortType2, 0);
-			record.PortOffset2 = DBCUtil.SetValue(table, PortOffset2, null);
-			record.PortType3 = DBCUtil.SetValue(table, PortType3, 0);
-			record.PortOffset3 = DBCUtil.SetValue(table, PortOffset3, null);
+			record.LeftPortType = DBCUtil.SetValue(table, LeftPortType, 0);
+			record.LeftOffeset = DBCUtil.SetValue(table, LeftOffeset, null);
+			record.RightPortType = DBCUtil.SetValue(table, RightPortType, 0);
+			record.RightOffset = DBCUtil.SetValue(table, RightOffset, null);
+			record.ForwardPortType = DBCUtil.SetValue(table, ForwardPortType, 0);
+			record.ForwardOffset = DBCUtil.SetValue(table, ForwardOffset, null);
+			record.BackPortType = DBCUtil.SetValue(table, BackPortType, 0);
+			record.BackOffset = DBCUtil.SetValue(table, BackOffset, null);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}
