@@ -29,39 +29,19 @@ namespace UnityClient
 
             m_Context.GetGroup(GameMatcher.Collision).OnEntityAdded += PhysicsSystem_OnEntityAdded;
             m_Context.GetGroup(GameMatcher.Collision).OnEntityRemoved += PhysicsSystem_OnEntityRemoved;
-
-            Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(new Util.Vector3(300, 1, 300));
-            Jitter.Dynamics.RigidBody rigid = new Jitter.Dynamics.RigidBody(shape)
-            {
-                Position = new Util.Vector3(0, -0.5f, 0),
-                LinearVelocity = Util.Vector3.zero,
-                IsStatic = true,
-                Tag = false,
-                EnableDebugDraw = true,
-            };
-            m_World.AddBody(rigid);
-
-            Jitter.Collision.Shapes.BoxShape littleBox = new Jitter.Collision.Shapes.BoxShape(new Vector3(0.4f, 0.8f, 0.4f));
-            Jitter.Dynamics.RigidBody littleBoxRigid = new Jitter.Dynamics.RigidBody(littleBox)
-            {
-                Position = new Util.Vector3(50, 0.1f, 50),
-                LinearVelocity = Util.Vector3.zero,
-                IsStatic = true,
-                Tag = false,
-                EnableDebugDraw = true,
-            };
-            m_World.AddBody(littleBoxRigid);
         }
 
         public void Execute()
         {
             m_World.Step(m_Context.timeInfo.DeltaTime, false);
 
+            /*
             DebugDrawer drawer = new DebugDrawer();
             foreach(Jitter.Dynamics.RigidBody body in m_World.RigidBodies)
             {
                body.DebugDraw(drawer);
             }
+            */
         }
 
         private void AddBoxRigidBody(float posX, float posY, float posZ, float eulerX, float eulerY, float eulerZ, float sizeX, float sizeY, float sizeZ)

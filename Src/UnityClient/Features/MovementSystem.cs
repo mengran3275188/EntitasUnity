@@ -34,6 +34,7 @@ namespace UnityClient
                     Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
 
                     rigid.LinearVelocity = velocity + skillVelocity + buffVelocity;
+                    rigid.AngularVelocity = Vector3.zero;
                     rigid.Orientation = orientation;
 
                     entity.ReplacePosition(position - offset);
