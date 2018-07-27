@@ -51,6 +51,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugins\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
@@ -72,6 +76,10 @@
     <Compile Include="Features\PhysicsSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\Services.cs" />
+    <Compile Include="Services\ViewService\IViewService.cs" />
+    <Compile Include="Services\ViewService\UnityViewService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Skill\Command\AreaDamageCommand.cs" />

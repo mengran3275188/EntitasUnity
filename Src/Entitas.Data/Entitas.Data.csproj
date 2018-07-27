@@ -52,6 +52,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugins\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeData.cs" />
@@ -63,6 +67,7 @@
     <Compile Include="Define\KeyboardCode.cs" />
     <Compile Include="Define\RigidObject.cs" />
     <Compile Include="Define\StartSkillParam.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="MovementComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceComponent.cs" />
