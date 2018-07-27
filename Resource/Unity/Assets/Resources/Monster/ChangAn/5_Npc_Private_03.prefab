@@ -366,10 +366,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4612848328522282}
   - component: {fileID: 111575992604812388}
+  - component: {fileID: 114372149820303176}
+  - component: {fileID: 114601726419112140}
   - component: {fileID: 136491313238746388}
   - component: {fileID: 54997332616200798}
-  - component: {fileID: 114601726419112140}
-  - component: {fileID: 114372149820303176}
   m_Layer: 0
   m_Name: 5_Npc_Private_03
   m_TagString: Untagged
@@ -1314,7 +1314,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1463041514641238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.554, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4873156291391274}
@@ -1633,7 +1633,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!111 &111575992604812388
 Animation:
   m_ObjectHideFlags: 1

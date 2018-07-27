@@ -6,6 +6,7 @@ using Entitas.Data;
 
 namespace UnityClient
 {
+    [RequireComponent(typeof(UnityRigid), typeof(Rigidbody))]
     public class UnityView : MonoBehaviour, IView
     {
         public void PlayAnimation(string animName)
