@@ -99,13 +99,12 @@ namespace SkillCommands
 
         private bool InCircle(Vector3 point, float range, PositionComponent position)
         {
-            return true;
-            //return Vector3.DistanceXZ(point, position.Value) < range;
+            return point.DistanceXZ(position.Value) < range;
         }
 
         private StateBuff_State GetState(GameEntity obj)
         {
-            return obj.skill.Instance == null ? StateBuff_State.Default : StateBuff_State.Skill;
+            return obj.skill== null || obj.skill.Instance == null ? StateBuff_State.Default : StateBuff_State.Skill;
         }
 
         private Vector3 m_RelativeCenter;
