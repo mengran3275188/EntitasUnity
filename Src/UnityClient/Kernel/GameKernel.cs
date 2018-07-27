@@ -34,10 +34,15 @@ namespace UnityClient.Kernel
             s_Logic.OnStart();
         }
 
-        public static void OnTick()
+        public static void Update()
         {
-            s_Logic.OnTick();
-            GfxMoudle.Instance.OnTick();
+            s_Logic.Update();
+            GfxMoudle.Instance.Update();
+        }
+        public static void FixUpdate()
+        {
+            s_Logic.FixedUpdate();
+            GfxMoudle.Instance.FixUpdate();
         }
         public static void OnQuit()
         {

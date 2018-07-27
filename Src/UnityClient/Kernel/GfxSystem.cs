@@ -17,10 +17,6 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.OnStart(processor);
         }
-        public static void OnTick()
-        {
-            GfxSystemImpl.Gfx.OnTick();
-        }
         public static void OnQuit()
         {
             GfxSystemImpl.Gfx.OnQuit();

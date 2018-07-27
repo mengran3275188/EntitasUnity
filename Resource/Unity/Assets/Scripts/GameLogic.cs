@@ -40,10 +40,14 @@ public class GameLogic : MonoBehaviour {
         GameKernel.OnStart(Application.streamingAssetsPath);
 #endif
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        GameKernel.OnTick();
+
+    private void Update()
+    {
+        GameKernel.Update();
+    }
+    void FixedUpdate ()
+    {
+        GameKernel.FixUpdate();
 	}
 
     private void OnDestroy()

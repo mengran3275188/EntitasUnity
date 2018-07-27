@@ -47,11 +47,14 @@ namespace UnityDelegate
             CameraManager.Instance.OnStart();
             HudMgr.Instance.OnStart();
         }
-        public void OnTick()
+        public void Update()
         {
-            CameraManager.Instance.Tick();
             InputManager.Instance.HandleInput();
             ResourceManager.Instance.Tick();
+        }
+        public void FixUpdate()
+        {
+            CameraManager.Instance.Tick();
             HudMgr.Instance.Tick();
         }
         public void OnQuit()

@@ -10,39 +10,51 @@ namespace UnityClient.Kernel
     internal class LogicMoudle : IActionQueue
     {
 
-        static Systems systems;
+        private Systems m_UpdateSystems;
+        private Systems m_FixUpdateSystems;
 
         public void OnStart()
         {
             var contexts = Contexts.sharedInstance;
 
 
-            systems = CreateSystems(contexts);
-            systems.Initialize();
+            m_UpdateSystems = CreateUpdateSystems(contexts);
+            m_UpdateSystems.Initialize();
+
+            m_FixUpdateSystems = CreateFixedUpdateSystems(contexts);
+            m_FixUpdateSystems.Initialize();
 
             LogUtil.Info("Game Start ...");
         }
-        public void OnTick()
+        public void Update()
         {
-            systems.Execute();
+            m_UpdateSystems.Execute();
+            m_UpdateSystems.Cleanup();
 
             m_ActionQueue.HandleActions(m_ActionNumPerTick);
         }
+        public void FixedUpdate()
+        {
+            m_FixUpdateSystems.Execute();
+            m_FixUpdateSystems.Cleanup();
+        }
         public void OnQuit()
         {
-            systems.ClearReactiveSystems();
-            systems.TearDown();
-            systems.Cleanup();
+            m_UpdateSystems.ClearReactiveSystems();
+            m_UpdateSystems.TearDown();
+
+            m_FixUpdateSystems.ClearReactiveSystems();
+            m_FixUpdateSystems.TearDown();
+
 
             Contexts.sharedInstance.Reset();
         }
-        private static Systems CreateSystems(Contexts contexts)
+        private static Systems CreateUpdateSystems(Contexts contexts)
         {
             Systems systems = new Systems();
 
             systems.Add(new TimeSystem(contexts));
             systems.Add(new InputSystem(contexts));
-            systems.Add(new CameraSystem(contexts));
             systems.Add(IdSystem.Instance);
             systems.Add(SceneSystem.Instance);
             systems.Add(new ChunkSystem(contexts));
@@ -51,10 +63,6 @@ namespace UnityClient.Kernel
             systems.Add(new DeadSystem(contexts));
             systems.Add(new BornSystem(contexts));
             systems.Add(new PhysicsSystem(contexts));
-            systems.Add(new MovementSystem(contexts));
-            systems.Add(new PositionSystem(contexts));
-            systems.Add(new RotationSystem(contexts));
-            systems.Add(new AnimationSystem(contexts));
             systems.Add(new AISystem(contexts));
             systems.Add(SkillSystem.Instance);
             systems.Add(BuffSystem.Instance);
@@ -62,6 +70,18 @@ namespace UnityClient.Kernel
             systems.Add(new GameStartSystem(contexts));
 
             systems.Add(new DestoryEntitySystem(contexts));
+            return systems;
+        }
+        private static Systems CreateFixedUpdateSystems(Contexts contexts)
+        {
+            Systems systems = new Systems();
+
+            systems.Add(new CameraSystem(contexts));
+            systems.Add(new MovementSystem(contexts));
+            systems.Add(new PositionSystem(contexts));
+            systems.Add(new RotationSystem(contexts));
+            systems.Add(new AnimationSystem(contexts));
+
             return systems;
         }
         public int CurActionNum
