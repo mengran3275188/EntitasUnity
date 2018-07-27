@@ -5,9 +5,11 @@ using System.Text;
 using Entitas;
 using Util;
 using Spatial;
+using UnityEngine;
 
 namespace UnityClient
 {
+    /*
     public class SpatialSystem : Singleton<SpatialSystem>
     {
         public void Load(string navmesh)
@@ -86,4 +88,5 @@ namespace UnityClient
         }
         private CellManager m_CellMgr;
     }
+    */
 }

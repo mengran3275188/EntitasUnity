@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Util;
+using Util.MyMath;
 
 namespace Spatial
 {

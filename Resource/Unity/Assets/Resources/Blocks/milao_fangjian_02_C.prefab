@@ -2595,6 +2595,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4457055159515638}
+  - component: {fileID: 114999231768932746}
   m_Layer: 0
   m_Name: milao_fangjian_02_C
   m_TagString: Untagged
@@ -4520,14 +4521,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789804645940454}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 500.4, y: 0, z: 110.066666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4025007046905690}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4457573410120566
 Transform:
   m_ObjectHideFlags: 1
@@ -13508,6 +13509,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec0701e9baf3142b363f0701378da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114999231768932746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789804645940454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BaseCollider:
+  - {fileID: 65965137294589752}
+  - {fileID: 65080100891262214}
+  - {fileID: 65452282303241904}
+  - {fileID: 65962238600288436}
+  - {fileID: 65187354973242284}
+  - {fileID: 65830527663889016}
+  - {fileID: 65628090568554828}
+  m_Doors: []
+  m_Triggers: []
 --- !u!198 &198067821266018162
 ParticleSystem:
   m_ObjectHideFlags: 1

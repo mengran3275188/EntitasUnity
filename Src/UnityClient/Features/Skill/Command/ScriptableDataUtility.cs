@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityClient;
-using Util;
+using UnityEngine;
 
 namespace ScriptableData
 {

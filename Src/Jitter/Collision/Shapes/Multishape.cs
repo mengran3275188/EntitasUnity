@@ -25,7 +25,7 @@ using System.Diagnostics;
 using Jitter.Dynamics;
 using Jitter.LinearMath;
 using Jitter.Collision.Shapes;
-using Util;
+using Util.MyMath;
 #endregion
 
 namespace Jitter.Collision.Shapes

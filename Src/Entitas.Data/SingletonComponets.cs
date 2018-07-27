@@ -1,6 +1,5 @@
 ﻿using System;
 using Entitas.Data;
-using Spatial;
 using Entitas.CodeGeneration.Attributes;
 
 namespace Entitas.Data

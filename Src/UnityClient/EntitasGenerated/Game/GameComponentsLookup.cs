@@ -15,22 +15,24 @@ public static class GameComponentsLookup {
     public const int BuffAttrChanged = 4;
     public const int Buff = 5;
     public const int Camp = 6;
-    public const int Collision = 7;
-    public const int Dead = 8;
-    public const int Destory = 9;
-    public const int Hp = 10;
-    public const int Id = 11;
-    public const int MainPlayer = 12;
-    public const int Movement = 13;
-    public const int Physics = 14;
-    public const int Position = 15;
-    public const int Resource = 16;
-    public const int Rotation = 17;
-    public const int Scene = 18;
-    public const int Skill = 19;
-    public const int TimeInfo = 20;
+    public const int Chunk = 7;
+    public const int Collision = 8;
+    public const int Dead = 9;
+    public const int Destory = 10;
+    public const int Hp = 11;
+    public const int Id = 12;
+    public const int MainPlayer = 13;
+    public const int Movement = 14;
+    public const int Physics = 15;
+    public const int Position = 16;
+    public const int Resource = 17;
+    public const int Rotation = 18;
+    public const int Scene = 19;
+    public const int Skill = 20;
+    public const int TimeInfo = 21;
+    public const int View = 22;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -40,6 +42,7 @@ public static class GameComponentsLookup {
         "BuffAttrChanged",
         "Buff",
         "Camp",
+        "Chunk",
         "Collision",
         "Dead",
         "Destory",
@@ -53,7 +56,8 @@ public static class GameComponentsLookup {
         "Rotation",
         "Scene",
         "Skill",
-        "TimeInfo"
+        "TimeInfo",
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -64,6 +68,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.BuffAttrChangedComponent),
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
+        typeof(Entitas.Data.ChunkComponent),
         typeof(Entitas.Data.CollisionComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
@@ -77,6 +82,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.RotationComponent),
         typeof(Entitas.Data.SceneComponent),
         typeof(Entitas.Data.SkillComponent),
-        typeof(Entitas.Data.TimeInfoComponent)
+        typeof(Entitas.Data.TimeInfoComponent),
+        typeof(Entitas.Data.ViewComponent)
     };
 }

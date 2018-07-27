@@ -1,8 +1,8 @@
 ﻿using System;
-using Util;
 using System.Collections.Generic;
 using ScriptableSystem;
 using ScriptableData;
+using UnityEngine;
 
 namespace SkillCommands
 {
@@ -165,13 +165,13 @@ namespace SkillCommands
                     m_RotateDir = instance.SenderDirection;
                     break;
                 case DirectionType.SenderTarget:
-                    m_RotateDir = Util.Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
+                    m_RotateDir = Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
                     break;
                 case DirectionType.Target:
                     m_RotateDir = target.rotation.Value;
                     break;
                 case DirectionType.TargetSender:
-                    m_RotateDir = Util.Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
+                    m_RotateDir = Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
                     break;
                 case DirectionType.SenderOpposite:
                     m_RotateDir = instance.SenderDirection + Mathf.PI;
@@ -193,7 +193,7 @@ namespace SkillCommands
         {
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
-            Vector3 object_speed = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * speed;
+            Vector3 object_speed = Quaternion.Euler(0, m_RotateDir, 0) * speed;
             instance.Velocity = object_speed;
             obj.ReplaceRotation(m_RotateDir);
 

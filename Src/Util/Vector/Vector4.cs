@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Util
+namespace Util.MyMath
 {
     // Representation of four-dimensional vectors.
     public partial struct Vector4

@@ -6,6 +6,7 @@ namespace Entitas.Data
 {
     public interface IView
     {
-        Transform Transform { get; }
+        void PlayAnimation(string animName);
+        void CrossFadeAnimation(string animName, float fadeLength = 0.3f);
     }
 }

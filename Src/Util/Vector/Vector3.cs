@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Util
+namespace Util.MyMath
 {
     // Representation of 3D vectors and points.
     public partial struct Vector3

@@ -5,7 +5,7 @@ using System.Text;
 using Jitter.LinearMath;
 using Jitter.Dynamics.Joints;
 using Jitter.Dynamics.Constraints;
-using Util;
+using Util.MyMath;
 
 namespace Jitter.Dynamics.Joints
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entitas.CodeGeneration.Attributes;
-using Util;
+using UnityEngine;
 
 namespace Entitas.Data
 {
@@ -22,12 +22,12 @@ namespace Entitas.Data
     }
     public sealed class PhysicsComponent : IComponent
     {
-        public RigidObject Rigid;
+        public IRigidbody Rigid;
         public Vector3 Offset;
     }
     public sealed class CollisionComponent : IComponent
     {
-        public RigidObject Rigid;
+        public IRigidbody Rigid;
         public Vector3 Offset;
         public CollisionDelegate OnCollision;
     }
@@ -58,5 +58,13 @@ namespace Entitas.Data
     public sealed class BornComponent : IComponent
     {
         public float BornTime;
+    }
+    public sealed class ChunkComponent : IComponent
+    {
+        public IChunk Value;
+    }
+    public sealed class ViewComponent : IComponent
+    {
+        public IView Value;
     }
 }

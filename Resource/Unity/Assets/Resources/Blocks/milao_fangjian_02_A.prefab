@@ -1585,6 +1585,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4375681980710842}
+  - component: {fileID: 114908591564940562}
   m_Layer: 0
   m_Name: milao_fangjian_02_A
   m_TagString: Untagged
@@ -4429,7 +4430,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1468447874498032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 516.1, y: 0, z: 229.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4356514053090174}
@@ -13491,6 +13492,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec0701e9baf3142b363f0701378da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114908591564940562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468447874498032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BaseCollider:
+  - {fileID: 65787395822085886}
+  - {fileID: 65824970225209206}
+  - {fileID: 65185827285448100}
+  - {fileID: 65775338855402772}
+  - {fileID: 65688491537332988}
+  - {fileID: 65121725165020394}
+  - {fileID: 65853340606732788}
+  m_Doors: []
+  m_Triggers: []
 --- !u!198 &198072363413399004
 ParticleSystem:
   m_ObjectHideFlags: 1

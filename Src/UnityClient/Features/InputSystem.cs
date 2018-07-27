@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using Entitas;
 using Entitas.Data;
-using UnityDelegate;
-using Util;
+using UnityEngine;
 
 namespace UnityClient
 {
@@ -66,7 +65,7 @@ namespace UnityClient
                         }
                     }
                 }
-                if (isMoving && !Util.Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
+                if (isMoving && !Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
                 {
                     if(!(SkillSystem.Instance.IsDisableRotationInput(mainPlayer) || BuffSystem.Instance.IsDisableRotationInput(mainPlayer)))
                         mainPlayer.ReplaceRotation(moveDir);

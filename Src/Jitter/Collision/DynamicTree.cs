@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Jitter.LinearMath;
-using Util;
+using Util.MyMath;
 
 
 namespace Jitter.Collision

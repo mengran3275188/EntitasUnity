@@ -5,6 +5,7 @@ using ScriptableData;
 using Entitas.Data;
 using Util;
 using UnityClient;
+using UnityEngine;
 
 namespace SkillCommands
 {
@@ -99,6 +100,8 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
+            /*
+
             Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_Size);
 
             Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
@@ -125,6 +128,7 @@ namespace SkillCommands
                     instance.AddGlobalVariable(varName, objId);
                 }
             }
+            */
 
             return ExecResult.Finished;
         }

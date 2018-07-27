@@ -4,8 +4,8 @@ using ScriptableData;
 using ScriptableSystem;
 using Entitas;
 using Entitas.Data;
-using Util;
 using UnityClient;
+using UnityEngine;
 
 namespace SkillCommands
 {
@@ -59,7 +59,7 @@ namespace SkillCommands
         {
             if (instance.Target is GameEntity obj)
             {
-                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
+                Quaternion quaternion = Quaternion.Euler(0, obj.rotation.Value, 0);
                 Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
 
                 UnityClient.GfxSystem.DrawCircle(center, m_Range, 2.0f);
@@ -99,7 +99,8 @@ namespace SkillCommands
 
         private bool InCircle(Vector3 point, float range, PositionComponent position)
         {
-            return Vector3.DistanceXZ(point, position.Value) < range;
+            return true;
+            //return Vector3.DistanceXZ(point, position.Value) < range;
         }
 
         private StateBuff_State GetState(GameEntity obj)

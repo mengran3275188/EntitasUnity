@@ -4,6 +4,7 @@ using Util;
 using Entitas;
 using Entitas.Data;
 using ScriptableSystem;
+using UnityEngine;
 
 namespace UnityClient
 {
@@ -29,7 +30,7 @@ namespace UnityClient
                 sceneInstance.m_SceneInstance.Start();
                 Contexts.sharedInstance.game.ReplaceScene(config, sceneInstance);
 
-
+                Services.Instance.SceneService.InitChunks();
             }
             else
             {

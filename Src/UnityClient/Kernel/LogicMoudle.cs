@@ -45,6 +45,7 @@ namespace UnityClient.Kernel
             systems.Add(new CameraSystem(contexts));
             systems.Add(IdSystem.Instance);
             systems.Add(SceneSystem.Instance);
+            systems.Add(new ChunkSystem(contexts));
             systems.Add(new AttrSystem(contexts));
             systems.Add(new HpSystem(contexts));
             systems.Add(new DeadSystem(contexts));

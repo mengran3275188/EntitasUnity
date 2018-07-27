@@ -5,6 +5,7 @@ using ScriptableData;
 using ScriptableSystem;
 using UnityClient;
 using Util;
+using UnityEngine;
 
 namespace SceneCommand
 {
@@ -100,15 +101,17 @@ namespace SceneCommand
 
                 // res
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
-                GfxSystem.Instantiate(resId, config.Model);
+                Services.Instance.ViewService.LoadAsset(entity, resId, config.Model);
                 entity.AddResource(resId);
 
                 // animation
                 entity.AddAnimation(config.ActionId, config.ActionPrefix);
 
                 // movement
-                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(target.rotation.Value, 0, 0);
+                Quaternion quaternion = Quaternion.Euler(0, target.rotation.Value, 0);
                 entity.AddMovement(Vector3.zero);
+                entity.physics.Rigid.Position = target.position.Value + quaternion * m_LocalPosition;
+
                 entity.AddPosition(target.position.Value + quaternion * m_LocalPosition);
                 entity.AddRotation(m_LocalRotation.y + target.rotation.Value);
 
@@ -131,6 +134,7 @@ namespace SceneCommand
                     SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
                 }
 
+                /*
                 if(m_PhysicsType == PhysicsType.Box)
                 {
                     Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_PhysicsSize);
@@ -159,6 +163,7 @@ namespace SceneCommand
 
                     entity.AddPhysics(rigid, m_PhysicsOffset);
                 }
+                */
 
                 // camp id
                 int campId = entity.isMainPlayer ? (int)CampId.Red : (int)CampId.Blue;

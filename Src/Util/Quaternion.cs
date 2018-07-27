@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Util
+namespace Util.MyMath
 {
     public partial struct Quaternion
     {

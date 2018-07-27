@@ -1,5 +1,5 @@
 ﻿using Entitas.Data;
-using Util;
+using UnityEngine;
 
 namespace Entitas.Data
 {

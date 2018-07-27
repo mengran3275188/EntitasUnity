@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Util;
+using UnityEngine;
 
 namespace Entitas.Data
 {

@@ -46,26 +46,6 @@ namespace UnityDelegate
 
             CameraManager.Instance.OnStart();
             HudMgr.Instance.OnStart();
-
-
-            // TODO(mr)
-            GameObject sceneRoot = GameObject.Find("Scene");
-            if(null != sceneRoot)
-            {
-                BoxCollider[] bcs = sceneRoot.GetComponentsInChildren<BoxCollider>();
-                foreach(var bc in bcs)
-                {
-                    GameObject obj = bc.gameObject;
-                    UnityEngine.Vector3 position = obj.transform.position;
-                    UnityEngine.Vector3 rotation = obj.transform.rotation.eulerAngles;
-                    UnityEngine.Vector3 size = obj.transform.lossyScale;
-                    PublishLogicEvent<float, float, float, float, float, float, float, float, float>(
-                                      "add_box", "physics_system",
-                                      position.x, position.y, position.z,
-                                      Util.Mathf.Deg2Rad * rotation.x, Util.Mathf.Deg2Rad * rotation.y, Util.Mathf.Deg2Rad * rotation.z,
-                                      size.x, size.y, size.z);
-                }
-            }
         }
         public void OnTick()
         {
@@ -389,9 +369,9 @@ namespace UnityDelegate
         public bool GetJoyStickDir(out float dir)
         {
             dir = 0;
-            if (Util.Mathf.Approximately(m_JoystickX, 0) && Util.Mathf.Approximately(m_JoystickY, 0))
+            if (Mathf.Approximately(m_JoystickX, 0) && Mathf.Approximately(m_JoystickY, 0))
                 return false;
-            dir = Util.Mathf.Atan2(m_JoystickX, m_JoystickY);
+            dir = Mathf.Atan2(m_JoystickX, m_JoystickY);
             return true;
         }
 

@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
+using UnityEngine;
 
 ///<<< END WRITING YOUR CODE
 
@@ -29,7 +30,7 @@ public class CharacterAgent : behaviac.Agent
         var context = Contexts.sharedInstance.game;
         var mainPlayer = context.mainPlayerEntity;
         var self = GetOwner();
-        float dis = Util.Vector3.Distance(mainPlayer.position.Value, self.position.Value);
+        float dis = Vector3.Distance(mainPlayer.position.Value, self.position.Value);
         return dis;
 ///<<< END WRITING YOUR CODE
 	}
@@ -44,11 +45,11 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return;
 
-        float dir = Util.Mathf.Atan2(self.position.Value.x - mainPlayer.position.Value.x, self.position.Value.z - mainPlayer.position.Value.z);
-        Util.Vector3 force = new Util.Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
+        float dir = Mathf.Atan2(self.position.Value.x - mainPlayer.position.Value.x, self.position.Value.z - mainPlayer.position.Value.z);
+        Vector3 force = new Vector3(self.position.Value.x - mainPlayer.position.Value.x, 0, self.position.Value.z - mainPlayer.position.Value.z);
         self.ReplaceRotation(dir);
         self.ReplaceMovement(force.normalized * self.attr.Value.MoveSpeed);
-        self.physics.Rigid.LinearVelocity = force;
+        self.physics.Rigid.Velocity = force;
 ///<<< END WRITING YOUR CODE
 	}
 
@@ -62,7 +63,7 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return ;
 
-        float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x - self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
+        float dir = Mathf.Atan2(mainPlayer.position.Value.x - self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
         self.ReplaceRotation(dir);
 ///<<< END WRITING YOUR CODE
 	}
@@ -77,8 +78,8 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return behaviac.EBTStatus.BT_SUCCESS;
 
-        float dir = Util.Mathf.Atan2(mainPlayer.position.Value.x- self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
-        Util.Vector3 force = new Util.Vector3(mainPlayer.position.Value.x- self.position.Value.x, 0, mainPlayer.position.Value.z - self.position.Value.z);
+        float dir = Mathf.Atan2(mainPlayer.position.Value.x- self.position.Value.x, mainPlayer.position.Value.z - self.position.Value.z);
+        Vector3 force = new Vector3(mainPlayer.position.Value.x- self.position.Value.x, 0, mainPlayer.position.Value.z - self.position.Value.z);
         self.ReplaceRotation(dir);
         self.ReplaceMovement(force.normalized * self.attr.Value.MoveSpeed);
 		return behaviac.EBTStatus.BT_SUCCESS;
@@ -100,7 +101,7 @@ public class CharacterAgent : behaviac.Agent
 ///<<< BEGIN WRITING YOUR CODE StopMove
         {
             var self = GetOwner();
-            self.ReplaceMovement(Util.Vector3.zero);
+            self.ReplaceMovement(Vector3.zero);
         }
 ///<<< END WRITING YOUR CODE
 	}

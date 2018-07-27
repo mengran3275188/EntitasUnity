@@ -69,6 +69,7 @@
     <Compile Include="Features\AISystem.cs" />
     <Compile Include="Features\AttrSystem.cs" />
     <Compile Include="Features\BornSystem.cs" />
+    <Compile Include="Features\ChunkSystem.cs" />
     <Compile Include="Features\DeadSystem.cs" />
     <Compile Include="Features\DestoryEntitySystem.cs" />
     <Compile Include="Features\HpSystem.cs" />
@@ -76,10 +77,18 @@
     <Compile Include="Features\PhysicsSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
+    <Compile Include="Services\ChunkService\UnityChunkService.cs" />
+    <Compile Include="Services\PhysicsService\UnityPhysicsService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\Services.cs" />
+    <Compile Include="Services\UnitySceneService.cs" />
     <Compile Include="Services\ViewService\IViewService.cs" />
     <Compile Include="Services\ViewService\UnityViewService.cs" />
+    <Compile Include="View\UnityChunk.cs" />
+    <Compile Include="View\UnityChunkDoor.cs" />
+    <Compile Include="View\UnityRigid.cs" />
+    <Compile Include="View\UnityScene.cs" />
+    <Compile Include="View\UnityView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Skill\Command\AreaDamageCommand.cs" />

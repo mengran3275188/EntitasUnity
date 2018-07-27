@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityClient;
 using ScriptableSystem;
 using ScriptableData;
-using Util;
+using UnityEngine;
 
 namespace SkillCommands
 {
@@ -29,7 +26,7 @@ namespace SkillCommands
                 string effectPath = m_EffectPath;
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
 
-                Quaternion quaternion = Quaternion.CreateFromYawPitchRoll(obj.rotation.Value, 0, 0);
+                Quaternion quaternion = Quaternion.Euler(0, obj.rotation.Value, 0);
 
                 if(string.IsNullOrEmpty(m_AttachPath))
                 {

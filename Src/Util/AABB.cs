@@ -17,7 +17,7 @@
 *  3. This notice may not be removed or altered from any source distribution. 
 */
 
-namespace Util
+namespace Util.MyMath
 {
     /// <summary>
     /// Bounding Box defined through min and max vectors. Member

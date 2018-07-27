@@ -16,7 +16,7 @@ namespace UnityClient
         {
             var e = m_Context.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != e)
-                GfxSystem.UpdateCamera(e.position.Value.x, e.position.Value.y, e.position.Value.z);
+                GfxSystem.UpdateCamera(e.physics.Rigid.Position.x, e.physics.Rigid.Position.y, e.physics.Rigid.Position.z);
         }
 
         private readonly GameContext m_Context;

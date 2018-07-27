@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Entitas;
 using Entitas.Data;
+using UnityEngine;
 
 namespace UnityClient
 {
@@ -27,20 +28,20 @@ namespace UnityClient
 
                 if (entity.hasDead)
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
+                    Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
                 }else if(entity.hasBorn)
                 {
-                    GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
+                    Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
                 }
                 else
                 {
-                    if(entity.movement.Velocity.IsNearlyZero())
+                    if( Mathf.Approximately(entity.movement.Velocity.magnitude, 0))
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
+                        Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Idle));
                     }
                     else
                     {
-                        GfxSystem.CrossFadeAnimation(entity.resource.Value, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
+                        Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Run));
                     }
                 }
             }

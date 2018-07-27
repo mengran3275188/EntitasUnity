@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Util
+namespace Util.MyMath
 {
     // Representation of 2D vectors and points.
     public struct Vector2

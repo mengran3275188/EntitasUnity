@@ -28,7 +28,7 @@ using Jitter.Collision.Shapes;
 using Jitter.Collision;
 using Jitter.Dynamics.Constraints;
 using Jitter.DataStructures;
-using Util;
+using Util.MyMath;
 #endregion
 
 namespace Jitter.Dynamics

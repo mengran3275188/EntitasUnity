@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Util
+namespace Util.MyMath
 {
     public struct Matrix3x3
     {

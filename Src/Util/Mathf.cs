@@ -15,7 +15,7 @@ namespace UnityEngineInternal
     }
 }
 
-namespace Util
+namespace Util.MyMath
 {
     // A collection of common math functions.
     public partial struct Mathf
