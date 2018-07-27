@@ -16,7 +16,7 @@ namespace SkillCommands
             {
                 //if(obj.isAnimation)
                 {
-                    GfxSystem.PlayAnimation(obj.resource.Value, m_AnimName, m_Speed, m_Weight, m_Layer, m_WrapMode, m_BlendMode, m_PlayMode, m_CrossFadeTime);
+                    Services.Instance.ViewService.PlayAnimation(obj, m_AnimName, m_Speed, m_Weight, m_Layer, m_WrapMode, m_BlendMode, m_PlayMode, m_CrossFadeTime);
                 }
             }
             return ExecResult.Finished;
@@ -106,7 +106,7 @@ namespace SkillCommands
             GameEntity obj = instance.Target as GameEntity;
             if (obj != null)
             {
-                GfxSystem.SetAnimationSpeed(obj.resource.Value, m_AnimName, m_Speed);
+                Services.Instance.ViewService.SetAnimationSpeed(obj, m_AnimName, m_Speed);
             }
             return ExecResult.Finished;
         }

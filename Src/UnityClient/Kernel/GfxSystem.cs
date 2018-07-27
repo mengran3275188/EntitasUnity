@@ -61,18 +61,6 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.UpdateRotation(resId, rotation);
         }
-        public static void PlayAnimation(uint resId, string animName)
-        {
-            GfxSystemImpl.Gfx.PlayAnimation(resId, animName);
-        }
-        public static void CrossFadeAnimation(uint resId, string animName)
-        {
-            GfxSystemImpl.Gfx.CrossFadeAnimation(resId, animName);
-        }
-        public static void PlayAnimation(uint resId, string animName, float speed, float weight, int layer, int wrapMode, int blendMode, int playMode, long crossFadeTime)
-        {
-            GfxSystemImpl.Gfx.PlayAnimation(resId, animName, speed,  weight, layer, wrapMode, blendMode, playMode, crossFadeTime);
-        }
         public static void ListenKeyPressState(params Keyboard.Code[] codes)
         {
             GfxSystemImpl.Gfx.ListenKeyPressState(codes);
@@ -84,10 +72,6 @@ namespace UnityClient
         public static void UpdateCamera(float x, float y, float z)
         {
             GfxSystemImpl.Gfx.UpdateCamera(x, y, z);
-        }
-        public static void SetAnimationSpeed(uint resId, string animName, float speed)
-        {
-            GfxSystemImpl.Gfx.SetAnimationSpeed(resId, animName, speed);
         }
         public static void MoveChildToBone(uint resId, string childName, string boneName)
         {

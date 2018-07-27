@@ -193,7 +193,7 @@ namespace SkillCommands
         {
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
-            Vector3 object_speed = Quaternion.Euler(0, m_RotateDir, 0) * speed;
+            Vector3 object_speed = Quaternion.Euler(0, Mathf.Rad2Deg * m_RotateDir, 0) * speed;
             instance.Velocity = object_speed;
             obj.ReplaceRotation(m_RotateDir);
 

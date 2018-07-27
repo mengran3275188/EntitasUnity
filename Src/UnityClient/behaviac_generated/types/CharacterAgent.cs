@@ -92,7 +92,7 @@ public class CharacterAgent : behaviac.Agent
 
         var self = GetOwner();
 
-        UnityClient.GfxSystem.PlayAnimation(self.resource.Value, animName);
+        UnityClient.Services.Instance.ViewService.PlayAnimation(self, animName);
 ///<<< END WRITING YOUR CODE
 	}
 

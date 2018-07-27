@@ -43,5 +43,15 @@ namespace UnityClient
             if(entity.hasView)
                 entity.view.Value.CrossFadeAnimation(animName, 0.3f);
         }
+        public void PlayAnimation(GameEntity entity, string animName, float speed, float weight, int layer, int wrapMode, int blendMode, int playMode, long crossFadeTime)
+        {
+            if (entity.hasView)
+                entity.view.Value.PlayAnimation(animName, speed, weight, layer, wrapMode, blendMode, playMode, crossFadeTime);
+        }
+        public void SetAnimationSpeed(GameEntity entity, string animName, float speed)
+        {
+            if (entity.hasView)
+                entity.view.Value.SetAnimationSpeed(animName, speed);
+        }
     }
 }
