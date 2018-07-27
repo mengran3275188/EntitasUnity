@@ -74,7 +74,6 @@
     <Compile Include="Features\DestoryEntitySystem.cs" />
     <Compile Include="Features\HpSystem.cs" />
     <Compile Include="Features\IdSystem.cs" />
-    <Compile Include="Features\PhysicsSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
