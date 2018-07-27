@@ -62,7 +62,6 @@ namespace UnityClient.Kernel
             systems.Add(new HpSystem(contexts));
             systems.Add(new DeadSystem(contexts));
             systems.Add(new BornSystem(contexts));
-            systems.Add(new PhysicsSystem(contexts));
             systems.Add(new AISystem(contexts));
             systems.Add(SkillSystem.Instance);
             systems.Add(BuffSystem.Instance);
