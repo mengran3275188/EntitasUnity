@@ -26,7 +26,7 @@ namespace UnityClient
             get { return m_Rigidbody.rotation; }
             set { m_Rigidbody.rotation = value; }
         }
-        public void OnTriggerEnter(Collision hit)
+        public void OnTriggerEnter(Collider hit)
         {
             Util.LogUtil.Debug("On Trigger Enter!");
         }
