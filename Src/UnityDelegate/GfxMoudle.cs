@@ -158,22 +158,6 @@ namespace UnityDelegate
                 LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: can not find parent  object with resId. parentId = {0}.", parentId);
             }
         }
-        public void DestroyResource(uint resId)
-        {
-            GameObject obj = GetGameObject(resId);
-            if (null != obj)
-            {
-                ForgetGameObject(resId, obj);
-                if(!ResourceManager.Instance.RecycleObject(obj))
-                    GameObject.Destroy(obj);
-                else
-                    ResourceManager.Instance.SetActiveOptim(obj, false);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.DestroyResource : can not find obj with resId {0}.", resId);
-            }
-        }
         public void UpdatePosition(uint resId, float x, float y, float z)
         {
             GameObject target = GetGameObject(resId);

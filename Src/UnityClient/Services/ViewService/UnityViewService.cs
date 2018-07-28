@@ -34,6 +34,14 @@ namespace UnityClient
                 LogUtil.Error("GfxMoudle.Instantiate new object failed. Resource path is {0}.", asset);
             }
         }
+        public void RecylceAsset(GameEntity entity)
+        {
+            if(entity.hasView)
+            {
+                UnityView view = entity.view.Value as UnityView;
+                ResourceSystem.RecycleObject(view.gameObject);
+            }
+        }
         public void PlayAnimation(GameEntity entity, string animName)
         {
             if(entity.hasView)

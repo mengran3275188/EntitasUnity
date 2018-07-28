@@ -17,9 +17,9 @@ namespace UnityClient
             {
 
                 // 一些资源的处理临时放在这里
-                if(entity.hasResource)
+                if(entity.hasView)
                 {
-                    GfxSystem.DestoryResource(entity.resource.Value);
+                    Services.Instance.ViewService.RecylceAsset(entity);
                 }
                 if(entity.hasAttr)
                 {
