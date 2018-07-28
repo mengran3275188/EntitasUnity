@@ -13520,16 +13520,6 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseCollider:
-  - {fileID: 65965137294589752}
-  - {fileID: 65080100891262214}
-  - {fileID: 65452282303241904}
-  - {fileID: 65962238600288436}
-  - {fileID: 65187354973242284}
-  - {fileID: 65830527663889016}
-  - {fileID: 65628090568554828}
-  m_Doors: []
-  m_Triggers: []
 --- !u!198 &198067821266018162
 ParticleSystem:
   m_ObjectHideFlags: 1

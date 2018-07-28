@@ -7,7 +7,7 @@ namespace UnityClient
 {
     public class UnityChunkTrigger : MonoBehaviour, IChunkTrigger
     {
-        public delegate void ChunkTriggerEnterDelegate(IChunk chunk);
+        public delegate void ChunkTriggerEnterDelegate(IChunk chunk, IView view);
 
         public ChunkTriggerEnterDelegate OnChunkTriggerEnter;
         public IChunk Chunk
@@ -20,8 +20,12 @@ namespace UnityClient
         }
         private void OnTriggerEnter(Collider collider)
         {
-            if (null != OnChunkTriggerEnter)
-                OnChunkTriggerEnter(m_Chunk);
+            UnityView view = collider.gameObject.GetComponent<UnityView>();
+            if(null != view)
+            {
+                if (null != OnChunkTriggerEnter)
+                    OnChunkTriggerEnter(m_Chunk, view);
+            }
         }
         private UnityChunk m_Chunk;
     }

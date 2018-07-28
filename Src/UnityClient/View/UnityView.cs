@@ -10,6 +10,10 @@ namespace UnityClient
     [RequireComponent(typeof(UnityRigid), typeof(Rigidbody))]
     public class UnityView : MonoBehaviour, IView
     {
+        public Entity Entity
+        {
+            get { return m_Entity; }
+        }
         public void Init(Entity entity)
         {
             m_Entity = entity;

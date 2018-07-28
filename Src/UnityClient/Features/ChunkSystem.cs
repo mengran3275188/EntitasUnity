@@ -41,10 +41,6 @@ namespace UnityClient
         }
         private void ChunkGroup_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
-            throw new NotImplementedException();
-        }
-        private void OnChunkTriggerEnter()
-        {
         }
 
         private readonly IGroup<GameEntity> m_ChunkGroup;
