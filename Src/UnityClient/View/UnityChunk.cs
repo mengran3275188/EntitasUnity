@@ -14,6 +14,10 @@ namespace UnityClient
             public Vector3 Position;
             public int NpcId;
         }
+        public GameEntity Entity
+        {
+            get { return m_Entity; }
+        }
         public UnityChunkDoor[] Doors
         {
             get { return m_Doors; }
@@ -27,11 +31,12 @@ namespace UnityClient
             get { return m_Triggered; }
             set { m_Triggered = value; }
         }
-        public void Init(UnityChunkDoor[] doors, UnityChunkTrigger[] triggers)
+        public void Init(GameEntity entity, UnityChunkDoor[] doors, UnityChunkTrigger[] triggers)
         {
             m_Doors = doors;
             m_Triggers = triggers;
             m_Triggered = false;
+            m_Entity = entity;
         }
         public void OnDrawGizmos()
         {
@@ -43,6 +48,7 @@ namespace UnityClient
         }
 
         private bool m_Triggered = false;
+        private GameEntity m_Entity;
         private UnityChunkDoor[] m_Doors;
         private UnityChunkTrigger[] m_Triggers;
     }

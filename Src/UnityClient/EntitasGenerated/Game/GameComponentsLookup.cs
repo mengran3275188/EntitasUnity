@@ -8,35 +8,38 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int AI = 0;
-    public const int Animation = 1;
-    public const int Attr = 2;
-    public const int Born = 3;
-    public const int BuffAttrChanged = 4;
-    public const int Buff = 5;
-    public const int Camp = 6;
-    public const int Chunk = 7;
-    public const int ChunkDoor = 8;
-    public const int ChunkTrigger = 9;
-    public const int Collision = 10;
-    public const int Dead = 11;
-    public const int Destory = 12;
-    public const int Hp = 13;
-    public const int Id = 14;
-    public const int MainPlayer = 15;
-    public const int Movement = 16;
-    public const int Physics = 17;
-    public const int Position = 18;
-    public const int Resource = 19;
-    public const int Rotation = 20;
-    public const int Scene = 21;
-    public const int Skill = 22;
-    public const int TimeInfo = 23;
-    public const int View = 24;
+    public const int ActiveChunk = 0;
+    public const int AI = 1;
+    public const int Animation = 2;
+    public const int Attr = 3;
+    public const int Born = 4;
+    public const int BuffAttrChanged = 5;
+    public const int Buff = 6;
+    public const int Camp = 7;
+    public const int Chunk = 8;
+    public const int ChunkDoor = 9;
+    public const int ChunkTrigger = 10;
+    public const int Collision = 11;
+    public const int Dead = 12;
+    public const int Destory = 13;
+    public const int Hp = 14;
+    public const int Id = 15;
+    public const int MainPlayer = 16;
+    public const int Movement = 17;
+    public const int Npc = 18;
+    public const int Physics = 19;
+    public const int Position = 20;
+    public const int Resource = 21;
+    public const int Rotation = 22;
+    public const int Scene = 23;
+    public const int Skill = 24;
+    public const int TimeInfo = 25;
+    public const int View = 26;
 
-    public const int TotalComponents = 25;
+    public const int TotalComponents = 27;
 
     public static readonly string[] componentNames = {
+        "ActiveChunk",
         "AI",
         "Animation",
         "Attr",
@@ -54,6 +57,7 @@ public static class GameComponentsLookup {
         "Id",
         "MainPlayer",
         "Movement",
+        "Npc",
         "Physics",
         "Position",
         "Resource",
@@ -65,6 +69,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Entitas.Data.ActiveChunkComponent),
         typeof(Entitas.Data.AIComponent),
         typeof(Entitas.Data.AnimationComponent),
         typeof(Entitas.Data.AttrComponent),
@@ -82,6 +87,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.MainPlayerComponent),
         typeof(Entitas.Data.MovementComponent),
+        typeof(Entitas.Data.NpcComponent),
         typeof(Entitas.Data.PhysicsComponent),
         typeof(Entitas.Data.PositionComponent),
         typeof(Entitas.Data.ResourceComponent),

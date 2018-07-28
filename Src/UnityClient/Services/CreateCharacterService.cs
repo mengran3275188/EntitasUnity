@@ -10,7 +10,19 @@ namespace UnityClient
         public CreateCharacterService(Contexts contexts) : base(contexts)
         {
         }
-        public void CreateCharacter(uint id, int characterId, int campId, Vector3 position, float rotation)
+        public void CreateNpc(uint id, int characterId, int campId, Vector3 position, float rotation)
+        {
+            var e = CreateCharacter(id, characterId, campId, position, rotation);
+            if (null != e)
+                e.isNpc = true;
+        }
+        public void CreatePlayer(uint id, int characterId, int campId, Vector3 position, float rotation)
+        {
+            var e = CreateCharacter(id, characterId, campId, position, rotation);
+            if (null != e)
+                e.isMainPlayer = true;
+        }
+        private GameEntity CreateCharacter(uint id, int characterId, int campId, Vector3 position, float rotation)
         {
             CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(characterId);
             if (null != config)
@@ -60,7 +72,10 @@ namespace UnityClient
                 }
 
                 e.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);
+
+                return e;
             }
+            return null;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace UnityClient
         public UnityChunkService(Contexts contexts) : base(contexts)
         {
         }
-        public void LoadChunk(IChunk chunk)
+        public void LoadChunk(GameEntity entity, IChunk chunk)
         {
             UnityChunk unityChunk = chunk as UnityChunk;
 
@@ -26,7 +26,7 @@ namespace UnityClient
                 LoadChunkTrigger(unityChunk, chunkTrigger);
             }
 
-            unityChunk.Init(chunkDoors, chunkTriggers);
+            unityChunk.Init(entity, chunkDoors, chunkTriggers);
             OpenDoor(chunk);
         }
         public void OpenDoor(IChunk chunk)
@@ -60,7 +60,7 @@ namespace UnityClient
                 Vector3 position = unityChunk.gameObject.transform.TransformPoint(npcSpawn.Position);
                 float rotation = 0;
 
-                Services.Instance.CreateCharacterService.CreateCharacter(entityId, npcSpawn.NpcId, (int)CampId.Blue, position, rotation);
+                Services.Instance.CreateCharacterService.CreateNpc(entityId, npcSpawn.NpcId, (int)CampId.Blue, position, rotation);
             }
         }
         private void LoadChunkDoor(UnityChunk chunk, UnityChunkDoor chunkDoor)
@@ -86,6 +86,7 @@ namespace UnityClient
             {
                 if (gameEntity.isMainPlayer)
                 {
+                    unityChunk.Entity.isActiveChunk = true;
                     CloseDoor(chunk);
                     SummonNpc(chunk);
                     unityChunk.Triggered = true;

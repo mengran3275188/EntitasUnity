@@ -62,14 +62,14 @@ namespace SceneCommand
             Vector3 position = target.position.Value + Quaternion.Euler(0, target.rotation.Value, 0) * m_LocalPosition;
             float rotation = target.rotation.Value + m_LocalRotation.y;
 
-            Services.Instance.CreateCharacterService.CreateCharacter(entityId, m_CharacterId, campId, position, rotation);
-
-            var entity = gameContext.GetEntityWithId(entityId);
-
-            entity.isMainPlayer = m_MainPlayer;
+            if(m_MainPlayer)
+                Services.Instance.CreateCharacterService.CreatePlayer(entityId, m_CharacterId, campId, position, rotation);
+            else
+                Services.Instance.CreateCharacterService.CreateNpc(entityId, m_CharacterId, campId, position, rotation);
 
             if (m_SkillId > 0)
             {
+                var entity = gameContext.GetEntityWithId(entityId);
                 SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
             }
             return ExecResult.Finished;

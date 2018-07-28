@@ -75,4 +75,7 @@ namespace Entitas.Data
     {
         public IView Value;
     }
+    public sealed class NpcComponent : IComponent
+    {
+    }
 }

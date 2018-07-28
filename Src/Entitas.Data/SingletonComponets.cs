@@ -20,4 +20,8 @@ namespace Entitas.Data
         public SceneConfig Config;
         public SceneInstanceInfo ScriptInstance;
     }
+    [Unique]
+    public sealed class ActiveChunkComponent : IComponent
+    {
+    }
 }
