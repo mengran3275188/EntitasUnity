@@ -13,7 +13,7 @@ namespace SceneCommand
     {
         protected override void Load(CallData callData)
         {
-            if(callData.GetParamNum() >= 3)
+            if (callData.GetParamNum() >= 3)
             {
                 m_CharacterId = int.Parse(callData.GetParamId(0));
 
@@ -27,57 +27,20 @@ namespace SceneCommand
             if (null == callData)
                 return;
             Load(callData);
-            for(int i = 0; i < funcData.Statements.Count; ++i)
+            for (int i = 0; i < funcData.Statements.Count; ++i)
             {
                 ScriptableData.CallData stCall = funcData.Statements[i] as ScriptableData.CallData;
                 if (null == stCall)
                     continue;
-                if(stCall.GetId() == "mainplayer")
+                if (stCall.GetId() == "mainplayer")
                 {
                     m_MainPlayer = true;
                 }
-                if(stCall.GetId() == "skill")
+                if (stCall.GetId() == "skill")
                 {
-                    if(stCall.GetParamNum() >= 1)
+                    if (stCall.GetParamNum() >= 1)
                     {
                         m_SkillId = int.Parse(stCall.GetParamId(0));
-                    }
-                }
-                if(stCall.GetId() == "ai")
-                {
-                    if(stCall.GetParamNum() >= 1)
-                    {
-                        m_AIScript = stCall.GetParamId(0);
-                    }
-                }
-                if(stCall.GetId() == "attr")
-                {
-                    if(stCall.GetParamNum() >= 1)
-                    {
-                        m_AttrId = int.Parse(stCall.GetParamId(0));
-                    }
-                }
-                if(stCall.GetId() == "physics")
-                {
-                    if(stCall.GetParamNum() == 3)
-                    {
-                        m_PhysicsType = PhysicsType.Box;
-                        m_PhysicsIsTrigger = bool.Parse(stCall.GetParamId(0));
-                        m_PhysicsOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
-                        m_PhysicsSize = ScriptableDataUtility.CalcVector3(stCall.GetParam(2) as CallData);
-
-                    }else if(stCall.GetParamNum() == 4)
-                    {
-                        m_PhysicsType = PhysicsType.Capsule;
-                        m_PhysicsIsTrigger = bool.Parse(stCall.GetParamId(0));
-                        m_PhysicsOffset = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as CallData);
-
-                        m_PhysicsLength = float.Parse(stCall.GetParamId(2));
-                        m_PhysicsRadius = float.Parse(stCall.GetParamId(3));
-                        m_PhysicsLength -= m_PhysicsRadius * 2;
-
-                        if (m_PhysicsLength < 0)
-                            m_PhysicsLength = 0;
                     }
                 }
             }
@@ -90,110 +53,25 @@ namespace SceneCommand
             if (null == target)
                 return ExecResult.Finished;
 
-            CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(m_CharacterId);
-            if(null != config)
+            uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
+            // camp id
+            int campId = m_MainPlayer ? (int)CampId.Red : (int)CampId.Blue;
+            if (target.hasCamp)
+                campId = target.camp.Value;
+
+            Vector3 position = target.position.Value + Quaternion.Euler(0, target.rotation.Value, 0) * m_LocalPosition;
+            float rotation = target.rotation.Value + m_LocalRotation.y;
+
+            Services.Instance.CreateCharacterService.CreateCharacter(entityId, m_CharacterId, campId, position, rotation);
+
+            var entity = gameContext.GetEntityWithId(entityId);
+
+            entity.isMainPlayer = m_MainPlayer;
+
+            if (m_SkillId > 0)
             {
-                uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
-                GameEntity entity = gameContext.CreateEntity();
-                entity.AddId(entityId);
-
-                entity.isMainPlayer = m_MainPlayer;
-
-                // res
-                uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
-                Services.Instance.ViewService.LoadAsset(entity, resId, config.Model);
-                entity.AddResource(resId);
-
-                // animation
-                entity.AddAnimation(config.ActionId, config.ActionPrefix);
-
-                // movement
-                Quaternion quaternion = Quaternion.Euler(0, target.rotation.Value, 0);
-                entity.AddMovement(Vector3.zero);
-                entity.physics.Rigid.Position = target.position.Value + quaternion * m_LocalPosition;
-
-                entity.AddPosition(target.position.Value + quaternion * m_LocalPosition);
-                entity.AddRotation(m_LocalRotation.y + target.rotation.Value);
-
-                // AI
-                if(!string.IsNullOrEmpty(m_AIScript))
-                {
-                    var agent = new CharacterAgent();
-                    agent.Init(entityId);
-                    bool ret = agent.btload(m_AIScript);
-                    agent.btsetcurrent(m_AIScript);
-                    entity.AddAI(agent);
-                }
-                // skill
-                entity.AddSkill(null, null);
-                entity.AddBuff(new System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<BuffInstanceInfo>>(), new System.Collections.Generic.List<StartBuffParam>());
-
-                // 考虑采用skillinputcomponent类似的形式替换这种直接释放技能的形式。减少依赖。
-                if(m_SkillId > 0)
-                {
-                    SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
-                }
-
-                /*
-                if(m_PhysicsType == PhysicsType.Box)
-                {
-                    Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_PhysicsSize);
-
-                    Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
-                    physicsMaterial.KineticFriction = 0;
-                    physicsMaterial.StaticFriction = 0;
-
-                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, false);
-                    rigid.Mass = 1000;
-                    rigid.IsTrigger = m_PhysicsIsTrigger;
-                    rigid.Position = entity.position.Value + m_PhysicsOffset;
-
-                    entity.AddPhysics(rigid, m_PhysicsOffset);
-                }else if(m_PhysicsType == PhysicsType.Capsule)
-                {
-                    Jitter.Collision.Shapes.CapsuleShape shape = new Jitter.Collision.Shapes.CapsuleShape(m_PhysicsLength, m_PhysicsRadius);
-
-                    Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
-                    physicsMaterial.KineticFriction = 0;
-                    physicsMaterial.StaticFriction = 0;
-
-                    RigidObject rigid = new RigidObject(entity.id.value, shape, physicsMaterial, true);
-                    rigid.IsTrigger = m_PhysicsIsTrigger;
-                    rigid.Position = entity.position.Value + m_PhysicsOffset;
-
-                    entity.AddPhysics(rigid, m_PhysicsOffset);
-                }
-                */
-
-                // camp id
-                int campId = entity.isMainPlayer ? (int)CampId.Red : (int)CampId.Blue;
-                if (target.hasCamp)
-                    campId = target.camp.Value;
-                entity.AddCamp(campId);
-
-                // attribute
-                if(m_AttrId > 0)
-                {
-                    GfxSystem.CreateHudHead(entity.resource.Value);
-
-                    AttributeConfig attrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(m_AttrId);
-                    if(null != attrConfig)
-                    {
-                        AttributeData attrData = new AttributeData();
-                        attrData.SetAbsoluteByConfig(attrConfig);
-                        entity.AddAttr(m_AttrId, attrData);
-                        entity.ReplaceHp(attrData.HpMax);
-                    }
-                }
-
-                if(!entity.isMainPlayer)
-                    entity.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);
+                SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
             }
-            else
-            {
-                LogUtil.Error("CreateCharacterCommand.ExecCommand : character config {0} not found!", m_CharacterId);
-            }
-
             return ExecResult.Finished;
         }
         private int m_CharacterId;
@@ -201,15 +79,6 @@ namespace SceneCommand
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
-        private string m_AIScript = string.Empty;
-        private int m_AttrId = 0;
-
-        private Vector3 m_PhysicsOffset = Vector3.zero;
-        private Vector3 m_PhysicsSize = Vector3.one;
-        private float m_PhysicsLength = 0;
-        private float m_PhysicsRadius = 0;
-        private PhysicsType m_PhysicsType = PhysicsType.Invalid;
-        private bool m_PhysicsIsTrigger = false;
 
         private enum PhysicsType
         {

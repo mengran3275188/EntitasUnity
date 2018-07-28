@@ -839,7 +839,7 @@ namespace Entitas.Data
 {
 	public sealed partial class CharacterConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 24)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 32)]
 		private struct CharacterConfigRecord
 		{
 			internal int Id;
@@ -848,6 +848,8 @@ namespace Entitas.Data
 			internal float Scale;
 			internal int ActionId;
 			internal int ActionPrefix;
+			internal int AIScript;
+			internal int AttrId;
 		}
 
 		public int Id;
@@ -856,6 +858,8 @@ namespace Entitas.Data
 		public float Scale;
 		public int ActionId;
 		public string ActionPrefix;
+		public string AIScript;
+		public int AttrId;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -865,6 +869,8 @@ namespace Entitas.Data
 			Scale = DBCUtil.ExtractNumeric<float>(node, "Scale", 0);
 			ActionId = DBCUtil.ExtractNumeric<int>(node, "ActionId", 0);
 			ActionPrefix = DBCUtil.ExtractString(node, "ActionPrefix", "");
+			AIScript = DBCUtil.ExtractString(node, "AIScript", "");
+			AttrId = DBCUtil.ExtractNumeric<int>(node, "AttrId", 0);
 			return true;
 		}
 
@@ -877,6 +883,8 @@ namespace Entitas.Data
 			Scale = DBCUtil.ExtractFloat(table, record.Scale, 0);
 			ActionId = DBCUtil.ExtractInt(table, record.ActionId, 0);
 			ActionPrefix = DBCUtil.ExtractString(table, record.ActionPrefix, "");
+			AIScript = DBCUtil.ExtractString(table, record.AIScript, "");
+			AttrId = DBCUtil.ExtractInt(table, record.AttrId, 0);
 			return true;
 		}
 
@@ -889,6 +897,8 @@ namespace Entitas.Data
 			record.Scale = DBCUtil.SetValue(table, Scale, 0);
 			record.ActionId = DBCUtil.SetValue(table, ActionId, 0);
 			record.ActionPrefix = DBCUtil.SetValue(table, ActionPrefix, "");
+			record.AIScript = DBCUtil.SetValue(table, AIScript, "");
+			record.AttrId = DBCUtil.SetValue(table, AttrId, 0);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

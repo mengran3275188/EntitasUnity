@@ -55,50 +55,12 @@ namespace UnityClient
 
             foreach (var npcSpawn in unityChunk.m_Npcs)
             {
-                CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(npcSpawn.NpcId);
-                if (null != config)
-                {
-                    uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
-                    GameEntity entity = _contexts.game.CreateEntity();
-                    entity.AddId(entityId);
 
-                    uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
-                    Services.Instance.ViewService.LoadAsset(entity, resId, config.Model);
-                    entity.AddResource(resId);
+                uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
+                Vector3 position = unityChunk.gameObject.transform.TransformPoint(npcSpawn.Position);
+                float rotation = 0;
 
-                    entity.AddAnimation(config.ActionId, config.ActionPrefix);
-
-                    Quaternion quaternion = Quaternion.Euler(0, 0, 0);
-                    entity.AddMovement(Vector3.zero);
-                    entity.physics.Rigid.Position = unityChunk.gameObject.transform.TransformPoint(npcSpawn.Position);
-
-                    entity.AddPosition(unityChunk.gameObject.transform.TransformPoint(npcSpawn.Position));
-                    entity.AddRotation(0);
-
-                    var agent = new CharacterAgent();
-                    agent.Init(entityId);
-                    bool ret = agent.btload("");
-                    agent.btsetcurrent("");
-                    entity.AddAI(agent);
-
-                    entity.AddSkill(null, null);
-                    entity.AddBuff(new Dictionary<int, List<BuffInstanceInfo>>(), new List<StartBuffParam>());
-
-                    entity.AddCamp((int)CampId.Blue);
-
-                    AttributeConfig attrConfig = AttributeConfigProvider.Instance.GetAttributeConfig(1000);
-                    if (null != attrConfig)
-                    {
-                        AttributeData attrData = new AttributeData();
-                        attrData.SetAbsoluteByConfig(attrConfig);
-                        entity.AddAttr(1000, attrData);
-                        entity.ReplaceHp(attrData.HpMax);
-                    }
-
-                    entity.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);
-
-                }
-
+                Services.Instance.CreateCharacterService.CreateCharacter(entityId, npcSpawn.NpcId, (int)CampId.Blue, position, rotation);
             }
         }
         private void LoadChunkDoor(UnityChunk chunk, UnityChunkDoor chunkDoor)
@@ -115,6 +77,9 @@ namespace UnityClient
         {
             UnityChunk unityChunk = chunk as UnityChunk;
 
+            if (unityChunk.Triggered)
+                return;
+
             UnityView unityView = view as UnityView;
 
             if (unityView.Entity is GameEntity gameEntity)
@@ -123,6 +88,7 @@ namespace UnityClient
                 {
                     CloseDoor(chunk);
                     SummonNpc(chunk);
+                    unityChunk.Triggered = true;
                 }
             }
 

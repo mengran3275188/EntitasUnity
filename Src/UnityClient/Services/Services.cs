@@ -11,5 +11,6 @@ namespace UnityClient
         public SceneService SceneService = new SceneService(Contexts.sharedInstance);
         public UnityChunkService ChunkService = new UnityChunkService(Contexts.sharedInstance);
         public UnityViewService ViewService = new UnityViewService(Contexts.sharedInstance);
+        public CreateCharacterService CreateCharacterService = new CreateCharacterService(Contexts.sharedInstance);
     }
 }

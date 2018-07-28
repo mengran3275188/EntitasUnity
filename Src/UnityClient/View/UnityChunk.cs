@@ -22,10 +22,16 @@ namespace UnityClient
         {
             get { return m_Triggers; }
         }
+        public bool Triggered
+        {
+            get { return m_Triggered; }
+            set { m_Triggered = value; }
+        }
         public void Init(UnityChunkDoor[] doors, UnityChunkTrigger[] triggers)
         {
             m_Doors = doors;
             m_Triggers = triggers;
+            m_Triggered = false;
         }
         public void OnDrawGizmos()
         {
@@ -36,6 +42,7 @@ namespace UnityClient
             }
         }
 
+        private bool m_Triggered = false;
         private UnityChunkDoor[] m_Doors;
         private UnityChunkTrigger[] m_Triggers;
     }

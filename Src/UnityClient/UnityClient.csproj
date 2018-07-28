@@ -78,6 +78,7 @@
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
+    <Compile Include="Services\CreateCharacterService.cs" />
     <Compile Include="Services\PhysicsService\UnityPhysicsService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\Services.cs" />
