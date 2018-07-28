@@ -63,6 +63,14 @@ namespace Entitas.Data
     {
         public IChunk Value;
     }
+    public sealed class ChunkDoorComponent : IComponent
+    {
+        public IChunkDoor Value;
+    }
+    public sealed class ChunkTriggerComponent : IComponent
+    {
+        public IChunkTrigger Value;
+    }
     public sealed class ViewComponent : IComponent
     {
         public IView Value;

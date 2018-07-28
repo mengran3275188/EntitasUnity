@@ -7,20 +7,13 @@ namespace UnityClient
 {
     public class UnityChunk : MonoBehaviour, IChunk
     {
-        public BoxCollider[] m_BaseCollider;
-        public BoxCollider[] m_Doors;
-        public BoxCollider[] m_Triggers;
-        public BoxCollider[] GetBaseCollider()
+        public void Init(UnityChunkDoor[] doors, UnityChunkTrigger[] triggers)
         {
-            return m_BaseCollider;
+            m_Doors = doors;
+            m_Triggers = triggers;
         }
-        public BoxCollider[] GetDoorsCollider()
-        {
-            return m_Doors;
-        }
-        public BoxCollider[] GetTriggers()
-        {
-            return m_Triggers;
-        }
+
+        private UnityChunkDoor[] m_Doors;
+        private UnityChunkTrigger[] m_Triggers;
     }
 }

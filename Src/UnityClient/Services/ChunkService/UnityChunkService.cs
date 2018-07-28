@@ -12,10 +12,35 @@ namespace UnityClient
         }
         public void LoadChunk(IChunk chunk)
         {
-            BoxCollider[] baseColliders = chunk.GetBaseCollider();
-            foreach(var collider in baseColliders)
+            UnityChunk unityChunk = chunk as UnityChunk;
+
+            UnityChunkDoor[] chunkDoors = unityChunk.GetComponentsInChildren<UnityChunkDoor>();
+            foreach(var chunkDoor in chunkDoors)
             {
+                LoadChunkDoor(unityChunk, chunkDoor);
             }
+
+            UnityChunkTrigger[] chunkTriggers = unityChunk.GetComponentsInChildren<UnityChunkTrigger>();
+            foreach(var chunkTrigger in chunkTriggers)
+            {
+                LoadChunkTrigger(unityChunk, chunkTrigger);
+            }
+
+            unityChunk.Init(chunkDoors, chunkTriggers);
+        }
+        public void LoadChunkDoor(UnityChunk chunk, UnityChunkDoor chunkDoor)
+        {
+            chunkDoor.Init(chunk);
+        }
+        public void LoadChunkTrigger(UnityChunk chunk, UnityChunkTrigger chunkTrigger)
+        {
+            chunkTrigger.Init(chunk);
+
+            chunkTrigger.OnChunkTriggerEnter += OnChunkTriggerEnter;
+        }
+        private void OnChunkTriggerEnter(IChunk chunk)
+        {
+            Util.LogUtil.Info("On chunk trigger enter!");
         }
     }
 }

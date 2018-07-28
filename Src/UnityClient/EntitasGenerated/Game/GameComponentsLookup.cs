@@ -16,23 +16,25 @@ public static class GameComponentsLookup {
     public const int Buff = 5;
     public const int Camp = 6;
     public const int Chunk = 7;
-    public const int Collision = 8;
-    public const int Dead = 9;
-    public const int Destory = 10;
-    public const int Hp = 11;
-    public const int Id = 12;
-    public const int MainPlayer = 13;
-    public const int Movement = 14;
-    public const int Physics = 15;
-    public const int Position = 16;
-    public const int Resource = 17;
-    public const int Rotation = 18;
-    public const int Scene = 19;
-    public const int Skill = 20;
-    public const int TimeInfo = 21;
-    public const int View = 22;
+    public const int ChunkDoor = 8;
+    public const int ChunkTrigger = 9;
+    public const int Collision = 10;
+    public const int Dead = 11;
+    public const int Destory = 12;
+    public const int Hp = 13;
+    public const int Id = 14;
+    public const int MainPlayer = 15;
+    public const int Movement = 16;
+    public const int Physics = 17;
+    public const int Position = 18;
+    public const int Resource = 19;
+    public const int Rotation = 20;
+    public const int Scene = 21;
+    public const int Skill = 22;
+    public const int TimeInfo = 23;
+    public const int View = 24;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -43,6 +45,8 @@ public static class GameComponentsLookup {
         "Buff",
         "Camp",
         "Chunk",
+        "ChunkDoor",
+        "ChunkTrigger",
         "Collision",
         "Dead",
         "Destory",
@@ -69,6 +73,8 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.BuffComponent),
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.ChunkComponent),
+        typeof(Entitas.Data.ChunkDoorComponent),
+        typeof(Entitas.Data.ChunkTriggerComponent),
         typeof(Entitas.Data.CollisionComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),

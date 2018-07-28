@@ -33,10 +33,6 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.DrawCircle(center.x, center.y, center.z, radius, remainTime);
         }
-        public static void Instantiate(uint resId, string path)
-        {
-            GfxSystemImpl.Gfx.Instantiate(resId, path);
-        }
         public static void DestoryResource(uint resId)
         {
             GfxSystemImpl.Gfx.DestroyResource(resId);

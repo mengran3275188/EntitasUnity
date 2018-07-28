@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using Util;
 using UnityEngine;
 using Entitas.Data;
+using Entitas;
 
 namespace UnityClient
 {
     [RequireComponent(typeof(UnityRigid), typeof(Rigidbody))]
     public class UnityView : MonoBehaviour, IView
     {
+        public void Init(Entity entity)
+        {
+            m_Entity = entity;
+        }
         public void PlayAnimation(string animName)
         {
             Animation animation = GetComponent<Animation>();
@@ -62,5 +67,7 @@ namespace UnityClient
                 }
             }
         }
+
+        private Entity m_Entity;
     }
 }

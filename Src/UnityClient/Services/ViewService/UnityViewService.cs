@@ -25,6 +25,7 @@ namespace UnityClient
                 if(null != view)
                 {
                     // add view;
+                    view.Init(entity);
                     entity.AddView(view);
                 }
             }

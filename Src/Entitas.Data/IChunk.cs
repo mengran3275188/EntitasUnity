@@ -6,8 +6,14 @@ namespace Entitas.Data
 {
     public interface IChunk
     {
-        BoxCollider[] GetBaseCollider();
-        BoxCollider[] GetDoorsCollider();
-        BoxCollider[] GetTriggers();
+    }
+    public interface IChunkDoor
+    {
+        IChunk Chunk { get; }
+    }
+    public interface IChunkTrigger
+    {
+        IChunk Chunk { get; }
     }
 }
+

@@ -102,18 +102,6 @@ namespace UnityDelegate
                 }
             }
         }
-        public void Instantiate(uint resId, string path)
-        {
-            var obj = ResourceSystem.NewObject(path) as UnityEngine.GameObject;
-            if (null != obj)
-            {
-                RememberGameObject(resId, obj);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.Instantiate new object failed. Resource path is {0}.", path);
-            }
-        }
         public void CreateGameObject(uint resId, string resource, float positionX, float positionY, float positionZ, 
                                      float eularX, float eularY, float eularZ, 
                                      float scaleX, float scaleY, float scaleZ,  float recycleTime)
