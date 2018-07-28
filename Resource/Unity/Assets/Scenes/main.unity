@@ -3000,11 +3000,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 53986353}
     m_Modifications:
-    - target: {fileID: 114868074486284886, guid: 23b634473967c854fb37e2aed7e1257e,
-        type: 2}
-      propertyPath: m_Npcs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4124184929536582, guid: 23b634473967c854fb37e2aed7e1257e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 187.8
