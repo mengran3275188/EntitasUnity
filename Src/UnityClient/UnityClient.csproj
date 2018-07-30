@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Plugins\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugins\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Features\DeadSystem.cs" />
     <Compile Include="Features\DestoryEntitySystem.cs" />
     <Compile Include="Features\HpSystem.cs" />
+    <Compile Include="Features\HudSystem.cs" />
     <Compile Include="Features\IdSystem.cs" />
     <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Features\Scene\SceneSystem.cs" />
@@ -82,6 +87,8 @@
     <Compile Include="Services\PhysicsService\UnityPhysicsService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\Services.cs" />
+    <Compile Include="Services\UnityCameraService.cs" />
+    <Compile Include="Services\UnityHudServices.cs" />
     <Compile Include="Services\UnitySceneService.cs" />
     <Compile Include="Services\ViewService\IViewService.cs" />
     <Compile Include="Services\ViewService\UnityViewService.cs" />

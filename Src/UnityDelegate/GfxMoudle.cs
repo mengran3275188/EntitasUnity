@@ -41,11 +41,7 @@ namespace UnityDelegate
         {
             Application.targetFrameRate = 60;
 
-
             m_LogicInvoker = processor;
-
-            CameraManager.Instance.OnStart();
-            HudMgr.Instance.OnStart();
         }
         public void Update()
         {
@@ -54,8 +50,6 @@ namespace UnityDelegate
         }
         public void FixUpdate()
         {
-            CameraManager.Instance.Tick();
-            HudMgr.Instance.Tick();
         }
         public void OnQuit()
         {
@@ -194,10 +188,6 @@ namespace UnityDelegate
         {
             InputManager.Instance.ListenKeyboardEvent(c, handler);
         }
-        public void UpdateCamera(float x, float y, float z)
-        {
-            CameraManager.Instance.UpdateCamera(x, y, z);
-        }
         public void MoveChildToBone(uint resId, string childName, string boneName)
         {
             GameObject target = GetGameObject(resId);
@@ -223,38 +213,6 @@ namespace UnityDelegate
             {
                 LogUtil.Error("GfxMoudle.MoveChildToBone : can not find obj with resId {0}.", resId);
             }
-        }
-        public void AddDamageText(uint resId, string text, long remainTime)
-        {
-            GameObject target = GetGameObject(resId);
-            if (null != target)
-            {
-                HudMgr.Instance.AddDamageText(text, target.transform, remainTime);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.CreateHudText : can not find obj with resId {0}.", resId);
-            }
-        }
-        public void CreateHudHead(uint resId)
-        {
-            GameObject target = GetGameObject(resId);
-            if (null != target)
-            {
-                HudMgr.Instance.AddHudHead(resId, target.transform);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.CreateHudText : can not find obj with resId {0}.", resId);
-            }
-        }
-        public void UpdateHudHead(uint resId, float curHp, float maxHp)
-        {
-            HudMgr.Instance.UpdateHudHead(resId, curHp, maxHp);
-        }
-        public void RemoveHudHead(uint resId)
-        {
-            HudMgr.Instance.RemoveHudHead(resId);
         }
         public bool GetJoyStickDir(out float dir)
         {

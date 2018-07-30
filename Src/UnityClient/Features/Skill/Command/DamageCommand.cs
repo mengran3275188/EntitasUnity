@@ -30,7 +30,7 @@ namespace SkillCommands
 
                     obj.ReplaceHp(obj.hp.Value - damage);
 
-                    GfxSystem.AddDamageText(obj.resource.Value, "-10", 3000);
+                    Services.Instance.HudService.AddDamageText(obj, "-10", 3000);
                 }
             }
             return ExecResult.Finished;

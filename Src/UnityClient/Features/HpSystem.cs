@@ -36,7 +36,7 @@ namespace UnityClient
                     else
                         entity.ReplaceDead(m_Context.timeInfo.Time);
                 }
-                GfxSystem.UpdateHudHead(entity.resource.Value, entity.hp.Value, entity.attr.Value.HpMax);
+                Services.Instance.HudService.UpdateHudHead(entity, entity.hp.Value, entity.attr.Value.HpMax);
             }
         }
         private readonly GameContext m_Context;

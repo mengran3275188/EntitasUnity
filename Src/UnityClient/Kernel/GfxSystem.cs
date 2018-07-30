@@ -61,31 +61,10 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.ListenKeyPressEvent(c, handler);
         }
-        public static void UpdateCamera(float x, float y, float z)
-        {
-            GfxSystemImpl.Gfx.UpdateCamera(x, y, z);
-        }
         public static void MoveChildToBone(uint resId, string childName, string boneName)
         {
             GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
         }
-        public static void AddDamageText(uint resId, string text, long remainTime)
-        {
-            GfxSystemImpl.Gfx.AddDamageText(resId, text, remainTime);
-        }
-        public static void CreateHudHead(uint resId)
-        {
-            GfxSystemImpl.Gfx.CreateHudHead(resId);
-        }
-        public static void UpdateHudHead(uint resId, float curHp, float maxHp)
-        {
-            GfxSystemImpl.Gfx.UpdateHudHead(resId, curHp, maxHp);
-        }
-        public static void RemoveHudHead(uint resId)
-        {
-            GfxSystemImpl.Gfx.RemoveHudHead(resId);
-        }
-
         // 线程安全的方法允许返回值
         public static bool GetJoyStickDir(out float dir)
         {

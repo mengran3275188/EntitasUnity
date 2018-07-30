@@ -80,6 +80,7 @@ namespace UnityClient.Kernel
             systems.Add(new PositionSystem(contexts));
             systems.Add(new RotationSystem(contexts));
             systems.Add(new AnimationSystem(contexts));
+            systems.Add(new HudSystem(contexts));
 
             return systems;
         }

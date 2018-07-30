@@ -69,6 +69,8 @@ namespace UnityClient
                     attrData.SetAbsoluteByConfig(attrConfig);
                     e.AddAttr(config.AttrId, attrData);
                     e.ReplaceHp(attrData.HpMax);
+
+                    Services.Instance.HudService.AddHudHead(e);
                 }
 
                 e.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);

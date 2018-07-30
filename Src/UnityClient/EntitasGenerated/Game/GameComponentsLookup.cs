@@ -15,28 +15,30 @@ public static class GameComponentsLookup {
     public const int Born = 4;
     public const int BuffAttrChanged = 5;
     public const int Buff = 6;
-    public const int Camp = 7;
-    public const int Chunk = 8;
-    public const int ChunkDoor = 9;
-    public const int ChunkTrigger = 10;
-    public const int Collision = 11;
-    public const int Dead = 12;
-    public const int Destory = 13;
-    public const int Hp = 14;
-    public const int Id = 15;
-    public const int MainPlayer = 16;
-    public const int Movement = 17;
-    public const int Npc = 18;
-    public const int Physics = 19;
-    public const int Position = 20;
-    public const int Resource = 21;
-    public const int Rotation = 22;
-    public const int Scene = 23;
-    public const int Skill = 24;
-    public const int TimeInfo = 25;
-    public const int View = 26;
+    public const int CameraSerivce = 7;
+    public const int Camp = 8;
+    public const int Chunk = 9;
+    public const int ChunkDoor = 10;
+    public const int ChunkTrigger = 11;
+    public const int Collision = 12;
+    public const int Dead = 13;
+    public const int Destory = 14;
+    public const int Hp = 15;
+    public const int Hud = 16;
+    public const int Id = 17;
+    public const int MainPlayer = 18;
+    public const int Movement = 19;
+    public const int Npc = 20;
+    public const int Physics = 21;
+    public const int Position = 22;
+    public const int Resource = 23;
+    public const int Rotation = 24;
+    public const int Scene = 25;
+    public const int Skill = 26;
+    public const int TimeInfo = 27;
+    public const int View = 28;
 
-    public const int TotalComponents = 27;
+    public const int TotalComponents = 29;
 
     public static readonly string[] componentNames = {
         "ActiveChunk",
@@ -46,6 +48,7 @@ public static class GameComponentsLookup {
         "Born",
         "BuffAttrChanged",
         "Buff",
+        "CameraSerivce",
         "Camp",
         "Chunk",
         "ChunkDoor",
@@ -54,6 +57,7 @@ public static class GameComponentsLookup {
         "Dead",
         "Destory",
         "Hp",
+        "Hud",
         "Id",
         "MainPlayer",
         "Movement",
@@ -76,6 +80,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.BornComponent),
         typeof(Entitas.Data.BuffAttrChangedComponent),
         typeof(Entitas.Data.BuffComponent),
+        typeof(Entitas.Data.CameraSerivceComponent),
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.ChunkComponent),
         typeof(Entitas.Data.ChunkDoorComponent),
@@ -84,6 +89,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
         typeof(Entitas.Data.HpComponent),
+        typeof(Entitas.Data.HudComponent),
         typeof(Entitas.Data.IdComponent),
         typeof(Entitas.Data.MainPlayerComponent),
         typeof(Entitas.Data.MovementComponent),

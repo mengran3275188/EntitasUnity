@@ -23,7 +23,7 @@ namespace UnityClient
                 }
                 if(entity.hasAttr)
                 {
-                    GfxSystem.RemoveHudHead(entity.resource.Value);
+                    Services.Instance.HudService.RemoveHudHead(entity);
                 }
 
                 entity.Destroy();

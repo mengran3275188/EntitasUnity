@@ -78,4 +78,8 @@ namespace Entitas.Data
     public sealed class NpcComponent : IComponent
     {
     }
+    public sealed class HudComponent : IComponent
+    {
+        public IHud Value;
+    }
 }

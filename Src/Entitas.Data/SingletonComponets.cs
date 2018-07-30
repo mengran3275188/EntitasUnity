@@ -24,4 +24,9 @@ namespace Entitas.Data
     public sealed class ActiveChunkComponent : IComponent
     {
     }
+    [Unique]
+    public sealed class CameraSerivceComponent : IComponent
+    {
+        public ICameraService Value;
+    }
 }
