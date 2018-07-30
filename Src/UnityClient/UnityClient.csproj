@@ -76,6 +76,7 @@
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="ExtensionUnityVector3.cs" />
+    <Compile Include="GameState\GameStateSystems.cs" />
     <Compile Include="Game\Features\AISystem.cs" />
     <Compile Include="Game\Features\AttrSystem.cs" />
     <Compile Include="Game\Features\BornSystem.cs" />
@@ -145,7 +146,7 @@
     <Compile Include="Game\Features\CameraSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Features\GameStartSystem.cs" />
+    <Compile Include="GameState\Features\GameStartSystem.cs" />
     <Compile Include="Kernel\GameKernel.cs" />
     <Compile Include="Kernel\GfxSystem.cs" />
     <Compile Include="Kernel\GfxSystemImpl.cs" />

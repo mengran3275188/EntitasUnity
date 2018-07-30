@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UnityClient
 {
-    public class SceneService : Service
+    public class UnitySceneService : Service
     {
-        public SceneService(Contexts contexts) : base(contexts)
+        public UnitySceneService(Contexts contexts) : base(contexts)
         {
         }
 
+        public void Init()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
         public void InitChunks()
         {
             GameObject sceneRoot = GameObject.Find("Scene");
@@ -23,6 +28,15 @@ namespace UnityClient
                     e.AddChunk(chunk);
                 }
             }
+        }
+        public void LoadScene(string name)
+        {
+            SceneManager.LoadScene("MainCity");
+        }
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Util.LogUtil.Error("OnSceneLoaded~");
+            SceneSystem.Instance.Load(1);
         }
     }
 }

@@ -13,9 +13,14 @@ namespace UnityClient.Kernel
         private GameLogicSystems m_GameLogicSystems;
         private GameViewSystems m_GameViewSystems;
 
+        private GameStateSystems m_GameStateSystems;
+
         public void OnStart()
         {
             var contexts = Contexts.sharedInstance;
+
+            m_GameStateSystems = new GameStateSystems(contexts, Services.Instance);
+            m_GameStateSystems.Initialize();
 
             m_GameLogicSystems = new GameLogicSystems(contexts, Services.Instance);
             m_GameLogicSystems.Initialize();
@@ -23,10 +28,14 @@ namespace UnityClient.Kernel
             m_GameViewSystems = new GameViewSystems(contexts, Services.Instance);
             m_GameViewSystems.Initialize();
 
+
             LogUtil.Info("Game Start ...");
         }
         public void Update()
         {
+            m_GameStateSystems.Execute();
+            m_GameStateSystems.Cleanup();
+
             m_GameLogicSystems.Execute();
             m_GameLogicSystems.Cleanup();
 
@@ -39,11 +48,15 @@ namespace UnityClient.Kernel
         }
         public void OnQuit()
         {
+
             m_GameLogicSystems.ClearReactiveSystems();
             m_GameLogicSystems.TearDown();
 
             m_GameViewSystems.ClearReactiveSystems();
             m_GameViewSystems.TearDown();
+
+            m_GameStateSystems.ClearReactiveSystems();
+            m_GameStateSystems.TearDown();
 
 
             Contexts.sharedInstance.Reset();

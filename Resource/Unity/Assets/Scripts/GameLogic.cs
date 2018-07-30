@@ -39,6 +39,7 @@ public class GameLogic : MonoBehaviour {
 #else
         GameKernel.OnStart(Application.streamingAssetsPath);
 #endif
+        DontDestroyOnLoad(this);
     }
 
     private void Update()

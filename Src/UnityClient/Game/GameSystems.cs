@@ -21,8 +21,6 @@ namespace UnityClient
             Add(SkillSystem.Instance);
             Add(BuffSystem.Instance);
 
-            Add(new GameStartSystem(contexts));
-
             Add(new DestoryEntitySystem(contexts));
         }
     }
