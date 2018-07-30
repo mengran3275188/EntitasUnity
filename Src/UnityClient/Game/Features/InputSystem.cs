@@ -35,6 +35,7 @@ namespace UnityClient
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
+            GfxSystem.ListenKeyboardEvent(Keyboard.Code.M, this.ChangeScene);
             GfxSystem.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
@@ -127,6 +128,13 @@ namespace UnityClient
                     SkillSystem.Instance.BreakSkill(mainPlayer);
                     SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 5, mainPlayer.position.Value, mainPlayer.rotation.Value);
                 }
+            }
+        }
+        private void ChangeScene(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                Contexts.sharedInstance.gameState.SetNextSceneName("MainCity");
             }
         }
         private KeyHit GetKeyboadHit()

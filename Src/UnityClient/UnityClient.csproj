@@ -76,6 +76,7 @@
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="ExtensionUnityVector3.cs" />
+    <Compile Include="GameState\Features\SceneSystem.cs" />
     <Compile Include="GameState\GameStateSystems.cs" />
     <Compile Include="Game\Features\AISystem.cs" />
     <Compile Include="Game\Features\AttrSystem.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Game\Features\LevelSystem.cs" />
     <Compile Include="Game\Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
-    <Compile Include="GameState\Features\ChangeLevelSystem.cs" />
+    <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
     <Compile Include="Services\CreateCharacterService.cs" />

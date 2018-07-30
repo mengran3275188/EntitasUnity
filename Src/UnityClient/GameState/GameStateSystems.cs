@@ -10,6 +10,8 @@ namespace UnityClient
         public GameStateSystems(Contexts contexts, Services services)
         {
             Add(new GameStartSystem(contexts));
+            Add(new SceneServiceSystem(contexts));
+            Add(new ChangeSceneSystem(contexts));
         }
     }
 }

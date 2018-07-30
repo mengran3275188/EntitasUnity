@@ -15,6 +15,16 @@ namespace UnityClient
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+        public void Tick()
+        {
+            float loadProgress = -1f;
+            if(null != m_LoadOperation)
+            {
+                loadProgress = m_LoadOperation.progress;
+                _contexts.gameState.ReplaceLoadingProgress(loadProgress);
+            }
+
+        }
         public void InitChunks()
         {
             GameObject sceneRoot = GameObject.Find("Scene");
@@ -29,14 +39,24 @@ namespace UnityClient
                 }
             }
         }
+        public void ChangeToLoadingScene()
+        {
+            SceneManager.LoadScene("Loading");
+        }
         public void LoadScene(string name)
         {
-            SceneManager.LoadScene("MainCity");
+            SceneManager.LoadScene(name);
+        }
+        public void LoadSceneAsync(string name)
+        {
+            m_LoadOperation = SceneManager.LoadSceneAsync(name);
+            _contexts.gameState.ReplaceLoadingProgress(0.0f);
         }
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Util.LogUtil.Error("OnSceneLoaded~");
             SceneSystem.Instance.Load(1);
         }
+        private AsyncOperation m_LoadOperation;
     }
 }

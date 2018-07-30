@@ -10,16 +10,13 @@ namespace Entitas.Data
         public int Value;
     }
     [GameState, Unique]
-    public class NextLevelComponent : IComponent
+    public class LoadingProgressComponent : IComponent
     {
-        public int Value;
+        public float Value;
     }
     [GameState, Unique]
-    public class LevelCleanUpComponent : IComponent
+    public class NextSceneNameComponent : IComponent
     {
-    }
-    [GameState, Unique]
-    public class LevelLoadedComponent : IComponent
-    {
+        public string Value;
     }
 }

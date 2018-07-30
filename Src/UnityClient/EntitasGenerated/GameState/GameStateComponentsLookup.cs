@@ -8,24 +8,21 @@
 //------------------------------------------------------------------------------
 public static class GameStateComponentsLookup {
 
-    public const int LevelCleanUp = 0;
-    public const int Level = 1;
-    public const int LevelLoaded = 2;
-    public const int NextLevel = 3;
+    public const int Level = 0;
+    public const int LoadingProgress = 1;
+    public const int NextSceneName = 2;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
-        "LevelCleanUp",
         "Level",
-        "LevelLoaded",
-        "NextLevel"
+        "LoadingProgress",
+        "NextSceneName"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Entitas.Data.LevelCleanUpComponent),
         typeof(Entitas.Data.LevelComponent),
-        typeof(Entitas.Data.LevelLoadedComponent),
-        typeof(Entitas.Data.NextLevelComponent)
+        typeof(Entitas.Data.LoadingProgressComponent),
+        typeof(Entitas.Data.NextSceneNameComponent)
     };
 }

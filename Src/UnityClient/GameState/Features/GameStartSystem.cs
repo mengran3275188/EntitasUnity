@@ -18,10 +18,8 @@ namespace UnityClient
 
         public void Initialize()
         {
-
             Services.Instance.SceneService.Init();
             Services.Instance.SceneService.LoadScene("MainCity");
-
         }
     }
 }
