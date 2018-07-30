@@ -58,6 +58,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\UnityClient\EntitasGenerated\GameState\GameStateAttribute.cs">
+      <Link>GameStateAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\UnityClient\EntitasGenerated\Game\GameAttribute.cs">
+      <Link>GameAttribute.cs</Link>
+    </Compile>
     <Compile Include="AttributeData.cs" />
     <Compile Include="AttributeEnum.cs" />
     <Compile Include="DataReader\AttributeConfigProvider.cs" />
@@ -66,6 +72,7 @@
     <Compile Include="Define\GameDefine.cs" />
     <Compile Include="Define\KeyboardCode.cs" />
     <Compile Include="Define\StartSkillParam.cs" />
+    <Compile Include="GameStateComponent.cs" />
     <Compile Include="ICamera.cs" />
     <Compile Include="IChunk.cs" />
     <Compile Include="IHud.cs" />

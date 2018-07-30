@@ -64,24 +64,32 @@
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
     <Compile Include="behaviac_generated\types\CharacterAgent.cs" />
     <Compile Include="EntitasGenerated\Contexts.cs" />
-    <Compile Include="EntitasGenerated\Game\GameAttribute.cs" />
+    <Compile Include="EntitasGenerated\Feature.cs" />
+    <Compile Include="EntitasGenerated\GameState\GameStateComponents.cs" />
+    <Compile Include="EntitasGenerated\GameState\GameStateComponentsLookup.cs" />
+    <Compile Include="EntitasGenerated\GameState\GameStateContext.cs" />
+    <Compile Include="EntitasGenerated\GameState\GameStateEntity.cs" />
+    <Compile Include="EntitasGenerated\GameState\GameStateMatcher.cs" />
     <Compile Include="EntitasGenerated\Game\GameComponents.cs" />
     <Compile Include="EntitasGenerated\Game\GameComponentsLookup.cs" />
     <Compile Include="EntitasGenerated\Game\GameContext.cs" />
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="ExtensionUnityVector3.cs" />
-    <Compile Include="Features\AISystem.cs" />
-    <Compile Include="Features\AttrSystem.cs" />
-    <Compile Include="Features\BornSystem.cs" />
-    <Compile Include="Features\ChunkSystem.cs" />
-    <Compile Include="Features\DeadSystem.cs" />
-    <Compile Include="Features\DestoryEntitySystem.cs" />
-    <Compile Include="Features\HpSystem.cs" />
-    <Compile Include="Features\HudSystem.cs" />
-    <Compile Include="Features\IdSystem.cs" />
-    <Compile Include="Features\Scene\Command\CreateCharacterCommand.cs" />
-    <Compile Include="Features\Scene\SceneSystem.cs" />
+    <Compile Include="Game\Features\AISystem.cs" />
+    <Compile Include="Game\Features\AttrSystem.cs" />
+    <Compile Include="Game\Features\BornSystem.cs" />
+    <Compile Include="Game\Features\ChunkSystem.cs" />
+    <Compile Include="Game\Features\DeadSystem.cs" />
+    <Compile Include="Game\Features\DestoryEntitySystem.cs" />
+    <Compile Include="Game\Features\HpSystem.cs" />
+    <Compile Include="Game\Features\HudSystem.cs" />
+    <Compile Include="Game\Features\IdSystem.cs" />
+    <Compile Include="Game\Features\LevelSystem.cs" />
+    <Compile Include="Game\Features\Scene\Command\CreateCharacterCommand.cs" />
+    <Compile Include="Game\Features\Scene\SceneSystem.cs" />
+    <Compile Include="GameState\Features\ChangeLevelSystem.cs" />
+    <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
     <Compile Include="Services\CreateCharacterService.cs" />
     <Compile Include="Services\PhysicsService\UnityPhysicsService.cs" />
@@ -100,48 +108,48 @@
     <Compile Include="View\UnityView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Skill\Command\AreaDamageCommand.cs" />
-    <Compile Include="Features\Skill\Command\ColliderDamageCommand.cs" />
-    <Compile Include="Features\Skill\Command\DamageCommand.cs" />
-    <Compile Include="Features\Skill\Command\DestroySelfCommand.cs" />
-    <Compile Include="Features\Skill\Command\GeneralCommand.cs" />
-    <Compile Include="Features\Skill\Command\ScriptableDataUtility.cs" />
+    <Compile Include="Game\Features\Skill\Command\AreaDamageCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\ColliderDamageCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\DamageCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\DestroySelfCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\GeneralCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\ScriptableDataUtility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Skill\Command\EffectCommand.cs" />
-    <Compile Include="Features\Skill\Command\MoveCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\EffectCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\MoveCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Skill\Command\AnimationCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\AnimationCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\RotationSystem.cs" />
+    <Compile Include="Game\Features\RotationSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\AnimationSystem.cs" />
+    <Compile Include="Game\Features\AnimationSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\PositionSystem.cs" />
-    <Compile Include="Features\Skill\BuffSystem.cs" />
-    <Compile Include="Features\Skill\Command\SelfBuffCommand.cs" />
-    <Compile Include="Features\Skill\Command\TeleportCommand.cs" />
-    <Compile Include="Features\Skill\SkillDefine.cs" />
-    <Compile Include="Features\Skill\SkillSystem.cs" />
+    <Compile Include="Game\Features\PositionSystem.cs" />
+    <Compile Include="Game\Features\Skill\BuffSystem.cs" />
+    <Compile Include="Game\Features\Skill\Command\SelfBuffCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\TeleportCommand.cs" />
+    <Compile Include="Game\Features\Skill\SkillDefine.cs" />
+    <Compile Include="Game\Features\Skill\SkillSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\TimeSystem.cs" />
+    <Compile Include="Game\Features\TimeSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\MovementSystem.cs" />
+    <Compile Include="Game\Features\MovementSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\InputSystem.cs" />
+    <Compile Include="Game\Features\InputSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\CameraSystem.cs" />
+    <Compile Include="Game\Features\CameraSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\GameStartSystem.cs" />
+    <Compile Include="Game\Features\GameStartSystem.cs" />
     <Compile Include="Kernel\GameKernel.cs" />
     <Compile Include="Kernel\GfxSystem.cs" />
     <Compile Include="Kernel\GfxSystemImpl.cs" />

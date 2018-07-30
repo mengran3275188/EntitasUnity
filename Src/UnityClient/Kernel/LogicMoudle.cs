@@ -10,79 +10,43 @@ namespace UnityClient.Kernel
     internal class LogicMoudle : IActionQueue
     {
 
-        private Systems m_UpdateSystems;
-        private Systems m_FixUpdateSystems;
+        private GameLogicSystems m_GameLogicSystems;
+        private GameViewSystems m_GameViewSystems;
 
         public void OnStart()
         {
             var contexts = Contexts.sharedInstance;
 
+            m_GameLogicSystems = new GameLogicSystems(contexts, Services.Instance);
+            m_GameLogicSystems.Initialize();
 
-            m_UpdateSystems = CreateUpdateSystems(contexts);
-            m_UpdateSystems.Initialize();
-
-            m_FixUpdateSystems = CreateFixedUpdateSystems(contexts);
-            m_FixUpdateSystems.Initialize();
+            m_GameViewSystems = new GameViewSystems(contexts, Services.Instance);
+            m_GameViewSystems.Initialize();
 
             LogUtil.Info("Game Start ...");
         }
         public void Update()
         {
-            m_UpdateSystems.Execute();
-            m_UpdateSystems.Cleanup();
+            m_GameLogicSystems.Execute();
+            m_GameLogicSystems.Cleanup();
 
             m_ActionQueue.HandleActions(m_ActionNumPerTick);
         }
         public void FixedUpdate()
         {
-            m_FixUpdateSystems.Execute();
-            m_FixUpdateSystems.Cleanup();
+            m_GameViewSystems.Execute();
+            m_GameViewSystems.Cleanup();
         }
         public void OnQuit()
         {
-            m_UpdateSystems.ClearReactiveSystems();
-            m_UpdateSystems.TearDown();
+            m_GameLogicSystems.ClearReactiveSystems();
+            m_GameLogicSystems.TearDown();
 
-            m_FixUpdateSystems.ClearReactiveSystems();
-            m_FixUpdateSystems.TearDown();
+            m_GameViewSystems.ClearReactiveSystems();
+            m_GameViewSystems.TearDown();
 
 
             Contexts.sharedInstance.Reset();
-        }
-        private static Systems CreateUpdateSystems(Contexts contexts)
-        {
-            Systems systems = new Systems();
-
-            systems.Add(new TimeSystem(contexts));
-            systems.Add(new InputSystem(contexts));
-            systems.Add(IdSystem.Instance);
-            systems.Add(SceneSystem.Instance);
-            systems.Add(new ChunkSystem(contexts));
-            systems.Add(new AttrSystem(contexts));
-            systems.Add(new HpSystem(contexts));
-            systems.Add(new DeadSystem(contexts));
-            systems.Add(new BornSystem(contexts));
-            systems.Add(new AISystem(contexts));
-            systems.Add(SkillSystem.Instance);
-            systems.Add(BuffSystem.Instance);
-
-            systems.Add(new GameStartSystem(contexts));
-
-            systems.Add(new DestoryEntitySystem(contexts));
-            return systems;
-        }
-        private static Systems CreateFixedUpdateSystems(Contexts contexts)
-        {
-            Systems systems = new Systems();
-
-            systems.Add(new CameraSystem(contexts));
-            systems.Add(new MovementSystem(contexts));
-            systems.Add(new PositionSystem(contexts));
-            systems.Add(new RotationSystem(contexts));
-            systems.Add(new AnimationSystem(contexts));
-            systems.Add(new HudSystem(contexts));
-
-            return systems;
         }
         public int CurActionNum
         {
