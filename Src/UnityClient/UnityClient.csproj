@@ -123,13 +123,9 @@
     <Compile Include="Game\Features\Skill\Command\AnimationCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Features\RotationSystem.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Game\Features\AnimationSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Features\PositionSystem.cs" />
     <Compile Include="Game\Features\Skill\BuffSystem.cs" />
     <Compile Include="Game\Features\Skill\Command\SelfBuffCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\TeleportCommand.cs" />

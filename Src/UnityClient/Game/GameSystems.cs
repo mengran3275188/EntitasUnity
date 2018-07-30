@@ -32,8 +32,6 @@ namespace UnityClient
         {
             Add(new CameraSystem(contexts));
             Add(new MovementSystem(contexts));
-            Add(new PositionSystem(contexts));
-            Add(new RotationSystem(contexts));
             Add(new AnimationSystem(contexts));
             Add(new HudSystem(contexts));
         }
