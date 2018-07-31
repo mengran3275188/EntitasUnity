@@ -13,6 +13,8 @@ namespace UnityClient
         public void Initialize()
         {
             CommandManager.Instance.RegisterCommandFactory("createcharacter", new CommandFactoryHelper<SceneCommand.CreateCharacterCommand>());
+            CommandManager.Instance.RegisterCommandFactory("loadui", new CommandFactoryHelper<SceneCommand.LoadUICommand>());
+            CommandManager.Instance.RegisterCommandFactory("changescene", new CommandFactoryHelper<SceneCommand.ChangeSceneCommand>());
 
         }
         public void Load(int id)

@@ -91,7 +91,9 @@
     <Compile Include="Game\Features\HpSystem.cs" />
     <Compile Include="Game\Features\HudSystem.cs" />
     <Compile Include="Game\Features\IdSystem.cs" />
+    <Compile Include="Game\Features\Scene\Command\ChangeSceneCommand.cs" />
     <Compile Include="Game\Features\Scene\Command\CreateCharacterCommand.cs" />
+    <Compile Include="Game\Features\Scene\Command\LoadUICommand.cs" />
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\GameSystems.cs" />

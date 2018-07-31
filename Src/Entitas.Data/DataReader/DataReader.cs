@@ -986,17 +986,19 @@ namespace Entitas.Data
 {
 	public sealed partial class SceneConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
 		private struct SceneConfigRecord
 		{
 			internal int Id;
 			internal int Description;
+			internal int Name;
 			internal int Script;
 			internal int Navmesh;
 		}
 
 		public int Id;
 		public string Description;
+		public string Name;
 		public string Script;
 		public string Navmesh;
 
@@ -1004,6 +1006,7 @@ namespace Entitas.Data
 		{
 			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
 			Description = DBCUtil.ExtractString(node, "Description", "");
+			Name = DBCUtil.ExtractString(node, "Name", "");
 			Script = DBCUtil.ExtractString(node, "Script", "");
 			Navmesh = DBCUtil.ExtractString(node, "Navmesh", "");
 			return true;
@@ -1014,6 +1017,7 @@ namespace Entitas.Data
 			SceneConfigRecord record = GetRecord(table,index);
 			Id = DBCUtil.ExtractInt(table, record.Id, 0);
 			Description = DBCUtil.ExtractString(table, record.Description, "");
+			Name = DBCUtil.ExtractString(table, record.Name, "");
 			Script = DBCUtil.ExtractString(table, record.Script, "");
 			Navmesh = DBCUtil.ExtractString(table, record.Navmesh, "");
 			return true;
@@ -1024,6 +1028,7 @@ namespace Entitas.Data
 			SceneConfigRecord record = new SceneConfigRecord();
 			record.Id = DBCUtil.SetValue(table, Id, 0);
 			record.Description = DBCUtil.SetValue(table, Description, "");
+			record.Name = DBCUtil.SetValue(table, Name, "");
 			record.Script = DBCUtil.SetValue(table, Script, "");
 			record.Navmesh = DBCUtil.SetValue(table, Navmesh, "");
 			byte[] bytes = GetRecordBytes(record);

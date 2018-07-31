@@ -11,6 +11,8 @@ namespace Util
         {
             get { return s_Instance; }
         }
+
         private readonly static T s_Instance = Activator.CreateInstance<T>();
+
     }
 }

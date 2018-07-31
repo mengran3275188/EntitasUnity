@@ -4,10 +4,14 @@ using Entitas;
 
 namespace UnityClient
 {
-    public class SceneServiceSystem : IExecuteSystem
+    public class SceneServiceSystem : IInitializeSystem, IExecuteSystem
     {
         public SceneServiceSystem(Contexts contexts)
         {
+        }
+        public void Initialize()
+        {
+            Services.Instance.UIService.Init();
         }
         public void Execute()
         {
