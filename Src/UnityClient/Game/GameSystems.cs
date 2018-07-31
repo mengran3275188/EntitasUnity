@@ -8,7 +8,6 @@ namespace UnityClient
     {
         public GameLogicSystems(Contexts contexts, Services services)
         {
-            Add(new TimeSystem(contexts));
             Add(new InputSystem(contexts));
             Add(IdSystem.Instance);
             Add(SceneSystem.Instance);
@@ -21,7 +20,9 @@ namespace UnityClient
             Add(SkillSystem.Instance);
             Add(BuffSystem.Instance);
 
+            Add(new CleanupSystem(contexts));
             Add(new DestoryEntitySystem(contexts));
+            Add(new CleanResourceSystem(contexts));
         }
     }
     public class GameViewSystems : Feature

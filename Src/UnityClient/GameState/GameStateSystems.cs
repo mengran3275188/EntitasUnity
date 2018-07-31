@@ -12,6 +12,7 @@ namespace UnityClient
             Add(new GameStartSystem(contexts));
             Add(new SceneServiceSystem(contexts));
             Add(new ChangeSceneSystem(contexts));
+            Add(new TimeSystem(contexts));
         }
     }
 }

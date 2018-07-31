@@ -135,7 +135,7 @@ namespace SkillCommands
 
         private void OnCollision(uint targetEntityId)
         {
-            float time = Contexts.sharedInstance.game.timeInfo.Time;
+            float time = Contexts.sharedInstance.gameState.timeInfo.Time;
 
             long lastHitTime = -1;
 

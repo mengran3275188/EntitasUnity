@@ -10,10 +10,10 @@ namespace UnityClient
 {
     public class GameStartSystem : IInitializeSystem
     {
-        readonly GameContext game;
+        readonly GameStateContext gameState;
         public GameStartSystem(Contexts contexts)
         {
-            game = contexts.game;
+            gameState = contexts.gameState;
         }
 
         public void Initialize()

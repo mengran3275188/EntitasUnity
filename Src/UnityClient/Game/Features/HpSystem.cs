@@ -9,7 +9,7 @@ namespace UnityClient
     {
         public HpSystem(Contexts contexts) : base(contexts.game)
         {
-            m_Context = contexts.game;
+            m_Contexts = contexts;
         }
         public void Initialize()
         {
@@ -34,11 +34,11 @@ namespace UnityClient
                     if (entity.isMainPlayer)
                         entity.ReplaceHp(entity.attr.Value.HpMax);
                     else
-                        entity.ReplaceDead(m_Context.timeInfo.Time);
+                        entity.ReplaceDead(m_Contexts.gameState.timeInfo.Time);
                 }
                 Services.Instance.HudService.UpdateHudHead(entity, entity.hp.Value, entity.attr.Value.HpMax);
             }
         }
-        private readonly GameContext m_Context;
+        private readonly Contexts m_Contexts;
     }
 }

@@ -21,6 +21,7 @@ namespace UnityClient
         protected override void Execute(List<GameStateEntity> entities)
         {
             Services.Instance.SceneService.ChangeToLoadingScene();
+            Services.Instance.SceneService.LoadSceneAsync(Contexts.sharedInstance.gameState.nextSceneName.Value);
         }
     }
 }

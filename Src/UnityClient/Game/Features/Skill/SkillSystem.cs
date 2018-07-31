@@ -12,8 +12,8 @@ namespace UnityClient
     {
         public SkillSystem()
         {
-            m_GameContext = Contexts.sharedInstance.game;
-            m_SkillEntities = m_GameContext.GetGroup(GameMatcher.Skill);
+            m_Contexts = Contexts.sharedInstance;
+            m_SkillEntities = m_Contexts.game.GetGroup(GameMatcher.Skill);
         }
         public void Initialize()
         {
@@ -40,7 +40,7 @@ namespace UnityClient
 
         public void Execute()
         {
-            long time = (long)(m_GameContext.timeInfo.Time * 1000);
+            long time = (long)(m_Contexts.gameState.timeInfo.Time * 1000);
 
             var entities = m_SkillEntities.GetEntities();
             foreach (GameEntity entity in entities)
@@ -138,7 +138,7 @@ namespace UnityClient
         }
         private void PlayUseSkill(int skillId)
         {
-            var mainPlayer = m_GameContext.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
+            var mainPlayer = m_Contexts.game.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != mainPlayer)
                 StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.Value);
         }
@@ -210,6 +210,6 @@ namespace UnityClient
         private Dictionary<int, List<SkillInstanceInfo>> m_SkillInstancePool = new Dictionary<int, List<SkillInstanceInfo>>();
 
         private readonly IGroup<GameEntity> m_SkillEntities;
-        private readonly GameContext m_GameContext;
+        private readonly Contexts m_Contexts;
     }
 }

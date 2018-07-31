@@ -12,15 +12,15 @@ namespace UnityClient
     {
         public BuffSystem()
         {
-            m_GameContext = Contexts.sharedInstance.game;
-            m_ImpactEntities = m_GameContext.GetGroup(GameMatcher.Buff);
+            m_Contexts = Contexts.sharedInstance;
+            m_ImpactEntities = m_Contexts.game.GetGroup(GameMatcher.Buff);
         }
         public void Initialize()
         {
         }
         public void Execute()
         {
-            long time = (long)(m_GameContext.timeInfo.Time * 1000);
+            long time = (long)(m_Contexts.gameState.timeInfo.Time * 1000);
             foreach (GameEntity entity in m_ImpactEntities)
             {
                 BuffComponent buffComponent = entity.buff;
@@ -234,6 +234,6 @@ namespace UnityClient
         private Dictionary<int, List<BuffInstanceInfo>> m_BuffInstancePool = new Dictionary<int, List<BuffInstanceInfo>>();
 
         private readonly IGroup<GameEntity> m_ImpactEntities;
-        private readonly GameContext m_GameContext;
+        private readonly Contexts m_Contexts;
     }
 }

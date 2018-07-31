@@ -14,23 +14,24 @@ namespace UnityClient
         {
             CommandManager.Instance.RegisterCommandFactory("createcharacter", new CommandFactoryHelper<SceneCommand.CreateCharacterCommand>());
 
-            // scriptsystem 归一化
-            // script system 依赖一个拥有transform 信息的entity.
-            Contexts.sharedInstance.game.SetScene(null, null);
-            Contexts.sharedInstance.game.sceneEntity.AddPosition(Vector3.zero);
-            Contexts.sharedInstance.game.sceneEntity.AddRotation(0);
         }
         public void Load(int id)
         {
+
             var config = SceneConfigProvider.Instance.GetSceneConfig(id);
             if(null != config)
             {
+                Contexts.sharedInstance.game.ReplaceScene(null, null);
                 //SpatialSystem.Instance.Load(config.Navmesh);
                 var sceneInstance = NewSceneInstance(id, config.Script);
-                sceneInstance.m_SceneInstance.Start();
+                // scriptsystem 归一化
+                // script system 依赖一个拥有transform 信息的entity.
                 Contexts.sharedInstance.game.ReplaceScene(config, sceneInstance);
-
+                Contexts.sharedInstance.game.sceneEntity.ReplacePosition(Vector3.zero);
+                Contexts.sharedInstance.game.sceneEntity.ReplaceRotation(0);
                 Services.Instance.SceneService.InitChunks();
+
+                sceneInstance.m_SceneInstance.Start();
             }
             else
             {
@@ -40,12 +41,11 @@ namespace UnityClient
         public void Execute()
         {
             var context = Contexts.sharedInstance.game;
-            long time = (long)(context.timeInfo.Time * 1000);
+            long time = (long)(Contexts.sharedInstance.gameState.timeInfo.Time * 1000);
 
-            var scene = context.scene;
-            if(null != scene && null != scene.ScriptInstance)
+            if(context.hasScene && null != context.scene.ScriptInstance)
             {
-                scene.ScriptInstance.m_SceneInstance.Tick(time);
+                context.scene.ScriptInstance.m_SceneInstance.Tick(time);
             }
         }
         public void SendMessage(string messageId)

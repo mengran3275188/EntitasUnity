@@ -15,11 +15,11 @@ public static class GameComponentsLookup {
     public const int Born = 4;
     public const int BuffAttrChanged = 5;
     public const int Buff = 6;
-    public const int CameraSerivce = 7;
-    public const int Camp = 8;
-    public const int Chunk = 9;
-    public const int ChunkDoor = 10;
-    public const int ChunkTrigger = 11;
+    public const int Camp = 7;
+    public const int Chunk = 8;
+    public const int ChunkDoor = 9;
+    public const int ChunkTrigger = 10;
+    public const int Cleanup = 11;
     public const int Collision = 12;
     public const int Dead = 13;
     public const int Destory = 14;
@@ -35,10 +35,9 @@ public static class GameComponentsLookup {
     public const int Rotation = 24;
     public const int Scene = 25;
     public const int Skill = 26;
-    public const int TimeInfo = 27;
-    public const int View = 28;
+    public const int View = 27;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 28;
 
     public static readonly string[] componentNames = {
         "ActiveChunk",
@@ -48,11 +47,11 @@ public static class GameComponentsLookup {
         "Born",
         "BuffAttrChanged",
         "Buff",
-        "CameraSerivce",
         "Camp",
         "Chunk",
         "ChunkDoor",
         "ChunkTrigger",
+        "Cleanup",
         "Collision",
         "Dead",
         "Destory",
@@ -68,7 +67,6 @@ public static class GameComponentsLookup {
         "Rotation",
         "Scene",
         "Skill",
-        "TimeInfo",
         "View"
     };
 
@@ -80,11 +78,11 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.BornComponent),
         typeof(Entitas.Data.BuffAttrChangedComponent),
         typeof(Entitas.Data.BuffComponent),
-        typeof(Entitas.Data.CameraSerivceComponent),
         typeof(Entitas.Data.CampComponent),
         typeof(Entitas.Data.ChunkComponent),
         typeof(Entitas.Data.ChunkDoorComponent),
         typeof(Entitas.Data.ChunkTriggerComponent),
+        typeof(Entitas.Data.Cleanup),
         typeof(Entitas.Data.CollisionComponent),
         typeof(Entitas.Data.DeadComponent),
         typeof(Entitas.Data.DestoryComponent),
@@ -100,7 +98,6 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.RotationComponent),
         typeof(Entitas.Data.SceneComponent),
         typeof(Entitas.Data.SkillComponent),
-        typeof(Entitas.Data.TimeInfoComponent),
         typeof(Entitas.Data.ViewComponent)
     };
 }

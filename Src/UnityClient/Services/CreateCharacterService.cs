@@ -73,7 +73,7 @@ namespace UnityClient
                     Services.Instance.HudService.AddHudHead(e);
                 }
 
-                e.AddBorn(Contexts.sharedInstance.game.timeInfo.Time);
+                e.AddBorn(Contexts.sharedInstance.gameState.timeInfo.Time);
 
                 return e;
             }

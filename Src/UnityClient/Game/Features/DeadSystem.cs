@@ -8,8 +8,8 @@ namespace UnityClient
     {
         public DeadSystem(Contexts contexts)
         {
-            m_Context = contexts.game;
-            m_EntitiesGroup = m_Context.GetGroup(GameMatcher.Dead);
+            m_Contexts = contexts;
+            m_EntitiesGroup = m_Contexts.game.GetGroup(GameMatcher.Dead);
         }
 
         public void Execute()
@@ -17,7 +17,7 @@ namespace UnityClient
             var entities = m_EntitiesGroup.GetEntities();
             foreach(var entity in entities)
             {
-                if(m_Context.timeInfo.Time > entity.dead.DeadTime + m_DeadRemainTime)
+                if(m_Contexts.gameState.timeInfo.Time > entity.dead.DeadTime + m_DeadRemainTime)
                 {
                     entity.isDestory = true;
                 }
@@ -26,6 +26,6 @@ namespace UnityClient
 
         private const float m_DeadRemainTime = 3.0f;
         private readonly IGroup<GameEntity> m_EntitiesGroup;
-        private readonly GameContext m_Context;
+        private readonly Contexts m_Contexts;
     }
 }

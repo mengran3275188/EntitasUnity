@@ -16,8 +16,6 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            m_Context.SetCameraSerivce(Services.Instance.CameraService);
-
             CameraConfig config = CameraConfigProvider.Instance.GetCameraConfig(1);
             if(null != config)
             {
@@ -31,7 +29,7 @@ namespace UnityClient
             if (null != e)
             {
                 Vector3 cameraTargetPosition = e.physics.Rigid.Position + m_Rotation * (Vector3.back * m_Distance);
-                m_Context.cameraSerivce.Value.SetPosition(cameraTargetPosition);
+                Services.Instance.CameraService.SetPosition(cameraTargetPosition);
             }
         }
 
