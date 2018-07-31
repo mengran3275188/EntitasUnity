@@ -9,12 +9,6 @@ namespace Entitas.Data
     {
     }
     [Unique]
-    public sealed class TimeInfoComponent : IComponent
-    {
-        public float Time;
-        public float DeltaTime;
-    }
-    [Unique]
     public sealed class SceneComponent : IComponent
     {
         public SceneConfig Config;
@@ -25,8 +19,7 @@ namespace Entitas.Data
     {
     }
     [Unique]
-    public sealed class CameraSerivceComponent : IComponent
+    public sealed class Cleanup : IComponent
     {
-        public ICameraService Value;
     }
 }

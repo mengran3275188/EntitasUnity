@@ -14,5 +14,6 @@ namespace UnityClient
         public UnityCameraService CameraService = new UnityCameraService(Contexts.sharedInstance);
         public UnityHudServices HudService = new UnityHudServices(Contexts.sharedInstance);
         public UnitySceneService SceneService = new UnitySceneService(Contexts.sharedInstance);
+        public UnityUIServices UIService = new UnityUIServices(Contexts.sharedInstance);
     }
 }

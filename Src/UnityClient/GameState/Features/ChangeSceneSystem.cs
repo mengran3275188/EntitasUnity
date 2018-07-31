@@ -12,7 +12,7 @@ namespace UnityClient
         }
         protected override ICollector<GameStateEntity> GetTrigger(IContext<GameStateEntity> context)
         {
-            return context.CreateCollector(GameStateMatcher.NextSceneName);
+            return context.CreateCollector(GameStateMatcher.NextSceneId);
         }
         protected override bool Filter(GameStateEntity entity)
         {
@@ -21,7 +21,7 @@ namespace UnityClient
         protected override void Execute(List<GameStateEntity> entities)
         {
             Services.Instance.SceneService.ChangeToLoadingScene();
-            Services.Instance.SceneService.LoadSceneAsync(Contexts.sharedInstance.gameState.nextSceneName.Value);
+            Services.Instance.UIService.LoadUI("Loading");
         }
     }
 }

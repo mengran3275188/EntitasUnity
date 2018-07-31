@@ -42,21 +42,23 @@ namespace UnityClient
         public void ChangeToLoadingScene()
         {
             SceneManager.LoadScene("Loading");
+            m_CurrentLoadingScene = c_LoadingSceneId;
         }
-        public void LoadScene(string name)
+        public void LoadSceneAsync(int sceneId, string sceneName)
         {
-            SceneManager.LoadScene(name);
-        }
-        public void LoadSceneAsync(string name)
-        {
-            m_LoadOperation = SceneManager.LoadSceneAsync(name);
-            _contexts.gameState.ReplaceLoadingProgress(0.0f);
+            m_LoadOperation = SceneManager.LoadSceneAsync(sceneName);
+            m_CurrentLoadingScene = sceneId;
         }
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            Util.LogUtil.Error("OnSceneLoaded~");
-            SceneSystem.Instance.Load(1);
+            _contexts.gameState.ReplaceCurSceneId(m_CurrentLoadingScene);
+            _contexts.gameState.isSceneLoadFinished = true;
+            m_CurrentLoadingScene = -1;
         }
+
         private AsyncOperation m_LoadOperation;
+        private int m_CurrentLoadingScene = -1;
+
+        private const int c_LoadingSceneId = 2;
     }
 }

@@ -1,0 +1,7 @@
+script(2)
+{
+    onmessage("start")
+    {
+		log("loadscene start");
+    };
+};

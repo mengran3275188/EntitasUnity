@@ -8,24 +8,27 @@
 //------------------------------------------------------------------------------
 public static class GameStateComponentsLookup {
 
-    public const int Level = 0;
+    public const int CurSceneId = 0;
     public const int LoadingProgress = 1;
-    public const int NextSceneName = 2;
-    public const int TimeInfo = 3;
+    public const int NextSceneId = 2;
+    public const int SceneLoadFinished = 3;
+    public const int TimeInfo = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
-        "Level",
+        "CurSceneId",
         "LoadingProgress",
-        "NextSceneName",
+        "NextSceneId",
+        "SceneLoadFinished",
         "TimeInfo"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Entitas.Data.LevelComponent),
+        typeof(Entitas.Data.CurSceneIdComponent),
         typeof(Entitas.Data.LoadingProgressComponent),
-        typeof(Entitas.Data.NextSceneNameComponent),
+        typeof(Entitas.Data.NextSceneIdComponent),
+        typeof(Entitas.Data.SceneLoadFinishedComponent),
         typeof(Entitas.Data.TimeInfoComponent)
     };
 }

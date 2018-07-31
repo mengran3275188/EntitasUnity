@@ -78,6 +78,7 @@
     <Compile Include="ExtensionUnityVector3.cs" />
     <Compile Include="GameState\Features\LoadingSceneSystem.cs" />
     <Compile Include="GameState\Features\SceneServiceSystem.cs" />
+    <Compile Include="GameState\Features\SceneStartSystem.cs" />
     <Compile Include="GameState\GameStateSystems.cs" />
     <Compile Include="Game\Features\AISystem.cs" />
     <Compile Include="Game\Features\AttrSystem.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="Game\Features\HpSystem.cs" />
     <Compile Include="Game\Features\HudSystem.cs" />
     <Compile Include="Game\Features\IdSystem.cs" />
-    <Compile Include="Game\Features\LevelSystem.cs" />
     <Compile Include="Game\Features\Scene\Command\CreateCharacterCommand.cs" />
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="Services\UnityCameraService.cs" />
     <Compile Include="Services\UnityHudServices.cs" />
     <Compile Include="Services\UnitySceneService.cs" />
+    <Compile Include="Services\UnityUIServices.cs" />
     <Compile Include="Services\ViewService\IViewService.cs" />
     <Compile Include="Services\ViewService\UnityViewService.cs" />
     <Compile Include="View\UnityChunk.cs" />

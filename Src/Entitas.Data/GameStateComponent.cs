@@ -5,7 +5,12 @@ using Entitas.CodeGeneration.Attributes;
 namespace Entitas.Data
 {
     [GameState, Unique]
-    public class LevelComponent : IComponent
+    public class CurSceneIdComponent : IComponent
+    {
+        public int Value;
+    }
+    [GameState, Unique]
+    public class NextSceneIdComponent : IComponent
     {
         public int Value;
     }
@@ -15,8 +20,13 @@ namespace Entitas.Data
         public float Value;
     }
     [GameState, Unique]
-    public class NextSceneNameComponent : IComponent
+    public sealed class TimeInfoComponent : IComponent
     {
-        public string Value;
+        public float Time;
+        public float DeltaTime;
+    }
+    [GameState, Unique]
+    public sealed class SceneLoadFinishedComponent : IComponent
+    {
     }
 }
