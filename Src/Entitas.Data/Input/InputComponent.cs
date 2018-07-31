@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityEngine;
+using Entitas;
 
 namespace Entitas.Data
 {
-    public class InputComponent
+    [Input]
+    public class KeyDownComponent : IComponent
     {
+        public KeyCode Value;
     }
 }

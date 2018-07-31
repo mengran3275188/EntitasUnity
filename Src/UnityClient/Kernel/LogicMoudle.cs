@@ -15,9 +15,14 @@ namespace UnityClient.Kernel
 
         private GameStateSystems m_GameStateSystems;
 
+        private InputSystems m_InputSystems;
+
         public void OnStart()
         {
             var contexts = Contexts.sharedInstance;
+
+            m_InputSystems = new InputSystems(contexts, Services.Instance);
+            m_InputSystems.Initialize();
 
             m_GameStateSystems = new GameStateSystems(contexts, Services.Instance);
             m_GameStateSystems.Initialize();
@@ -29,10 +34,12 @@ namespace UnityClient.Kernel
             m_GameViewSystems.Initialize();
 
 
+
             LogUtil.Info("Game Start ...");
         }
         public void Update()
         {
+
             m_GameStateSystems.Execute();
             m_GameStateSystems.Cleanup();
 
@@ -43,11 +50,17 @@ namespace UnityClient.Kernel
         }
         public void FixedUpdate()
         {
+
+            m_InputSystems.Execute();
+            m_InputSystems.Cleanup();
+
             m_GameViewSystems.Execute();
             m_GameViewSystems.Cleanup();
         }
         public void OnQuit()
         {
+            m_InputSystems.Execute();
+            m_InputSystems.Cleanup();
 
             m_GameLogicSystems.ClearReactiveSystems();
             m_GameLogicSystems.TearDown();

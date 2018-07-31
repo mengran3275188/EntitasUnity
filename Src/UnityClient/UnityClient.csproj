@@ -75,6 +75,11 @@
     <Compile Include="EntitasGenerated\Game\GameContext.cs" />
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
+    <Compile Include="EntitasGenerated\Input\InputComponents.cs" />
+    <Compile Include="EntitasGenerated\Input\InputComponentsLookup.cs" />
+    <Compile Include="EntitasGenerated\Input\InputContext.cs" />
+    <Compile Include="EntitasGenerated\Input\InputEntity.cs" />
+    <Compile Include="EntitasGenerated\Input\InputMatcher.cs" />
     <Compile Include="ExtensionUnityVector3.cs" />
     <Compile Include="GameState\Features\SceneServiceSystem.cs" />
     <Compile Include="GameState\Features\SceneStartSystem.cs" />
@@ -96,6 +101,7 @@
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\GameSystems.cs" />
+    <Compile Include="Input\InputSystems.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
     <Compile Include="Services\CreateCharacterService.cs" />
     <Compile Include="Services\PhysicsService\UnityPhysicsService.cs" />
@@ -103,6 +109,7 @@
     <Compile Include="Services\Services.cs" />
     <Compile Include="Services\UnityCameraService.cs" />
     <Compile Include="Services\UnityHudServices.cs" />
+    <Compile Include="Services\UnityInputServices.cs" />
     <Compile Include="Services\UnitySceneService.cs" />
     <Compile Include="Services\UnityUIServices.cs" />
     <Compile Include="Services\ViewService\IViewService.cs" />
@@ -157,7 +164,6 @@
     <Compile Include="Kernel\GfxSystem.cs" />
     <Compile Include="Kernel\GfxSystemImpl.cs" />
     <Compile Include="Kernel\LogicMoudle.cs" />
-    <Compile Include="Matcher\GameMatcherEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +188,8 @@
       <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Input\Features\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
