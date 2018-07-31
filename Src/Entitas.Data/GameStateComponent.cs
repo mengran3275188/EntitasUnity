@@ -15,6 +15,12 @@ namespace Entitas.Data
         public int Value;
     }
     [GameState, Unique]
+    public class TargetSceneIdComponent : IComponent
+    {
+        public int Value;
+    }
+
+    [GameState, Unique]
     public class LoadingProgressComponent : IComponent
     {
         public float Value;

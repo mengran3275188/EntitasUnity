@@ -20,6 +20,8 @@ namespace UnityClient
         }
         protected override void Execute(List<GameStateEntity> entities)
         {
+            Services.Instance.UIService.Cleanup();
+
             int sceneId = Contexts.sharedInstance.gameState.curSceneId.Value;
 
             SceneSystem.Instance.Load(sceneId);

@@ -158,6 +158,8 @@ namespace UnityDelegate
                 m_LoadedPrefabs.Remove(m_WaitDeleteLoadedPrefabEntrys[i]);
             }
             m_WaitDeleteLoadedPrefabEntrys.Clear();
+
+            UnityEngine.Resources.UnloadUnusedAssets();
         }
 
         private UnityEngine.Object GetSharedResource(string res, bool notdestoryed)

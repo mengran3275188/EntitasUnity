@@ -4,9 +4,9 @@ using Entitas;
 
 namespace UnityClient
 {
-    public class CleanupSystem : ReactiveSystem<GameEntity>
+    public class CleanupEntitySystem : ReactiveSystem<GameEntity>
     {
-        public CleanupSystem(Contexts contexts) : base(contexts.game)
+        public CleanupEntitySystem(Contexts contexts) : base(contexts.game)
         {
         }
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

@@ -20,7 +20,7 @@ namespace UnityClient
             Add(SkillSystem.Instance);
             Add(BuffSystem.Instance);
 
-            Add(new CleanupSystem(contexts));
+            Add(new CleanupEntitySystem(contexts));
             Add(new DestoryEntitySystem(contexts));
             Add(new CleanResourceSystem(contexts));
         }

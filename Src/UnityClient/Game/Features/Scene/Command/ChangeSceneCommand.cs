@@ -11,18 +11,13 @@ namespace SceneCommand
     {
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            if(Contexts.sharedInstance.gameState.hasNextSceneId)
+            if(Contexts.sharedInstance.gameState.hasTargetSceneId)
             {
-                int sceneId = Contexts.sharedInstance.gameState.nextSceneId.Value;
+                Contexts.sharedInstance.game.isCleanup = true;
 
-                SceneConfig config = SceneConfigProvider.Instance.GetSceneConfig(sceneId);
-                if(null != config)
-                {
-                    Services.Instance.SceneService.LoadSceneAsync(config.Id, config.Name);
-                }
-
+                int sceneId = Contexts.sharedInstance.gameState.targetSceneId.Value;
+                Contexts.sharedInstance.gameState.ReplaceNextSceneId(sceneId);
             }
-
             return ExecResult.Finished;
         }
     }

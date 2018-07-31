@@ -76,7 +76,6 @@
     <Compile Include="EntitasGenerated\Game\GameEntity.cs" />
     <Compile Include="EntitasGenerated\Game\GameMatcher.cs" />
     <Compile Include="ExtensionUnityVector3.cs" />
-    <Compile Include="GameState\Features\LoadingSceneSystem.cs" />
     <Compile Include="GameState\Features\SceneServiceSystem.cs" />
     <Compile Include="GameState\Features\SceneStartSystem.cs" />
     <Compile Include="GameState\GameStateSystems.cs" />
@@ -85,7 +84,7 @@
     <Compile Include="Game\Features\BornSystem.cs" />
     <Compile Include="Game\Features\ChunkSystem.cs" />
     <Compile Include="Game\Features\Cleanup\CleanResourceSystem.cs" />
-    <Compile Include="Game\Features\Cleanup\CleanupSystem.cs" />
+    <Compile Include="Game\Features\Cleanup\CleanupEntitySystem.cs" />
     <Compile Include="Game\Features\DeadSystem.cs" />
     <Compile Include="Game\Features\DestoryEntitySystem.cs" />
     <Compile Include="Game\Features\HpSystem.cs" />

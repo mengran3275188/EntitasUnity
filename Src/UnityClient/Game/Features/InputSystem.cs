@@ -135,7 +135,8 @@ namespace UnityClient
             if((int)Keyboard.Event.Down == what)
             {
                 Contexts.sharedInstance.game.isCleanup = true;
-                Contexts.sharedInstance.gameState.ReplaceNextSceneId(3);
+                Contexts.sharedInstance.gameState.ReplaceNextSceneId(2);
+                Contexts.sharedInstance.gameState.ReplaceTargetSceneId(3);
             }
         }
         private KeyHit GetKeyboadHit()

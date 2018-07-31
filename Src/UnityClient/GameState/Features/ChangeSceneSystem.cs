@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Entitas;
+using Entitas.Data;
 
 namespace UnityClient
 {
@@ -20,8 +20,12 @@ namespace UnityClient
         }
         protected override void Execute(List<GameStateEntity> entities)
         {
-            Services.Instance.SceneService.ChangeToLoadingScene();
-            Services.Instance.UIService.LoadUI("Loading");
+            int sceneId = Contexts.sharedInstance.gameState.nextSceneId.Value;
+
+            SceneConfig config = SceneConfigProvider.Instance.GetSceneConfig(sceneId);
+            if(null != config)
+                Services.Instance.SceneService.LoadSceneAsync(config.Id, config.Name);
+
         }
     }
 }

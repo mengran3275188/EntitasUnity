@@ -20,7 +20,7 @@ namespace UnityClient
             get
             {
                 if (null == m_UIRoot)
-                    m_UIRoot = GameObject.Find("GameLogic/Canvas").transform;
+                    m_UIRoot = GameObject.Find("GameLogic/Canvas/TempUIRoot").transform;
                 return m_UIRoot;
             }
         }
