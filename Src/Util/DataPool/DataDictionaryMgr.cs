@@ -18,7 +18,6 @@ namespace Util
 
         public bool CollectDataFromDBC(string file)
         {
-            LogUtil.Info("Collect From DBC Start");
             long t1 = TimeUtility.Instance.GetElapsedTimeUs();
             bool result = true;
             DBC document = new DBC();
@@ -54,7 +53,7 @@ namespace Util
                 }
             }
             long t4 = TimeUtility.Instance.GetElapsedTimeUs();
-            LogUtil.Info("text load {0} parse {1}, file {2}", t2 - t1, t4 - t3, file);
+            //LogUtil.Info("text load {0} parse {1}, file {2}", t2 - t1, t4 - t3, file);
             return result;
         }
         public bool CollectDataFromBinary(string file)

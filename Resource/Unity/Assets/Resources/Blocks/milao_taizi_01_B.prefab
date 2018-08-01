@@ -5779,15 +5779,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseCollider:
-  - {fileID: 65795179898902882}
-  - {fileID: 65071438713278538}
-  - {fileID: 65797132609802996}
-  - {fileID: 65172339929637582}
-  - {fileID: 65701685274258258}
-  - {fileID: 65489481473534054}
-  m_Doors: []
-  m_Triggers: []
+  m_Npcs: []
 --- !u!114 &114088987783429906
 MonoBehaviour:
   m_ObjectHideFlags: 1

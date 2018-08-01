@@ -338,7 +338,6 @@ GameObject:
   - component: {fileID: 4405563056832254}
   - component: {fileID: 198521574593203774}
   - component: {fileID: 199069851325596090}
-  - component: {fileID: 114529259144285126}
   m_Layer: 0
   m_Name: 7_Huo_03 (101)
   m_TagString: Untagged
@@ -422,7 +421,6 @@ GameObject:
   - component: {fileID: 4345515574937272}
   - component: {fileID: 198704670131679012}
   - component: {fileID: 199743031078165876}
-  - component: {fileID: 114496387963500820}
   m_Layer: 0
   m_Name: 7_Guangyun_03 (146)
   m_TagString: Untagged
@@ -725,7 +723,6 @@ GameObject:
   - component: {fileID: 4452866445944702}
   - component: {fileID: 198408460079374774}
   - component: {fileID: 199652605369825698}
-  - component: {fileID: 114831751892915544}
   m_Layer: 0
   m_Name: 7_Guangyun_03 (146)
   m_TagString: Untagged
@@ -777,7 +774,6 @@ GameObject:
   - component: {fileID: 4386581812698140}
   - component: {fileID: 198932895850115010}
   - component: {fileID: 199617825107548460}
-  - component: {fileID: 114312309703169844}
   m_Layer: 0
   m_Name: 7_Huo_03 (101)
   m_TagString: Untagged
@@ -3684,50 +3680,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114312309703169844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1745959124185134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114496387963500820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1380947398698314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114529259144285126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1303537705502550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114831751892915544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1736088183715806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198408460079374774
 ParticleSystem:
   m_ObjectHideFlags: 1

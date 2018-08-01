@@ -42,10 +42,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 436190}
-  - component: {fileID: 11406388}
   - component: {fileID: 19858930}
   - component: {fileID: 19978430}
-  - component: {fileID: 11407746}
   m_Layer: 14
   m_Name: 6_Npc_BasicStab_01
   m_TagString: Untagged
@@ -218,32 +216,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11406388
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce08d505228437945b0f39ced2439455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleScale: 1.5
-  alsoScaleGameobject: 1
---- !u!114 &11407746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce08d505228437945b0f39ced2439455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particleScale: 0.3
-  alsoScaleGameobject: 1
 --- !u!198 &19819814
 ParticleSystem:
   m_ObjectHideFlags: 1

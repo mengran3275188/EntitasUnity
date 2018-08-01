@@ -815,7 +815,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 400106}
-  - component: {fileID: 11400004}
   m_Layer: 0
   m_Name: shadow
   m_TagString: Untagged
@@ -1891,37 +1890,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea70978a5e6141b3aa6cb5599348412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxProjectionDistance: 10
-  girth: .800000012
-  shadowHoverHeight: .200000003
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 65537
-  shadowMaterial: {fileID: 2100000, guid: 5231caf19bce04df29d48d73a92356f2, type: 2}
-  isStatic: 0
-  useLightSource: 0
-  lightSource: {fileID: 0}
-  lightDirection: {x: 0, y: -1, z: 0}
-  isPerspectiveProjection: 0
-  doVisibilityCulling: 0
-  shadowpostion: {x: 0, y: .200000003, z: 0}
-  uvs:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

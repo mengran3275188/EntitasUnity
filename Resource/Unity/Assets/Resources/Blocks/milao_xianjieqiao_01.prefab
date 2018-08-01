@@ -460,7 +460,7 @@ Transform:
   m_GameObject: {fileID: 1429481184852914}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 424.84, y: 0, z: 210.33}
-  m_LocalScale: {x: 1, y: 0.9141651, z: 1}
+  m_LocalScale: {x: 1, y: 0.914165, z: 1}
   m_Children:
   - {fileID: 4964908267467544}
   - {fileID: 4630782880380144}
@@ -469,7 +469,7 @@ Transform:
   - {fileID: 4929143455939234}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 90, z: 90.00001}
 --- !u!4 &4379244622111300
 Transform:
   m_ObjectHideFlags: 1
@@ -1538,12 +1538,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseCollider:
-  - {fileID: 65603425756104726}
-  - {fileID: 65632927754943622}
-  - {fileID: 65544261077976474}
-  m_Doors: []
-  m_Triggers: []
+  m_Npcs: []
 --- !u!114 &114925290722024296
 MonoBehaviour:
   m_ObjectHideFlags: 1
