@@ -62,7 +62,6 @@ namespace UnityClient.Kernel
             Entitas.Data.BlocksProvider.Instance.LoadForClient();
         }
 
-
         private static LogicMoudle s_Logic = new LogicMoudle();
     }
 }

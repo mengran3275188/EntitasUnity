@@ -8,7 +8,6 @@ namespace UnityClient
     {
         public GameLogicSystems(Contexts contexts, Services services)
         {
-            Add(new InputSystem(contexts));
             Add(IdSystem.Instance);
             Add(SceneSystem.Instance);
             Add(new ChunkSystem(contexts));

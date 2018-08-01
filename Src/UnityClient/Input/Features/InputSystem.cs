@@ -25,21 +25,22 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            GfxSystem.ListenKeyPressState(
+            Services.Instance.InputService.ListenKeyPressState(
                 Keyboard.Code.W,
                 Keyboard.Code.A,
                 Keyboard.Code.S,
                 Keyboard.Code.D);
 
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.H, this.MainPlayerUseSkillH);
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.M, this.ChangeScene);
-            GfxSystem.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.H, this.MainPlayerUseSkillH);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.M, this.ChangeScene);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
         {
+            Services.Instance.InputService.Tick();
             // keyboard
             KeyHit kh = GetKeyboadHit();
 
@@ -142,13 +143,13 @@ namespace UnityClient
         private KeyHit GetKeyboadHit()
         {
             KeyHit kh = KeyHit.None;
-            if (GfxSystem.IsKeyPressed(Keyboard.Code.W))
+            if (Services.Instance.InputService.IsKeyPressed(Keyboard.Code.W))
                 kh |= KeyHit.Up;
-            if (GfxSystem.IsKeyPressed(Keyboard.Code.A))
+            if (Services.Instance.InputService.IsKeyPressed(Keyboard.Code.A))
                 kh |= KeyHit.Left;
-            if (GfxSystem.IsKeyPressed(Keyboard.Code.S))
+            if (Services.Instance.InputService.IsKeyPressed(Keyboard.Code.S))
                 kh |= KeyHit.Down;
-            if (GfxSystem.IsKeyPressed(Keyboard.Code.D))
+            if (Services.Instance.InputService.IsKeyPressed(Keyboard.Code.D))
                 kh |= KeyHit.Right;
 
             return kh;

@@ -39,6 +39,8 @@ namespace UnityClient.Kernel
         }
         public void Update()
         {
+            m_InputSystems.Execute();
+            m_InputSystems.Cleanup();
 
             m_GameStateSystems.Execute();
             m_GameStateSystems.Cleanup();
@@ -50,10 +52,6 @@ namespace UnityClient.Kernel
         }
         public void FixedUpdate()
         {
-
-            m_InputSystems.Execute();
-            m_InputSystems.Cleanup();
-
             m_GameViewSystems.Execute();
             m_GameViewSystems.Cleanup();
         }

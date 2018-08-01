@@ -9,6 +9,7 @@ namespace UnityClient
     {
         public InputSystems(Contexts contexts, Services services)
         {
+            Add(new InputSystem(contexts));
         }
     }
 }

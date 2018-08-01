@@ -45,7 +45,6 @@ namespace UnityDelegate
         }
         public void Update()
         {
-            InputManager.Instance.HandleInput();
             ResourceManager.Instance.Tick();
         }
         public void FixUpdate()
@@ -175,18 +174,6 @@ namespace UnityDelegate
             {
                 LogUtil.Error("GfxMoudle.UpdateRotation : can not find obj with resId {0}.", resId);
             }
-        }
-        public bool IsKeyPressed(Keyboard.Code c)
-        {
-            return InputManager.Instance.IsKeyPressed(c);
-        }
-        public void ListenKeyPressState(Keyboard.Code[] codes)
-        {
-            InputManager.Instance.ListenKeyPressState(codes);
-        }
-        public void ListenKeyPressEvent(Keyboard.Code c, MyAction<int, int> handler)
-        {
-            InputManager.Instance.ListenKeyboardEvent(c, handler);
         }
         public void MoveChildToBone(uint resId, string childName, string boneName)
         {

@@ -53,14 +53,6 @@ namespace UnityClient
         {
             GfxSystemImpl.Gfx.UpdateRotation(resId, rotation);
         }
-        public static void ListenKeyPressState(params Keyboard.Code[] codes)
-        {
-            GfxSystemImpl.Gfx.ListenKeyPressState(codes);
-        }
-        public static void ListenKeyboardEvent(Keyboard.Code c, MyAction<int, int> handler)
-        {
-            GfxSystemImpl.Gfx.ListenKeyPressEvent(c, handler);
-        }
         public static void MoveChildToBone(uint resId, string childName, string boneName)
         {
             GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
@@ -69,10 +61,6 @@ namespace UnityClient
         public static bool GetJoyStickDir(out float dir)
         {
             return GfxSystemImpl.Gfx.GetJoyStickDir(out dir);
-        }
-        public static bool IsKeyPressed(Keyboard.Code c)
-        {
-            return GfxSystemImpl.Gfx.IsKeyPressed(c);
         }
         public static float GetCameraYaw()
         {
