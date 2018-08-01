@@ -151,30 +151,6 @@ namespace UnityDelegate
                 LogUtil.Error("GfxMoudle.CreateAndAttachGameObject: can not find parent  object with resId. parentId = {0}.", parentId);
             }
         }
-        public void UpdatePosition(uint resId, float x, float y, float z)
-        {
-            GameObject target = GetGameObject(resId);
-            if (null != target)
-            {
-                target.transform.position = new UnityEngine.Vector3(x, y, z);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.UpdatePostion : can not find obj with resId {0}.", resId);
-            }
-        }
-        public void UpdateRotation(uint resId, float rotation)
-        {
-            GameObject target = GetGameObject(resId);
-            if (null != target)
-            {
-                target.transform.rotation = UnityEngine.Quaternion.Euler(0, rotation / UnityEngine.Mathf.PI * 180f, 0);
-            }
-            else
-            {
-                LogUtil.Error("GfxMoudle.UpdateRotation : can not find obj with resId {0}.", resId);
-            }
-        }
         public void MoveChildToBone(uint resId, string childName, string boneName)
         {
             GameObject target = GetGameObject(resId);

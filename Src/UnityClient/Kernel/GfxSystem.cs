@@ -45,14 +45,6 @@ namespace UnityClient
             GfxSystemImpl.Gfx.CreateAndAttachGameObject(resId, resource, parentId, path, isAttach,
                                                         position.x, position.y, position.z, eular.x, eular.y, eular.z, scale.x, scale.y, scale.z, recycleTime);
         }
-        public static void UpdatePosition(uint resId, float x, float y, float z)
-        {
-            GfxSystemImpl.Gfx.UpdatePosition(resId, x, y, z);
-        }
-        public static void UpdateRotation(uint resId, float rotation)
-        {
-            GfxSystemImpl.Gfx.UpdateRotation(resId, rotation);
-        }
         public static void MoveChildToBone(uint resId, string childName, string boneName)
         {
             GfxSystemImpl.Gfx.MoveChildToBone(resId, childName, boneName);
