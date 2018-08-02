@@ -138,6 +138,14 @@ namespace SkillCommands
 
         private void OnCollision(uint targetEntityId)
         {
+            GameEntity target = m_Instance.Target as GameEntity;
+            GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
+
+            if (null == target || null == collideTarget)
+                return;
+            if (!target.hasCamp || !collideTarget.hasCamp || target.camp.Value == collideTarget.camp.Value)
+                return;
+
             float time = Contexts.sharedInstance.gameState.timeInfo.Time;
 
             long lastHitTime = -1;
@@ -151,8 +159,6 @@ namespace SkillCommands
                 }
             }
 
-            GameEntity target = m_Instance.Target as GameEntity;
-            GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget && !collideTarget.hasDead)
             {
                 StateBuff_State state = GetState(collideTarget);
