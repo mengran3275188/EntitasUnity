@@ -54,6 +54,7 @@ skill(3)
 	};
 
 };
+
 skill(1004)
 {
 	onmessage("start")
@@ -75,15 +76,178 @@ skill(1004)
 		destroyself();
 		terminate();
 	};
-}
+};
 
-skill(100203)
+skill(4)
 {
 	onmessage("start")
 	{
-		curvemove(true, 0.19, 0, 0, -1, 0, 0, 0);
-		wait(190);
+		//animation("cast");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,6));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-6,1.2,0));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,-6));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(6,1.2,0));
+		};
+		createcharacter(1008, vector3(0, 1.2, 6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1005);
+		};
+		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1006);
+		};
+		createcharacter(1008, vector3(0, 1.2, -6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1007);
+		};
+		createcharacter(1008, vector3(6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1008);
+		};
+		wait(100);
+		createcharacter(1008, vector3(0, 1.2, 6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1005);
+		};
+		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1006);
+		};
+		createcharacter(1008, vector3(0, 1.2, -6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1007);
+		};
+		createcharacter(1008, vector3(6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1008);
+		};
+		//wait(200);
+		terminate();
+	};
+
+};
+
+skill(1005)
+{
+	onmessage("start")
+	{
+		loop(10)
+		{
+			curvemove(true, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300);
+
+			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			{
+					statebuff("Default", 1);
+					statebuff("Skill", 3);
+			}objid("@colliderId");
+			wait(800);
+		};
 		destroyself();
 		terminate();
 	};
-}
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+
+skill(1006)
+{
+	onmessage("start")
+	{
+		loop(10)
+		{
+			curvemove(true, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300);
+
+			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			{
+					statebuff("Default", 1);
+					statebuff("Skill", 3);
+			}objid("@colliderId");
+			wait(800);
+		};
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+skill(1007)
+{
+	onmessage("start")
+	{
+		loop(10)
+		{
+			curvemove(true, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300);
+
+			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			{
+					statebuff("Default", 1);
+					statebuff("Skill", 3);
+			}objid("@colliderId");
+			wait(800);
+		};
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+skill(1008)
+{
+	onmessage("start")
+	{
+		loop(10)
+		{
+			curvemove(true, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300);
+			
+			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			{
+					statebuff("Default", 1);
+					statebuff("Skill", 3);
+			}objid("@colliderId");
+			wait(800);
+		};
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
