@@ -17,10 +17,6 @@ namespace UnityClient
             var viewObject = ResourceSystem.NewObject(asset) as GameObject;
             if(null != viewObject)
             {
-                var rigidbody = viewObject.GetComponent<IRigidbody>();
-                if (null != rigidbody)
-                    entity.AddPhysics(rigidbody, Vector3.zero);
-
                 var view = viewObject.GetComponent<IView>();
                 if(null != view)
                 {
@@ -28,6 +24,10 @@ namespace UnityClient
                     view.Init(entity);
                     entity.AddView(view);
                 }
+                var rigidbody = viewObject.GetComponent<IRigidbody>();
+                if (null != rigidbody)
+                    entity.AddPhysics(rigidbody, Vector3.zero);
+
             }
             else
             {
