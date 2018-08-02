@@ -1667,7 +1667,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4375681980710842}
-  - component: {fileID: 114908591564940562}
   - component: {fileID: 114318313577811902}
   m_Layer: 0
   m_Name: milao_fangjian_02_A
@@ -13895,18 +13894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec0701e9baf3142b363f0701378da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114908591564940562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1468447874498032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Npcs: []
 --- !u!198 &198072363413399004
 ParticleSystem:
   m_ObjectHideFlags: 1
