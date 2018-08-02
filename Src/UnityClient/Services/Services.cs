@@ -16,5 +16,6 @@ namespace UnityClient
         public UnitySceneService SceneService = new UnitySceneService(Contexts.sharedInstance);
         public UnityUIServices UIService = new UnityUIServices(Contexts.sharedInstance);
         public UnityInputServices InputService = new UnityInputServices(Contexts.sharedInstance);
+        public UnityPhysicsService PhysicsService = new UnityPhysicsService(Contexts.sharedInstance);
     }
 }

@@ -59,12 +59,11 @@ skill(1004)
 	onmessage("start")
 	{
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
-		colliderdamage(100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+		colliderdamage(700, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
         {
 			statebuff("Default", 100202);
         }objid("@colliderId");
 		wait(700);
-		removecollider();
 		destroyself();
 		terminate();
 	};
@@ -72,7 +71,6 @@ skill(1004)
 	onmessage("oncollision")
 	{
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
-		removecollider();
 		destroyself();
 		terminate();
 	};

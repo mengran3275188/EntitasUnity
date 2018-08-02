@@ -41,11 +41,12 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 3)
+            if(num >= 4)
             {
-                m_Interval = long.Parse(callData.GetParamId(0));
-                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(1) as ScriptableData.CallData);
-                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
+                m_RemainTime = long.Parse(callData.GetParamId(0));
+                m_Interval = long.Parse(callData.GetParamId(1));
+                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
+                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(3) as ScriptableData.CallData);
             }
         }
         protected override void Load(FunctionData funcData)
@@ -100,6 +101,8 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
+            Services.Instance.PhysicsService.CreateBoxCollider(target.view.Value, m_RemainTime, m_Size, m_Offset, OnCollision);
+
             /*
 
             Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_Size);
@@ -152,8 +155,6 @@ namespace SkillCommands
             GameEntity collideTarget = Contexts.sharedInstance.game.GetEntityWithId(targetEntityId);
             if(null !=  target && null != collideTarget && !collideTarget.hasDead)
             {
-
-
                 StateBuff_State state = GetState(collideTarget);
 
                 StateBuff stateBuff;
@@ -181,6 +182,7 @@ namespace SkillCommands
         private Vector3 m_Offset = Vector3.zero;
         private Vector3 m_Size = Vector3.one;
         private long m_Interval = -1;
+        private long m_RemainTime = 1000;
         private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
 
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();

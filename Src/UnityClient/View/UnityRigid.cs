@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace UnityClient
 {
-    [RequireComponent(typeof(Collider))]
     public sealed class UnityRigid : MonoBehaviour, IRigidbody
     {
         [SerializeField]

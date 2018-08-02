@@ -45,13 +45,12 @@ skill(21)
 	onmessage("start")
 	{
 		curvemove(true, 0.066, 0, 0, 6, 0, 0, 270, 0.1, 0, 0, 24, 0, 0, 400);
-		colliderdamage(100, vector3(0,1,1.5), vector3(1, 1, 3.5))
+		colliderdamage(200, 100, vector3(0,1,1.5), vector3(1, 1, 3.5))
         {
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
         }objid("@colliderId");
 		wait(200);
-		removecollider();
 		wait(1000);
 		destroyself();
 		terminate();
@@ -60,7 +59,6 @@ skill(21)
 	onmessage("oncollision")
 	{
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
-		removecollider();
 		destroyself();
 		terminate();
 	};

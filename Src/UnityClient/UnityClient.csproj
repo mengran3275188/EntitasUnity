@@ -117,6 +117,7 @@
     <Compile Include="View\UnityChunk.cs" />
     <Compile Include="View\UnityChunkDoor.cs" />
     <Compile Include="View\UnityChunkTrigger.cs" />
+    <Compile Include="View\UnityCollider.cs" />
     <Compile Include="View\UnityRigid.cs" />
     <Compile Include="View\UnityScene.cs" />
     <Compile Include="View\UnityView.cs" />

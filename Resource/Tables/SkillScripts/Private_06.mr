@@ -15,7 +15,7 @@ skill(30)
         animationspeed("attack_01_03", 1);
         curvemove(true, 0.1, 0, 0, 3, 0, 0, 90, 0.8, 0, 0, 12, 0, 0, 0, 0.1, 0, 0, 12, 0, 0, -90);
         effect("Boss_FX/Boss_WangHuaiDe_xuanfengchui_04", 1000, "Root", true);		
-				colliderdamage(100, vector3(0,1,0), vector3(2, 2, 2))
+		colliderdamage(834, 100, vector3(0,1,0), vector3(2, 2, 2))
         {
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
@@ -26,7 +26,6 @@ skill(30)
 			wrapmode(2); 
 		};
         wait(667);
-			removecollider();
         animation("attack_01_05");
         wait(1033);
         disablemoveinput(false);
