@@ -54,10 +54,6 @@ namespace UnityClient
         {
             return GfxSystemImpl.Gfx.GetJoyStickDir(out dir);
         }
-        public static float GetCameraYaw()
-        {
-            return GfxSystemImpl.Gfx.GetCameraYaw();
-        }
         public static float GetTime()
         {
             return GfxSystemImpl.Gfx.GetTime();
