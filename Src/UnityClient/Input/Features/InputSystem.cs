@@ -50,7 +50,6 @@ namespace UnityClient
             if(!isMoving)
                 isMoving = GfxSystem.GetJoyStickDir(out moveDir);
 
-
             GameContext gameContext = Contexts.sharedInstance.game;
 
             GameEntity mainPlayer = gameContext.mainPlayerEntity;

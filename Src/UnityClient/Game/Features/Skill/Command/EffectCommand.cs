@@ -26,11 +26,11 @@ namespace SkillCommands
                 string effectPath = m_EffectPath;
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
 
-                Quaternion quaternion = Quaternion.Euler(0, obj.rotation.Value, 0);
+                Quaternion quaternion = Quaternion.Euler(0, Mathf.Rad2Deg * obj.rotation.Value, 0);
 
                 if(string.IsNullOrEmpty(m_AttachPath))
                 {
-                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + quaternion * m_Pos, m_Euler + new Vector3(0, (obj.rotation.Value * Mathf.Rad2Deg), 0), m_Scale, m_DeleteTime);
+                    GfxSystem.CreateGameObject(resId, effectPath, obj.position.Value + quaternion * m_Pos, m_Euler + new Vector3(0, Mathf.Rad2Deg * obj.rotation.Value, 0), m_Scale, m_DeleteTime);
                 }
                 else
                 {

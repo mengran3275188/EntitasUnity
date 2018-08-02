@@ -59,7 +59,7 @@ namespace SkillCommands
         {
             if (instance.Target is GameEntity obj)
             {
-                Quaternion quaternion = Quaternion.Euler(0, obj.rotation.Value, 0);
+                Quaternion quaternion = Quaternion.Euler(0, Mathf.Rad2Deg * obj.rotation.Value, 0);
                 Vector3 center = obj.position.Value + quaternion * m_RelativeCenter;
 
                 UnityClient.GfxSystem.DrawCircle(center, m_Range, 2.0f);

@@ -59,8 +59,8 @@ namespace SceneCommand
             if (target.hasCamp)
                 campId = target.camp.Value;
 
-            Vector3 position = target.position.Value + Quaternion.Euler(0, target.rotation.Value, 0) * m_LocalPosition;
-            float rotation = target.rotation.Value + m_LocalRotation.y;
+            Vector3 position = target.position.Value + Quaternion.Euler(0, Mathf.Rad2Deg * target.rotation.Value, 0) * m_LocalPosition;
+            float rotation = target.rotation.Value + m_LocalRotation.y * Mathf.Deg2Rad;
 
             if(m_MainPlayer)
                 Services.Instance.CreateCharacterService.CreatePlayer(entityId, m_CharacterId, campId, position, rotation);

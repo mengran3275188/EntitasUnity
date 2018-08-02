@@ -12,7 +12,9 @@ bin/
 /Src/Bin
 /Resource/Unity/Library/
 /Resource/Unity/Temp/
-/Resource/Unity/Assets/Plugins/
+/Resource/Unity/Assets/Plugins/*.dll
+/Resource/Unity/Assets/Plugins/*.mdb
+/Resource/Unity/Assets/Plugins/*.mdb.meta
 /Resource/Unity/Assets/StreamingAssets
 /Resource/Unity/Assembly-CSharp-Editor-firstpass.csproj
 /Resource/Unity/Assembly-CSharp-firstpass.csproj

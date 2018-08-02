@@ -15,7 +15,6 @@ namespace SceneCommand
                 m_UIPath = callData.GetParamId(0);
             }
         }
-
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             Services.Instance.UIService.LoadUI(m_UIPath);
