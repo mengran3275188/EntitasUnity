@@ -251,6 +251,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4227477266238232}
+  - component: {fileID: 114115483507777616}
   m_Layer: 0
   m_Name: milao_louti_01_A
   m_TagString: Untagged
@@ -1560,6 +1561,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ec0701e9baf3142b363f0701378da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114115483507777616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472102219577452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Npcs: []
 --- !u!114 &114121607316250850
 MonoBehaviour:
   m_ObjectHideFlags: 1
