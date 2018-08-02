@@ -39,11 +39,6 @@ namespace UnityClient
                 }
             }
         }
-        public void ChangeToLoadingScene()
-        {
-            SceneManager.LoadScene("Loading");
-            m_CurrentLoadingScene = c_LoadingSceneId;
-        }
         public void LoadSceneAsync(int sceneId, string sceneName)
         {
             m_LoadOperation = SceneManager.LoadSceneAsync(sceneName);

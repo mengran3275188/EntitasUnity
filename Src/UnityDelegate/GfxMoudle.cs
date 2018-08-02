@@ -57,11 +57,6 @@ namespace UnityDelegate
         {
             m_LogicInvoker = processor;
         }
-        public void Log(string log)
-        {
-            UnityEngine.Debug.Log(log);
-        }
-
         public void DrawLine(float startx, float starty, float startz, float endx, float endy, float endz)
         {
             Debug.DrawLine(new UnityEngine.Vector3(startx, starty, startz), new UnityEngine.Vector3(endx, endy, endz));
@@ -186,26 +181,16 @@ namespace UnityDelegate
             return true;
         }
 
-        public float GetCameraYaw()
-        {
-            return 0;
-        }
-        public int GetMainPlayerSkill()
-        {
-            return m_InputSkillId;
-        }
         public float GetTime()
         {
             return Time.time;
         }
-
 
         public void SetJoystickXY(float x, float y)
         {
             m_JoystickX = x;
             m_JoystickY = y;
         }
-
         private GameObject GetGameObject(uint id)
         {
             GameObject ret = null;
@@ -254,7 +239,6 @@ namespace UnityDelegate
             }
             return null;
         }
-
         public void PublishLogicEvent<T1>(string evt, string group, T1 t1)
         {
             if (null != m_LogicInvoker)
