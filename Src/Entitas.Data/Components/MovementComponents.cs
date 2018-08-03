@@ -1,4 +1,5 @@
 ﻿using Entitas.Data;
+using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
 namespace Entitas.Data
@@ -7,6 +8,7 @@ namespace Entitas.Data
     {
         public Vector3 Velocity;
     }
+    [Game, Event(EventTarget.Any)]
     public sealed class PositionComponent : IComponent
     {
         public Vector3 Value;
