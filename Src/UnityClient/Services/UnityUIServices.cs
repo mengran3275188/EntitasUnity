@@ -30,8 +30,24 @@ namespace UnityClient
         }
         public void ShowGamemap(GameEntity[] chunkEntities)
         {
+            Transform mapTransform = m_UIRoot.Find("GameMap");
+            if (null == mapTransform)
+            {
+                GameObject mapObject = new GameObject();
+                mapObject.name = "GameMap";
+                mapObject.transform.SetParent(m_UIRoot, false);
+                GenerateGameMap(mapObject.transform, chunkEntities);
+            }
+            else
+            {
+                mapTransform.gameObject.SetActive(!mapTransform.gameObject.activeSelf);
+            }
+
+        }
+        private void GenerateGameMap(Transform root, GameEntity[] entities)
+        {
             Bounds bounds = new Bounds();
-            foreach(var chunkEntity in chunkEntities)
+            foreach(var chunkEntity in entities)
             {
                 UnityChunk unityChunk = chunkEntity.chunk.Value as UnityChunk;
                 bounds.Encapsulate(unityChunk.transform.position);
@@ -45,7 +61,7 @@ namespace UnityClient
 
             float scale = (mapXSize / size.x) / 2;
 
-            foreach(var chunkEntity in chunkEntities)
+            foreach(var chunkEntity in entities)
             {
                 UnityChunk unityChunk = chunkEntity.chunk.Value as UnityChunk;
                 string chunkName = unityChunk.m_ChunkName;
@@ -60,7 +76,7 @@ namespace UnityClient
                 }
                 GameObject chunkMapObj = GameObject.Instantiate(chunkMap);
 
-                chunkMapObj.transform.SetParent(m_UIRoot, false);
+                chunkMapObj.transform.SetParent(root, false);
 
                 Image chunkImage = chunkMapObj.GetComponent<Image>();
 
