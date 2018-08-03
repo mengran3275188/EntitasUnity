@@ -35,7 +35,8 @@ namespace UnityClient
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.M, this.ChangeScene);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.T, this.ChangeScene);
+            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.M, this.ShowGameMap);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
@@ -137,6 +138,13 @@ namespace UnityClient
                 Contexts.sharedInstance.game.isCleanup = true;
                 Contexts.sharedInstance.gameState.ReplaceNextSceneId(2);
                 Contexts.sharedInstance.gameState.ReplaceTargetSceneId(3);
+            }
+        }
+        private void ShowGameMap(int keyCode, int what)
+        {
+            if((int)Keyboard.Event.Down == what)
+            {
+                Services.Instance.UIService.ShowGamemap(Contexts.sharedInstance.game.GetGroup(GameMatcher.Chunk).GetEntities());
             }
         }
         private KeyHit GetKeyboadHit()

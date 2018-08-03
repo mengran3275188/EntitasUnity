@@ -1907,14 +1907,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978995028010200}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: -0.00000004371139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4639647807175730}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -170.20601, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4335492515644626
 Transform:
   m_ObjectHideFlags: 1
@@ -2333,8 +2333,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768067519250226}
-  m_LocalRotation: {x: -0.6652996, y: -0.23953359, z: -0.23953395, w: 0.6652997}
-  m_LocalPosition: {x: 0.123306006, y: 0, z: -14.012138}
+  m_LocalRotation: {x: 0.23953398, y: -0.6652997, z: -0.6652996, w: -0.23953362}
+  m_LocalPosition: {x: -0.12330723, y: 0, z: 14.012138}
   m_LocalScale: {x: 1.40785, y: 1.4078615, z: 2.431203}
   m_Children:
   - {fileID: 4821227172583532}
@@ -5801,6 +5801,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChunkName: milao_taizi_01_C
   m_Npcs: []
 --- !u!114 &114506037462225056
 MonoBehaviour:

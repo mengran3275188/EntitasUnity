@@ -20,7 +20,7 @@ public class TT : MonoBehaviour {
             {
                 m_ChildrenRotation.Add(child.gameObject, child.rotation);
                 m_ChildrenPos.Add(child.gameObject, child.position);
-                m_ChildrenScale.Add(child.gameObject, child.lossyScale);
+                m_ChildrenScale.Add(child.gameObject, child.localScale);
             }
         }
 	}
