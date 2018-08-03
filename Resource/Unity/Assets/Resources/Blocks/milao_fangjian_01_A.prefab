@@ -3688,7 +3688,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749976705723194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 191.4, y: 0, z: 256.53003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4676718557245262}
@@ -14435,11 +14435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Npcs:
-  - Position: {x: 0, y: 0, z: 13.63}
+  - Position: {x: 0, y: 0, z: -17.44}
     NpcId: 1007
-  - Position: {x: 0, y: 0, z: 29.18}
+  - Position: {x: 0, y: 0, z: -6.9}
     NpcId: 1007
-  - Position: {x: 0, y: 0, z: 41.03}
+  - Position: {x: 0, y: 0, z: 9.1}
     NpcId: 1007
 --- !u!198 &198066816421134072
 ParticleSystem:
