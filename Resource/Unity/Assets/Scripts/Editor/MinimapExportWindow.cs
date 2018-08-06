@@ -35,10 +35,39 @@ public class MinimapExportWindow : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
+        if(GUILayout.Button("FixPivot", GUILayout.MaxWidth(80)))
+        {
+            FixPivot();
+        }
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.BeginHorizontal();
         if(GUILayout.Button("Generate", GUILayout.MaxWidth(80)))
         {
             GenerateMinimap();
         }
+    }
+    private void FixPivot()
+    {
+        string[] blockPaths = Directory.GetFiles(Application.dataPath + "/" + "Resources/Blocks/", "*.prefab");
+        foreach (var path in blockPaths)
+        {
+            string assetPath = GetAssetPath(path);
+            GameObject blockObject = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            blockObject.transform.position = Vector3.zero;
+            Bounds bounds = GetBounds(blockObject);
+
+            if(blockObject.transform.childCount != 1)
+            {
+                Debug.LogError(assetPath + " has more than one child!");
+                continue;
+            }
+            Transform blockChild = blockObject.transform.GetChild(0);
+            Vector3 blockChildPosition = blockChild.position - bounds.center;
+            blockChildPosition.y = 0;
+            blockChild.position = blockChildPosition; 
+
+        }
+        AssetDatabase.SaveAssets();
     }
     private void GenerateMinimap()
     {
@@ -47,8 +76,9 @@ public class MinimapExportWindow : EditorWindow
         {
             string assetPath = GetAssetPath(path);
             GameObject blockObject = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-            blockObject.transform.position = Vector3.zero;
             GameObject blockInstance = GameObject.Instantiate(blockObject);
+            blockInstance.transform.position = Vector3.zero;
+            blockInstance.transform.rotation = Quaternion.identity;
             Bounds bounds = GetBounds(blockInstance);
 
             Vector3 size = bounds.max - bounds.min;
@@ -85,6 +115,7 @@ public class MinimapExportWindow : EditorWindow
 
             GameObject.DestroyImmediate(blockInstance);
         }
+        AssetDatabase.Refresh();
     }
 
     private Bounds GetBounds(GameObject obj)

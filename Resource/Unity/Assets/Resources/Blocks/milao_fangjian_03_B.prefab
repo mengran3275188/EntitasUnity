@@ -7292,7 +7292,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1122941122878188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23350005, y: 0, z: 0.5576}
+  m_LocalPosition: {x: -0.23350008, y: 0, z: 0.5576}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4116633401853528}
@@ -23171,6 +23171,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChunkName: milao_fangjian_03_B
   m_Npcs: []
 --- !u!114 &114879005265612822
 MonoBehaviour:

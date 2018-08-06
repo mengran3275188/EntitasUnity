@@ -7,6 +7,7 @@ namespace UnityClient
 {
     public class UnityChunk : MonoBehaviour, IChunk
     {
+        public string m_ChunkName;
         public NpcSpawn[] m_Npcs;
         [Serializable]
         public class NpcSpawn

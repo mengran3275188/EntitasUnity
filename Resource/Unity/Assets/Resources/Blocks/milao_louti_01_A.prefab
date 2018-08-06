@@ -1572,6 +1572,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChunkName: milao_louti_01_A
   m_Npcs: []
 --- !u!114 &114121607316250850
 MonoBehaviour:

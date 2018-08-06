@@ -64,6 +64,10 @@
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
     <Compile Include="behaviac_generated\types\CharacterAgent.cs" />
     <Compile Include="EntitasGenerated\Contexts.cs" />
+    <Compile Include="EntitasGenerated\Events\Components\PositionListenerComponent.cs" />
+    <Compile Include="EntitasGenerated\Events\GameEventSystems.cs" />
+    <Compile Include="EntitasGenerated\Events\Interfaces\IPositionListener.cs" />
+    <Compile Include="EntitasGenerated\Events\Systems\PositionEventSystem.cs" />
     <Compile Include="EntitasGenerated\Feature.cs" />
     <Compile Include="EntitasGenerated\GameState\GameStateComponents.cs" />
     <Compile Include="EntitasGenerated\GameState\GameStateComponentsLookup.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Game\Features\Cleanup\CleanupEntitySystem.cs" />
     <Compile Include="Game\Features\DeadSystem.cs" />
     <Compile Include="Game\Features\DestoryEntitySystem.cs" />
+    <Compile Include="Game\Features\GameMapSystem.cs" />
     <Compile Include="Game\Features\HpSystem.cs" />
     <Compile Include="Game\Features\HudSystem.cs" />
     <Compile Include="Game\Features\IdSystem.cs" />

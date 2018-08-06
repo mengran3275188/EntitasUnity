@@ -14370,12 +14370,13 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChunkName: milao_fangjian_01_B
   m_Npcs:
-  - Position: {x: 27.5, y: 0, z: 27.6}
+  - Position: {x: -0.8, y: 0, z: -1}
     NpcId: 1009
-  - Position: {x: 10.2, y: 0, z: 27.3}
+  - Position: {x: -16.8, y: 0, z: -1.01}
     NpcId: 1009
-  - Position: {x: 14.5, y: 0, z: 6.38}
+  - Position: {x: 14.5, y: 0, z: -0.7}
     NpcId: 1009
 --- !u!114 &114887113098517722
 MonoBehaviour:

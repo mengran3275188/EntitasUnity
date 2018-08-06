@@ -4708,8 +4708,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230201909690636}
-  m_LocalRotation: {x: -0.6495254, y: 0.2794951, z: 0.27949536, w: 0.64952415}
-  m_LocalPosition: {x: -18.70719, y: 0, z: 26.46781}
+  m_LocalRotation: {x: -0.26165077, y: 0.65691584, z: 0.65691686, w: 0.2616501}
+  m_LocalPosition: {x: 26.467815, y: 0, z: 18.70719}
   m_LocalScale: {x: 1.40785, y: 1.4078605, z: 2.4312}
   m_Children:
   - {fileID: 4747374548954174}
@@ -5831,14 +5831,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1139775484888872}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4490260029403478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4885889037952092
 Transform:
   m_ObjectHideFlags: 1
@@ -13397,6 +13397,7 @@ MonoBehaviour:
   m_Script: {fileID: 526013545, guid: b672e47641b03504eb1dd648e8fe181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChunkName: milao_fangjian_02_B
   m_Npcs: []
 --- !u!114 &114620300832899314
 MonoBehaviour:
