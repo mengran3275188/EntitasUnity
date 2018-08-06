@@ -13,7 +13,6 @@ namespace UnityClient
             Add(new ChangeSceneSystem(contexts));
             Add(new SceneStartSystem(contexts));
             Add(new SceneServiceSystem(contexts));
-
         }
     }
 }

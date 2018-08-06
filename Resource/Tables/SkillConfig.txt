@@ -5,7 +5,7 @@ int	string	string	int
 3	主角火球	Tables/SkillScripts/FireBall.mr	1
 4	主角火球2式	Tables/SkillScripts/FireBall.mr	1
 1004	主角召唤的火球	Tables/SkillScripts/FireBall.mr	1
-5	主角闪现	Tables/SkillScripts/Teleport.mr	1
+5	主角闪现	Tables/SkillScripts/Teleport.mr	2
 1005	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1
 1006	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1
 1007	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1

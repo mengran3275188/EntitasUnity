@@ -93,6 +93,14 @@ namespace UnityClient
         }
         public void StartSkill(GameEntity sender, GameEntity target, int skillId, Vector3 senderPosition, float direction)
         {
+
+            SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
+            if(null == config)
+            {
+                LogUtil.Error("SkillSystem.StartSkill can not find skill config {0}.", skillId);
+                return;
+            }
+
             StartSkillParam param = new StartSkillParam
             {
                 SkillId = skillId,
@@ -106,10 +114,11 @@ namespace UnityClient
             }
 
             // break
-            if(CanBreakCurSkill(target, skillId, 10))
+            float time = Contexts.sharedInstance.input.time.Value;
+            if(CanBreakCurSkill(target, config.BreakType, (long)(time * 1000)))
             {
+                BreakSkill(target);
             }
-
         }
         public void BreakSkill(GameEntity entity)
         {
@@ -145,6 +154,17 @@ namespace UnityClient
         }
         private bool CanBreakCurSkill(GameEntity entity, int breakType, long time)
         {
+            if (!entity.hasSkill)
+                return false;
+
+            if (null == entity.skill.Instance)
+                return true;
+
+            foreach(var bs in entity.skill.Instance.BreakSections)
+            {
+                if (bs.BreakType == breakType && time >= bs.StartTime && time <= bs.EndTime)
+                    return true;
+            }
             return false;
         }
         private void PlayUseSkill(int skillId)

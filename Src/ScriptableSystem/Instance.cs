@@ -115,6 +115,10 @@ namespace ScriptableSystem
     public sealed class Instance
     {
 
+        public long Time
+        {
+            get { return m_LastTickTime; }
+        }
         public int Id
         {
             get { return m_Id; }

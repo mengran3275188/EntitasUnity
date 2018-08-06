@@ -29,8 +29,8 @@ namespace SkillCommands
                     BreakSection bs = new BreakSection
                     {
                         BreakType = m_BreakType,
-                        StartTime = m_StartTime,
-                        EndTime = m_EndTime,
+                        StartTime = m_StartTime + instance.Time,
+                        EndTime = m_EndTime + instance.Time,
                     };
                     target.skill.Instance.BreakSections.Add(bs);
                 }
