@@ -839,7 +839,7 @@ namespace Entitas.Data
 {
 	public sealed partial class CharacterConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 32)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 36)]
 		private struct CharacterConfigRecord
 		{
 			internal int Id;
@@ -850,6 +850,7 @@ namespace Entitas.Data
 			internal int ActionPrefix;
 			internal int AIScript;
 			internal int AttrId;
+			internal int Skills;
 		}
 
 		public int Id;
@@ -860,6 +861,7 @@ namespace Entitas.Data
 		public string ActionPrefix;
 		public string AIScript;
 		public int AttrId;
+		public int[] Skills;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -871,6 +873,7 @@ namespace Entitas.Data
 			ActionPrefix = DBCUtil.ExtractString(node, "ActionPrefix", "");
 			AIScript = DBCUtil.ExtractString(node, "AIScript", "");
 			AttrId = DBCUtil.ExtractNumeric<int>(node, "AttrId", 0);
+			Skills = DBCUtil.ExtractNumericArray<int>(node, "Skills", null);
 			return true;
 		}
 
@@ -885,6 +888,7 @@ namespace Entitas.Data
 			ActionPrefix = DBCUtil.ExtractString(table, record.ActionPrefix, "");
 			AIScript = DBCUtil.ExtractString(table, record.AIScript, "");
 			AttrId = DBCUtil.ExtractInt(table, record.AttrId, 0);
+			Skills = DBCUtil.ExtractIntArray(table, record.Skills, null);
 			return true;
 		}
 
@@ -899,6 +903,7 @@ namespace Entitas.Data
 			record.ActionPrefix = DBCUtil.SetValue(table, ActionPrefix, "");
 			record.AIScript = DBCUtil.SetValue(table, AIScript, "");
 			record.AttrId = DBCUtil.SetValue(table, AttrId, 0);
+			record.Skills = DBCUtil.SetValue(table, Skills, null);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

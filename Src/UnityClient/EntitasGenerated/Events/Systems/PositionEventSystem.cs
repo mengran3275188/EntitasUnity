@@ -8,13 +8,9 @@
 //------------------------------------------------------------------------------
 public sealed class PositionEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly Entitas.IGroup<GameEntity> _listeners;
-    readonly System.Collections.Generic.List<GameEntity> _entityBuffer;
     readonly System.Collections.Generic.List<IPositionListener> _listenerBuffer;
 
     public PositionEventSystem(Contexts contexts) : base(contexts.game) {
-        _listeners = contexts.game.GetGroup(GameMatcher.PositionListener);
-        _entityBuffer = new System.Collections.Generic.List<GameEntity>();
         _listenerBuffer = new System.Collections.Generic.List<IPositionListener>();
     }
 
@@ -25,18 +21,16 @@ public sealed class PositionEventSystem : Entitas.ReactiveSystem<GameEntity> {
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasPosition;
+        return entity.hasPosition && entity.hasPositionListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
             var component = e.position;
-            foreach (var listenerEntity in _listeners.GetEntities(_entityBuffer)) {
-                _listenerBuffer.Clear();
-                _listenerBuffer.AddRange(listenerEntity.positionListener.value);
-                foreach (var listener in _listenerBuffer) {
-                    listener.OnPosition(e, component.Value);
-                }
+            _listenerBuffer.Clear();
+            _listenerBuffer.AddRange(e.positionListener.value);
+            foreach (var listener in _listenerBuffer) {
+                listener.OnPosition(e, component.Value);
             }
         }
     }

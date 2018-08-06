@@ -1467,10 +1467,15 @@ namespace TableReaderGenerator
                 byte[] buffer = null;
                 try
                 {
-                    buffer = File.ReadAllBytes(path);
+                    using(var fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        buffer = new byte[fs.Length];
+                        fs.Read(buffer, 0, (int)fs.Length);
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    LogUtil.Error("{0}\n{1}", ex.Message, ex.StackTrace);
                 }
                 return buffer;
             });

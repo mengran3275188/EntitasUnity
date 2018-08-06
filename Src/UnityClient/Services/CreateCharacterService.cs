@@ -59,6 +59,17 @@ namespace UnityClient
                 e.AddSkill(null, null);
                 e.AddBuff(new Dictionary<int, List<BuffInstanceInfo>>(), new List<StartBuffParam>());
 
+                List<SkillInfo> skills = new List<SkillInfo>();
+                foreach(var skill in config.Skills)
+                {
+                    SkillInfo skillInfo = new SkillInfo
+                    {
+                        SkillId = skill,
+                    };
+                    skills.Add(skillInfo);
+                }
+                e.AddSkillConfig(skills);
+
                 // camp
                 e.AddCamp(campId);
 

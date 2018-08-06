@@ -1,14 +1,14 @@
-Id	Description	Model	Scale	ActionId	ActionPrefix	AIScript	AttrId
-int	string	string	float	int	string	string	int
-1	第一只主角	Monster/ChangAn/5_Npc_Private_03	1	1			1
-1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	2			1000
-1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	2		FirstBT	1000
-1003	第一只小怪的第一只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_01	1	-1			
-1004	第一只小怪的第二只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_02	1	-1			
-1005	第一只小怪的第三只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_03	1	-1			
-1006	第一只小怪的第四只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_04	1	-1			
-1007	近战刀兵	Monster/ChangAn/5_Npc_Private_03	1	1		FirstBT_0	1001
-1008	火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_fly	1	-1			
-1009	近战枪兵	Monster/ChangAn/5_Npc_Private_04	1	1		FirstBT_1	1002
-1010	近战小陀螺	Monster/ChangAn/5_Npc_Private_06	1	1		FirstBT_2	1003
-1011	近战枪兵枪	Monster_FX/Campaign_1/6_Npc_Private_Attack_07	1	-1		FirstBT	
+Id	Description	Model	Scale	ActionId	ActionPrefix	AIScript	AttrId	Skills
+int	string	string	float	int	string	string	int	int_array
+1	第一只主角	Monster/ChangAn/5_Npc_Private_03	1	1			1	1|2|3|5
+1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	2			1000	
+1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	2		FirstBT	1000	
+1003	第一只小怪的第一只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_01	1	-1				
+1004	第一只小怪的第二只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_02	1	-1				
+1005	第一只小怪的第三只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_03	1	-1				
+1006	第一只小怪的第四只箭	Monster_FX/Campaign_1/6_Npc_LittleFox_Attack_04	1	-1				
+1007	近战刀兵	Monster/ChangAn/5_Npc_Private_03	1	1		FirstBT_0	1001	
+1008	火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_fly	1	-1				
+1009	近战枪兵	Monster/ChangAn/5_Npc_Private_04	1	1		FirstBT_1	1002	
+1010	近战小陀螺	Monster/ChangAn/5_Npc_Private_06	1	1		FirstBT_2	1003	
+1011	近战枪兵枪	Monster_FX/Campaign_1/6_Npc_Private_Attack_07	1	-1		FirstBT		

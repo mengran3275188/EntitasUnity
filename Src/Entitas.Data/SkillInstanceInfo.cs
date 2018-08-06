@@ -16,4 +16,8 @@ namespace Entitas.Data
         public Instance m_BuffInstance;
         public bool m_IsUsed;
     }
+    public class SkillInfo
+    {
+        public int SkillId;
+    }
 }

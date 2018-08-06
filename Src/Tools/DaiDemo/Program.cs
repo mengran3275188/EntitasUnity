@@ -23,7 +23,7 @@ namespace JitterOpenGLDemo
         public Program() : base(800,600)
         {
             world = new World(new CollisionSystemSAP());
-            world.Gravity = new Vector3(0, 0, -10);
+            world.Gravity = new Util.MyMath.Vector3(0, 0, -10);
 
             dsSetSphereQuality(2);
 
@@ -39,13 +39,13 @@ namespace JitterOpenGLDemo
         {
             if (e.Key == OpenTK.Input.Key.Space) ShootSphere();
             if (e.Key == OpenTK.Input.Key.R) BuildScene();
-            if (e.Key == OpenTK.Input.Key.W) MyMove(Vector3.forward);
-            if (e.Key == OpenTK.Input.Key.S) MyMove(Vector3.back);
-            if (e.Key == OpenTK.Input.Key.A) MyMove(Vector3.left);
-            if (e.Key == OpenTK.Input.Key.D) MyMove(Vector3.right);
+            if (e.Key == OpenTK.Input.Key.W) MyMove(Util.MyMath.Vector3.forward);
+            if (e.Key == OpenTK.Input.Key.S) MyMove(Util.MyMath.Vector3.back);
+            if (e.Key == OpenTK.Input.Key.A) MyMove(Util.MyMath.Vector3.left);
+            if (e.Key == OpenTK.Input.Key.D) MyMove(Util.MyMath.Vector3.right);
         }
 
-        private void MyMove(Util.Vector3 vec)
+        private void MyMove(Util.MyMath.Vector3 vec)
         {
             m_LastSphere.LinearVelocity = vec * 50;
         }
@@ -54,8 +54,8 @@ namespace JitterOpenGLDemo
         {
             world.Clear();
 
-            RigidBody body = AddBox(new Vector3(0, 0, -0.5f), Vector3.zero,
-                new Vector3(300, 300, 1));
+            RigidBody body = AddBox(new Util.MyMath.Vector3(0, 0, -0.5f), Util.MyMath.Vector3.zero,
+                new Util.MyMath.Vector3(300, 300, 1));
 
             body.IsStatic = true;
             body.Tag = false;
@@ -64,8 +64,8 @@ namespace JitterOpenGLDemo
             {
                 for (int e = i; e < 20; e++)
                 {
-                    var box = AddBox(new Vector3(0.0f, (e - i * 0.5f) * 1.01f, 0.5f + i * 1.0f),
-                        Vector3.zero, Vector3.one);
+                    var box = AddBox(new Util.MyMath.Vector3(0.0f, (e - i * 0.5f) * 1.01f, 0.5f + i * 1.0f),
+                        Util.MyMath.Vector3.zero, Util.MyMath.Vector3.one);
                     box.IsStatic = true;
                 }
             }
@@ -74,16 +74,16 @@ namespace JitterOpenGLDemo
         private RigidBody m_LastSphere = null;
         private void ShootSphere()
         {
-            Vector3 pos, ang;
+            Util.MyMath.Vector3 pos, ang;
             dsGetViewPoint(out pos, out ang);
 
             RigidBody body = new RigidBody(new SphereShape(1.0f));
             body.Position = pos;
 
-            Vector3 unit;
-            unit.x = (float)Math.Cos(ang.x / 180.0f * Mathf.PI);
-            unit.y = (float)Math.Sin(ang.x / 180.0f * Mathf.PI);
-            unit.z = (float)Math.Sin(ang.y / 180.0f * Mathf.PI);
+            Util.MyMath.Vector3 unit;
+            unit.x = (float)Math.Cos(ang.x / 180.0f * Util.MyMath.Mathf.PI);
+            unit.y = (float)Math.Sin(ang.x / 180.0f * Util.MyMath.Mathf.PI);
+            unit.z = (float)Math.Sin(ang.y / 180.0f * Util.MyMath.Mathf.PI);
 
             body.LinearVelocity = unit * 50.0f;
 
@@ -92,7 +92,7 @@ namespace JitterOpenGLDemo
             m_LastSphere = body;
         }
 
-        private RigidBody AddBox(Vector3 position, Vector3 velocity, Vector3 size)
+        private RigidBody AddBox(Util.MyMath.Vector3 position, Util.MyMath.Vector3 velocity, Util.MyMath.Vector3 size)
         {
             BoxShape shape = new BoxShape(size);
             RigidBody body = new RigidBody(shape);

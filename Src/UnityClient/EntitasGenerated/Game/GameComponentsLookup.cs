@@ -35,10 +35,11 @@ public static class GameComponentsLookup {
     public const int Rotation = 24;
     public const int Scene = 25;
     public const int Skill = 26;
-    public const int View = 27;
-    public const int PositionListener = 28;
+    public const int SkillConfig = 27;
+    public const int View = 28;
+    public const int PositionListener = 29;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "ActiveChunk",
@@ -68,6 +69,7 @@ public static class GameComponentsLookup {
         "Rotation",
         "Scene",
         "Skill",
+        "SkillConfig",
         "View",
         "PositionListener"
     };
@@ -100,6 +102,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.RotationComponent),
         typeof(Entitas.Data.SceneComponent),
         typeof(Entitas.Data.SkillComponent),
+        typeof(Entitas.Data.SkillConfigComponent),
         typeof(Entitas.Data.ViewComponent),
         typeof(PositionListenerComponent)
     };

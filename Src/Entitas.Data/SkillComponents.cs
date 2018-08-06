@@ -2,6 +2,10 @@
 
 namespace Entitas.Data
 {
+    public sealed class SkillConfigComponent : IComponent
+    {
+        public List<SkillInfo> Skills;
+    }
     public sealed class SkillComponent : IComponent
     {
         public SkillInstanceInfo Instance;

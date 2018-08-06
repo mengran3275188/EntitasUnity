@@ -8,7 +8,7 @@ namespace Entitas.Data
     {
         public Vector3 Velocity;
     }
-    [Game, Event(EventTarget.Any)]
+    [Game, Event(EventTarget.Self)]
     public sealed class PositionComponent : IComponent
     {
         public Vector3 Value;
