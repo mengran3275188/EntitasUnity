@@ -3,8 +3,13 @@ int	string	string
 1	主角普攻	Tables/SkillScripts/PuGong.mr
 2	主角加速	Tables/SkillScripts/Accelerate.mr
 3	主角火球	Tables/SkillScripts/FireBall.mr
+4	主角火球2式	Tables/SkillScripts/FireBall.mr
 1004	主角召唤的火球	Tables/SkillScripts/FireBall.mr
 5	主角闪现	Tables/SkillScripts/Teleport.mr
+1005	主角召唤的火球2	Tables/SkillScripts/FireBall.mr
+1006	主角召唤的火球2	Tables/SkillScripts/FireBall.mr
+1007	主角召唤的火球2	Tables/SkillScripts/FireBall.mr
+1008	主角召唤的火球2	Tables/SkillScripts/FireBall.mr
 100201	狐狸射箭	Tables/SkillScripts/LittleFox.mr
 100202	狐狸射的箭	Tables/SkillScripts/LittleFox.mr
 100203	狐狸射的箭2	Tables/SkillScripts/LittleFox.mr
