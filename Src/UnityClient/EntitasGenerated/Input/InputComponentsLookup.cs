@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int KeyDown = 0;
+    public const int RealTimeSinceStartup = 0;
+    public const int Time = 1;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-        "KeyDown"
+        "RealTimeSinceStartup",
+        "Time"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Entitas.Data.KeyDownComponent)
+        typeof(Entitas.Data.RealTimeSinceStartupComponent),
+        typeof(Entitas.Data.TimeComponent)
     };
 }

@@ -34,7 +34,7 @@ namespace UnityClient
                     if (entity.isMainPlayer)
                         entity.ReplaceHp(entity.attr.Value.HpMax);
                     else
-                        entity.ReplaceDead(m_Contexts.gameState.timeInfo.Time);
+                        entity.ReplaceDead(m_Contexts.input.time.Value);
                 }
                 Services.Instance.HudService.UpdateHudHead(entity, entity.hp.Value, entity.attr.Value.HpMax);
             }

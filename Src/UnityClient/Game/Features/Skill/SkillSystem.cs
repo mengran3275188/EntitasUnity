@@ -21,26 +21,29 @@ namespace UnityClient
 
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
+            CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
             CommandManager.Instance.RegisterCommandFactory("movechild", new CommandFactoryHelper<SkillCommands.MoveChildTrigger>());
+
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
+            CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
             CommandManager.Instance.RegisterCommandFactory("colliderdamage", new CommandFactoryHelper<SkillCommands.ColliderDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("removecollider", new CommandFactoryHelper<SkillCommands.RemoveColliderCommand>());
-
-            CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
             CommandManager.Instance.RegisterCommandFactory("damage", new CommandFactoryHelper<SkillCommands.DamageCommand>());
-            CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
+
             CommandManager.Instance.RegisterCommandFactory("selfbuff", new CommandFactoryHelper<SkillCommands.SelfBuffCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("disablemoveinput", new CommandFactoryHelper<SkillCommands.DisableMoveInputCommand>());
             CommandManager.Instance.RegisterCommandFactory("disablerotationinput", new CommandFactoryHelper<SkillCommands.DisableRotationInputCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("breaksection", new CommandFactoryHelper<SkillCommands.BreakSectionCommand>());
         }
 
         public void Execute()
         {
-            long time = (long)(m_Contexts.gameState.timeInfo.Time * 1000);
+            long time = (long)(m_Contexts.input.time.Value * 1000);
 
             var entities = m_SkillEntities.GetEntities();
             foreach (GameEntity entity in entities)
@@ -49,8 +52,8 @@ namespace UnityClient
                 SkillInstanceInfo info = skillComponent.Instance;
                 if (null != info)
                 {
-                    info.m_SkillInstance.Tick(time);
-                    if(info.m_SkillInstance.IsTerminated)
+                    info.SkillInstance.Tick(time);
+                    if(info.SkillInstance.IsTerminated)
                     {
                         RecycleSkillInstance(info);
 
@@ -63,15 +66,15 @@ namespace UnityClient
                     {
 
                         SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
-                        if (null != instance && null != instance.m_SkillInstance)
+                        if (null != instance && null != instance.SkillInstance)
                         {
-                            instance.m_SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
-                            instance.m_SkillInstance.Target = entity;
-                            instance.m_SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
-                            instance.m_SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                            instance.m_SkillInstance.Context = null;
-                            instance.m_SkillInstance.GlobalVariables = m_GlobalVariables;
-                            instance.m_SkillInstance.Start();
+                            instance.SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                            instance.SkillInstance.Target = entity;
+                            instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
+                            instance.SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
+                            instance.SkillInstance.Context = null;
+                            instance.SkillInstance.GlobalVariables = m_GlobalVariables;
+                            instance.SkillInstance.Start();
 
                             entity.ReplaceSkill(instance, null);
 
@@ -97,18 +100,22 @@ namespace UnityClient
                 SenderPosition = senderPosition,
                 SenderDirection = direction
             };
-
             if (target.hasSkill)
             {
                 target.skill.StartParam = param;
             }
 
-        }
-        public void BreakSkill(GameEntity target)
-        {
-            if(target.hasSkill && target.skill.Instance != null)
+            // break
+            if(CanBreakCurSkill(target, skillId, 10))
             {
-                target.skill.Instance.m_SkillInstance.SendMessage("onbreak");
+            }
+
+        }
+        public void BreakSkill(GameEntity entity)
+        {
+            if(entity.hasSkill && entity.skill.Instance != null)
+            {
+                entity.skill.Instance.SkillInstance.SendMessage("onbreak");
             }
         }
         public Vector3 GetSkillVelocity(GameEntity entity)
@@ -116,7 +123,7 @@ namespace UnityClient
             Vector3 velocity = Vector3.zero;
             if(entity.hasSkill && null != entity.skill.Instance)
             {
-                velocity = entity.skill.Instance.m_SkillInstance.Velocity;
+                velocity = entity.skill.Instance.SkillInstance.Velocity;
             }
             return velocity;
         }
@@ -124,7 +131,7 @@ namespace UnityClient
         {
             if(entity.hasSkill && null != entity.skill.Instance)
             {
-                return entity.skill.Instance.m_SkillInstance.DisableMoveInput;
+                return entity.skill.Instance.SkillInstance.DisableMoveInput;
             }
             return false;
         }
@@ -132,8 +139,12 @@ namespace UnityClient
         {
             if(entity.hasSkill && null != entity.skill.Instance)
             {
-                return entity.skill.Instance.m_SkillInstance.DisableRotationInput;
+                return entity.skill.Instance.SkillInstance.DisableRotationInput;
             }
+            return false;
+        }
+        private bool CanBreakCurSkill(GameEntity entity, int breakType, long time)
+        {
             return false;
         }
         private void PlayUseSkill(int skillId)
@@ -159,9 +170,10 @@ namespace UnityClient
                 }
                 SkillInstanceInfo res = new SkillInstanceInfo
                 {
-                    m_SkillId = skillId,
-                    m_SkillInstance = instance,
-                    m_IsUsed = true
+                    SkillId = skillId,
+                    SkillInstance = instance,
+                    BreakSections = new List<BreakSection>(),
+                    IsUsed = true
                 };
 
                 AddStoryInstanceInfoToPool(skillId, res);
@@ -169,14 +181,15 @@ namespace UnityClient
             }
             else
             {
-                instanceInfo.m_IsUsed = true;
+                instanceInfo.IsUsed = true;
                 return instanceInfo;
             }
         }
         private void RecycleSkillInstance(SkillInstanceInfo info)
         {
-            info.m_SkillInstance.Reset();
-            info.m_IsUsed = false;
+            info.SkillInstance.Reset();
+            info.BreakSections.Clear();
+            info.IsUsed = false;
         }
         private void AddStoryInstanceInfoToPool(int skillId, SkillInstanceInfo info)
         {
@@ -197,7 +210,7 @@ namespace UnityClient
             {
                 foreach(var skillInfo in infos)
                 {
-                    if (!skillInfo.m_IsUsed)
+                    if (!skillInfo.IsUsed)
                     {
                         info = skillInfo;
                         break;

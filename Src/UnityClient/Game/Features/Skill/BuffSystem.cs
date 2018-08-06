@@ -20,7 +20,7 @@ namespace UnityClient
         }
         public void Execute()
         {
-            long time = (long)(m_Contexts.gameState.timeInfo.Time * 1000);
+            long time = (long)(m_Contexts.input.time.Value * 1000);
             foreach (GameEntity entity in m_ImpactEntities)
             {
                 BuffComponent buffComponent = entity.buff;
@@ -31,8 +31,8 @@ namespace UnityClient
                     for (int i = infos.Count - 1; i >= 0; i--)
                     {
                         var info = infos[i];
-                        info.m_BuffInstance.Tick(time);
-                        if (info.m_BuffInstance.IsTerminated)
+                        info.BuffInstance.Tick(time);
+                        if (info.BuffInstance.IsTerminated)
                         {
                             RecycleImpactInstance(info);
 
@@ -64,10 +64,10 @@ namespace UnityClient
                         {
                             for(int i = 0; i < infos.Count - maxCount + 1; ++i)
                             {
-                                if(!infos[i].m_BuffInstance.IsTerminated)
+                                if(!infos[i].BuffInstance.IsTerminated)
                                 {
-                                    infos[i].m_BuffInstance.SendMessage("onbreak");
-                                    infos[i].m_BuffInstance.IsTerminated = true;
+                                    infos[i].BuffInstance.SendMessage("onbreak");
+                                    infos[i].BuffInstance.IsTerminated = true;
                                 }
                             }
                         }
@@ -75,13 +75,13 @@ namespace UnityClient
                         BuffInstanceInfo instance = NewBuffInstance(startParam.BuffId);
                         if (null != instance)
                         {
-                            instance.m_BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
-                            instance.m_BuffInstance.SenderPosition = startParam.SenderPosition;
-                            instance.m_BuffInstance.SenderDirection = startParam.SenderDirection;
-                            instance.m_BuffInstance.Target = entity;
-                            instance.m_BuffInstance.Context = null;
-                            instance.m_BuffInstance.GlobalVariables = m_GlobalVariables;
-                            instance.m_BuffInstance.Start();
+                            instance.BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
+                            instance.BuffInstance.SenderPosition = startParam.SenderPosition;
+                            instance.BuffInstance.SenderDirection = startParam.SenderDirection;
+                            instance.BuffInstance.Target = entity;
+                            instance.BuffInstance.Context = null;
+                            instance.BuffInstance.GlobalVariables = m_GlobalVariables;
+                            instance.BuffInstance.Start();
 
                             infos.Add(instance);
 
@@ -122,7 +122,7 @@ namespace UnityClient
                     for (int i = infos.Count - 1; i >= 0; i--)
                     {
                         var info = infos[i];
-                        velocity += info.m_BuffInstance.Velocity;
+                        velocity += info.BuffInstance.Velocity;
                     }
                 }
             }
@@ -139,7 +139,7 @@ namespace UnityClient
                     for (int i = infos.Count - 1; i >= 0; i--)
                     {
                         var info = infos[i];
-                        if (info.m_BuffInstance.DisableMoveInput)
+                        if (info.BuffInstance.DisableMoveInput)
                             return true;
                     }
                 }
@@ -157,7 +157,7 @@ namespace UnityClient
                     for (int i = infos.Count - 1; i >= 0; i--)
                     {
                         var info = infos[i];
-                        if (info.m_BuffInstance.DisableRotationInput)
+                        if (info.BuffInstance.DisableRotationInput)
                             return true;
                     }
                 }
@@ -180,9 +180,9 @@ namespace UnityClient
                 }
                 BuffInstanceInfo res = new BuffInstanceInfo
                 {
-                    m_BuffId = buffId,
-                    m_BuffInstance = instance,
-                    m_IsUsed = true
+                    BuffId = buffId,
+                    BuffInstance = instance,
+                    IsUsed = true
                 };
 
                 AddImpactInstanceInfoToPool(buffId, res);
@@ -190,14 +190,14 @@ namespace UnityClient
             }
             else
             {
-                instanceInfo.m_IsUsed = true;
+                instanceInfo.IsUsed = true;
                 return instanceInfo;
             }
         }
         private void RecycleImpactInstance(BuffInstanceInfo info)
         {
-            info.m_BuffInstance.Reset();
-            info.m_IsUsed = false;
+            info.BuffInstance.Reset();
+            info.IsUsed = false;
         }
         private void AddImpactInstanceInfoToPool(int buffId, BuffInstanceInfo info)
         {
@@ -219,7 +219,7 @@ namespace UnityClient
             {
                 foreach (var buffInfo in infos)
                 {
-                    if (!buffInfo.m_IsUsed)
+                    if (!buffInfo.IsUsed)
                     {
                         info = buffInfo;
                         break;

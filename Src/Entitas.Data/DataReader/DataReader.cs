@@ -1123,23 +1123,26 @@ namespace Entitas.Data
 {
 	public sealed partial class SkillConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 12)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
 		private struct SkillConfigRecord
 		{
 			internal int Id;
 			internal int Description;
 			internal int Script;
+			internal int BreakType;
 		}
 
 		public int Id;
 		public string Description;
 		public string Script;
+		public int BreakType;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
 			Id = DBCUtil.ExtractNumeric<int>(node, "Id", 0);
 			Description = DBCUtil.ExtractString(node, "Description", "");
 			Script = DBCUtil.ExtractString(node, "Script", "");
+			BreakType = DBCUtil.ExtractNumeric<int>(node, "BreakType", 0);
 			return true;
 		}
 
@@ -1149,6 +1152,7 @@ namespace Entitas.Data
 			Id = DBCUtil.ExtractInt(table, record.Id, 0);
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Script = DBCUtil.ExtractString(table, record.Script, "");
+			BreakType = DBCUtil.ExtractInt(table, record.BreakType, 0);
 			return true;
 		}
 
@@ -1158,6 +1162,7 @@ namespace Entitas.Data
 			record.Id = DBCUtil.SetValue(table, Id, 0);
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Script = DBCUtil.SetValue(table, Script, "");
+			record.BreakType = DBCUtil.SetValue(table, BreakType, 0);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

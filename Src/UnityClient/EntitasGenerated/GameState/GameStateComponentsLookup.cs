@@ -13,17 +13,15 @@ public static class GameStateComponentsLookup {
     public const int NextSceneId = 2;
     public const int SceneLoadFinished = 3;
     public const int TargetSceneId = 4;
-    public const int TimeInfo = 5;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
         "CurSceneId",
         "LoadingProgress",
         "NextSceneId",
         "SceneLoadFinished",
-        "TargetSceneId",
-        "TimeInfo"
+        "TargetSceneId"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -31,7 +29,6 @@ public static class GameStateComponentsLookup {
         typeof(Entitas.Data.LoadingProgressComponent),
         typeof(Entitas.Data.NextSceneIdComponent),
         typeof(Entitas.Data.SceneLoadFinishedComponent),
-        typeof(Entitas.Data.TargetSceneIdComponent),
-        typeof(Entitas.Data.TimeInfoComponent)
+        typeof(Entitas.Data.TargetSceneIdComponent)
     };
 }

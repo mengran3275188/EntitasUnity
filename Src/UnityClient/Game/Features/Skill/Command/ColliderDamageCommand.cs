@@ -146,7 +146,7 @@ namespace SkillCommands
             if (!target.hasCamp || !collideTarget.hasCamp || target.camp.Value == collideTarget.camp.Value)
                 return;
 
-            float time = Contexts.sharedInstance.gameState.timeInfo.Time;
+            float time = Contexts.sharedInstance.input.time.Value;
 
             long lastHitTime = -1;
 

@@ -43,7 +43,7 @@ namespace UnityClient
         public void Execute()
         {
             var context = Contexts.sharedInstance.game;
-            long time = (long)(Contexts.sharedInstance.gameState.timeInfo.Time * 1000);
+            long time = (long)(Contexts.sharedInstance.input.time.Value * 1000);
 
             if(context.hasScene && null != context.scene.ScriptInstance)
             {

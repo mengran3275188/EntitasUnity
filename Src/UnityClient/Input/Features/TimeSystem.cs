@@ -9,21 +9,22 @@ namespace UnityClient
     {
         public TimeSystem(Contexts contexts)
         {
-            m_GameStateContext = contexts.gameState;
+            m_InputContext = contexts.input;
         }
         public void Initialize()
         {
-            m_GameStateContext.SetTimeInfo(GfxSystemImpl.Gfx.GetTime(), 0);
+            Services.Instance.TimeService.Initialize();
         }
         public void Execute()
         {
-            float curTime = GfxSystemImpl.Gfx.GetTime();
+            Services.Instance.TimeService.Execute();
+
+            float curTime = m_InputContext.time.Value;
 
             behaviac.Workspace.Instance.DoubleValueSinceStartup = curTime * 1000f;
 
-            m_GameStateContext.ReplaceTimeInfo(curTime, curTime - m_GameStateContext.timeInfo.Time);
         }
 
-        private readonly GameStateContext m_GameStateContext;
+        private readonly InputContext m_InputContext;
     }
 }

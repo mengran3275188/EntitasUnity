@@ -17,7 +17,7 @@ namespace UnityClient
             var entities = m_EntitiesGroup.GetEntities();
             foreach(var entity in entities)
             {
-                if(m_Contexts.gameState.timeInfo.Time > entity.dead.DeadTime + m_DeadRemainTime)
+                if(m_Contexts.input.time.Value > entity.dead.DeadTime + m_DeadRemainTime)
                 {
                     entity.isDestory = true;
                 }

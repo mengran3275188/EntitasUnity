@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
 namespace Entitas.Data
 {
-    [Input]
-    public class KeyDownComponent : IComponent
+    [Input, Unique]
+    public class TimeComponent : IComponent
     {
-        public KeyCode Value;
+        public float Value;
+    }
+    [Input, Unique]
+    public class RealTimeSinceStartupComponent : IComponent
+    {
+        public float Value;
     }
 }

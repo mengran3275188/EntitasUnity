@@ -16,7 +16,7 @@ namespace UnityClient
             var entities = m_EntitiesGroup.GetEntities();
             foreach(var entity in entities)
             {
-                if(m_Contexts.gameState.timeInfo.Time > entity.born.BornTime + m_BornRemainTime)
+                if(m_Contexts.input.time.Value > entity.born.BornTime + m_BornRemainTime)
                 {
                     entity.RemoveBorn();
                 }

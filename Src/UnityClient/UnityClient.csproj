@@ -105,6 +105,7 @@
     <Compile Include="Game\Features\Scene\Command\LoadUICommand.cs" />
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
+    <Compile Include="Game\Features\Skill\Command\BreakSectionCommand.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\InputSystems.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Services\UnityHudServices.cs" />
     <Compile Include="Services\UnityInputServices.cs" />
     <Compile Include="Services\UnitySceneService.cs" />
+    <Compile Include="Services\UnityTimeService.cs" />
     <Compile Include="Services\UnityUIServices.cs" />
     <Compile Include="Services\ViewService\IViewService.cs" />
     <Compile Include="Services\ViewService\UnityViewService.cs" />
@@ -151,7 +153,7 @@
     <Compile Include="Game\Features\Skill\SkillSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameState\Features\TimeSystem.cs" />
+    <Compile Include="Input\Features\TimeSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\Features\MovementSystem.cs" />
