@@ -119,10 +119,6 @@
       <Project>{4295c1b7-d43f-4e38-85ad-33623489fbbe}</Project>
       <Name>ScriptableData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScriptableSystem\ScriptableSystem.csproj">
-      <Project>{858834c7-8228-4a4e-9d06-064b792a91f7}</Project>
-      <Name>ScriptableSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{ea8f8fd9-bda8-4368-881f-f0c820907f7a}</Project>
       <Name>Util</Name>
