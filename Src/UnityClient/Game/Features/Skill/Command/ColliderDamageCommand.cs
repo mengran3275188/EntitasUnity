@@ -198,17 +198,4 @@ namespace SkillCommands
         private Dictionary<uint, long> m_DamagedEntities = new Dictionary<uint, long>();
 
     }
-
-    internal class RemoveColliderCommand : AbstractCommand
-    {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
-        {
-            GameEntity obj = instance.Target as GameEntity;
-            if(null != obj && obj.hasCollision)
-            {
-                obj.RemoveCollision();
-            }
-            return ExecResult.Finished;
-        }
-    }
 }
