@@ -70,7 +70,7 @@ namespace UnityClient
                         if (null != instance && null != instance.SkillInstance)
                         {
                             instance.Category = skillComponent.StartParam.Category;
-                            instance.SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
+                            instance.SkillInstance.SenderId = skillComponent.StartParam.SenderId;
                             instance.SkillInstance.Target = entity;
                             instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
                             instance.SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;

@@ -41,6 +41,7 @@ namespace SkillCommands
             CurveMoveCommand copy = new CurveMoveCommand();
             copy.m_SectionList.AddRange(m_SectionList);
             copy.m_DirectionType = m_DirectionType;
+            copy.m_AlwaysUpdateDirection = m_AlwaysUpdateDirection;
             copy.m_IsCurveMoving = true;
             return copy;
         }
@@ -89,6 +90,10 @@ namespace SkillCommands
                         {
                             m_DirectionType = (DirectionType)int.Parse(stCall.GetParamId(0));
                         }
+                        if(stCall.GetParamNum() >= 2)
+                        {
+                            m_AlwaysUpdateDirection = bool.Parse(stCall.GetParamId(1));
+                        }
                     }
                 }
             }
@@ -101,7 +106,7 @@ namespace SkillCommands
             {
                 return ExecResult.Finished;
             }
-            GameEntity sender = instance.Sender as GameEntity;
+            GameEntity sender = Contexts.sharedInstance.game.GetEntityWithId(instance.SenderId);
             if(sender == null)
             {
                 return ExecResult.Finished;
@@ -122,6 +127,10 @@ namespace SkillCommands
                 return ExecResult.Finished;
             }
 
+            if (m_AlwaysUpdateDirection)
+                m_RotateDir = UpdateRotation(instance, sender, target, m_DirectionType);
+
+
             m_ElapsedTime += delta;
             float realTime = m_ElapsedTime / 1000.0f;
             MoveSectionInfo cur_section = m_SectionListCopy[0];
@@ -129,7 +138,7 @@ namespace SkillCommands
             {
                 float end_time = cur_section.startTime + cur_section.moveTime;
                 float used_time = end_time - cur_section.lastUpdateTime;
-                cur_section.curSpeedVect = Move(instance, target, cur_section.curSpeedVect, cur_section.accelVect, used_time);
+                cur_section.curSpeedVect = Move(instance, target, m_RotateDir, cur_section.curSpeedVect, cur_section.accelVect, used_time);
                 m_SectionListCopy.RemoveAt(0);
                 if (m_SectionListCopy.Count > 0)
                 {
@@ -145,7 +154,7 @@ namespace SkillCommands
             }
             else
             {
-                cur_section.curSpeedVect = Move(instance, target, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
+                cur_section.curSpeedVect = Move(instance, target, m_RotateDir, cur_section.curSpeedVect, cur_section.accelVect, realTime - cur_section.lastUpdateTime);
                 cur_section.lastUpdateTime = realTime;
             }
             return ExecResult.Parallel;
@@ -177,21 +186,14 @@ namespace SkillCommands
                 m_SectionListCopy.Add(m_SectionList[i].Clone());
             }
         }
-        private Vector3 Move(Instance instance, GameEntity obj, Vector3 speed_vect, Vector3 accel_vect, float time)
+        private static Vector3 Move(Instance instance, GameEntity obj, float rotateDir, Vector3 speed_vect, Vector3 accel_vect, float time)
         {
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
-            Vector3 object_speed = Quaternion.Euler(0, Mathf.Rad2Deg * m_RotateDir, 0) * speed;
+            Vector3 object_speed = Quaternion.Euler(0, Mathf.Rad2Deg * rotateDir, 0) * speed;
             instance.Velocity = object_speed;
-            obj.ReplaceRotation(m_RotateDir);
+            obj.ReplaceRotation(rotateDir);
 
-            /*
-            Vector3 local_motion = speed_vect * time + accel_vect * time * time / 2;
-            Vector3 object_motion = Quaternion.CreateFromYawPitchRoll(m_RotateDir, 0, 0) * local_motion;
-            Vector3 word_target_pos = obj.position.Value + object_motion;
-            obj.ReplacePosition(word_target_pos);
-            obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
-            */
             return (speed_vect + accel_vect * time);
         }
         private static float UpdateRotation(Instance instance, GameEntity sender, GameEntity target, DirectionType directionType)
@@ -200,25 +202,26 @@ namespace SkillCommands
             switch(directionType)
             {
                 case DirectionType.Sender:
-                    rotateDir = instance.SenderDirection;
+                    rotateDir = sender.rotation.Value;
                     break;
                 case DirectionType.SenderTarget:
-                    rotateDir = Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
+                    rotateDir = Mathf.Atan2(target.position.Value.x - sender.position.Value.x, target.position.Value.z - sender.position.Value.z);
                     break;
                 case DirectionType.Target:
                     rotateDir = target.rotation.Value;
                     break;
                 case DirectionType.TargetSender:
-                    rotateDir = Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
+                    rotateDir = Mathf.Atan2(sender.position.Value.x - target.position.Value.x, sender.position.Value.z - target.position.Value.z);
                     break;
                 case DirectionType.SenderOpposite:
-                    rotateDir = instance.SenderDirection + Mathf.PI;
+                    rotateDir = sender.rotation.Value + Mathf.PI;
                     break;
             }
             return rotateDir;
         }
 
         private DirectionType m_DirectionType = DirectionType.Target;
+        private bool m_AlwaysUpdateDirection = false;
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
         private List<MoveSectionInfo> m_SectionListCopy = new List<MoveSectionInfo>();
         private bool m_IsCurveMoving = false;

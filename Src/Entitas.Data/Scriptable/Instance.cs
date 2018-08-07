@@ -7,7 +7,6 @@ namespace ScriptableSystem
 {
     public sealed class MessageHandler
     {
-
         public string MessageId
         {
             get { return m_MessageId; }
@@ -123,10 +122,10 @@ namespace ScriptableSystem
         {
             get { return m_Id; }
         }
-        public object Sender
+        public uint SenderId
         {
-            get { return m_Sender; }
-            set { m_Sender = value; }
+            get { return m_SenderId; }
+            set { m_SenderId = value; }
         }
         public Vector3 SenderPosition
         {
@@ -279,42 +278,6 @@ namespace ScriptableSystem
                         LogUtil.Error("Instance::Init, unknown part {0}", skill.Statements[i].GetId());
                     }
                 }
-                /*
-                foreach (ScriptableData.ISyntaxComponent info in story.Statements) {
-                  if (info.GetId() == "local") {
-                    ScriptableData.FunctionData sectionData = info as ScriptableData.FunctionData;
-                    if (null != sectionData) {
-                      foreach (ScriptableData.ISyntaxComponent def in sectionData.Statements) {
-                        ScriptableData.CallData defData = def as ScriptableData.CallData;
-                        if (null != defData && defData.HaveId() && defData.HaveParam()) {
-                          string id = defData.GetId();
-                          if (id.StartsWith("@") && !id.StartsWith("@@")) {
-                            SkillValue val = new SkillValue();
-                            val.InitFromDsl(defData.GetParam(0));
-                            if (!m_PreInitedLocalVariables.ContainsKey(id)) {
-                              m_PreInitedLocalVariables.Add(id, val.Value);
-                            } else {
-                              m_PreInitedLocalVariables[id] = val.Value;
-                            }
-                          }
-                        }
-                      }
-                    } else {
-                      LogSystem.Error("Story {0} DSL, local must be a function !", m_StoryId);
-                    }
-                  } else if (info.GetId() == "onmessage") {
-                    ScriptableData.FunctionData sectionData = info as ScriptableData.FunctionData;
-                    if (null != sectionData) {
-                      StoryMessageHandler handler = new StoryMessageHandler();
-                      handler.Load(sectionData);
-                      m_MessageHandlers.Add(handler);
-                    } else {
-                      LogSystem.Error("Story {0} DSL, onmessage must be a function !", m_StoryId);
-                    }
-                  } else {
-                    LogSystem.Error("Instance::Init, unknown part {0}", info.GetId());
-                  }
-                }*/
             }
             else
             {
@@ -489,10 +452,12 @@ namespace ScriptableSystem
         private int m_Id = 0;
         private bool m_IsTerminated = false;
         private object m_Context = null;
-        private object m_Sender = null;
         private object m_Target = null;
+
+        private uint m_SenderId = 0;
         private Vector3 m_SenderPosition = Vector3.zero;
         private float m_SenderDir = 0;
+
         private Vector3 m_Velocity = Vector3.zero;
         private bool m_DisableRotationInput = false;
         private bool m_DisableMoveInput = false;

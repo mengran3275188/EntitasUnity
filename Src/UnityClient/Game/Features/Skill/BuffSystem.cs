@@ -75,7 +75,7 @@ namespace UnityClient
                         BuffInstanceInfo instance = NewBuffInstance(startParam.Id);
                         if (null != instance)
                         {
-                            instance.BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
+                            instance.BuffInstance.SenderId = startParam.SenderId;
                             instance.BuffInstance.SenderPosition = startParam.SenderPosition;
                             instance.BuffInstance.SenderDirection = startParam.SenderDirection;
                             instance.BuffInstance.Target = entity;

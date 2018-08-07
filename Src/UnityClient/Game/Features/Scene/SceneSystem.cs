@@ -66,7 +66,7 @@ namespace UnityClient
                 {
                     LogUtil.Error("SceneSystem::NewSceneInstance scene script {0} not found!", sceneId);
                 }
-                instance.Sender = Contexts.sharedInstance.game.sceneEntity;
+                instance.SenderId = 0;
                 instance.Target = Contexts.sharedInstance.game.sceneEntity;
 
                 SceneInstanceInfo sii = new SceneInstanceInfo();

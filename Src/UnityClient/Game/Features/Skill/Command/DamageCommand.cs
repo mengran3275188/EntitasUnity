@@ -21,7 +21,8 @@ namespace SkillCommands
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
-            if (instance.Target is GameEntity obj && instance.Sender is GameEntity sender)
+            GameEntity sender = Contexts.sharedInstance.game.GetEntityWithId(instance.SenderId);
+            if (instance.Target is GameEntity obj && null != sender)
             {
                 if (obj.hasHp)
                 {
