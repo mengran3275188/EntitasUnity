@@ -104,6 +104,7 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1005);
 		};
+        /*
 		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
 		{
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
@@ -140,6 +141,7 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1008);
 		};
+        */
 		//wait(200);
 		terminate();
 	};
@@ -177,7 +179,7 @@ skill(1006)
 {
 	onmessage("start")
 	{
-		loop(10)
+		loop(1)
 		{
 			curvemove(true, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300);
 
@@ -203,7 +205,7 @@ skill(1007)
 {
 	onmessage("start")
 	{
-		loop(10)
+		loop(1)
 		{
 			curvemove(true, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300);
 
@@ -229,7 +231,7 @@ skill(1008)
 {
 	onmessage("start")
 	{
-		loop(10)
+		loop(1)
 		{
 			curvemove(true, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300);
 			

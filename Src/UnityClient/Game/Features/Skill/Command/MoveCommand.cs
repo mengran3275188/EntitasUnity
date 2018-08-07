@@ -150,6 +150,11 @@ namespace SkillCommands
             }
             return ExecResult.Parallel;
         }
+        protected override void ResetState()
+        {
+            m_IsCurveMoving = true;
+            m_IsInited = false;
+        }
 
         private void Init(GameEntity sender, GameEntity target, Instance instance)
         {
@@ -159,24 +164,7 @@ namespace SkillCommands
             m_SectionListCopy[0].lastUpdateTime = m_ElapsedTime;
             m_SectionListCopy[0].curSpeedVect = m_SectionListCopy[0].speedVect;
 
-            switch(m_DirectionType)
-            {
-                case DirectionType.Sender:
-                    m_RotateDir = instance.SenderDirection;
-                    break;
-                case DirectionType.SenderTarget:
-                    m_RotateDir = Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
-                    break;
-                case DirectionType.Target:
-                    m_RotateDir = target.rotation.Value;
-                    break;
-                case DirectionType.TargetSender:
-                    m_RotateDir = Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
-                    break;
-                case DirectionType.SenderOpposite:
-                    m_RotateDir = instance.SenderDirection + Mathf.PI;
-                    break;
-            }
+            m_RotateDir = UpdateRotation(instance, sender, target, m_DirectionType);
 
             m_IsInited = true;
         }
@@ -205,6 +193,29 @@ namespace SkillCommands
             obj.ReplaceRotation(Entitas.Data.RotateState.SkillRotate, m_RotateDir);
             */
             return (speed_vect + accel_vect * time);
+        }
+        private static float UpdateRotation(Instance instance, GameEntity sender, GameEntity target, DirectionType directionType)
+        {
+            float rotateDir = 0;
+            switch(directionType)
+            {
+                case DirectionType.Sender:
+                    rotateDir = instance.SenderDirection;
+                    break;
+                case DirectionType.SenderTarget:
+                    rotateDir = Mathf.Atan2(target.position.Value.x - instance.SenderPosition.x, target.position.Value.z - instance.SenderPosition.z);
+                    break;
+                case DirectionType.Target:
+                    rotateDir = target.rotation.Value;
+                    break;
+                case DirectionType.TargetSender:
+                    rotateDir = Mathf.Atan2(instance.SenderPosition.x - target.position.Value.x, instance.SenderPosition.z - target.position.Value.z);
+                    break;
+                case DirectionType.SenderOpposite:
+                    rotateDir = instance.SenderDirection + Mathf.PI;
+                    break;
+            }
+            return rotateDir;
         }
 
         private DirectionType m_DirectionType = DirectionType.Target;
