@@ -70,7 +70,7 @@ namespace SceneCommand
             if (m_SkillId > 0)
             {
                 var entity = gameContext.GetEntityWithId(entityId);
-                SkillSystem.Instance.StartSkill(target, entity, m_SkillId, target.position.Value, target.rotation.Value);
+                SkillSystem.Instance.StartSkill(target, entity, m_SkillId, -1, target.position.Value, target.rotation.Value);
             }
             return ExecResult.Finished;
         }

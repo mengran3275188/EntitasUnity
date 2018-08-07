@@ -7,6 +7,7 @@ namespace Entitas.Data
     {
         public List<BreakSection> BreakSections;
         public int SkillId;
+        public int Category;
         public Instance SkillInstance;
         public bool IsUsed;
     }

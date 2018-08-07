@@ -87,7 +87,7 @@
     <Compile Include="Components\ResourceComponents.cs" />
     <Compile Include="SceneInstanceInfo.cs" />
     <Compile Include="Components\SingletonComponets.cs" />
-    <Compile Include="SkillComponents.cs" />
+    <Compile Include="Components\SkillComponents.cs" />
     <Compile Include="SkillInstanceInfo.cs" />
   </ItemGroup>
   <ItemGroup>

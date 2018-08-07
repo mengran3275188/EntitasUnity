@@ -26,20 +26,21 @@ public static class GameComponentsLookup {
     public const int Hp = 15;
     public const int Hud = 16;
     public const int Id = 17;
-    public const int MainPlayer = 18;
-    public const int Movement = 19;
-    public const int Npc = 20;
-    public const int Physics = 21;
-    public const int Position = 22;
-    public const int Resource = 23;
-    public const int Rotation = 24;
-    public const int Scene = 25;
-    public const int Skill = 26;
-    public const int SkillConfig = 27;
-    public const int View = 28;
-    public const int PositionListener = 29;
+    public const int LastSkill = 18;
+    public const int MainPlayer = 19;
+    public const int Movement = 20;
+    public const int Npc = 21;
+    public const int Physics = 22;
+    public const int Position = 23;
+    public const int Resource = 24;
+    public const int Rotation = 25;
+    public const int Scene = 26;
+    public const int Skill = 27;
+    public const int SkillConfig = 28;
+    public const int View = 29;
+    public const int PositionListener = 30;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "ActiveChunk",
@@ -60,6 +61,7 @@ public static class GameComponentsLookup {
         "Hp",
         "Hud",
         "Id",
+        "LastSkill",
         "MainPlayer",
         "Movement",
         "Npc",
@@ -93,6 +95,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.HpComponent),
         typeof(Entitas.Data.HudComponent),
         typeof(Entitas.Data.IdComponent),
+        typeof(Entitas.Data.LastSkillComponent),
         typeof(Entitas.Data.MainPlayerComponent),
         typeof(Entitas.Data.MovementComponent),
         typeof(Entitas.Data.NpcComponent),

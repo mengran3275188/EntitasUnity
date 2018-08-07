@@ -1123,19 +1123,21 @@ namespace Entitas.Data
 {
 	public sealed partial class SkillConfig : IData2
 	{
-		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 16)]
+		[StructLayout(LayoutKind.Auto, Pack = 1, Size = 20)]
 		private struct SkillConfigRecord
 		{
 			internal int Id;
 			internal int Description;
 			internal int Script;
 			internal int BreakType;
+			internal int NextId;
 		}
 
 		public int Id;
 		public string Description;
 		public string Script;
 		public int BreakType;
+		public int NextId;
 
 		public bool CollectDataFromDBC(DBC_Row node)
 		{
@@ -1143,6 +1145,7 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(node, "Description", "");
 			Script = DBCUtil.ExtractString(node, "Script", "");
 			BreakType = DBCUtil.ExtractNumeric<int>(node, "BreakType", 0);
+			NextId = DBCUtil.ExtractNumeric<int>(node, "NextId", 0);
 			return true;
 		}
 
@@ -1153,6 +1156,7 @@ namespace Entitas.Data
 			Description = DBCUtil.ExtractString(table, record.Description, "");
 			Script = DBCUtil.ExtractString(table, record.Script, "");
 			BreakType = DBCUtil.ExtractInt(table, record.BreakType, 0);
+			NextId = DBCUtil.ExtractInt(table, record.NextId, 0);
 			return true;
 		}
 
@@ -1163,6 +1167,7 @@ namespace Entitas.Data
 			record.Description = DBCUtil.SetValue(table, Description, "");
 			record.Script = DBCUtil.SetValue(table, Script, "");
 			record.BreakType = DBCUtil.SetValue(table, BreakType, 0);
+			record.NextId = DBCUtil.SetValue(table, NextId, 0);
 			byte[] bytes = GetRecordBytes(record);
 			table.Records.Add(bytes);
 		}

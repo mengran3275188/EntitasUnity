@@ -47,15 +47,15 @@ namespace UnityClient
                 {
                     //SkillSystem.Instance.BreakSkill(entity);
 
-                    BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(startParam.BuffId);
+                    BuffConfig buffConfig = BuffConfigProvider.Instance.GetBuffConfig(startParam.Id);
                     if (null != buffConfig)
                     {
                         int maxCount = buffConfig.MaxCount;
 
-                        if (!buffComponent.InstanceInfos.TryGetValue(startParam.BuffId, out List<BuffInstanceInfo> infos))
+                        if (!buffComponent.InstanceInfos.TryGetValue(startParam.Id, out List<BuffInstanceInfo> infos))
                         {
                             infos = new List<BuffInstanceInfo>();
-                            buffComponent.InstanceInfos.Add(startParam.BuffId, infos);
+                            buffComponent.InstanceInfos.Add(startParam.Id, infos);
                         }
                         if(maxCount == 0 && infos.Count > 0)
                         {
@@ -72,7 +72,7 @@ namespace UnityClient
                             }
                         }
 
-                        BuffInstanceInfo instance = NewBuffInstance(startParam.BuffId);
+                        BuffInstanceInfo instance = NewBuffInstance(startParam.Id);
                         if (null != instance)
                         {
                             instance.BuffInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(startParam.SenderId);
@@ -98,7 +98,7 @@ namespace UnityClient
 
             StartBuffParam param = new StartBuffParam
             {
-                BuffId = buffId,
+                Id = buffId,
                 SenderId = sender.id.value,
                 SenderPosition = senderPosition,
                 SenderDirection = direction

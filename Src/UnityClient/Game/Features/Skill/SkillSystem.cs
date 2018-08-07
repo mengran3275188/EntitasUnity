@@ -57,6 +57,8 @@ namespace UnityClient
                         RecycleSkillInstance(info);
 
                         skillComponent.Instance = null;
+
+                        entity.ReplaceLastSkill(info.SkillId, info.Category, time);
                     }
                 }
                 if(null != skillComponent.StartParam)
@@ -64,9 +66,10 @@ namespace UnityClient
                     if(skillComponent.Instance == null)
                     {
 
-                        SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.SkillId);
+                        SkillInstanceInfo instance = NewSkillInstance(skillComponent.StartParam.Id);
                         if (null != instance && null != instance.SkillInstance)
                         {
+                            instance.Category = skillComponent.StartParam.Category;
                             instance.SkillInstance.Sender = Contexts.sharedInstance.game.GetEntityWithId(skillComponent.StartParam.SenderId);
                             instance.SkillInstance.Target = entity;
                             instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
@@ -90,7 +93,7 @@ namespace UnityClient
                 }
             }
         }
-        public void StartSkill(GameEntity sender, GameEntity target, int skillId, Vector3 senderPosition, float direction)
+        public void StartSkill(GameEntity sender, GameEntity target, int skillId, int category, Vector3 senderPosition, float direction)
         {
 
             SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
@@ -102,7 +105,8 @@ namespace UnityClient
 
             StartSkillParam param = new StartSkillParam
             {
-                SkillId = skillId,
+                Id = skillId,
+                Category = category,
                 SenderId = sender.id.value,
                 SenderPosition = senderPosition,
                 SenderDirection = direction
@@ -170,7 +174,7 @@ namespace UnityClient
         {
             var mainPlayer = m_Contexts.game.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
             if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId, mainPlayer.position.Value, mainPlayer.rotation.Value);
+                StartSkill(mainPlayer, mainPlayer, skillId, -1, mainPlayer.position.Value, mainPlayer.rotation.Value);
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {

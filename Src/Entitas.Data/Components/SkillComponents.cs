@@ -16,4 +16,10 @@ namespace Entitas.Data
         public Dictionary<int, List<BuffInstanceInfo>> InstanceInfos;
         public List<StartBuffParam> StartParams;
     }
+    public sealed class LastSkillComponent : IComponent
+    {
+        public int Id;
+        public int Category;
+        public long FinishTime;
+    }
 }
