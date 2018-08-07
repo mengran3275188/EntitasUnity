@@ -2,12 +2,16 @@ skill(1)
 {
     onmessage("start")
     {
+		breaksection(102, 0, 33);
+		breaksection(102, 133, 1000);
+		breaksection(101, 200, 1000);
         disablemoveinput(true);
         disablerotationinput(true);
-        // 1
         animation("attack_01");
+		//0
         animationspeed("attack_01", 1);
         wait(33);
+		//1
         animationspeed("attack_01", 2);
         curvemove(true, 0.066, 0, 0, 6, 0, 0, 90, 0.067, 0, 0, 12, 0, 0, -90);
         effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
@@ -18,28 +22,10 @@ skill(1)
             statebuff("Skill", 3);
         };
         wait(67);
+		//7
         animationspeed("attack_01", 1);
-
-        // 2	
-        animation("attack_02");
-        animationspeed("attack_02", 2);
         wait(67);
-        animationspeed("attack_02", 2);
-        curvemove(true, 0.066, 0, 0, 6, 0, 0, 90, 0.067, 0, 0, 12, 0, 0, -90);
-        effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_02", 3000, "", false);
-        wait(33);
-        areadamage(vector3(0, 1.7, 1.5), 2.5)
-        {
-            statebuff("Default", 1);
-            statebuff("Skill", 3);
-        };
-        wait(100);
-        animationspeed("attack_02", 1);
-
-        //effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_12_01", 3000, "Bip001", true);
-        //wait(33);
-        disablemoveinput(false);
-        disablerotationinput(false);
+        wait(700);
         terminate();
     };
 
@@ -51,4 +37,97 @@ skill(1)
         terminate();
     };
 
+};
+
+skill(101)
+{
+    onmessage("start")
+    {
+		breaksection(102, 0, 67);
+		breaksection(102, 200, 1000);
+		breaksection(101, 233, 1000);
+        disablemoveinput(true);
+        disablerotationinput(true);
+        animation("attack_02");
+        // 0	
+        animationspeed("attack_02", 2);
+        wait(67);
+        // 4	
+        animationspeed("attack_02", 2);
+        curvemove(true, 0.066, 0, 0, 6, 0, 0, 90, 0.067, 0, 0, 12, 0, 0, -90);
+        effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_02", 3000, "", false);
+        wait(33);
+        areadamage(vector3(0, 1.7, 1.5), 2.5)
+        {
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        };
+        wait(100);
+		// 12
+        animationspeed("attack_02", 1);
+        wait(67);
+        wait(433);
+        terminate();
+    };
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        enablemove(false);
+        enablerotation(false);
+        terminate();
+    };
+
+};
+
+skill(102)
+{
+    onmessage("start")
+    {
+		breaksection(102, 200, 1000);
+		breaksection(101, 300, 1000);
+        disablemoveinput(true);
+        disablerotationinput(true);
+        animation("attack_01");
+        // 1
+        animationspeed("attack_01", 1);
+        wait(33);
+        animationspeed("attack_01", 4);
+        curvemove(true, 0.066, 0, 0, 6, 0, 0, 90);
+        effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
+        wait(33);
+        areadamage(vector3(0, 1.7, 1.5), 2.5)
+        {
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        };
+        wait(33);
+        animationspeed("attack_01", 1);
+
+        // 2	
+        animation("attack_02");
+        animationspeed("attack_02", 4);
+        wait(33);
+        animationspeed("attack_02", 4);
+        curvemove(true, 0.066, 0, 0, 6, 0, 0, 90);
+        effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_02", 3000, "", false);
+        wait(33);
+        areadamage(vector3(0, 1.7, 1.5), 2.5)
+        {
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        };
+        wait(33);
+        animationspeed("attack_02", 1);
+        wait(433);
+        terminate();
+    };
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        enablemove(false);
+        enablerotation(false);
+        terminate();
+    };
 };

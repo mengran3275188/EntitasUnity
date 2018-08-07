@@ -1,19 +1,21 @@
 Id	Description	Script	BreakType	NextId
 int	string	string	int	int
-1	主角普攻	Tables/SkillScripts/PuGong.mr	1	3
-2	主角加速	Tables/SkillScripts/Accelerate.mr	1	
-3	主角火球	Tables/SkillScripts/FireBall.mr	1	4
-4	主角火球2式	Tables/SkillScripts/FireBall.mr	1	
-1004	主角召唤的火球	Tables/SkillScripts/FireBall.mr	1	
-5	主角闪现	Tables/SkillScripts/Teleport.mr	2	
-1005	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1	
-1006	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1	
-1007	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1	
-1008	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	1	
-100201	狐狸射箭	Tables/SkillScripts/LittleFox.mr	1	
-100202	狐狸射的箭	Tables/SkillScripts/LittleFox.mr	1	
-100203	狐狸射的箭2	Tables/SkillScripts/LittleFox.mr	1	
-10	近战刀兵	Tables/SkillScripts/Private_03.mr	1	
-20	近战枪兵	Tables/SkillScripts/Private_04.mr	1	
-21	近战枪兵的枪	Tables/SkillScripts/Private_04.mr	1	
-30	近战小陀螺	Tables/SkillScripts/Private_06.mr	1	
+1	主角普攻	Tables/SkillScripts/PuGong.mr	101	101
+2	主角加速	Tables/SkillScripts/Accelerate.mr	101	
+3	主角火球	Tables/SkillScripts/FireBall.mr	101	
+4	主角火球2式	Tables/SkillScripts/FireBall.mr	101	
+1004	主角召唤的火球	Tables/SkillScripts/FireBall.mr	101	
+5	主角闪现	Tables/SkillScripts/Teleport.mr	102	
+1005	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	101	
+1006	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	101	
+1007	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	101	
+1008	主角召唤的火球2	Tables/SkillScripts/FireBall.mr	101	
+100201	狐狸射箭	Tables/SkillScripts/LittleFox.mr	101	
+100202	狐狸射的箭	Tables/SkillScripts/LittleFox.mr	101	
+100203	狐狸射的箭2	Tables/SkillScripts/LittleFox.mr	101	
+10	近战刀兵	Tables/SkillScripts/Private_03.mr	101	
+20	近战枪兵	Tables/SkillScripts/Private_04.mr	101	
+21	近战枪兵的枪	Tables/SkillScripts/Private_04.mr	101	
+30	近战小陀螺	Tables/SkillScripts/Private_06.mr	101	
+101	主角普攻二	Tables/SkillScripts/PuGong.mr	101	102
+102	主角普攻三	Tables/SkillScripts/PuGong.mr	101	
