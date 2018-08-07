@@ -31,13 +31,8 @@ namespace UnityClient
                 Keyboard.Code.S,
                 Keyboard.Code.D);
 
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.H, this.MainPlayerUseSkillH);
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.J, this.MainPlayerUseSkillJ);
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.K, this.MainPlayerUseSkillK);
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.L, this.MainPlayerUseSkillL);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.T, this.ChangeScene);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.M, this.ShowGameMap);
-            Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.Space, this.MainPlayerUseSkillSpace);
         }
         public void Execute()
         {
@@ -75,62 +70,6 @@ namespace UnityClient
             }
         }
 
-        private void MainPlayerUseSkillH(int keyCode, int what)
-        {
-            if((int)Keyboard.Event.Down == what)
-            {
-                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-                if(null != mainPlayer)
-                {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 1, mainPlayer.position.Value, mainPlayer.rotation.Value);
-                }
-            }
-        }
-        private void MainPlayerUseSkillJ(int keyCode, int what)
-        {
-            if((int)Keyboard.Event.Down == what)
-            {
-                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-                if(null != mainPlayer)
-                {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 2, mainPlayer.position.Value, mainPlayer.rotation.Value);
-                }
-            }
-        }
-        private void MainPlayerUseSkillK(int keyCode, int what)
-        {
-            if((int)Keyboard.Event.Down == what)
-            {
-                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-                if(null != mainPlayer)
-                {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 3, mainPlayer.position.Value, mainPlayer.rotation.Value);
-                }
-            }
-        }
-        private void MainPlayerUseSkillL(int keyCode, int what)
-        {
-            if((int)Keyboard.Event.Down == what)
-            {
-                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-                if(null != mainPlayer)
-                {
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 4, mainPlayer.position.Value, mainPlayer.rotation.Value);
-                }
-            }
-        }
-        private void MainPlayerUseSkillSpace(int keyCode, int what)
-        {
-            if((int)Keyboard.Event.Down == what)
-            {
-                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-                if(null != mainPlayer)
-                {
-                    //SkillSystem.Instance.BreakSkill(mainPlayer);
-                    SkillSystem.Instance.StartSkill(mainPlayer, mainPlayer, 5, mainPlayer.position.Value, mainPlayer.rotation.Value);
-                }
-            }
-        }
         private void ChangeScene(int keyCode, int what)
         {
             if((int)Keyboard.Event.Down == what)

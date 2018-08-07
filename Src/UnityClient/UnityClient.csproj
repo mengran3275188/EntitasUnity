@@ -107,6 +107,8 @@
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\Features\Skill\Command\BreakSectionCommand.cs" />
     <Compile Include="Game\GameSystems.cs" />
+    <Compile Include="Input\Features\SkillInputSystem.cs" />
+    <Compile Include="Input\Features\SkillKeyBindingSystem.cs" />
     <Compile Include="Input\InputSystems.cs" />
     <Compile Include="Services\ChunkService\UnityChunkService.cs" />
     <Compile Include="Services\CreateCharacterService.cs" />

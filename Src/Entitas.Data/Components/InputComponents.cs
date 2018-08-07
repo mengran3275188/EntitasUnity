@@ -14,4 +14,9 @@ namespace Entitas.Data
     {
         public float Value;
     }
+    [Input, Unique]
+    public class SkillKeyBindingComponent : IComponent
+    {
+        public Dictionary<Keyboard.Code, int> Value;
+    }
 }

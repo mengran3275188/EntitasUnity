@@ -9,17 +9,20 @@
 public static class InputComponentsLookup {
 
     public const int RealTimeSinceStartup = 0;
-    public const int Time = 1;
+    public const int SkillKeyBinding = 1;
+    public const int Time = 2;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
         "RealTimeSinceStartup",
+        "SkillKeyBinding",
         "Time"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Entitas.Data.RealTimeSinceStartupComponent),
+        typeof(Entitas.Data.SkillKeyBindingComponent),
         typeof(Entitas.Data.TimeComponent)
     };
 }
