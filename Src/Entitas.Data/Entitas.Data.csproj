@@ -88,9 +88,37 @@
     <Compile Include="SceneInstanceInfo.cs" />
     <Compile Include="Components\SingletonComponets.cs" />
     <Compile Include="Components\SkillComponents.cs" />
+    <Compile Include="Scriptable\CommandHelper.cs" />
+    <Compile Include="Scriptable\CommandManager.cs" />
+    <Compile Include="Scriptable\CommonCommands\Assign.cs" />
+    <Compile Include="Scriptable\CommonCommands\Foreach.cs" />
+    <Compile Include="Scriptable\CommonCommands\IfElse.cs" />
+    <Compile Include="Scriptable\CommonCommands\LocalMessage.cs" />
+    <Compile Include="Scriptable\CommonCommands\Log.cs" />
+    <Compile Include="Scriptable\CommonCommands\Terminate.cs" />
+    <Compile Include="Scriptable\CommonCommands\Wait.cs" />
+    <Compile Include="Scriptable\CommonCommands\While.cs" />
+    <Compile Include="Scriptable\CommonValues\Arithmetic.cs" />
+    <Compile Include="Scriptable\CommonValues\Compare.cs" />
+    <Compile Include="Scriptable\CommonValues\GeneralValues.cs" />
+    <Compile Include="Scriptable\CommonValues\Logic.cs" />
+    <Compile Include="Scriptable\CommonValues\String.cs" />
+    <Compile Include="Scriptable\CommonValues\Time.cs" />
+    <Compile Include="Scriptable\ConfigManager.cs" />
+    <Compile Include="Scriptable\ICommand.cs" />
+    <Compile Include="Scriptable\ICommandFactory.cs" />
+    <Compile Include="Scriptable\Instance.cs" />
+    <Compile Include="Scriptable\IValue.cs" />
+    <Compile Include="Scriptable\Program.cs" />
+    <Compile Include="Scriptable\ValueHelper.cs" />
+    <Compile Include="Scriptable\ValueManager.cs" />
     <Compile Include="SkillInstanceInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScriptableData\ScriptableData.csproj">
+      <Project>{4295c1b7-d43f-4e38-85ad-33623489fbbe}</Project>
+      <Name>ScriptableData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScriptableSystem\ScriptableSystem.csproj">
       <Project>{858834c7-8228-4a4e-9d06-064b792a91f7}</Project>
       <Name>ScriptableSystem</Name>

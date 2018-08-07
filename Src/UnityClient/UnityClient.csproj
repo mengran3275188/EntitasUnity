@@ -183,10 +183,6 @@
       <Project>{4295c1b7-d43f-4e38-85ad-33623489fbbe}</Project>
       <Name>ScriptableData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScriptableSystem\ScriptableSystem.csproj">
-      <Project>{858834c7-8228-4a4e-9d06-064b792a91f7}</Project>
-      <Name>ScriptableSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnityDelegate\UnityDelegate.csproj">
       <Project>{eed5186f-0477-44ac-8c66-1027d9a263cb}</Project>
       <Name>UnityDelegate</Name>
