@@ -36,6 +36,7 @@ skill(100202)
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
         }objid("@colliderId");
+		wait(700);
 		destroyself();
 		terminate();
 	};

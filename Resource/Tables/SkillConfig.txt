@@ -17,5 +17,5 @@ int	string	string	int	int
 20	近战枪兵	Tables/SkillScripts/Private_04.mr	101	
 21	近战枪兵的枪	Tables/SkillScripts/Private_04.mr	101	
 30	近战小陀螺	Tables/SkillScripts/Private_06.mr	101	
-101	主角普攻二	Tables/SkillScripts/PuGong.mr	101	102
+101	主角普攻二	Tables/SkillScripts/PuGong.mr	101	
 102	主角普攻三	Tables/SkillScripts/PuGong.mr	101	
