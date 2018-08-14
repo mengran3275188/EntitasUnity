@@ -36,7 +36,7 @@ namespace SkillCommands
                 }
                 else
                 {
-                    Util.LogUtil.Error("BreakSectionCommand target {0} has no skill or no skillinstance! Somtion must go wrong!", target);
+                    Util.LogUtil.Error("BreakSectionCommand target {0} has no skill or no skillinstance! Something must go wrong!", target);
                 }
             }
             return ExecResult.Finished;

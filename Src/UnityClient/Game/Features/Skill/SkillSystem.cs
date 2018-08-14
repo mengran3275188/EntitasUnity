@@ -17,7 +17,6 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            GfxSystem.EventForLogic.Subscribe<int>("player_use_skill", "skill_system", this.PlayUseSkill);
 
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
@@ -25,6 +24,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("movechild", new CommandFactoryHelper<SkillCommands.MoveChildTrigger>());
 
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
+            CommandManager.Instance.RegisterCommandFactory("circlemove", new CommandFactoryHelper<SkillCommands.CircleCommand>());
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
@@ -169,12 +169,6 @@ namespace UnityClient
                     return true;
             }
             return false;
-        }
-        private void PlayUseSkill(int skillId)
-        {
-            var mainPlayer = m_Contexts.game.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
-            if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId, -1, mainPlayer.position.Value, mainPlayer.rotation.Value);
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {

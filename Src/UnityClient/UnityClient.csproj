@@ -106,6 +106,7 @@
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\Features\Skill\Command\BreakSectionCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\CircleCommand.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\Features\SkillInputSystem.cs" />
     <Compile Include="Input\Features\SkillKeyBindingSystem.cs" />
