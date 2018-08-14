@@ -53,7 +53,7 @@ namespace UnityClient
                 {
                     finalSkillId = GetNextSkillId(mainPlayer.skill.Instance.SkillId, headSkillId);
                 }
-                if (mainPlayer.hasLastSkill && mainPlayer.lastSkill.Category == catecory && curTime < mainPlayer.lastSkill.FinishTime + 1000)
+                else if (mainPlayer.hasLastSkill && mainPlayer.lastSkill.Category == catecory && curTime < mainPlayer.lastSkill.FinishTime + 1000)
                 {
                     finalSkillId = GetNextSkillId(mainPlayer.lastSkill.Id, headSkillId);
                 }
