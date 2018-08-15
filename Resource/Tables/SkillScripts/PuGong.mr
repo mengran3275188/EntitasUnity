@@ -6,6 +6,8 @@ skill(1)
 		breaksection(102, 0, 33);
 		breaksection(102, 133, 1000);
 		breaksection(101, 200, 1000);
+		
+
         disablemoveinput(true);
         disablerotationinput(true);
         animation("attack_01");
@@ -141,6 +143,8 @@ skill(1)
 		breaksection(102, 0, 300);
 		breaksection(102, 450, 1200);
 		breaksection(101, 500, 1200);
+		
+		breaksection(1, 500, 1000);
         disablemoveinput(true);
         disablerotationinput(true);
         animation("attack_001");
@@ -184,6 +188,7 @@ skill(101)
 		breaksection(102, 0, 350);
 		breaksection(102, 533, 1033);
 		breaksection(101, 583, 1033);
+		breaksection(1, 583, 1033);
         disablemoveinput(true);
         disablerotationinput(true);
         animation("attack_002");
@@ -226,6 +231,7 @@ skill(102)
     {
 		breaksection(102, 200, 1000);
 		breaksection(101, 300, 1000);
+		breaksection(1, 300, 1000);
         disablemoveinput(true);
         disablerotationinput(true);
         animation("attack_01");

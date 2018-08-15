@@ -43,7 +43,7 @@ namespace UnityClient
             float moveDir = CalcMoveDir(kh);
             bool isMoving = moveDir >= 0;
 
-            if(!isMoving)
+            if (!isMoving)
                 isMoving = GfxSystem.GetJoyStickDir(out moveDir);
 
             GameContext gameContext = Contexts.sharedInstance.game;
@@ -53,7 +53,7 @@ namespace UnityClient
             {
                 if (mainPlayer.hasMovement)
                 {
-                    if(!(SkillSystem.Instance.IsDisableMoveInput(mainPlayer) || BuffSystem.Instance.IsDisableMoveInput(mainPlayer)))
+                    if (!(SkillSystem.Instance.IsDisableMoveInput(mainPlayer) || BuffSystem.Instance.IsDisableMoveInput(mainPlayer)))
                     {
                         if (mainPlayer.hasAttr)
                         {
@@ -64,15 +64,17 @@ namespace UnityClient
                 }
                 if (isMoving && !Mathf.Approximately(moveDir, mainPlayer.rotation.Value))
                 {
-                    if(!(SkillSystem.Instance.IsDisableRotationInput(mainPlayer) || BuffSystem.Instance.IsDisableRotationInput(mainPlayer)))
+                    if (!(SkillSystem.Instance.IsDisableRotationInput(mainPlayer) || BuffSystem.Instance.IsDisableRotationInput(mainPlayer)))
                         mainPlayer.ReplaceRotation(moveDir);
                 }
+                if (isMoving)
+                    SkillSystem.Instance.BreakSkill(mainPlayer, SkillBreakType.Move);
             }
         }
 
         private void ChangeScene(int keyCode, int what)
         {
-            if((int)Keyboard.Event.Down == what)
+            if ((int)Keyboard.Event.Down == what)
             {
                 Contexts.sharedInstance.game.isCleanup = true;
                 Contexts.sharedInstance.gameState.ReplaceNextSceneId(2);
@@ -81,7 +83,7 @@ namespace UnityClient
         }
         private void ShowGameMap(int keyCode, int what)
         {
-            if((int)Keyboard.Event.Down == what)
+            if ((int)Keyboard.Event.Down == what)
             {
                 Services.Instance.UIService.ShowGamemap(Contexts.sharedInstance.game.GetGroup(GameMatcher.Chunk).GetEntities());
             }

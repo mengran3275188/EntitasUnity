@@ -123,11 +123,12 @@ namespace UnityClient
                 BreakSkill(target);
             }
         }
-        public void BreakSkill(GameEntity entity)
+        public void BreakSkill(GameEntity entity, SkillBreakType breakType)
         {
-            if(entity.hasSkill && entity.skill.Instance != null)
+            float time = Contexts.sharedInstance.input.time.Value;
+            if(CanBreakCurSkill(entity, (int)breakType, (long)(time * 1000)))
             {
-                entity.skill.Instance.SkillInstance.SendMessage("onbreak");
+                BreakSkill(entity);
             }
         }
         public Vector3 GetSkillVelocity(GameEntity entity)
@@ -169,6 +170,13 @@ namespace UnityClient
                     return true;
             }
             return false;
+        }
+        private void BreakSkill(GameEntity entity)
+        {
+            if(entity.hasSkill && entity.skill.Instance != null)
+            {
+                entity.skill.Instance.SkillInstance.SendMessage("onbreak");
+            }
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {
