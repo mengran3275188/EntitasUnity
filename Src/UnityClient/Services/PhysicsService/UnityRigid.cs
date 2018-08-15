@@ -25,5 +25,9 @@ namespace UnityClient
             get { return m_Rigidbody.rotation; }
             set { m_Rigidbody.rotation = value; }
         }
+        public void MovePosition(Vector3 pos)
+        {
+            m_Rigidbody.MovePosition(pos);
+        }
     }
 }

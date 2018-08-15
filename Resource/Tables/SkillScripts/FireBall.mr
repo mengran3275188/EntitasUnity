@@ -104,7 +104,6 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1005);
 		};
-        /*
 		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
 		{
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
@@ -141,7 +140,6 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1008);
 		};
-        */
 		//wait(200);
 		terminate();
 	};
@@ -152,9 +150,9 @@ skill(1005)
 {
 	onmessage("start")
 	{
-		loop(10)
+		loop(5)
 		{
-			circlemove(1, 0.8, 0, 180, 0, 0);
+			circlemove(4, 0, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
 			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
@@ -169,6 +167,7 @@ skill(1005)
 	
 	onmessage("oncollision")
 	{
+		log("oncollision");
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
 		destroyself();
 		terminate();
@@ -179,9 +178,9 @@ skill(1006)
 {
 	onmessage("start")
 	{
-		loop(1)
+		loop(5)
 		{
-			curvemove(true, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300);
+			circlemove(4, 90, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
 			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
@@ -196,6 +195,7 @@ skill(1006)
 	
 	onmessage("oncollision")
 	{
+		log("oncollision");
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
 		destroyself();
 		terminate();
@@ -205,9 +205,9 @@ skill(1007)
 {
 	onmessage("start")
 	{
-		loop(1)
+		loop(5)
 		{
-			curvemove(true, 0.2, 60, 0, 0, -300, 0, 300, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300);
+			circlemove(4, 180, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
 			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
@@ -222,6 +222,7 @@ skill(1007)
 	
 	onmessage("oncollision")
 	{
+		log("oncollision");
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
 		destroyself();
 		terminate();
@@ -231,9 +232,9 @@ skill(1008)
 {
 	onmessage("start")
 	{
-		loop(1)
+		loop(5)
 		{
-			curvemove(true, 0.2, 0, 0,60, -300, 0, -300, 0.2, -60, 0, 0, 300, 0, -300, 0.2, 0, 0, -60, 300, 0, 300, 0.2, 60, 0, 0, -300, 0, 300);
+			circlemove(4, 270, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 			
 			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
@@ -248,6 +249,7 @@ skill(1008)
 	
 	onmessage("oncollision")
 	{
+		log("oncollision");
 		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
 		destroyself();
 		terminate();

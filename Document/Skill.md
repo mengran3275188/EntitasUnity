@@ -122,7 +122,7 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
 ```
 ### circlemove
 ```
-circlemove(obj_id, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
+circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
 ```
 ### areadamage
 ```

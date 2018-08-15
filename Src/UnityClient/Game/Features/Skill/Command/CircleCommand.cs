@@ -12,19 +12,29 @@ namespace SkillCommands
         {
             CircleCommand copy = new CircleCommand();
             copy.m_SectionList.AddRange(m_SectionList);
+            copy.m_StartPos = m_StartPos;
             return copy;
         }
         protected override void Load(CallData callData)
         {
             int sectionNum = 0;
-            while (callData.GetParamNum() >= 5 * (sectionNum + 1) + 1)
+            if(callData.GetParamNum() >= 2)
+            {
+                float startDistance = (float)System.Convert.ToDouble(callData.GetParamId(0));
+                float startAngle = (float)System.Convert.ToDouble(callData.GetParamId(1));
+
+                m_StartPos = new Vector3(startDistance, 0, startAngle);
+            }
+
+
+            while (callData.GetParamNum() >= 5 * (sectionNum + 1) + 2)
             {
                 MoveSectionInfo section = new MoveSectionInfo();
-                section.moveTime = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 1));
-                section.speedVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 2));
-                section.speedVect.z = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 3));
-                section.accelVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 4));
+                section.moveTime = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 2));
+                section.speedVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 3));
+                section.speedVect.z = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 4));
                 section.accelVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 5));
+                section.accelVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 6));
                 m_SectionList.Add(section);
                 sectionNum++;
             }
@@ -57,32 +67,28 @@ namespace SkillCommands
             }
 
 
-            m_ElapsedTime = delta;
+            m_ElapsedTime += delta;
             float realTime = m_ElapsedTime / 1000.0f;
-            MoveSectionInfo curSection = m_SectionListCopy[0];
-            if (realTime - curSection.startTime > curSection.moveTime)
+            float remainTime = realTime;
+            Vector3 distance = Vector3.zero;
+            for (int i = 0; i < m_SectionListCopy.Count; ++i)
             {
-                float endTime = curSection.startTime + curSection.moveTime;
-                float usedTime = endTime - curSection.lastUpdateTime;
-                curSection.curSpeedVect = Move(instance, sender, target, m_LastPos, curSection.curSpeedVect, curSection.accelVect, usedTime);
-                m_SectionListCopy.RemoveAt(0);
-                if (m_SectionListCopy.Count > 0)
+                if (remainTime > m_SectionListCopy[i].moveTime)
                 {
-                    curSection = m_SectionListCopy[0];
-                    curSection.startTime = endTime;
-                    curSection.lastUpdateTime = endTime;
-                    curSection.curSpeedVect = curSection.speedVect;
+                    distance += m_SectionListCopy[i].speedVect * m_SectionListCopy[i].moveTime + 0.5f * m_SectionListCopy[i].accelVect * m_SectionListCopy[i].moveTime * m_SectionListCopy[i].moveTime;
+                    remainTime -= m_SectionListCopy[i].moveTime;
+
+                    if (i == m_SectionListCopy.Count - 1)
+                        return ExecResult.Finished;
                 }
                 else
                 {
-                    m_IsCurveMoving = false;
+                    distance += m_SectionListCopy[i].speedVect * remainTime + 0.5f * m_SectionListCopy[i].accelVect * remainTime * remainTime;
+                    break;
                 }
             }
-            else
-            {
-                curSection.curSpeedVect = Move(instance, sender, target, m_LastPos, curSection.curSpeedVect, curSection.accelVect, realTime - curSection.lastUpdateTime);
-                curSection.lastUpdateTime = realTime;
-            }
+
+            Move(instance, sender, target, m_StartPos, distance);
             return ExecResult.Parallel;
         }
 
@@ -91,11 +97,6 @@ namespace SkillCommands
         {
             CopySectionList();
             m_ElapsedTime = 0;
-            m_SectionListCopy[0].startTime = m_ElapsedTime;
-            m_SectionListCopy[0].lastUpdateTime = m_ElapsedTime;
-            m_SectionListCopy[0].curSpeedVect = m_SectionListCopy[0].speedVect;
-
-            m_LastPos = CalculatePos(sender, target);
 
             m_IsInited = true;
         }
@@ -107,35 +108,19 @@ namespace SkillCommands
                 m_SectionListCopy.Add(m_SectionList[i].Clone());
             }
         }
-        private Vector3 Move(Instance instance, GameEntity sender, GameEntity target, Vector3 lastPos, Vector3 speed_vect, Vector3 accel_vect, float time)
+        private void Move(Instance instance, GameEntity sender, GameEntity target, Vector3 lastPos, Vector3 distance)
         {
-            if (time > 0)
-            {
-                Vector3 nowPos = lastPos + (speed_vect + accel_vect * time / 2) * time;
+            Vector3 nowPos = lastPos + distance;
 
-                m_LastPos = nowPos;
+            Vector3 centerPos = sender.position.Value;
 
-                Vector3 centerPos = sender.position.Value;
+            Vector3 targetPos = centerPos + Quaternion.Euler(0, nowPos.z, 0) * (Vector3.forward * nowPos.x);
 
-                Vector3 targetPos = centerPos + Quaternion.Euler(0, nowPos.z, 0) * (Vector3.forward * nowPos.x);
 
-                Vector3 speed = (targetPos - target.position.Value) / time;
-                speed.y = 0;
-
-                instance.Velocity = speed;
-            }
-
-            return (speed_vect + accel_vect * time);
-        }
-        private static Vector3 CalculatePos(GameEntity sender, GameEntity target)
-        {
-            float distance = sender.position.Value.DistanceXZ(target.position.Value);
-            float rotateAngle = Mathf.Rad2Deg * Mathf.Atan2(target.position.Value.x - sender.position.Value.x, target.position.Value.z - sender.position.Value.z);
-
-            return new Vector3(distance, 0, rotateAngle);
+            target.physics.Rigid.Position = targetPos;
         }
 
-        private Vector3 m_LastPos = Vector3.zero;
+        private Vector3 m_StartPos = Vector3.zero;
         private float m_ElapsedTime = 0;
 
         private List<MoveSectionInfo> m_SectionList = new List<MoveSectionInfo>();
