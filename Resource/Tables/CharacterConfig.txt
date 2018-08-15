@@ -12,3 +12,4 @@ int	string	string	float	int	string	string	int	int_array
 1009	近战枪兵	Monster/ChangAn/5_Npc_Private_04	1	1		FirstBT_1	1002	
 1010	近战小陀螺	Monster/ChangAn/5_Npc_Private_06	1	1		FirstBT_2	1003	
 1011	近战枪兵枪	Monster_FX/Campaign_1/6_Npc_Private_Attack_07	1	-1		FirstBT		
+1012	火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_fly_Bounce	1	-1				

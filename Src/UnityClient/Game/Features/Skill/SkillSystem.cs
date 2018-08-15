@@ -26,6 +26,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
             CommandManager.Instance.RegisterCommandFactory("circlemove", new CommandFactoryHelper<SkillCommands.CircleCommand>());
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
+            CommandManager.Instance.RegisterCommandFactory("physicsmove", new CommandFactoryHelper<SkillCommands.PhysicsMoveCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
