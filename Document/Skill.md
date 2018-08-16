@@ -57,6 +57,25 @@ skill(1)
 	};
 };
 ```
+# 技能设计
+## 技能打断
+约定0 - 100 为保留打断类型，100以上由策划设计。
+目前 打断类型 1 为 移动打断。
+## 召唤物
+技能召唤的召唤物都需要Unity View组件，需要移动的要增加Unity Rigid组件，需要物理碰撞的要增加Collider组件。
+根据需要选择Layer类型，详细的Layer类型见物理章节。
+## 物理
+### 技能大量使用了仿真物理，主要为了实现
+* 伤害判定 ：多用trigger触发
+* 物理移动 ：多用Collider实现
+### Layer
+* Wall
+* Terrain
+* Player
+* Character
+* TriggerBullet
+* PhysicsBullet
+
 
 # 命令说明
 ## 通用命令
