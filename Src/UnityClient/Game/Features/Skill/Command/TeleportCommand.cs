@@ -26,7 +26,7 @@ namespace SkillCommands
 
                 if(obj.hasPhysics)
                 {
-                    obj.physics.Rigid.Position = targetPostion + obj.physics.Offset;
+                    obj.physics.Rigid.MovePosition(targetPostion + obj.physics.Offset);
                 }
             }
             return ExecResult.Finished;

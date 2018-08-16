@@ -4,9 +4,9 @@ using Entitas;
 
 namespace UnityClient
 {
-    public class GameLogicSystems : Feature
+    public class GameUpdateSystems : Feature
     {
-        public GameLogicSystems(Contexts contexts, Services services)
+        public GameUpdateSystems(Contexts contexts, Services services)
         {
             Add(IdSystem.Instance);
             Add(SceneSystem.Instance);
@@ -16,18 +16,19 @@ namespace UnityClient
             Add(new DeadSystem(contexts));
             Add(new BornSystem(contexts));
             Add(new AISystem(contexts));
-            Add(SkillSystem.Instance);
-            Add(BuffSystem.Instance);
 
             Add(new CleanupEntitySystem(contexts));
             Add(new DestoryEntitySystem(contexts));
             Add(new CleanResourceSystem(contexts));
         }
     }
-    public class GameViewSystems : Feature
+    public class GameFixedUpdateSystems : Feature
     {
-        public GameViewSystems(Contexts contexts, Services services)
+        public GameFixedUpdateSystems(Contexts contexts, Services services)
         {
+            Add(SkillSystem.Instance);
+            Add(BuffSystem.Instance);
+
             Add(new CameraSystem(contexts));
             Add(new MovementSystem(contexts));
             Add(new AnimationSystem(contexts));

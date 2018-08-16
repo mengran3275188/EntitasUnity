@@ -34,6 +34,10 @@ namespace Entitas.Data
         Red = 0,
         Blue = 1,
     }
+    public enum SkillBreakType
+    {
+        Move = 1,
+    }
     public enum Operate_Type
     {
         // 设置绝对值，直接设置当前值

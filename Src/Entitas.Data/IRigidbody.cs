@@ -9,5 +9,7 @@ namespace Entitas.Data
         Vector3 Position { get; set; }
         Vector3 Velocity { get; set; }
         Quaternion Rotation { get; set; }
+        bool IsKinematic { get; set; }
+        void MovePosition(Vector3 pos);
     }
 }

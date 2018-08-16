@@ -17,7 +17,6 @@ namespace UnityClient
         }
         public void Initialize()
         {
-            GfxSystem.EventForLogic.Subscribe<int>("player_use_skill", "skill_system", this.PlayUseSkill);
 
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
@@ -25,7 +24,9 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("movechild", new CommandFactoryHelper<SkillCommands.MoveChildTrigger>());
 
             CommandManager.Instance.RegisterCommandFactory("curvemove", new CommandFactoryHelper<SkillCommands.CurveMoveCommand>());
+            CommandManager.Instance.RegisterCommandFactory("circlemove", new CommandFactoryHelper<SkillCommands.CircleCommand>());
             CommandManager.Instance.RegisterCommandFactory("teleport", new CommandFactoryHelper<SkillCommands.TeleportCommand>());
+            CommandManager.Instance.RegisterCommandFactory("physicsmove", new CommandFactoryHelper<SkillCommands.PhysicsMoveCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("areadamage", new CommandFactoryHelper<SkillCommands.AreaDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
@@ -123,11 +124,12 @@ namespace UnityClient
                 BreakSkill(target);
             }
         }
-        public void BreakSkill(GameEntity entity)
+        public void BreakSkill(GameEntity entity, SkillBreakType breakType)
         {
-            if(entity.hasSkill && entity.skill.Instance != null)
+            float time = Contexts.sharedInstance.input.time.Value;
+            if(CanBreakCurSkill(entity, (int)breakType, (long)(time * 1000)))
             {
-                entity.skill.Instance.SkillInstance.SendMessage("onbreak");
+                BreakSkill(entity);
             }
         }
         public Vector3 GetSkillVelocity(GameEntity entity)
@@ -170,11 +172,12 @@ namespace UnityClient
             }
             return false;
         }
-        private void PlayUseSkill(int skillId)
+        private void BreakSkill(GameEntity entity)
         {
-            var mainPlayer = m_Contexts.game.GetGroup(GameMatcher.MainPlayer).GetSingleEntity();
-            if(null != mainPlayer)
-                StartSkill(mainPlayer, mainPlayer, skillId, -1, mainPlayer.position.Value, mainPlayer.rotation.Value);
+            if(entity.hasSkill && entity.skill.Instance != null)
+            {
+                entity.skill.Instance.SkillInstance.SendMessage("onbreak");
+            }
         }
         private SkillInstanceInfo NewSkillInstance(int skillId)
         {

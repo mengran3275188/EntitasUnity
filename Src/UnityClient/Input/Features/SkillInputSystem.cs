@@ -12,11 +12,22 @@ namespace UnityClient
         }
         public void Initialize()
         {
+            GfxSystem.EventForLogic.Subscribe<Keyboard.Code>("player_use_skill", "skill_system", this.PlayUseSkill);
+
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.H, this.OnKeyboardEvent);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.J, this.OnKeyboardEvent);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.K, this.OnKeyboardEvent);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.L, this.OnKeyboardEvent);
             Services.Instance.InputService.ListenKeyboardEvent(Keyboard.Code.Space, this.OnKeyboardEvent);
+        }
+        private void PlayUseSkill(Keyboard.Code keyCode)
+        {
+            var keybings = Contexts.sharedInstance.input.skillKeyBinding.Value;
+            int skillId = 0;
+            if (keybings.TryGetValue(keyCode, out skillId))
+            {
+                StartSkillWithCategory((int)keyCode, skillId);
+            }
         }
         private void OnKeyboardEvent(int keyCode, int what)
         {
@@ -38,11 +49,11 @@ namespace UnityClient
                 long curTime = (long)(Contexts.sharedInstance.input.time.Value * 1000);
 
                 int finalSkillId = headSkillId;
-                if(null != mainPlayer.skill.Instance && mainPlayer.skill.Instance.Category == catecory)
+                if (null != mainPlayer.skill.Instance && mainPlayer.skill.Instance.Category == catecory)
                 {
                     finalSkillId = GetNextSkillId(mainPlayer.skill.Instance.SkillId, headSkillId);
                 }
-                if(mainPlayer.hasLastSkill && mainPlayer.lastSkill.Category == catecory && curTime < mainPlayer.lastSkill.FinishTime + 1000)
+                else if (mainPlayer.hasLastSkill && mainPlayer.lastSkill.Category == catecory && curTime < mainPlayer.lastSkill.FinishTime + 1000)
                 {
                     finalSkillId = GetNextSkillId(mainPlayer.lastSkill.Id, headSkillId);
                 }

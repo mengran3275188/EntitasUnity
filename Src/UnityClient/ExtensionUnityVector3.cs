@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityClient
+namespace UnityEngine
 {
     public static class ExtensionUnityVector3
     {

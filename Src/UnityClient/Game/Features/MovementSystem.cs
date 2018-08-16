@@ -22,17 +22,20 @@ namespace UnityClient
             {
                 if(entity.hasPhysics)
                 {
+                    if(entity.physics.Rigid.IsKinematic)
+                    {
+                        Vector3 velocity = entity.movement.Velocity;
+                        Vector3 offset = entity.physics.Offset;
+                        IRigidbody rigid = entity.physics.Rigid;
+
+                        Vector3 skillVelocity = SkillSystem.Instance.GetSkillVelocity(entity);
+                        Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
+
+                        rigid.Velocity = velocity + skillVelocity + buffVelocity;
+                        rigid.Rotation = Quaternion.Euler(0, Mathf.Rad2Deg * entity.rotation.Value, 0);
+                    }
+
                     Vector3 position = entity.physics.Rigid.Position;
-                    Vector3 velocity = entity.movement.Velocity;
-                    Vector3 offset = entity.physics.Offset;
-                    IRigidbody rigid = entity.physics.Rigid;
-
-                    Vector3 skillVelocity = SkillSystem.Instance.GetSkillVelocity(entity);
-                    Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
-
-                    rigid.Velocity = velocity + skillVelocity + buffVelocity;
-                    rigid.Rotation = Quaternion.Euler(0, Mathf.Rad2Deg * entity.rotation.Value, 0);
-
                     entity.ReplacePosition(position);
                 }
             }

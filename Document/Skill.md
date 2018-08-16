@@ -107,7 +107,7 @@ enum direction_type
 
 curvemove(is_lock_rotate, [movetime, speedx, speedy, speedz, accelx, accely, accelz]+)
 {
-    direction(direction_type);
+    direction(direction_type, always_update_direction);
 };
 ```
 ```
@@ -115,6 +115,14 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
 {
     direction(0);
 };
+curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
+{
+    direction(2, true);
+};
+```
+### circlemove
+```
+circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
 ```
 ### areadamage
 ```

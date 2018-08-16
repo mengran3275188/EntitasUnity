@@ -10,8 +10,8 @@ namespace UnityClient.Kernel
     internal class LogicMoudle : IActionQueue
     {
 
-        private GameLogicSystems m_GameLogicSystems;
-        private GameViewSystems m_GameViewSystems;
+        private GameUpdateSystems m_GameUpdateSystems;
+        private GameFixedUpdateSystems m_GameFixedUpdateSystems;
 
         private GameStateSystems m_GameStateSystems;
 
@@ -27,11 +27,11 @@ namespace UnityClient.Kernel
             m_GameStateSystems = new GameStateSystems(contexts, Services.Instance);
             m_GameStateSystems.Initialize();
 
-            m_GameLogicSystems = new GameLogicSystems(contexts, Services.Instance);
-            m_GameLogicSystems.Initialize();
+            m_GameUpdateSystems = new GameUpdateSystems(contexts, Services.Instance);
+            m_GameUpdateSystems.Initialize();
 
-            m_GameViewSystems = new GameViewSystems(contexts, Services.Instance);
-            m_GameViewSystems.Initialize();
+            m_GameFixedUpdateSystems = new GameFixedUpdateSystems(contexts, Services.Instance);
+            m_GameFixedUpdateSystems.Initialize();
 
 
 
@@ -45,26 +45,26 @@ namespace UnityClient.Kernel
             m_GameStateSystems.Execute();
             m_GameStateSystems.Cleanup();
 
-            m_GameLogicSystems.Execute();
-            m_GameLogicSystems.Cleanup();
+            m_GameUpdateSystems.Execute();
+            m_GameUpdateSystems.Cleanup();
 
             m_ActionQueue.HandleActions(m_ActionNumPerTick);
         }
         public void FixedUpdate()
         {
-            m_GameViewSystems.Execute();
-            m_GameViewSystems.Cleanup();
+            m_GameFixedUpdateSystems.Execute();
+            m_GameFixedUpdateSystems.Cleanup();
         }
         public void OnQuit()
         {
             m_InputSystems.Execute();
             m_InputSystems.Cleanup();
 
-            m_GameLogicSystems.ClearReactiveSystems();
-            m_GameLogicSystems.TearDown();
+            m_GameUpdateSystems.ClearReactiveSystems();
+            m_GameUpdateSystems.TearDown();
 
-            m_GameViewSystems.ClearReactiveSystems();
-            m_GameViewSystems.TearDown();
+            m_GameFixedUpdateSystems.ClearReactiveSystems();
+            m_GameFixedUpdateSystems.TearDown();
 
             m_GameStateSystems.ClearReactiveSystems();
             m_GameStateSystems.TearDown();

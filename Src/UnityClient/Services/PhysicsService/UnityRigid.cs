@@ -9,6 +9,8 @@ namespace UnityClient
     {
         [SerializeField]
         private Rigidbody m_Rigidbody;
+        private bool m_IsKinematic = true;
+
 
         public Vector3 Position
         {
@@ -24,6 +26,16 @@ namespace UnityClient
         {
             get { return m_Rigidbody.rotation; }
             set { m_Rigidbody.rotation = value; }
+        }
+        public bool IsKinematic
+        {
+            get { return m_IsKinematic; }
+            set { m_IsKinematic = value; }
+        }
+
+        public void MovePosition(Vector3 pos)
+        {
+            m_Rigidbody.MovePosition(pos);
         }
     }
 }
