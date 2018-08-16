@@ -14,6 +14,7 @@ namespace SkillCommands
         public override ICommand Clone()
         {
             ColliderDamageCommand copy = new ColliderDamageCommand();
+            copy.m_LayerId = m_LayerId;
             copy.m_Offset = m_Offset;
             copy.m_Size = m_Size;
             copy.m_Interval = m_Interval;
@@ -41,12 +42,13 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 4)
+            if(num >= 5)
             {
-                m_RemainTime = long.Parse(callData.GetParamId(0));
-                m_Interval = long.Parse(callData.GetParamId(1));
-                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(2) as ScriptableData.CallData);
-                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(3) as ScriptableData.CallData);
+                m_LayerId = LayerMask.NameToLayer(callData.GetParamId(0));
+                m_RemainTime = long.Parse(callData.GetParamId(1));
+                m_Interval = long.Parse(callData.GetParamId(2));
+                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(3) as ScriptableData.CallData);
+                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(4) as ScriptableData.CallData);
             }
         }
         protected override void Load(FunctionData funcData)
@@ -101,37 +103,7 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
-            Services.Instance.PhysicsService.CreateBoxCollider(target.view.Value, m_RemainTime, m_Size, m_Offset, OnCollision);
-
-            /*
-
-            Jitter.Collision.Shapes.BoxShape shape = new Jitter.Collision.Shapes.BoxShape(m_Size);
-
-            Jitter.Dynamics.Material physicsMaterial = new Jitter.Dynamics.Material();
-            physicsMaterial.KineticFriction = 0;
-            physicsMaterial.StaticFriction = 0;
-
-            RigidObject rigid = new RigidObject(target.id.value, shape, physicsMaterial, false);
-            rigid.IsTrigger = true;
-            rigid.Position = target.position.Value + m_Offset;
-            rigid.Orientation = Matrix3x3.CreateRotationY(target.rotation.Value);
-
-            target.AddCollision(rigid, m_Offset, OnCollision);
-
-            if (m_HaveObjId)
-            {
-                int objId = 10086;
-                string varName = m_ObjIdVarName.Value;
-                if(varName.StartsWith("@") && !varName.StartsWith("@@"))
-                {
-                    instance.AddLocalVariable(varName, objId);
-                }
-                else
-                {
-                    instance.AddGlobalVariable(varName, objId);
-                }
-            }
-            */
+            Services.Instance.PhysicsService.CreateBoxCollider(target.view.Value, m_LayerId, m_RemainTime, m_Size, m_Offset, OnCollision);
 
             return ExecResult.Finished;
         }
@@ -189,6 +161,7 @@ namespace SkillCommands
         private Vector3 m_Size = Vector3.one;
         private long m_Interval = -1;
         private long m_RemainTime = 1000;
+        private int m_LayerId = 0;
         private Dictionary<StateBuff_State, StateBuff> m_StateImpacts = new Dictionary<StateBuff_State, StateBuff>();
 
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();

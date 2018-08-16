@@ -159,14 +159,14 @@ areadamage(vector3(0, 0, 0), 3)
 ```
 ### colliderdamage
 ```
-colliderdamage(remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
+colliderdamage(layer, remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
 {
     statebuff("Default", default_buff);
     statebuff("Skill", skill_buff);
 };
 ```
 ```
-colliderdamage(1000, 100, vector3(0, 0, 0), vector3(1, 1, 1))
+colliderdamage("TriggerBullet", 1000, 100, vector3(0, 0, 0), vector3(1, 1, 1))
 {
     statebuff("Default", 1001);
     statebuff("Skill", 1002);

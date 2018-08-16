@@ -55,7 +55,7 @@ skill(1004)
 	onmessage("start")
 	{
 		physicsmove(7000, vector3(0, 0, 30));
-		colliderdamage(7000, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+		colliderdamage("TriggerBullet", 7000, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
         {
 				statebuff("Default", 1);
 				statebuff("Skill", 3);
@@ -149,7 +149,7 @@ skill(1005)
 		{
 			circlemove(4, 0, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			colliderdamage("TriggerBullet", 800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
 					statebuff("Default", 1);
 					statebuff("Skill", 3);
@@ -177,7 +177,7 @@ skill(1006)
 		{
 			circlemove(4, 90, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			colliderdamage("TriggerBullet", 800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
 					statebuff("Default", 1);
 					statebuff("Skill", 3);
@@ -204,7 +204,7 @@ skill(1007)
 		{
 			circlemove(4, 180, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			colliderdamage("TriggerBullet", 800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
 					statebuff("Default", 1);
 					statebuff("Skill", 3);
@@ -231,7 +231,7 @@ skill(1008)
 		{
 			circlemove(4, 270, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
 			
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+			colliderdamage("TriggerBullet", 800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
 			{
 					statebuff("Default", 1);
 					statebuff("Skill", 3);

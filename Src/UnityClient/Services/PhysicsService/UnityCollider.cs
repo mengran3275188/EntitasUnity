@@ -15,6 +15,7 @@ namespace UnityClient
             UnityView view = collider.gameObject.GetComponent<UnityView>();
             if(null != view)
             {
+                Util.LogUtil.Info("Name {0} Layer {1} , Name {2} Layer {3}.", collider.gameObject.name, collider.gameObject.layer, this.gameObject.name, this.gameObject.layer);
                 if(view.Entity is GameEntity gameEntity)
                 {
                     if(gameEntity.hasId)
