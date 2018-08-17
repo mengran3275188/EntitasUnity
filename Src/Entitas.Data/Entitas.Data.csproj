@@ -58,6 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\UnityClient\EntitasGenerated\Chunk\ChunkAttribute.cs">
+      <Link>Attribute\ChunkAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\UnityClient\EntitasGenerated\GameState\GameStateAttribute.cs">
       <Link>Attribute\GameStateAttribute.cs</Link>
     </Compile>
@@ -69,6 +72,7 @@
     </Compile>
     <Compile Include="AttributeData.cs" />
     <Compile Include="AttributeEnum.cs" />
+    <Compile Include="Components\ChunkComponents.cs" />
     <Compile Include="DataReader\AttributeConfigProvider.cs" />
     <Compile Include="DataReader\DataReader.cs" />
     <Compile Include="DataReader\FilePathDefine.cs" />

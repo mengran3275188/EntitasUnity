@@ -5,11 +5,11 @@ using Entitas.Data;
 
 namespace UnityClient
 {
-    public class ChunkSystem : ReactiveSystem<GameEntity>, IInitializeSystem, ITearDownSystem
+    public class ChunkSystem : ReactiveSystem<ChunkEntity>, IInitializeSystem, ITearDownSystem
     {
-        public ChunkSystem(Contexts contexts) : base(contexts.game)
+        public ChunkSystem(Contexts contexts) : base(contexts.chunk)
         {
-            m_ChunkGroup = contexts.game.GetGroup(GameMatcher.Chunk);
+            m_ChunkGroup = contexts.chunk.GetGroup(ChunkMatcher.Chunk);
             m_NpcGroup = contexts.game.GetGroup(GameMatcher.Npc);
         }
         public void Initialize()
@@ -29,32 +29,32 @@ namespace UnityClient
 
             m_NpcGroup.OnEntityRemoved -= NpcGroup_OnEntityRemoved;
         }
-        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+        protected override ICollector<ChunkEntity> GetTrigger(IContext<ChunkEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Chunk);
+            return context.CreateCollector(ChunkMatcher.Chunk);
         }
-        protected override bool Filter(GameEntity entity)
+        protected override bool Filter(ChunkEntity entity)
         {
             return true;
         }
-        protected override void Execute(List<GameEntity> entities)
+        protected override void Execute(List<ChunkEntity> entities)
         {
         }
-        private void ChunkSystem_OnEntityAdded(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
+        private void ChunkSystem_OnEntityAdded(IGroup<ChunkEntity> group, ChunkEntity entity, int index, IComponent component)
         {
             if(component is ChunkComponent chunkComponent)
             {
                 Services.Instance.ChunkService.LoadChunk(entity, chunkComponent.Value);
             }
         }
-        private void ChunkGroup_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
+        private void ChunkGroup_OnEntityRemoved(IGroup<ChunkEntity> group, ChunkEntity entity, int index, IComponent component)
         {
         }
         private void NpcGroup_OnEntityRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
         {
             if(component is NpcComponent npcComponent)
             {
-                var chunkEntity = Contexts.sharedInstance.game.activeChunkEntity;
+                var chunkEntity = Contexts.sharedInstance.chunk.activeChunkEntity;
                 if(null != chunkEntity)
                 {
                     if (group.GetEntities().Length == 0)
@@ -66,7 +66,7 @@ namespace UnityClient
             }
         }
 
-        private readonly IGroup<GameEntity> m_ChunkGroup;
+        private readonly IGroup<ChunkEntity> m_ChunkGroup;
         private readonly IGroup<GameEntity> m_NpcGroup;
     }
 }

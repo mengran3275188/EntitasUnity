@@ -85,7 +85,7 @@ namespace UnityClient
         {
             if ((int)Keyboard.Event.Down == what)
             {
-                Services.Instance.UIService.ShowGamemap(Contexts.sharedInstance.game.GetGroup(GameMatcher.Chunk).GetEntities());
+                Services.Instance.UIService.ShowGamemap(Contexts.sharedInstance.chunk.GetGroup(ChunkMatcher.Chunk).GetEntities());
             }
         }
         private KeyHit GetKeyboadHit()

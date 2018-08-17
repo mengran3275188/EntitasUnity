@@ -73,6 +73,13 @@
   <ItemGroup>
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
     <Compile Include="behaviac_generated\types\CharacterAgent.cs" />
+    <Compile Include="Chunk\ChunkSystems.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkAttribute.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkComponents.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkComponentsLookup.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkContext.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkEntity.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkMatcher.cs" />
     <Compile Include="EntitasGenerated\Contexts.cs" />
     <Compile Include="EntitasGenerated\Events\Components\PositionListenerComponent.cs" />
     <Compile Include="EntitasGenerated\Events\GameEventSystems.cs" />
@@ -101,7 +108,7 @@
     <Compile Include="Game\Features\AISystem.cs" />
     <Compile Include="Game\Features\AttrSystem.cs" />
     <Compile Include="Game\Features\BornSystem.cs" />
-    <Compile Include="Game\Features\ChunkSystem.cs" />
+    <Compile Include="Chunk\Features\ChunkSystem.cs" />
     <Compile Include="Game\Features\Cleanup\CleanResourceSystem.cs" />
     <Compile Include="Game\Features\Cleanup\CleanupEntitySystem.cs" />
     <Compile Include="Game\Features\DeadSystem.cs" />

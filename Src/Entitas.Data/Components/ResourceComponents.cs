@@ -59,10 +59,6 @@ namespace Entitas.Data
     {
         public float BornTime;
     }
-    public sealed class ChunkComponent : IComponent
-    {
-        public IChunk Value;
-    }
     public sealed class ChunkDoorComponent : IComponent
     {
         public IChunkDoor Value;

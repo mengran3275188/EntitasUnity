@@ -15,10 +15,6 @@ namespace Entitas.Data
         public SceneInstanceInfo ScriptInstance;
     }
     [Unique]
-    public sealed class ActiveChunkComponent : IComponent
-    {
-    }
-    [Unique]
     public sealed class Cleanup : IComponent
     {
     }

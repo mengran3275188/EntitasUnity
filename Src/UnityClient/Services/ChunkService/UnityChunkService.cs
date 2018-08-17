@@ -10,7 +10,7 @@ namespace UnityClient
         public UnityChunkService(Contexts contexts) : base(contexts)
         {
         }
-        public void LoadChunk(GameEntity entity, IChunk chunk)
+        public void LoadChunk(ChunkEntity entity, IChunk chunk)
         {
             UnityChunk unityChunk = chunk as UnityChunk;
 
