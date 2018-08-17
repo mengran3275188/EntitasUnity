@@ -42,6 +42,7 @@ namespace UnityClient
             if(entity.hasView)
             {
                 UnityView view = entity.view.Value as UnityView;
+                view.gameObject.Unlink();
                 ResourceSystem.RecycleObject(view.gameObject);
             }
         }
