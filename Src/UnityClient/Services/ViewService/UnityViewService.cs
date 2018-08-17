@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityDelegate;
 using Entitas.Data;
+using Entitas.Unity;
 using Util;
 
 namespace UnityClient
@@ -27,6 +28,8 @@ namespace UnityClient
                 var rigidbody = viewObject.GetComponent<IRigidbody>();
                 if (null != rigidbody)
                     entity.AddPhysics(rigidbody, Vector3.zero);
+
+                viewObject.Link(entity, Contexts.sharedInstance.game);
 
             }
             else
