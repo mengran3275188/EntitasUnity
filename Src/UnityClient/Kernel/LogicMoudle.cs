@@ -12,6 +12,7 @@ namespace UnityClient.Kernel
 
         private GameUpdateSystems m_GameUpdateSystems;
         private GameFixedUpdateSystems m_GameFixedUpdateSystems;
+        private ChunkFixedUpdateSystems m_ChunkFixedUpdateSystems;
 
         private GameStateSystems m_GameStateSystems;
 
@@ -33,7 +34,8 @@ namespace UnityClient.Kernel
             m_GameFixedUpdateSystems = new GameFixedUpdateSystems(contexts, Services.Instance);
             m_GameFixedUpdateSystems.Initialize();
 
-
+            m_ChunkFixedUpdateSystems = new ChunkFixedUpdateSystems(contexts, Services.Instance);
+            m_ChunkFixedUpdateSystems.Initialize();
 
             LogUtil.Info("Game Start ...");
         }
@@ -48,17 +50,21 @@ namespace UnityClient.Kernel
             m_GameUpdateSystems.Execute();
             m_GameUpdateSystems.Cleanup();
 
+
             m_ActionQueue.HandleActions(m_ActionNumPerTick);
         }
         public void FixedUpdate()
         {
             m_GameFixedUpdateSystems.Execute();
             m_GameFixedUpdateSystems.Cleanup();
+
+            m_ChunkFixedUpdateSystems.Execute();
+            m_ChunkFixedUpdateSystems.Cleanup();
         }
         public void OnQuit()
         {
-            m_InputSystems.Execute();
-            m_InputSystems.Cleanup();
+            m_InputSystems.ClearReactiveSystems();
+            m_InputSystems.TearDown();
 
             m_GameUpdateSystems.ClearReactiveSystems();
             m_GameUpdateSystems.TearDown();
@@ -66,8 +72,12 @@ namespace UnityClient.Kernel
             m_GameFixedUpdateSystems.ClearReactiveSystems();
             m_GameFixedUpdateSystems.TearDown();
 
+            m_ChunkFixedUpdateSystems.ClearReactiveSystems();
+            m_ChunkFixedUpdateSystems.TearDown();
+
             m_GameStateSystems.ClearReactiveSystems();
             m_GameStateSystems.TearDown();
+
 
 
             Contexts.sharedInstance.Reset();

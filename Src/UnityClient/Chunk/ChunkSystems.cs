@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UnityClient.Chunk
+namespace UnityClient
 {
-    class ChunkSystems
+    public class ChunkFixedUpdateSystems : Feature
     {
+        public ChunkFixedUpdateSystems(Contexts contexts, Services services)
+        {
+            Add(new ChunkSystem(contexts));
+        }
     }
 }
