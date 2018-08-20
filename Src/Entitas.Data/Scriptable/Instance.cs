@@ -415,7 +415,21 @@ namespace ScriptableSystem
                 handler.Analyze(this);
             }
         }
-        public void AddLocalVariable(string varName, object val)
+        public void AddVariable(string varName, object val)
+        {
+            if(varName.StartsWith("@@"))
+            {
+                AddLocalVariable(varName, val);
+            }else if(varName.StartsWith("@"))
+            {
+                AddGlobalVariable(varName, val);
+            }
+            else
+            {
+                Util.LogUtil.Error("AddVariable var name {0} is invalid! var name should starts with @ or @@.");
+            }
+        }
+        private void AddLocalVariable(string varName, object val)
         {
             if(m_LocalVariables.ContainsKey(varName))
             {
@@ -426,7 +440,7 @@ namespace ScriptableSystem
                 m_LocalVariables.Add(varName, val);
             }
         }
-        public void AddGlobalVariable(string varName, object val)
+        private void AddGlobalVariable(string varName, object val)
         {
             if(m_GlobalVariables.ContainsKey(varName))
             {

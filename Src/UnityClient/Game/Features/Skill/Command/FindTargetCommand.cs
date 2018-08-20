@@ -73,14 +73,7 @@ namespace SkillCommands
                 }
             }
 
-            if(m_ObjIdVarName.StartsWith("@") && !m_ObjIdVarName.StartsWith("@@"))
-            {
-                instance.AddLocalVariable(m_ObjIdVarName, findedTargets);
-            }
-            else
-            {
-                instance.AddGlobalVariable(m_ObjIdVarName, findedTargets);
-            }
+            instance.AddVariable(m_ObjIdVarName, findedTargets);
 
             return ExecResult.Finished;
         }
