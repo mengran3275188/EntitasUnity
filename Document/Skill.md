@@ -80,22 +80,39 @@ skill(1)
 # 命令说明
 ## 通用命令
 ### wait
+等待指定的时间，毫秒为单位
 ```
 wait(milliseconds);
 ```
-等待指定的时间，毫秒为单位
 ### terminate
+结束脚本。
 ```
 terminate();
 ```
-结束技能。
 ### log
+输出日志。
 ```
 log("hello world.");
 ```
-输出日志。
+### <span id="loopcommand">loop</span>
+将一组指令循环执行指定次数
+```
+loop(10)
+{
+    log($$);
+};
+```
+### <span id="loopcommand">looplist</span>
+类似于[loop](#loopcommand), 迭代元素替换为list元素
+```
+looplist(@targets)
+{
+    log($$);
+};
+```
 ## 特定命令
 ### animation
+播放动作
 ```
 animation("skill_01_animation");
 ```
@@ -109,10 +126,12 @@ animation("skill_01_animation")
 };
 ```
 ### animationspeed
+设置动作速度
 ```
 animationspeed("skill_01_animation", 2);
 ```
 ### curvemove
+变加速移动
 ```
 enum direction_type
 {
@@ -140,6 +159,7 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
 };
 ```
 ### circlemove
+极坐标下的变加速移动
 ```
 circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
 ```
@@ -158,6 +178,7 @@ areadamage(vector3(0, 0, 0), 3)
 }
 ```
 ### colliderdamage
+物理检测伤害
 ```
 colliderdamage(layer, remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
 {
@@ -173,16 +194,19 @@ colliderdamage("TriggerBullet", 1000, 100, vector3(0, 0, 0), vector3(1, 1, 1))
 };
 ```
 ### removecollider
+移除检测伤害的物理组件
 ```
 removecollider();
 ```
 
 ### movechild
+移动挂接模型到指定节点
 ```
 movechild("1_JianShi_w_01", "ef_backweapon01"); // 将子节点1_JianShi_w_01移动到挂点ef_backweapon01
 ```
 
 ### effect
+特效命令
 ```
 effect(res_path, delete_time, attach_bone, is_attach);
 effect(res_path, delete_time, attach_bone, is_attach)
@@ -198,4 +222,16 @@ effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
   transform(vector3(1, 1, 1));  
 };
 
+```
+### findtarget
+寻找指定目标
+```
+findtarget(vector3(offsetx, offsety, offsetz), radius)objid(@retval);
+```
+```
+findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+looplist(@targetidlist)
+{
+    log($$);
+};
 ```
