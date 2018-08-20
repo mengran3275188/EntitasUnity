@@ -3,6 +3,11 @@ skill(2)
 	onmessage("start")
 	{
         selfbuff(2);
+		findtarget(vector3(0, 0, 0), 6)objid(@targetlist);
+		looplist(@targetlist)
+		{
+			log($$);
+		};
         terminate();
 	};
 };

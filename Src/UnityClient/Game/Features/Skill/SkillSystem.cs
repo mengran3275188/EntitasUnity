@@ -39,6 +39,8 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("disablerotationinput", new CommandFactoryHelper<SkillCommands.DisableRotationInputCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("breaksection", new CommandFactoryHelper<SkillCommands.BreakSectionCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("findtarget", new CommandFactoryHelper<SkillCommands.FindTargetCommand>());
         }
 
         public void Execute()
