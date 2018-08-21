@@ -235,3 +235,20 @@ looplist(@targetidlist)
     log($$);
 };
 ```
+### createcharacter
+创建character
+```
+createcharacter(character_id, vector3(posX, posY, posZ), vector3(rotationX, rotationY, rotationZ))
+{
+    mainplayer();
+    skill(skill_id);
+}objid(@retval);
+```
+```
+createcharacter(1, vector3(0, 0, 0), vector3(0, 90, 0)objid(@characterid);
+
+createcharacter(1, vector3(0, 0, 1), vector3(0, 90, 0)
+{
+    skill(1001);
+};
+```

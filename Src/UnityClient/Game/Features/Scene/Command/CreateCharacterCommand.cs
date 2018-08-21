@@ -45,6 +45,26 @@ namespace SceneCommand
                 }
             }
         }
+        protected override void Load(StatementData statementData)
+        {
+            if(statementData.Functions.Count == 2)
+            {
+                FunctionData first = statementData.First;
+                FunctionData second = statementData.Second;
+                if(null != first && null != first.Call && null != second && null != second.Call)
+                {
+                    Load(first);
+                    LoadVarName(second.Call);
+                }
+            }
+        }
+        private void LoadVarName(CallData callData)
+        {
+            if(callData.GetId() == "objId" && callData.GetParamNum() == 1)
+            {
+                m_ObjIdVarName = callData.GetParamId(0);
+            }
+        }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             var gameContext = Contexts.sharedInstance.game;
@@ -72,6 +92,10 @@ namespace SceneCommand
                 var entity = gameContext.GetEntityWithId(entityId);
                 SkillSystem.Instance.StartSkill(target, entity, m_SkillId, -1, target.position.Value, target.rotation.Value);
             }
+
+            if (!string.IsNullOrEmpty(m_ObjIdVarName))
+                instance.AddVariable(m_ObjIdVarName, entityId);
+
             return ExecResult.Finished;
         }
         private int m_CharacterId;
@@ -79,6 +103,7 @@ namespace SceneCommand
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
+        private string m_ObjIdVarName = string.Empty;
 
         private enum PhysicsType
         {
