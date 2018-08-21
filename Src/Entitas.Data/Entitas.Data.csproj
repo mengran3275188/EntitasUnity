@@ -87,6 +87,7 @@
     <Compile Include="IRigidbody.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Components\MovementComponents.cs" />
+    <Compile Include="IVolumetricLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\ResourceComponents.cs" />
     <Compile Include="SceneInstanceInfo.cs" />
