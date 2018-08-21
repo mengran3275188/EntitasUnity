@@ -2,6 +2,7 @@ Id	Description	Script	BreakType	NextId
 int	string	string	int	int
 1	主角普攻	Tables/SkillScripts/PuGong.mr	101	101
 2	主角加速	Tables/SkillScripts/Accelerate.mr	101	
+201	主角加速子技能	Tables/SkillScripts/Accelerate.mr	101	
 3	主角火球	Tables/SkillScripts/FireBall.mr	101	
 4	主角火球2式	Tables/SkillScripts/FireBall.mr	101	
 1004	主角召唤的火球	Tables/SkillScripts/FireBall.mr	101	

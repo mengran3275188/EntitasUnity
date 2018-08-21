@@ -41,6 +41,8 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("breaksection", new CommandFactoryHelper<SkillCommands.BreakSectionCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("findtarget", new CommandFactoryHelper<SkillCommands.FindTargetCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("line", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
         }
 
         public void Execute()

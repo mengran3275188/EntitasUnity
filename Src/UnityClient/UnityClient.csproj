@@ -126,6 +126,7 @@
     <Compile Include="Game\Features\Skill\Command\CircleCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\FindTargetCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\PhysicsMoveCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\VolumetricLineCommand.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\Features\SkillInputSystem.cs" />
     <Compile Include="Input\Features\SkillKeyBindingSystem.cs" />

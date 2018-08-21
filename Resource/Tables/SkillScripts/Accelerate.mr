@@ -3,11 +3,35 @@ skill(2)
 	onmessage("start")
 	{
         selfbuff(2);
+
 		findtarget(vector3(0, 0, 0), 6)objid(@targetlist);
 		looplist(@targetlist)
 		{
 			log($$);
 		};
+
+		createcharacter(1000, vector3(0, 0, 0), vector3(0, 0, 0))
+		{
+			skill(201);
+		};
+
         terminate();
 	};
+};
+skill(201)
+{
+    onmessage("start")
+    {
+        line(vector3(0, 1, 2), vector3(1.176, 1, -1.618), 1, 10000);
+        wait(50);
+        line(vector3(1.176, 1, -1.618), vector3(-1.902, 1, 0.618), 1, 9950);
+        wait(50);
+        line(vector3(-1.902, 1, 0.618), vector3(1.902, 1, 0.618), 1, 9900);
+        wait(50);
+        line(vector3(1.902, 1, 0.618), vector3(-1.176, 1, -1.618), 1, 9850);
+        wait(50);
+        line(vector3(-1.176, 1, -1.618), vector3(0, 1, 2), 1, 9800);
+        destroyself();
+        terminate();
+    };
 };
