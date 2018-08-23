@@ -18,6 +18,8 @@ namespace SkillCommands
             copy.m_Offset = m_Offset;
             copy.m_Size = m_Size;
             copy.m_Interval = m_Interval;
+            copy.m_RemainTime = m_RemainTime;
+            copy.m_Rotation = m_Rotation;
 
             copy.m_HaveObjId = m_HaveObjId;
             copy.m_ObjIdVarName = m_ObjIdVarName.Clone();
@@ -42,13 +44,11 @@ namespace SkillCommands
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
-            if(num >= 5)
+            if(num >= 3)
             {
                 m_LayerId = LayerMask.NameToLayer(callData.GetParamId(0));
                 m_RemainTime = long.Parse(callData.GetParamId(1));
                 m_Interval = long.Parse(callData.GetParamId(2));
-                m_Offset = ScriptableDataUtility.CalcVector3(callData.GetParam(3) as ScriptableData.CallData);
-                m_Size = ScriptableDataUtility.CalcVector3(callData.GetParam(4) as ScriptableData.CallData);
             }
         }
         protected override void Load(FunctionData funcData)
@@ -68,6 +68,31 @@ namespace SkillCommands
                         {
                             StateBuff stateBuff = ScriptableDataUtility.CalcStateBuff(stCall);
                             m_StateImpacts[stateBuff.m_State] = stateBuff;
+                        }
+                        if(id == "box")
+                        {
+                            int num = stCall.GetParamNum();
+                            if(num >= 2)
+                            {
+                                m_Offset = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as ScriptableData.CallData);
+                                m_Size = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as ScriptableData.CallData);
+                                m_Rotation = Quaternion.identity;
+                            }
+                        }
+                        if(id == "line")
+                        {
+                            int num = stCall.GetParamNum();
+                            if(num >= 3)
+                            {
+                                Vector3 startPos = ScriptableDataUtility.CalcVector3(stCall.GetParam(0) as ScriptableData.CallData);
+                                Vector3 endPos = ScriptableDataUtility.CalcVector3(stCall.GetParam(1) as ScriptableData.CallData);
+                                float radius = float.Parse(stCall.GetParamId(2));
+
+                                m_Offset = (startPos + endPos) / 2;
+                                m_Size = new Vector3(Vector3.Distance(startPos, endPos), radius, radius);
+
+                                m_Rotation = Quaternion.LookRotation(Vector3.Cross((endPos - startPos), Vector3.up));
+                            }
                         }
                     }
                 }
@@ -103,7 +128,7 @@ namespace SkillCommands
             m_Instance = instance;
             m_Target = target;
 
-            Services.Instance.PhysicsService.CreateBoxCollider(target.view.Value, m_LayerId, m_RemainTime, m_Size, m_Offset, OnCollision);
+            Services.Instance.PhysicsService.CreateBoxCollider(target.view.Value, m_LayerId, m_RemainTime, m_Size, m_Offset, m_Rotation, OnCollision);
 
             return ExecResult.Finished;
         }
@@ -159,6 +184,7 @@ namespace SkillCommands
         // config
         private Vector3 m_Offset = Vector3.zero;
         private Vector3 m_Size = Vector3.one;
+        private Quaternion m_Rotation = Quaternion.identity;
         private long m_Interval = -1;
         private long m_RemainTime = 1000;
         private int m_LayerId = 0;

@@ -23,15 +23,46 @@ skill(201)
     onmessage("start")
     {
         line(vector3(0, 1, 2), vector3(1.176, 1, -1.618), 1, 10000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(0, 1, 2), vector3(1.176, 1, -1.618), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }objid("@colliderId");
         wait(50);
         line(vector3(1.176, 1, -1.618), vector3(-1.902, 1, 0.618), 1, 9950);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(1.176, 1, -1.618), vector3(-1.902, 1, 0.618), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }objid("@colliderId");
         wait(50);
         line(vector3(-1.902, 1, 0.618), vector3(1.902, 1, 0.618), 1, 9900);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-1.902, 1, 0.618), vector3(1.902, 1, 0.618), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }objid("@colliderId");
         wait(50);
         line(vector3(1.902, 1, 0.618), vector3(-1.176, 1, -1.618), 1, 9850);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(1.902, 1, 0.618), vector3(-1.176, 1, -1.618), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }objid("@colliderId");
         wait(50);
         line(vector3(-1.176, 1, -1.618), vector3(0, 1, 2), 1, 9800);
-        destroyself();
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-1.176, 1, -1.618), vector3(0, 1, 2), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }objid("@colliderId");
+        wait(10000);
+		destroyself();
         terminate();
     };
 };

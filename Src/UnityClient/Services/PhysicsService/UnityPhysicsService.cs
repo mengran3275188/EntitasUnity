@@ -11,7 +11,7 @@ namespace UnityClient
         public UnityPhysicsService(Contexts contexts) : base(contexts)
         {
         }
-        public void CreateBoxCollider(IView view, int layerId, long remainTime, Vector3 size, Vector3 offset, MyAction<uint> callback)
+        public void CreateBoxCollider(IView view, int layerId, long remainTime, Vector3 size, Vector3 offset, Quaternion rotation, MyAction<uint> callback)
         {
             if(view is UnityView unityView)
             {
@@ -24,6 +24,7 @@ namespace UnityClient
 
                 obj.transform.parent = unityView.transform;
                 obj.transform.localPosition = offset;
+                obj.transform.localRotation = rotation;
 
                 unityRigid.OnColliderTriggerEnter = callback;
 
