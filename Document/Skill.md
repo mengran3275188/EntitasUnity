@@ -213,7 +213,6 @@ changelayer(layer_name);
 ```
 ```
 changelayer("PhysicsBullet");
-;
 ```
 ### removecollider
 移除检测伤害的物理组件
@@ -274,3 +273,12 @@ createcharacter(1, vector3(0, 0, 1), vector3(0, 90, 0)
     skill(1001);
 };
 ```
+### visible
+关闭渲染组件
+```
+visible(true_of_false);
+```
+```
+visible(false);
+```
+

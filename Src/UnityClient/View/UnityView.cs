@@ -71,6 +71,15 @@ namespace UnityClient
                 }
             }
         }
+        public void SetVisible(bool visible)
+        {
+            // 这里只隐藏skinedmeshrenderder, 看后续能否资源规范化
+            SkinnedMeshRenderer[] smrs = GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach(var smr in smrs)
+            {
+                smr.enabled = visible;
+            }
+        }
 
         private Entity m_Entity;
     }

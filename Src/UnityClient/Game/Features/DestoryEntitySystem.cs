@@ -34,7 +34,6 @@ namespace UnityClient
                     }
                 }
 
-
                 // 一些资源的处理临时放在这里
                 if (entity.hasView)
                 {
