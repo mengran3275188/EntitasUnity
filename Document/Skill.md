@@ -70,6 +70,7 @@ skill(1)
 * 物理移动 ：多用Collider实现
 ### <span id="layer">Layer</span>
 * Wall
+* InvisibelWall
 * Terrain
 * Player
 * Character
