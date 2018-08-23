@@ -137,6 +137,10 @@ namespace UnityClient
                 BreakSkill(entity);
             }
         }
+        public void ForceBreakSkill(GameEntity entity)
+        {
+            BreakSkill(entity);
+        }
         public Vector3 GetSkillVelocity(GameEntity entity)
         {
             Vector3 velocity = Vector3.zero;
