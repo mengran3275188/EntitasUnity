@@ -31,10 +31,11 @@ skill(100202)
 	onmessage("start")
 	{
 		curvemove(true, 0.7, 0, 0, 30, 0, 0, 0);
-		colliderdamage("TriggerBullet", 700, 100, vector3(0,0,0), vector3(0.1, 0.1, 1.5))
+		colliderdamage("TriggerBullet", 700, 100)
         {
-				statebuff("Default", 1);
-				statebuff("Skill", 3);
+            box(vector3(0,0,0), vector3(0.1, 0.1, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
         }objid("@colliderId");
 		wait(700);
 		destroyself();

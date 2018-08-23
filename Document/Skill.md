@@ -182,13 +182,24 @@ areadamage(vector3(0, 0, 0), 3)
 ```
 colliderdamage(layer, remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
 {
+    box(vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez));
+    line(vector3(startposx, startposy, startposz), vector3(startposx, startposy, startposz), radius);
     statebuff("Default", default_buff);
     statebuff("Skill", skill_buff);
 };
 ```
 ```
-colliderdamage("TriggerBullet", 1000, 100, vector3(0, 0, 0), vector3(1, 1, 1))
+// box collider
+colliderdamage("TriggerBullet", 1000, 100)
 {
+    box(vector3(0, 0, 0), vector3(1, 1, 1));
+    statebuff("Default", 1001);
+    statebuff("Skill", 1002);
+};
+// line collider
+colliderdamage("TriggerBullet", 1000, 100)
+{
+    line(vector3(0, 0, 0), vector3(1, 1, 1), 0.1f);
     statebuff("Default", 1001);
     statebuff("Skill", 1002);
 };
