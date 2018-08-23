@@ -11,6 +11,10 @@ namespace UnityClient
         private Rigidbody m_Rigidbody;
         private bool m_IsKinematic = true;
 
+        public int Layer
+        {
+            set { m_Rigidbody.gameObject.layer = value; }
+        }
 
         public Vector3 Position
         {

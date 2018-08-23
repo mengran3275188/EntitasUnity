@@ -68,7 +68,7 @@ skill(1)
 ### 技能大量使用了仿真物理，主要为了实现
 * 伤害判定 ：多用trigger触发
 * 物理移动 ：多用Collider实现
-### Layer
+### <span id="layer">Layer</span>
 * Wall
 * Terrain
 * Player
@@ -203,6 +203,16 @@ colliderdamage("TriggerBullet", 1000, 100)
     statebuff("Default", 1001);
     statebuff("Skill", 1002);
 };
+```
+### changelayer
+改变物理组件的layer，从而改变碰撞检关系。
+[Layer列表](#layer)
+```
+changelayer(layer_name);
+```
+```
+changelayer("PhysicsBullet");
+;
 ```
 ### removecollider
 移除检测伤害的物理组件
