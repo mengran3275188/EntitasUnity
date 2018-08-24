@@ -8,11 +8,13 @@ skill(2)
 		looplist(@targetlist)
 		{
 			log($$);
+            skill($$, 5);
+            log("use skill");
 		};
 
 		createcharacter(1000, vector3(0, 0, 0), vector3(0, 0, 0))
 		{
-			skill(201);
+			//skill(201);
 		};
 
         terminate();

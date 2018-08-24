@@ -45,6 +45,8 @@ namespace UnityClient
 
             CommandManager.Instance.RegisterCommandFactory("line", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
             CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
         }
 
         public void Execute()

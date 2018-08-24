@@ -281,4 +281,16 @@ visible(true_of_false);
 ```
 visible(false);
 ```
+### skill
+强制指定目标释放技能
+```
+skill(enity_id, skill_id);
+```
+```
+findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+looplist(@targetidlist)
+{
+    skill($$, 5);
+};
+```
 
