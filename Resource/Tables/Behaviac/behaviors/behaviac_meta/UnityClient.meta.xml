@@ -26,18 +26,21 @@
       </Method>
     </agent>
     <agent classfullname="CharacterAgent" base="behaviac::Agent" DisplayName="CharacterAgent" Desc="CharacterAgent" IsRefType="true" IsCustomized="true">
+      <Member Name="m_CurTargetId" DisplayName="CurTargetId" Desc="当前目标" Class="CharacterAgent" Type="uint" TypeFullName="System.UInt32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
+      <Member Name="m_ExternalTargetId" DisplayName="ExternalTargetId" Desc="外部目标" Class="CharacterAgent" Type="uint" TypeFullName="System.UInt32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
       <Method Name="CanUseSkill" DisplayName="CanUseSkill" Desc="当前是否可以使用技能" Class="CharacterAgent" ReturnType="bool" ReturnTypeFullName="System.Boolean" Static="false" Public="true" istask="false" />
       <Method Name="UseSkill" DisplayName="UseSkill" Desc="使用指定技能id的技能" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
         <Param Name="SkillId" Type="const int" TypeFullName="System.Int32" IsConst="true" DisplayName="SkillId" Desc="SkillId" />
       </Method>
-      <Method Name="MoveToPlayer" DisplayName="MoveToPlayer" Desc="向目标玩家移动" Class="CharacterAgent" ReturnType="behaviac::EBTStatus" ReturnTypeFullName="XMLPluginBehaviac.behaviac_EBTStatus" Static="false" Public="true" istask="false" />
-      <Method Name="DistanceToPlayer" DisplayName="DistanceToPlayer" Desc="和目标的距离" Class="CharacterAgent" ReturnType="float" ReturnTypeFullName="System.Single" Static="false" Public="true" istask="false" />
-      <Method Name="EscapeFromPlayer" DisplayName="EscapeFromPlayer" Desc="逃离目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="MoveToTarget" DisplayName="MoveToTarget" Desc="向目标玩家移动" Class="CharacterAgent" ReturnType="behaviac::EBTStatus" ReturnTypeFullName="XMLPluginBehaviac.behaviac_EBTStatus" Static="false" Public="true" istask="false" />
+      <Method Name="DistanceToTarget" DisplayName="DistanceToTarget" Desc="和目标的距离" Class="CharacterAgent" ReturnType="float" ReturnTypeFullName="System.Single" Static="false" Public="true" istask="false" />
+      <Method Name="EscapeFromTarget" DisplayName="EscapeFromTarget" Desc="逃离目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="StopMove" DisplayName="StopMove" Desc="停止移动" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="FaceToTarget" DisplayName="FaceToTarget" Desc="转向目标" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="PlayAnimation" DisplayName="PlayAnimation" Desc="PlayAnimation" Class="CharacterAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
         <Param Name="animName" Type="string" TypeFullName="System.String" DisplayName="animName" Desc="animName" />
       </Method>
+      <Method Name="TryFindTarget" DisplayName="TryFindTarget" Desc="尝试寻找目标" Class="CharacterAgent" ReturnType="uint" ReturnTypeFullName="System.UInt32" Static="false" Public="true" istask="false" />
     </agent>
   </agents>
   <instances />

@@ -67,7 +67,7 @@ namespace SkillCommands
                 if (entity.hasDead)
                     continue;
 
-                if(center.DistanceXZ(entity.position.Value) < m_Radius)
+                if(ExtensionUnityVector3.DistanceXZ(center, entity.position.Value) < m_Radius)
                 {
                     findedTargets.Add(entity.id.value);
                 }

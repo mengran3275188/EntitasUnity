@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
-<agents version="1" signature="2081019846" />
+<agents version="1" signature="3403492403">
+  <agent type="CharacterAgent" base="behaviac::Agent" signature="1867616810">
+    <properties>
+      <property name="m_CurTargetId" type="uint" member="false" static="false" defaultvalue="0" />
+      <property name="m_ExternalTargetId" type="uint" member="false" static="false" defaultvalue="0" />
+    </properties>
+  </agent>
+</agents>

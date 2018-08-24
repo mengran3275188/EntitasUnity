@@ -99,7 +99,7 @@ namespace SkillCommands
 
         private bool InCircle(Vector3 point, float range, PositionComponent position)
         {
-            return point.DistanceXZ(position.Value) < range;
+            return ExtensionUnityVector3.DistanceXZ(point, position.Value) < range;
         }
 
         private StateBuff_State GetState(GameEntity obj)

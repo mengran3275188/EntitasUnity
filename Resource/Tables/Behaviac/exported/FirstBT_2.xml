@@ -7,12 +7,12 @@
       <node class="And" id="7">
         <node class="Condition" id="14">
           <property Operator="Less" />
-          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opl="Self.CharacterAgent::DistanceToTarget()" />
           <property Opr="const float 10" />
         </node>
         <node class="Condition" id="22">
           <property Operator="Greater" />
-          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opl="Self.CharacterAgent::DistanceToTarget()" />
           <property Opr="const float 5" />
         </node>
       </node>
@@ -78,15 +78,15 @@
       <node class="IfElse" id="24">
         <node class="Condition" id="25">
           <property Operator="LessEqual" />
-          <property Opl="Self.CharacterAgent::DistanceToPlayer()" />
+          <property Opl="Self.CharacterAgent::DistanceToTarget()" />
           <property Opr="const float 6" />
         </node>
         <node class="Action" id="26">
-          <property Method="Self.CharacterAgent::EscapeFromPlayer()" />
+          <property Method="Self.CharacterAgent::EscapeFromTarget()" />
           <property ResultOption="BT_SUCCESS" />
         </node>
         <node class="Action" id="8">
-          <property Method="Self.CharacterAgent::MoveToPlayer()" />
+          <property Method="Self.CharacterAgent::MoveToTarget()" />
           <property ResultOption="BT_INVALID" />
         </node>
       </node>

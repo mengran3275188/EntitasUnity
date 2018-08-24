@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: Berserker.xml-->
+<behavior name="Berserker" agenttype="CharacterAgent" version="5">
+  <node class="IfElse" id="0">
+    <node class="Condition" id="1">
+      <property Operator="Greater" />
+      <property Opl="uint Self.CharacterAgent::m_CurTargetId" />
+      <property Opr="const uint 0" />
+    </node>
+    <node class="Sequence" id="2">
+      <node class="IfElse" id="7">
+        <node class="Condition" id="8">
+          <property Operator="Less" />
+          <property Opl="Self.CharacterAgent::DistanceToTarget()" />
+          <property Opr="const float 3" />
+        </node>
+        <node class="Sequence" id="10">
+          <custom>
+            <node class="Condition" id="19">
+              <property Operator="NotEqual" />
+              <property Opl="Self.CharacterAgent::CanUseSkill()" />
+              <property Opr="const bool true" />
+            </node>
+          </custom>
+          <node class="Action" id="11">
+            <property Method="Self.CharacterAgent::StopMove()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Action" id="12">
+            <property Method="Self.CharacterAgent::FaceToTarget()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="13">
+            <property Time="const float 50" />
+          </node>
+          <node class="Action" id="14">
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_01&quot;)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="15">
+            <property Time="const float 200" />
+          </node>
+          <node class="Action" id="16">
+            <property Method="Self.CharacterAgent::PlayAnimation(&quot;attack_01_02&quot;)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Wait" id="17">
+            <property Time="const float 100" />
+          </node>
+          <node class="Action" id="18">
+            <property Method="Self.CharacterAgent::UseSkill(10)" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+        </node>
+        <node class="Action" id="9">
+          <property Method="Self.CharacterAgent::MoveToTarget()" />
+          <property ResultOption="BT_INVALID" />
+        </node>
+      </node>
+    </node>
+    <node class="IfElse" id="3">
+      <node class="Condition" id="4">
+        <property Operator="Greater" />
+        <property Opl="uint Self.CharacterAgent::m_ExternalTargetId" />
+        <property Opr="const uint 0" />
+      </node>
+      <node class="Assignment" id="5">
+        <property CastRight="false" />
+        <property Opl="uint Self.CharacterAgent::m_CurTargetId" />
+        <property Opr="uint Self.CharacterAgent::m_ExternalTargetId" />
+      </node>
+      <node class="Assignment" id="6">
+        <property CastRight="false" />
+        <property Opl="uint Self.CharacterAgent::m_CurTargetId" />
+        <property Opr="Self.CharacterAgent::TryFindTarget()" />
+      </node>
+    </node>
+  </node>
+</behavior>
