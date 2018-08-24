@@ -7,14 +7,6 @@ namespace SkillCommands
 {
     public class SkillCommand : AbstractCommand
     {
-        protected override void UpdateArguments(object iterator, object[] args)
-        {
-            m_Target.Evaluate(iterator, args);
-        }
-        protected override void UpdateVariables(Instance instance)
-        {
-            m_Target.Evaluate(instance);
-        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
@@ -23,6 +15,14 @@ namespace SkillCommands
                 m_Target.InitFromDsl(callData.GetParam(0));
                 m_SkillId = int.Parse(callData.GetParamId(1));
             }
+        }
+        protected override void UpdateArguments(object iterator, object[] args)
+        {
+            m_Target.Evaluate(iterator, args);
+        }
+        protected override void UpdateVariables(Instance instance)
+        {
+            m_Target.Evaluate(instance);
         }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {

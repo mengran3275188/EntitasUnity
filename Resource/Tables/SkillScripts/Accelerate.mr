@@ -9,6 +9,7 @@ skill(2)
 		{
 			log($$);
             skill($$, 5);
+            camp($$, $$);
             log("use skill");
 		};
 

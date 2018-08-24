@@ -47,6 +47,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
+            CommandManager.Instance.RegisterCommandFactory("camp", new CommandFactoryHelper<SkillCommands.CampCommand>());
         }
 
         public void Execute()
@@ -84,6 +85,7 @@ namespace UnityClient
                             instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
                             instance.SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
                             instance.SkillInstance.Context = null;
+                            instance.SkillInstance.AddVariable("@@id", entity.id.value);
                             instance.SkillInstance.GlobalVariables = m_GlobalVariables;
                             instance.SkillInstance.Start();
 

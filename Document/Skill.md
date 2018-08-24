@@ -293,4 +293,17 @@ looplist(@targetidlist)
     skill($$, 5);
 };
 ```
+### camp
+设置目标阵营
+保留阵营目前是 主角阵营：0， 怪物阵营：1.
+```
+camp(entity_id, camp_id);
+```
+```
+findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+looplist(@targetidlist)
+{
+    camp($$, 5);
+};
+```
 

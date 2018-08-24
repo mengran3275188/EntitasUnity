@@ -80,6 +80,7 @@ namespace UnityClient
                             instance.BuffInstance.SenderDirection = startParam.SenderDirection;
                             instance.BuffInstance.Target = entity;
                             instance.BuffInstance.Context = null;
+                            instance.BuffInstance.AddVariable("@@id", entity.id.value);
                             instance.BuffInstance.GlobalVariables = m_GlobalVariables;
                             instance.BuffInstance.Start();
 
