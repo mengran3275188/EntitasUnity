@@ -55,9 +55,21 @@ namespace UnityClient
             if(component is NpcComponent npcComponent)
             {
                 var chunkEntity = Contexts.sharedInstance.chunk.activeChunkEntity;
-                if(null != chunkEntity)
+                var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
+                if(null != chunkEntity && null != mainPlayer)
                 {
-                    if (group.GetEntities().Length == 0)
+                    bool hasEnemy = false;
+
+                    var npcs = group.GetEntities();
+                    foreach(var npc in npcs)
+                    {
+                        if(npc.hasCamp && npc.camp.Value != mainPlayer.camp.Value)
+                        {
+                            hasEnemy = true;
+                            break;
+                        }
+                    }
+                    if (!hasEnemy)
                     {
                         Services.Instance.ChunkService.OpenDoor(chunkEntity.chunk.Value);
                         chunkEntity.isActiveChunk = false;
