@@ -41,6 +41,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("breaksection", new CommandFactoryHelper<SkillCommands.BreakSectionCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("findtarget", new CommandFactoryHelper<SkillCommands.FindTargetCommand>());
+            CommandManager.Instance.RegisterCommandFactory("children", new CommandFactoryHelper<SkillCommands.ChildrenCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("line", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
             CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());

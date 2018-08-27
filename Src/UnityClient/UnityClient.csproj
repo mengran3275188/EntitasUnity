@@ -125,6 +125,7 @@
     <Compile Include="Game\Features\Skill\Command\BreakSectionCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\CampCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\ChangeLayerCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\ChildrenCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\CircleCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\FindTargetCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\PhysicsMoveCommand.cs" />

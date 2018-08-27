@@ -60,7 +60,7 @@ namespace SceneCommand
         }
         private void LoadVarName(CallData callData)
         {
-            if(callData.GetId() == "objId" && callData.GetParamNum() == 1)
+            if(callData.GetId() == "ret" && callData.GetParamNum() == 1)
             {
                 m_ObjIdVarName = callData.GetParamId(0);
             }
@@ -83,9 +83,9 @@ namespace SceneCommand
             float rotation = target.rotation.Value + m_LocalRotation.y * Mathf.Deg2Rad;
 
             if(m_MainPlayer)
-                Services.Instance.CreateCharacterService.CreatePlayer(entityId, m_CharacterId, campId, position, rotation);
+                Services.Instance.CreateCharacterService.CreatePlayer(entityId, target.parent.value, m_CharacterId, campId, position, rotation);
             else
-                Services.Instance.CreateCharacterService.CreateNpc(entityId, m_CharacterId, campId, position, rotation);
+                Services.Instance.CreateCharacterService.CreateNpc(entityId, target.parent.value, m_CharacterId, campId, position, rotation);
 
             if (m_SkillId > 0)
             {

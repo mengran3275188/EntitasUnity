@@ -11,6 +11,10 @@ namespace Entitas.Data
     {
         [PrimaryEntityIndex]public uint value;
     }
+    public sealed class ParentComponent : IComponent
+    {
+        [EntityIndex] public uint value;
+    }
 
     public sealed class ResourceComponent : IComponent
     {

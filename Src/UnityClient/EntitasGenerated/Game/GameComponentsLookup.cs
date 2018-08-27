@@ -28,17 +28,18 @@ public static class GameComponentsLookup {
     public const int MainPlayer = 17;
     public const int Movement = 18;
     public const int Npc = 19;
-    public const int Physics = 20;
-    public const int Position = 21;
-    public const int Resource = 22;
-    public const int Rotation = 23;
-    public const int Scene = 24;
-    public const int Skill = 25;
-    public const int SkillConfig = 26;
-    public const int View = 27;
-    public const int PositionListener = 28;
+    public const int Parent = 20;
+    public const int Physics = 21;
+    public const int Position = 22;
+    public const int Resource = 23;
+    public const int Rotation = 24;
+    public const int Scene = 25;
+    public const int Skill = 26;
+    public const int SkillConfig = 27;
+    public const int View = 28;
+    public const int PositionListener = 29;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "AI",
@@ -61,6 +62,7 @@ public static class GameComponentsLookup {
         "MainPlayer",
         "Movement",
         "Npc",
+        "Parent",
         "Physics",
         "Position",
         "Resource",
@@ -93,6 +95,7 @@ public static class GameComponentsLookup {
         typeof(Entitas.Data.MainPlayerComponent),
         typeof(Entitas.Data.MovementComponent),
         typeof(Entitas.Data.NpcComponent),
+        typeof(Entitas.Data.ParentComponent),
         typeof(Entitas.Data.PhysicsComponent),
         typeof(Entitas.Data.PositionComponent),
         typeof(Entitas.Data.ResourceComponent),

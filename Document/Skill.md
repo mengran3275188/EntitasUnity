@@ -247,10 +247,10 @@ effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
 ### findtarget
 寻找指定目标
 ```
-findtarget(vector3(offsetx, offsety, offsetz), radius)objid(@retval);
+findtarget(vector3(offsetx, offsety, offsetz), radius)ret(@@retval);
 ```
 ```
-findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+findtarget(vector3(0, 0, 0), 10)ret(@@targetidlist);
 looplist(@targetidlist)
 {
     log($$);
@@ -263,10 +263,10 @@ createcharacter(character_id, vector3(posX, posY, posZ), vector3(rotationX, rota
 {
     mainplayer();
     skill(skill_id);
-}objid(@retval);
+}ret(@@retval);
 ```
 ```
-createcharacter(1, vector3(0, 0, 0), vector3(0, 90, 0)objid(@characterid);
+createcharacter(1, vector3(0, 0, 0), vector3(0, 90, 0)ret(@@characterid);
 
 createcharacter(1, vector3(0, 0, 1), vector3(0, 90, 0)
 {
@@ -287,7 +287,7 @@ visible(false);
 skill(enity_id, skill_id);
 ```
 ```
-findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+findtarget(vector3(0, 0, 0), 10)ret(@@targetidlist);
 looplist(@targetidlist)
 {
     skill($$, 5);
@@ -300,8 +300,20 @@ looplist(@targetidlist)
 camp(entity_id, camp_id);
 ```
 ```
-findtarget(vector3(0, 0, 0), 10)objid(@targetidlist);
+findtarget(vector3(0, 0, 0), 10)ret(@@targetidlist);
 looplist(@targetidlist)
+{
+    camp($$, 5);
+};
+```
+### children
+获取当前实体所召唤的其他实体
+```
+children()ret(@@retval);
+```
+```
+chuldren()ret(@@childrenlist);
+looplist(@childrenlist)
 {
     camp($$, 5);
 };

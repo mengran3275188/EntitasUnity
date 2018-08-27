@@ -40,7 +40,7 @@ namespace SkillCommands
         }
         private void LoadVarName(CallData callData)
         {
-            if(callData.GetId() == "objid" && callData.GetParamNum() == 1)
+            if(callData.GetId() == "ret" && callData.GetParamNum() == 1)
             {
                 m_ObjIdVarName = callData.GetParamId(0);
             }
