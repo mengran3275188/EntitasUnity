@@ -104,12 +104,5 @@ namespace SceneCommand
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
         private string m_ObjIdVarName = string.Empty;
-
-        private enum PhysicsType
-        {
-            Invalid,
-            Box,
-            Capsule,
-        }
     }
 }
