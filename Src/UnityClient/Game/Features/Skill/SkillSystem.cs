@@ -17,7 +17,6 @@ namespace UnityClient
         }
         public void Initialize()
         {
-
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
             CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
@@ -84,7 +83,7 @@ namespace UnityClient
                             instance.SkillInstance.Target = entity;
                             instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
                             instance.SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                            instance.SkillInstance.Context = null;
+                            instance.SkillInstance.Context = Contexts.sharedInstance.game;
                             instance.SkillInstance.AddVariable("@@id", entity.id.value);
                             instance.SkillInstance.GlobalVariables = m_GlobalVariables;
                             instance.SkillInstance.Start();

@@ -79,7 +79,7 @@ namespace UnityClient
                             instance.BuffInstance.SenderPosition = startParam.SenderPosition;
                             instance.BuffInstance.SenderDirection = startParam.SenderDirection;
                             instance.BuffInstance.Target = entity;
-                            instance.BuffInstance.Context = null;
+                            instance.BuffInstance.Context = Contexts.sharedInstance.game;
                             instance.BuffInstance.AddVariable("@@id", entity.id.value);
                             instance.BuffInstance.GlobalVariables = m_GlobalVariables;
                             instance.BuffInstance.Start();
