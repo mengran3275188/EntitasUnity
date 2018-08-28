@@ -50,6 +50,9 @@ public class CharacterAgent : behaviac.Agent
         var target = GetTargetEntity();
         var self = GetOwner();
 
+        if (null == target)
+            return float.MaxValue;
+
         return ExtensionUnityVector3.DistanceXZ(self.position.Value, target.position.Value);
         ///<<< END WRITING YOUR CODE
 	}
@@ -62,6 +65,9 @@ public class CharacterAgent : behaviac.Agent
 
         var target = GetTargetEntity();
         var self = GetOwner();
+
+        if (null == target)
+            return;
 
         Vector3 direction = self.position.Value - target.position.Value;
         direction.y = 0;
@@ -79,6 +85,9 @@ public class CharacterAgent : behaviac.Agent
         if (IsSkillActivite() || IsBuffActivite())
             return;
 
+        if (null == target)
+            return;
+
         Vector3 direction = target.position.Value - self.position.Value;
         self.ReplaceRotation(direction.ToDir());
         ///<<< END WRITING YOUR CODE
@@ -94,12 +103,15 @@ public class CharacterAgent : behaviac.Agent
         var target = GetTargetEntity();
         var self = GetOwner();
 
+        if (null == target)
+            return behaviac.EBTStatus.BT_SUCCESS;
+
         Vector3 direction = target.position.Value - self.position.Value;
         direction.y = 0;
         self.ReplaceMovement(direction.normalized * self.attr.Value.MoveSpeed);
         self.ReplaceRotation(direction.ToDir());
 
-		return behaviac.EBTStatus.BT_INVALID;
+		return behaviac.EBTStatus.BT_SUCCESS;
 ///<<< END WRITING YOUR CODE
 	}
 
