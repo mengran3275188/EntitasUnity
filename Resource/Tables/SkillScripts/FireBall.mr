@@ -60,7 +60,7 @@ skill(1004)
             box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
             statebuff("Default", 1);
             statebuff("Skill", 3);
-        }objid("@colliderId");
+        }ret("@colliderId");
 		wait(7000);
 		destroyself();
 		terminate();
@@ -155,7 +155,7 @@ skill(1005)
                 box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
                 statebuff("Default", 1);
                 statebuff("Skill", 3);
-			}objid("@colliderId");
+			}ret("@colliderId");
 			wait(800);
 		};
 		destroyself();
@@ -184,7 +184,7 @@ skill(1006)
                 box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
 					statebuff("Default", 1);
 					statebuff("Skill", 3);
-			}objid("@colliderId");
+			}ret("@colliderId");
 			wait(800);
 		};
 		destroyself();
@@ -212,7 +212,7 @@ skill(1007)
                 box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
                 statebuff("Default", 1);
                 statebuff("Skill", 3);
-			}objid("@colliderId");
+			}ret("@colliderId");
 			wait(800);
 		};
 		destroyself();
@@ -240,7 +240,7 @@ skill(1008)
                 box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
                 statebuff("Default", 1);
                 statebuff("Skill", 3);
-			}objid("@colliderId");
+			}ret("@colliderId");
 			wait(800);
 		};
 		destroyself();

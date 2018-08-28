@@ -20,7 +20,7 @@ skill(30)
             box(vector3(0,1,0), vector3(2, 2, 2));
             statebuff("Default", 1);
             statebuff("Skill", 3);
-        }objid("@colliderId");
+        }ret("@colliderId");
         wait(167);
         animation("attack_01_04")
 		{

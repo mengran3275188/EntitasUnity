@@ -425,7 +425,7 @@ namespace ScriptableSystem
             }
             else
             {
-                Util.LogUtil.Error("AddVariable var name {0} is invalid! var name should starts with @ or @@.");
+                Util.LogUtil.Error("AddVariable var name {0} is invalid! var name should starts with @ or @@.", varName);
             }
         }
         private void AddLocalVariable(string varName, object val)

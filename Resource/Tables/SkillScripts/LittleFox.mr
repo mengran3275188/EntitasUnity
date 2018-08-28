@@ -36,7 +36,7 @@ skill(100202)
             box(vector3(0,0,0), vector3(0.1, 0.1, 1.5));
             statebuff("Default", 1);
             statebuff("Skill", 3);
-        }objid("@colliderId");
+        }ret("@colliderId");
 		wait(700);
 		destroyself();
 		terminate();
