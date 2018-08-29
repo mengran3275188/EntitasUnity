@@ -1,0 +1,34 @@
+skill(900)
+{
+    onmessage("start")
+    {
+        createcharacter(1013, vector3(0, 0, 5), vector3(0, 0, 0))
+        {
+            skill(901);
+        };
+        terminate();
+    };
+};
+
+skill(901)
+{
+    onmessage("start")
+    {
+        wait(1200);
+        createcharacter(1015, vector3(0, 0, 0), vector3(0, 0, 0))
+        {
+            skill(902);
+        };
+        destroyself();
+        terminate();
+    };
+};
+skill(902)
+{
+    onmessage("start")
+    {
+        wait(4000);
+        destroyself();
+        terminate();
+    };
+};
