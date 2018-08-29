@@ -23,10 +23,10 @@ namespace UnityClient
         private void PlayUseSkill(Keyboard.Code keyCode)
         {
             var keybings = Contexts.sharedInstance.input.skillKeyBinding.Value;
-            int skillId = 0;
-            if (keybings.TryGetValue(keyCode, out skillId))
+            int skillIndex = 0;
+            if (keybings.TryGetValue(keyCode, out skillIndex))
             {
-                StartSkillWithCategory((int)keyCode, skillId);
+                StartSkillWithCategoryAndIndex(skillIndex, skillIndex);
             }
         }
         private void OnKeyboardEvent(int keyCode, int what)
@@ -34,18 +34,20 @@ namespace UnityClient
             if ((int)Keyboard.Event.Down == what)
             {
                 var keybings = Contexts.sharedInstance.input.skillKeyBinding.Value;
-                int skillId = 0;
-                if (keybings.TryGetValue((Keyboard.Code)keyCode, out skillId))
+                int skillIndex = 0;
+                if (keybings.TryGetValue((Keyboard.Code)keyCode, out skillIndex))
                 {
-                    StartSkillWithCategory(keyCode, skillId);
+                    StartSkillWithCategoryAndIndex(skillIndex, skillIndex);
                 }
             }
         }
-        private void StartSkillWithCategory(int catecory, int headSkillId)
+        private void StartSkillWithCategoryAndIndex(int catecory, int skillIndex)
         {
             var mainPlayer = Contexts.sharedInstance.game.mainPlayerEntity;
-            if (null != mainPlayer && mainPlayer.hasSkill)
+            if (null != mainPlayer && mainPlayer.hasSkillConfig && mainPlayer.skillConfig.Skills.Count > skillIndex  && mainPlayer.hasSkill)
             {
+                int headSkillId = mainPlayer.skillConfig.Skills[skillIndex].SkillId;
+
                 long curTime = (long)(Contexts.sharedInstance.input.time.Value * 1000);
 
                 int finalSkillId = headSkillId;
