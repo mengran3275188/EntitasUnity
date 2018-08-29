@@ -1,4 +1,54 @@
-# 简介
+
+# 技能系统简介
+
+<!-- vim-markdown-toc GFM -->
+
+* [语法元素](#语法元素)
+* [技能配置](#技能配置)
+* [技能设计](#技能设计)
+    * [术语介绍](#术语介绍)
+    * [技能流程](#技能流程)
+    * [技能打断](#技能打断)
+    * [召唤物](#召唤物)
+        * [仿真物理](#仿真物理)
+        * [Layer](#layer)
+        * [物理材质](#物理材质)
+    * [预置的变量](#预置的变量)
+        * [全局变量](#全局变量)
+        * [局部变量](#局部变量)
+* [命令说明](#命令说明)
+    * [通用命令](#通用命令)
+        * [wait](#wait)
+        * [terminate](#terminate)
+        * [log](#log)
+        * [loop](#loop)
+        * [looplist](#looplist)
+    * [动作命令](#动作命令)
+        * [animation](#animation)
+        * [animationspeed](#animationspeed)
+    * [特效命令](#特效命令)
+        * [effect](#effect)
+        * [lineeffect](#lineeffect)
+    * [位移命令](#位移命令)
+        * [curvemove](#curvemove)
+        * [circlemove](#circlemove)
+        * [physicsmove](#physicsmove)
+    * [伤害命令](#伤害命令)
+        * [areadamage](#areadamage)
+        * [colliderdamage](#colliderdamage)
+        * [removecollider](#removecollider)
+    * [寻找目标命令](#寻找目标命令)
+        * [findtarget](#findtarget)
+        * [children](#children)
+    * [其他命令](#其他命令)
+        * [changelayer](#changelayer)
+        * [movechild](#movechild)
+        * [createcharacter](#createcharacter)
+        * [visible](#visible)
+        * [skill](#skill)
+        * [camp](#camp)
+
+<!-- vim-markdown-toc -->
 
 我们的技能配置采用的是自己设计的DSL语言。DSL语言是在工作中逐渐演化出来的一门交互式脚本语言。语法形式上类似于c语言。有c++和c#的paser和runtime。DSL语言的定位是介于lua，python脚本语言和传统txt，xml配置文件之间，通过提供编程语言的超小子集和强大的可读性配置在灵活性和易用性之间达到平衡。
 
@@ -98,11 +148,12 @@ terminate();
 技能召唤的召唤物都需要Unity View组件，需要移动的要增加Unity Rigid组件，需要物理碰撞的要增加Collider组件。
 根据需要选择Layer类型，详细的Layer类型见物理章节。
 
-### 技能大量使用了仿真物理，主要为了实现
+### 仿真物理 
+技能大量使用了仿真物理，主要为了实现
  * 伤害判定 ：多用trigger触发
  * 物理移动 ：多用Collider实现
 
-### <span id="layer"> Layer</span>
+### Layer
  * Wall
  * InvisibelWall
  * Terrain
@@ -151,7 +202,7 @@ terminate();
 log("hello world.");
 ```
 
-### <span id="loopcommand">loop</span>
+### loop
 将一组指令循环执行指定次数
 ```
 loop(10)
@@ -160,8 +211,8 @@ log($$);
 };
 ```
 
-### <div id="loopcommand">looplist</div>
-类似于[loop](#loopcommand), 迭代元素替换为list元素
+### looplist
+类似于[loop](#loop), 迭代元素替换为list元素
 ```
 looplist(@targets)
 {
@@ -169,7 +220,7 @@ log($$);
 };
 ```
 
-## 特定命令
+## 动作命令 
 
 ### animation
 播放动作
@@ -191,6 +242,37 @@ wrapmode(0);   // 0 = Default; 1 = Once; 2 = loop; 3 = PingPong; 4 = ClampForeve
 ```
 animationspeed("skill_01_animation", 2);
 ```
+
+## 特效命令
+
+### effect
+特效命令
+```
+effect(res_path, delete_time, attach_bone, is_attach);
+effect(res_path, delete_time, attach_bone, is_attach)
+{
+    transform(vector3(offsetx, offsety, offsetz), vector3(rotationx, rotationy, rotationz));
+};
+
+```
+```
+effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
+effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
+{
+    transform(vector3(1, 1, 1));  
+};
+```
+
+### lineeffect
+根据两点创建连线特效，通常和[colliderdamage](#colliderdamage)的line选项共用。
+```
+lineeffect(vector3(startx, starty, startz), vector3(endx, endy, endz), width, remain_time);
+```
+```
+lineeffect(vector3(0, 0, 0), vector3(1, 1, 1), 10, 10);
+```
+
+## 位移命令
 
 ### curvemove
 变加速移动 
@@ -232,6 +314,8 @@ circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, ra
 physicsmove(remain_time, vector3(offsetx, offsety, offsetz))
 ```
 
+## 伤害命令
+
 ### areadamage
 ```
 areadamage(vector3(offsetx, offsety, offsetz), radius)
@@ -249,7 +333,7 @@ areadamage(vector3(0, 0, 0), 3)
 
 ### colliderdamage
 物理检测伤害。
-可选box和line两种伤害判定范围，line伤害判定通常和lineeffect同时使用。
+可选box和line两种伤害判定范围，line伤害判定通常和[lineeffect](#lineeffect)同时使用。
 ```
 colliderdamage(layer, remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
 {
@@ -276,54 +360,13 @@ colliderdamage("TriggerBullet", 1000, 100)
 };
 ```
 
-### changelayer
-改变物理组件的layer，从而改变碰撞检关系。
-[Layer列表](#layer)
-```
-changelayer(layer_name);
-```
-```
-changelayer("PhysicsBullet");
-```
-
 ### removecollider
 移除检测伤害的物理组件
 ```
 removecollider();
 ```
 
-### movechild
-移动挂接模型到指定节点
-```
-movechild("1_JianShi_w_01", "ef_backweapon01"); // 将子节点1_JianShi_w_01移动到挂点ef_backweapon01
-```
-
-### effect
-特效命令
-```
-effect(res_path, delete_time, attach_bone, is_attach);
-effect(res_path, delete_time, attach_bone, is_attach)
-{
-    transform(vector3(offsetx, offsety, offsetz), vector3(rotationx, rotationy, rotationz));
-};
-
-```
-```
-effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
-effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
-{
-    transform(vector3(1, 1, 1));  
-};
-```
-
-### lineeffect
-根据两点创建连线特效，通常和colliderdamage的line选项共用。
-```
-lineeffect(vector3(startx, starty, startz), vector3(endx, endy, endz), width, remain_time);
-```
-```
-lineeffect(vector3(0, 0, 0), vector3(1, 1, 1), 10, 10);
-```
+##寻找目标命令
 
 ### findtarget
 寻找指定目标
@@ -338,6 +381,39 @@ looplist(@targetidlist)
     log($$);
 };
 ```
+
+### children
+获取当前实体所召唤的其他实体
+```
+children()ret(@@retval);
+```
+```
+chuldren()ret(@@childrenlist);
+looplist(@childrenlist)
+{
+    camp($$, 5);
+};
+```
+
+## 其他命令
+
+### changelayer
+改变物理组件的layer，从而改变碰撞检关系。
+[Layer列表](#layer)
+```
+changelayer(layer_name);
+```
+```
+changelayer("PhysicsBullet");
+```
+
+
+### movechild
+移动挂接模型到指定节点
+```
+movechild("1_JianShi_w_01", "ef_backweapon01"); // 将子节点1_JianShi_w_01移动到挂点ef_backweapon01
+```
+
 
 ### createcharacter
 创建character
@@ -390,19 +466,6 @@ camp(entity_id, camp_id);
 ```
 findtarget(vector3(0, 0, 0), 10)ret(@@targetidlist);
 looplist(@targetidlist)
-{
-    camp($$, 5);
-};
-```
-
-### children
-获取当前实体所召唤的其他实体
-```
-children()ret(@@retval);
-```
-```
-chuldren()ret(@@childrenlist);
-looplist(@childrenlist)
 {
     camp($$, 5);
 };
