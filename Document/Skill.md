@@ -55,9 +55,37 @@ skill(1)
 		movechild("1_JianShi_w_01", "ef_backweapon01");
 		terminate();
 	};
+    onmessage("break")
+    {
+		terminate();
+    };
 };
 ```
 # 技能设计
+## 术语介绍
+- skill        : 技能，同一character只能有一个激活技能。存在激活技能时释放技能，会走打断逻辑。
+- buff         : 效果，同一character会有多个激活效果。character和效果id可以唯一确定一个效果。
+- sender       : 施与者，释放技能的发起者。用户控制或者AI控制释放技能时，
+                 施与者是character本身；技能强制召唤者释放技能时，施与者是技能的拥有着。 
+- owner        : 拥有者， 技能的拥有者。是绝大多数技能trigger的默认目标。
+- parent       : 父节点， 产生该character的实体。由场景创建的主角和npc的父节点是场景，
+                 技能召唤的character的父节点是技能的拥有者。
+- global_param : 全局变量，形如@param_name的变量，被所有character的所有技能共享。
+- local_param  : 局部变量，刑如@@param_name的变量，只能在当前技能里被访问，技能结束后会清除。
+## 技能流程
+技能的入口函数为
+```
+onmessage("start")
+{
+};
+```
+技能在执行到
+```
+terminate();
+```
+技能才会结束。
+当技能被打断时，一定会触发消息"onbreak",通常会在onbreak消息里处理资源回收、状态重置、结束技能等行为。
+** 技能正常结束时不会触发onbreak消息 **。
 ## 技能打断
 约定0 - 100 为保留打断类型，100以上由策划设计。
 目前 打断类型 1 为 移动打断。
@@ -76,8 +104,11 @@ skill(1)
 * Character
 * TriggerBullet
 * PhysicsBullet
-
-
+## 预置的变量
+### 全局变量
+当前没有预置的全局变量。
+### 局部变量
+- id     技能owner的id。
 # 命令说明
 ## 通用命令
 ### wait
@@ -160,9 +191,15 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
 };
 ```
 ### circlemove
-极坐标下的变加速移动
+极坐标下的变加速移动，主要用于环绕技能运动方式。
 ```
 circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
+```
+### physicsmove
+为当前执行物理移动的实体赋予初速度。
+** remain_time **现在不起作用
+```
+physicsmove(remain_time, vector3(offsetx, offsety, offsetz))
 ```
 ### areadamage
 ```
@@ -243,7 +280,15 @@ effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
   transform(vector3(1, 1, 1));  
 };
 
+### lineeffect
+根据两点创建连线特效，通常和colliderdamage的line选项共用。
 ```
+lineeffect(vector3(startx, starty, startz), vector3(endx, endy, endz), width, remain_time);
+```
+```
+lineeffect(vector3(0, 0, 0), vector3(1, 1, 1), 10, 10);
+```
+
 ### findtarget
 寻找指定目标
 ```

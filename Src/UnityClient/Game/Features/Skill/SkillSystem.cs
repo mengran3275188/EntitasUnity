@@ -43,7 +43,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("findtarget", new CommandFactoryHelper<SkillCommands.FindTargetCommand>());
             CommandManager.Instance.RegisterCommandFactory("children", new CommandFactoryHelper<SkillCommands.ChildrenCommand>());
 
-            CommandManager.Instance.RegisterCommandFactory("line", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
+            CommandManager.Instance.RegisterCommandFactory("lineeffect", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
             CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
