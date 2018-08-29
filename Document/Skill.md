@@ -29,49 +29,52 @@ DSL里的字符串可以用单引号或者双引号括起来。不带空格的�
 ```
 skill(1)
 {
-	onmessage("start")
-	{
-		log("skill start");
-		movechild("1_JianShi_w_01", "ef_rightweapon01");
-		animation("zhankuang_julitiaokong_01");
-		wait(33);
-		animationspeed("zhankuang_julitiaokong_01", 2.5);
-		wait(167);
-		animationspeed("zhankuang_julitiaokong_01", 1.5);
-		wait(66);
-		animationspeed("zhankuang_julitiaokong_01", 2);
-		wait(67);
-		animationspeed("zhankuang_julitiaokong_01", 1.5);
-		wait(133);
-		animationspeed("zhankuang_julitiaokong_01", 0.125);
-		wait(267);
-		animationspeed("zhankuang_julitiaokong_01", 0.5);
-		wait(167);
-		setanimspeed("zhankuang_julitiaokong_01", 1);
-		wait(700);
-		animation("zhankuang_julitiaokong_02");
-		areadamage(vector3(0, 0, 0), 3, 0);
-		wait(1000);
-		movechild("1_JianShi_w_01", "ef_backweapon01");
-		terminate();
-	};
+    onmessage("start")
+    {
+        log("skill start");
+        movechild("1_JianShi_w_01", "ef_rightweapon01");
+        animation("zhankuang_julitiaokong_01");
+        wait(33);
+        animationspeed("zhankuang_julitiaokong_01", 2.5);
+        wait(167);
+        animationspeed("zhankuang_julitiaokong_01", 1.5);
+        wait(66);
+        animationspeed("zhankuang_julitiaokong_01", 2);
+        wait(67);
+        animationspeed("zhankuang_julitiaokong_01", 1.5);
+        wait(133);
+        animationspeed("zhankuang_julitiaokong_01", 0.125);
+        wait(267);
+        animationspeed("zhankuang_julitiaokong_01", 0.5);
+        wait(167);
+        setanimspeed("zhankuang_julitiaokong_01", 1);
+        wait(700);
+        animation("zhankuang_julitiaokong_02");
+        areadamage(vector3(0, 0, 0), 3, 0);
+        wait(1000);
+        movechild("1_JianShi_w_01", "ef_backweapon01");
+        terminate();
+    };
     onmessage("break")
     {
-		terminate();
+        terminate();
     };
 };
 ```
+
 # 技能设计
+
 ## 术语介绍
 - skill        : 技能，同一character只能有一个激活技能。存在激活技能时释放技能，会走打断逻辑。
 - buff         : 效果，同一character会有多个激活效果。character和效果id可以唯一确定一个效果。
 - sender       : 施与者，释放技能的发起者。用户控制或者AI控制释放技能时，
-                 施与者是character本身；技能强制召唤者释放技能时，施与者是技能的拥有着。 
+    施与者是character本身；技能强制召唤者释放技能时，施与者是技能的拥有着。 
 - owner        : 拥有者， 技能的拥有者。是绝大多数技能trigger的默认目标。
 - parent       : 父节点， 产生该character的实体。由场景创建的主角和npc的父节点是场景，
-                 技能召唤的character的父节点是技能的拥有者。
+    技能召唤的character的父节点是技能的拥有者。
 - global_param : 全局变量，形如@param_name的变量，被所有character的所有技能共享。
 - local_param  : 局部变量，刑如@@param_name的变量，只能在当前技能里被访问，技能结束后会清除。
+
 ## 技能流程
 技能的入口函数为
 ```
@@ -86,62 +89,88 @@ terminate();
 技能才会结束。
 当技能被打断时，一定会触发消息"onbreak",通常会在onbreak消息里处理资源回收、状态重置、结束技能等行为。
 **技能正常结束时不会触发onbreak消息**。
+
 ## 技能打断
 约定0 - 100 为保留打断类型，100以上由策划设计。
 目前 打断类型 1 为 移动打断。
+
 ## 召唤物
 技能召唤的召唤物都需要Unity View组件，需要移动的要增加Unity Rigid组件，需要物理碰撞的要增加Collider组件。
 根据需要选择Layer类型，详细的Layer类型见物理章节。
+
 ### 技能大量使用了仿真物理，主要为了实现
-* 伤害判定 ：多用trigger触发
-* 物理移动 ：多用Collider实现
-### <span id="layer">Layer</span>
-* Wall
-* InvisibelWall
-* Terrain
-* Player
-* Character
-* TriggerBullet
-* PhysicsBullet
+ * 伤害判定 ：多用trigger触发
+ * 物理移动 ：多用Collider实现
+
+### <span id="layer"> Layer</span>
+ * Wall
+ * InvisibelWall
+ * Terrain
+ * Player
+ * Character
+ * TriggerBullet
+ * PhysicsBullet
+
+### 物理材质
+ * Bounce 
+ * NoBounce
+
+Bounce x Bounce     : 完全反弹，不损失任何动量。
+Bounce x NoBounce   : 完全不反弹，动量较大的实体会推动动量较小的实体。
+NoBounce x NoBounce : 完全不反弹，动量较大的实体会推动动量较小的实体。
+
 ## 预置的变量
+
 ### 全局变量
+
 当前没有预置的全局变量。
+
 ### 局部变量
+
 - id     技能owner的id。
+
 # 命令说明
+
 ## 通用命令
+
 ### wait
 等待指定的时间，毫秒为单位
 ```
 wait(milliseconds);
 ```
+
 ### terminate
 结束脚本。
 ```
 terminate();
 ```
+
 ### log
 输出日志。
 ```
 log("hello world.");
 ```
+
 ### <span id="loopcommand">loop</span>
 将一组指令循环执行指定次数
 ```
 loop(10)
 {
-    log($$);
+log($$);
 };
 ```
-### <span id="loopcommand">looplist</span>
+
+### <div id="loopcommand">looplist</div>
 类似于[loop](#loopcommand), 迭代元素替换为list元素
 ```
 looplist(@targets)
 {
-    log($$);
+log($$);
 };
 ```
+
 ## 特定命令
+
 ### animation
 播放动作
 ```
@@ -150,19 +179,21 @@ animation("skill_01_animation");
 ```
 animation("skill_01_animation")
 {
-    speed(1.0f);
-    playmode(1, 1000); 0 = Play; 1 = CrossFade
-    blendmode(0);  // 0 = Blend; 1 = Additive
-    wrapmode(0);   // 0 = Default; 1 = Once; 2 = loop; 3 = PingPong; 4 = ClampForever
+speed(1.0f);
+playmode(1, 1000); 0 = Play; 1 = CrossFade
+blendmode(0);  // 0 = Blend; 1 = Additive
+wrapmode(0);   // 0 = Default; 1 = Once; 2 = loop; 3 = PingPong; 4 = ClampForever
 };
 ```
+
 ### animationspeed
 设置动作速度
 ```
 animationspeed("skill_01_animation", 2);
 ```
+
 ### curvemove
-变加速移动
+变加速移动 
 ```
 enum direction_type
 {
@@ -172,14 +203,10 @@ enum direction_type
     target_sender = 3,
     sender_opposite = 4,
 }
-
-
 curvemove(is_lock_rotate, [movetime, speedx, speedy, speedz, accelx, accely, accelz]+)
 {
     direction(direction_type, always_update_direction);
 };
-```
-```
 curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
 {
     direction(0);
@@ -189,11 +216,13 @@ curvemove(true, 1, 0, 6, 6, 0, 0, 0, 1, 0, 0, 6, 0, 0, 0, 1, 0, -6, 6, 0, 0, 0)
     direction(2, true);
 };
 ```
+
 ### circlemove
 极坐标下的变加速移动，主要用于环绕技能运动方式。
 ```
 circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, radius_accel, angle_accel]+);
 ```
+
 ### physicsmove
 为当前执行物理移动的实体赋予初速度。
 **需要为刚体移动的实体配置特殊的刚体**
@@ -202,6 +231,7 @@ circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, ra
 ```
 physicsmove(remain_time, vector3(offsetx, offsety, offsetz))
 ```
+
 ### areadamage
 ```
 areadamage(vector3(offsetx, offsety, offsetz), radius)
@@ -216,6 +246,7 @@ areadamage(vector3(0, 0, 0), 3)
     statebuff("Default", 1001);
 }
 ```
+
 ### colliderdamage
 物理检测伤害。
 可选box和line两种伤害判定范围，line伤害判定通常和lineeffect同时使用。
@@ -244,6 +275,7 @@ colliderdamage("TriggerBullet", 1000, 100)
     statebuff("Skill", 1002);
 };
 ```
+
 ### changelayer
 改变物理组件的layer，从而改变碰撞检关系。
 [Layer列表](#layer)
@@ -253,6 +285,7 @@ changelayer(layer_name);
 ```
 changelayer("PhysicsBullet");
 ```
+
 ### removecollider
 移除检测伤害的物理组件
 ```
@@ -279,7 +312,7 @@ effect(res_path, delete_time, attach_bone, is_attach)
 effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
 effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
 {
-  transform(vector3(1, 1, 1));  
+    transform(vector3(1, 1, 1));  
 };
 ```
 
@@ -305,6 +338,7 @@ looplist(@targetidlist)
     log($$);
 };
 ```
+
 ### createcharacter
 创建character
 通过mainplayer()选项标示是否主角。
@@ -324,6 +358,7 @@ createcharacter(1, vector3(0, 0, 1), vector3(0, 90, 0)
     skill(1001);
 };
 ```
+
 ### visible
 关闭渲染组件
 ```
@@ -332,6 +367,7 @@ visible(true_of_false);
 ```
 visible(false);
 ```
+
 ### skill
 强制指定目标释放技能
 ```
@@ -344,6 +380,7 @@ looplist(@targetidlist)
     skill($$, 5);
 };
 ```
+
 ### camp
 设置目标阵营
 保留阵营目前是 主角阵营：0， 怪物阵营：1.
@@ -357,6 +394,7 @@ looplist(@targetidlist)
     camp($$, 5);
 };
 ```
+
 ### children
 获取当前实体所召唤的其他实体
 ```
