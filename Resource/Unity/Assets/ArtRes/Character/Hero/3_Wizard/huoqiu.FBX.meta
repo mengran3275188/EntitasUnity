@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: 91df744cd50825b4daa965b3dac88050
+timeCreated: 1496992335
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone_Root
+    100002: Dummy001
+    100004: Dummy002
+    100006: Dummy003
+    100008: Dummy004
+    100010: Dummy005
+    100012: Dummy006
+    100014: Dummy007
+    100016: Dummy008
+    100018: Dummy009
+    100020: //RootNode
+    100022: Object001
+    100024: Object002
+    100026: Object003
+    100028: Object004
+    100030: Object005
+    100032: Object006
+    100034: Object007
+    100036: Object008
+    100038: Object009
+    100040: Object010
+    100042: Object011
+    100044: Object012
+    100046: Object013
+    100048: Object014
+    100050: Object015
+    100052: Sphere001
+    400000: Bone_Root
+    400002: Dummy001
+    400004: Dummy002
+    400006: Dummy003
+    400008: Dummy004
+    400010: Dummy005
+    400012: Dummy006
+    400014: Dummy007
+    400016: Dummy008
+    400018: Dummy009
+    400020: //RootNode
+    400022: Object001
+    400024: Object002
+    400026: Object003
+    400028: Object004
+    400030: Object005
+    400032: Object006
+    400034: Object007
+    400036: Object008
+    400038: Object009
+    400040: Object010
+    400042: Object011
+    400044: Object012
+    400046: Object013
+    400048: Object014
+    400050: Object015
+    400052: Sphere001
+    4300000: Sphere001
+    4300002: Object001
+    4300004: Object002
+    4300006: Object003
+    4300008: Object004
+    4300010: Object005
+    4300012: Object006
+    4300014: Object007
+    4300016: Object008
+    4300018: Object009
+    4300020: Object010
+    4300022: Object011
+    4300024: Object012
+    4300026: Object013
+    4300028: Object014
+    4300030: Object015
+    7400000: broke_01
+    7400002: broke_02
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Object001
+    13700002: Object002
+    13700004: Object003
+    13700006: Object004
+    13700008: Object005
+    13700010: Object006
+    13700012: Object007
+    13700014: Object008
+    13700016: Object009
+    13700018: Object010
+    13700020: Object011
+    13700022: Object012
+    13700024: Object013
+    13700026: Object014
+    13700028: Object015
+    13700030: Sphere001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: broke_01
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 144
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone_Root
+        weight: 1
+      - path: Bone_Root/Dummy001
+        weight: 1
+      - path: Bone_Root/Dummy002
+        weight: 1
+      - path: Bone_Root/Dummy003
+        weight: 1
+      - path: Bone_Root/Dummy004
+        weight: 1
+      - path: Bone_Root/Dummy005
+        weight: 1
+      - path: Bone_Root/Dummy006
+        weight: 1
+      - path: Bone_Root/Dummy007
+        weight: 1
+      - path: Bone_Root/Dummy008
+        weight: 1
+      - path: Bone_Root/Dummy009
+        weight: 1
+      - path: Object001
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: Object003
+        weight: 1
+      - path: Object004
+        weight: 1
+      - path: Object005
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Object008
+        weight: 1
+      - path: Object009
+        weight: 1
+      - path: Object010
+        weight: 1
+      - path: Object011
+        weight: 1
+      - path: Object012
+        weight: 1
+      - path: Object013
+        weight: 1
+      - path: Object014
+        weight: 1
+      - path: Object015
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: broke_02
+      takeName: Take 001
+      firstFrame: 156
+      lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone_Root
+        weight: 1
+      - path: Bone_Root/Dummy001
+        weight: 1
+      - path: Bone_Root/Dummy002
+        weight: 1
+      - path: Bone_Root/Dummy003
+        weight: 1
+      - path: Bone_Root/Dummy004
+        weight: 1
+      - path: Bone_Root/Dummy005
+        weight: 1
+      - path: Bone_Root/Dummy006
+        weight: 1
+      - path: Bone_Root/Dummy007
+        weight: 1
+      - path: Bone_Root/Dummy008
+        weight: 1
+      - path: Bone_Root/Dummy009
+        weight: 1
+      - path: Object001
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: Object003
+        weight: 1
+      - path: Object004
+        weight: 1
+      - path: Object005
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Object008
+        weight: 1
+      - path: Object009
+        weight: 1
+      - path: Object010
+        weight: 1
+      - path: Object011
+        weight: 1
+      - path: Object012
+        weight: 1
+      - path: Object013
+        weight: 1
+      - path: Object014
+        weight: 1
+      - path: Object015
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
