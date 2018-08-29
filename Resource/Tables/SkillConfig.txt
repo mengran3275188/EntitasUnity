@@ -23,3 +23,4 @@ int	string	string	int	int
 900	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
 901	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
 902	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
+903	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	

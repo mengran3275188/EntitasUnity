@@ -27,6 +27,21 @@ skill(902)
 {
     onmessage("start")
     {
+        createcharacter(1014, vector3(0, 0.5, 0), vector3(0, 0, 0))
+        {
+            skill(903);
+        };
+        wait(4000);
+        destroyself();
+        terminate();
+    };
+};
+skill(903)
+{
+    onmessage("start")
+    {
+        wait(100);
+        physicsmove(10, vector3(0, 0, 15));
         wait(4000);
         destroyself();
         terminate();
