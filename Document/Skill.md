@@ -85,14 +85,13 @@ terminate();
 ```
 技能才会结束。
 当技能被打断时，一定会触发消息"onbreak",通常会在onbreak消息里处理资源回收、状态重置、结束技能等行为。
-** 技能正常结束时不会触发onbreak消息 **。
+**技能正常结束时不会触发onbreak消息**。
 ## 技能打断
 约定0 - 100 为保留打断类型，100以上由策划设计。
 目前 打断类型 1 为 移动打断。
 ## 召唤物
 技能召唤的召唤物都需要Unity View组件，需要移动的要增加Unity Rigid组件，需要物理碰撞的要增加Collider组件。
 根据需要选择Layer类型，详细的Layer类型见物理章节。
-## 物理
 ### 技能大量使用了仿真物理，主要为了实现
 * 伤害判定 ：多用trigger触发
 * 物理移动 ：多用Collider实现
@@ -197,7 +196,9 @@ circlemove(start_distance, start_angle, [movetime, radius_speed, angle_speed, ra
 ```
 ### physicsmove
 为当前执行物理移动的实体赋予初速度。
-** remain_time **现在不起作用
+**需要为刚体移动的实体配置特殊的刚体**
+**进行物理移动的实体需要有特殊的刚体配置。这块是离线配置还是运行时设置需要在考虑**
+**remain_time**现在不起作用
 ```
 physicsmove(remain_time, vector3(offsetx, offsety, offsetz))
 ```
@@ -216,7 +217,8 @@ areadamage(vector3(0, 0, 0), 3)
 }
 ```
 ### colliderdamage
-物理检测伤害
+物理检测伤害。
+可选box和line两种伤害判定范围，line伤害判定通常和lineeffect同时使用。
 ```
 colliderdamage(layer, remain_time, damage_interval, vector3(offsetx, offsety, offsetz), vector3(sizex, sizey, sizez))
 {
@@ -279,6 +281,7 @@ effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "bone_root", ture)
 {
   transform(vector3(1, 1, 1));  
 };
+```
 
 ### lineeffect
 根据两点创建连线特效，通常和colliderdamage的line选项共用。
@@ -291,6 +294,7 @@ lineeffect(vector3(0, 0, 0), vector3(1, 1, 1), 10, 10);
 
 ### findtarget
 寻找指定目标
+通过偏移和半径寻找目标，当前已过滤本方阵营玩家。
 ```
 findtarget(vector3(offsetx, offsety, offsetz), radius)ret(@@retval);
 ```
@@ -303,6 +307,8 @@ looplist(@targetidlist)
 ```
 ### createcharacter
 创建character
+通过mainplayer()选项标示是否主角。
+通过skill(skill_id)选项强制被召唤者释放技能。
 ```
 createcharacter(character_id, vector3(posX, posY, posZ), vector3(rotationX, rotationY, rotationZ))
 {
