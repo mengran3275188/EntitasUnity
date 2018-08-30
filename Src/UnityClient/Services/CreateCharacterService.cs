@@ -34,7 +34,7 @@ namespace UnityClient
 
                 // res
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
-                Services.Instance.ViewService.LoadAsset(e, resId, config.Model);
+                Services.Instance.ViewService.LoadAsset(e, resId, config.Model, config.Scale, position);
                 e.AddResource(resId);
 
                 // animation
@@ -43,7 +43,6 @@ namespace UnityClient
                 // movement
                 e.AddMovement(Vector3.zero);
                 Quaternion quaternion = Quaternion.Euler(0, Mathf.Rad2Deg * rotation, 0);
-                e.physics.Rigid.Position = position;
                 e.AddPosition(position);
                 e.AddRotation(rotation);
 
