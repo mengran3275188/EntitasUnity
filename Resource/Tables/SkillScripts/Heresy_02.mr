@@ -1,0 +1,247 @@
+skill(3)
+{
+	onmessage("start")
+	{
+		//animation("cast");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-1,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-2,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(1,1.2,1.5));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(2,1.2,1.5));
+		};
+		wait(100);
+		createcharacter(1012, vector3(0, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1012, vector3(-1, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1012, vector3(-2, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1012, vector3(1, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		createcharacter(1012, vector3(2, 1.2, 1.5), vector3(0, 0, 0))
+		{
+			skill(1004);
+		};
+		//wait(200);
+		terminate();
+	};
+
+};
+
+skill(1004)
+{
+	onmessage("start")
+	{
+		physicsmove(7000, vector3(0, 0, 30));
+		colliderdamage("TriggerBullet", 7000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+		wait(7000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+
+skill(4)
+{
+	onmessage("start")
+	{
+		//animation("cast");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,6));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(-6,1.2,0));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(0,1.2,-6));
+		};
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_cast", 3000, "", false)
+		{
+			transform(vector3(6,1.2,0));
+		};
+		createcharacter(1008, vector3(0, 1.2, 6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1005);
+		};
+		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1006);
+		};
+		createcharacter(1008, vector3(0, 1.2, -6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1007);
+		};
+		createcharacter(1008, vector3(6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1008);
+		};
+		/*
+		wait(100);
+		createcharacter(1008, vector3(0, 1.2, 6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1005);
+		};
+		createcharacter(1008, vector3(-6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1006);
+		};
+		createcharacter(1008, vector3(0, 1.2, -6), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1007);
+		};
+		createcharacter(1008, vector3(6, 1.2, 0), vector3(0, 0, 0))
+		{
+      physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
+			skill(1008);
+		};
+		*/
+		//wait(200);
+		terminate();
+	};
+
+};
+
+skill(1005)
+{
+	onmessage("start")
+	{
+        circlemove(4, 0, 5, 0, 180, 0, 0);
+
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		log("oncollision");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+
+skill(1006)
+{
+	onmessage("start")
+	{
+        circlemove(4, 90, 4, 0, 180, 0, 0);
+
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+                statebuff("Default", 1);
+                statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		log("oncollision");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+skill(1007)
+{
+	onmessage("start")
+	{
+        circlemove(4, 180, 4, 0, 180, 0, 0);
+
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		log("oncollision");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+skill(1008)
+{
+	onmessage("start")
+	{
+        circlemove(4, 270, 4, 0, 180, 0, 0);
+        
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		log("oncollision");
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
