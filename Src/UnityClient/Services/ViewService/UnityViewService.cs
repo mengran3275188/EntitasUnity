@@ -13,11 +13,14 @@ namespace UnityClient
         public UnityViewService(Contexts contexts): base(contexts)
         {
         }
-        public void LoadAsset(GameEntity entity, uint resId, string asset)
+        public void LoadAsset(GameEntity entity, uint resId, string asset, float scale, Vector3 position)
         {
             var viewObject = ResourceSystem.NewObject(asset) as GameObject;
             if(null != viewObject)
             {
+                viewObject.transform.localScale = Vector3.one * scale;
+                viewObject.transform.localPosition = position;
+
                 var view = viewObject.GetComponent<IView>();
                 if(null != view)
                 {
