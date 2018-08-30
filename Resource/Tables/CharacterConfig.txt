@@ -2,7 +2,7 @@ Id	Description	Model	Scale	ActionId	ActionPrefix	AIScript	AttrId	Skills
 int	string	string	float	int	string	string	int	int_array
 1	第一只主角	Monster/ChangAn/5_Npc_Private_03	1	1			1	1|2|3|4|5
 2	第二只主角	Hero/3_Wizard/3_Wizard_A_01	0.7	1			1	900
-3	第三只主角	Monster/ChangAn/5_NPC_Heresy_02	1	1			1	1|2|3|4|5
+3	第三只主角	Monster/ChangAn/5_NPC_Heresy_02	0.8	1			1	50001
 1000	用于隐形召唤物的空模型	Empty	1	-1				
 1001	第一只boss	Monster/Boss_New/5_Boss_t01_01_BearKing_01	1	2			1000	
 1002	第一只小怪	Monster/Campaign_1/5_NPC_LittleFox_01	1	2		FirstBT	1000	
@@ -19,3 +19,5 @@ int	string	string	float	int	string	string	int	int_array
 1013	法师扭曲	Hero_FX/3_Wizard/3_hero_Wizard_s06_niuqu00_01	1	-1				
 1014	法师扭曲子弹	Hero_FX/3_Wizard/3_hero_Wizard_s06_niuqu00_03	1	-1				
 1015	法师扭曲阻挡	Hero_FX/3_Wizard/3_hero_Wizard_s06_niuqu00_02	1	-1				
+5000101	风火法师火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_start	1	-1				
+5000102	风火法师火球	Npc_FX/Partner/Skill_Magic_LittleFireball_01_fly_Bounce	1	-1				

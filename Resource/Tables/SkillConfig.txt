@@ -29,6 +29,7 @@ int	string	string	int	int
 50003	·ç»ğ·¨Ê¦ÆÕ¹¥3	Tables/SkillScripts/Heresy_02.mr	101	
 5000101	ÕÙ»½»ğÇò	Tables/SkillScripts/Heresy_02.mr	101	
 5000102	ÕÙ»½»ğÇò·É³ö	Tables/SkillScripts/Heresy_02.mr	101	
+5000103	ÕÙ»½»ğÇò·É³ö	Tables/SkillScripts/Heresy_02.mr	101	
 50004	·ç»ğ·¨Ê¦ì«·ç	Tables/SkillScripts/Heresy_02.mr	101	
 5000401	ÕÙ»½ì«·ç	Tables/SkillScripts/Heresy_02.mr	101	
 5000402	ÕÙ»½ì«·ç·É³ö	Tables/SkillScripts/Heresy_02.mr	101	
