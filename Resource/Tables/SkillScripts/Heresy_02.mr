@@ -1,0 +1,133 @@
+//风火法师普攻1：召唤两枚随机方向的火球
+skill(50001)
+{
+    onmessage("start")
+    {
+		//设置技能打断时间
+		breaksection(102, 0, 33);
+		breaksection(102, 133, 1000);
+		breaksection(101, 200, 1000);
+		
+		//在技能释放中屏蔽移动和旋转输入
+        disablemoveinput(true);
+        disablerotationinput(true);
+		
+		//播放动作
+        animation("attack_01");
+
+		//0
+        animationspeed("attack_01", 3);
+        wait(100);
+		
+		//9
+        animationspeed("attack_01", 0.5);
+		//召唤原地的火球
+		createcharacter(5000101, vector3(1.06, 1.2, 1.06), vector3(0, 45, 0))
+		{
+			skill(5000101);
+		}ret(@@fireball01);
+		createcharacter(5000101, vector3(-1.06, 1.2, 1.06), vector3(0, -45, 0))
+		{
+			skill(5000101);
+		}ret(@@fireball02);
+        wait(200);
+
+		//12
+        animationspeed("attack_01", 3);
+		//播放攻击特效
+        effect("Monster_FX/Campaign_1/6_Npc_Private_Attack_01", 3000, "", false);
+        wait(100);
+
+		//21
+        animationspeed("attack_01", 0.5);
+		//召唤飞行的火球
+		createcharacter(5000102, vector3(1.06, 1.2, 1.06), vector3(0, 45, 0))
+		{
+			skill(5000102);
+		}ret(@@fireball03);
+		createcharacter(5000102, vector3(-1.06, 1.2, 1.06), vector3(0, -45, 0))
+		{
+			skill(5000102);
+		}ret(@@fireball04);
+		//删除原地的火球
+		skill(@@fireball01, 5000103);
+		skill(@@fireball02, 5000103);
+        wait(200);
+		
+		//24
+        animationspeed("attack_01", 1);
+		
+		//39
+        wait(500);
+        terminate();
+    };
+
+    onmessage("onbreak")
+    {
+        log("onbreak");
+        enablemove(false);
+        enablerotation(false);
+        terminate();
+    };
+};
+
+skill(5000101)
+{
+	onmessage("start")
+	{
+		colliderdamage("TriggerBullet", 5000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+		wait(5000);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+
+skill(5000102)
+{
+	onmessage("start")
+	{
+		curvemove(true, 5, 0, 0, 9, 0, 0, 0)
+		{
+			direction(0);
+		};
+		colliderdamage("TriggerBullet", 5000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+		wait(5000);
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+	
+	onmessage("oncollision")
+	{
+		effect("Npc_FX/Partner/Skill_Magic_LittleFireball_01_boom", 3000, "", false);
+		destroyself();
+		terminate();
+	};
+};
+
+skill(5000103)
+{
+	onmessage("start")
+	{
+		wait(50);
+		destroyself();
+		terminate();
+	};
+};

@@ -24,5 +24,32 @@ int	string	string	int	int
 901	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
 902	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
 903	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
-904	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
-905	法师杀戮空间	Tables/SkillScripts/Magic/KillingFloor.mr	101	
+50001	风火法师普攻1	Tables/SkillScripts/Heresy_02.mr	101	500002
+50002	风火法师普攻2	Tables/SkillScripts/Heresy_02.mr	101	500003
+50003	风火法师普攻3	Tables/SkillScripts/Heresy_02.mr	101	
+5000101	召唤火球	Tables/SkillScripts/Heresy_02.mr	101	
+5000102	召唤火球飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000103	召唤火球飞出	Tables/SkillScripts/Heresy_02.mr	101	
+50004	风火法师飓风	Tables/SkillScripts/Heresy_02.mr	101	
+5000401	召唤飓风	Tables/SkillScripts/Heresy_02.mr	101	
+5000402	召唤飓风飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000403	召唤火球碰撞飓风	Tables/SkillScripts/Heresy_02.mr	101	
+50005	风火法师风闪	Tables/SkillScripts/Heresy_02.mr	101	
+5000501	召唤风闪飓风	Tables/SkillScripts/Heresy_02.mr	101	
+50006	风火法师风火轮	Tables/SkillScripts/Heresy_02.mr	101	
+5000601	召唤风火轮1	Tables/SkillScripts/Heresy_02.mr	101	
+5000602	召唤风火轮2	Tables/SkillScripts/Heresy_02.mr	101	
+5000603	召唤风火轮3	Tables/SkillScripts/Heresy_02.mr	101	
+5000604	召唤风火轮4	Tables/SkillScripts/Heresy_02.mr	101	
+5000605	召唤风火轮5	Tables/SkillScripts/Heresy_02.mr	101	
+5000606	召唤风火轮6	Tables/SkillScripts/Heresy_02.mr	101	
+5000607	召唤风火轮7	Tables/SkillScripts/Heresy_02.mr	101	
+5000608	召唤风火轮8	Tables/SkillScripts/Heresy_02.mr	101	
+5000609	召唤风火轮1飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000610	召唤风火轮2飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000611	召唤风火轮3飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000612	召唤风火轮4飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000613	召唤风火轮5飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000614	召唤风火轮6飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000615	召唤风火轮7飞出	Tables/SkillScripts/Heresy_02.mr	101	
+5000616	召唤风火轮8飞出	Tables/SkillScripts/Heresy_02.mr	101	
