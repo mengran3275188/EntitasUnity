@@ -127,7 +127,7 @@ namespace ScriptableSystem
         {
             get { return m_ParallelCommands; }
         }
-        public CSharpInstance Clone()
+        public IInstance Clone()
         {
             CSharpInstance instance = new CSharpInstance();
             foreach (var handler in m_MessageHandlers)

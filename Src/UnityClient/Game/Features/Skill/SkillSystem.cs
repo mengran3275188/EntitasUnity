@@ -48,6 +48,9 @@ namespace UnityClient
 
             CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
             CommandManager.Instance.RegisterCommandFactory("camp", new CommandFactoryHelper<SkillCommands.CampCommand>());
+
+            ConfigManager.Instance.AddInstanceResource(SkillScripts.Skill_Test.GetId(), new SkillScripts.Skill_Test());
+
         }
 
         public void Execute()
@@ -204,7 +207,6 @@ namespace UnityClient
                     ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath(config.Script));
 
                 IInstance instance = ConfigManager.Instance.NewInstance(skillId, 0);
-                instance = new SkillScripts.Skill_Test();
                 if(null == instance)
                 {
                     LogUtil.Error("Can't load skill config, skill:{0}!", skillId);

@@ -11,10 +11,17 @@ namespace SkillScripts
 {
     public sealed class Skill_Test : ScriptableSystem.CSharpInstance
     {
-        public override bool Init()
+        public Skill_Test()
         {
             AddMessageHandler("start", Message_Start);
-            return true;
+        }
+        public static int GetId()
+        {
+            return 100 * GetSkillId();
+        }
+        private static int GetSkillId()
+        {
+            return 900;
         }
         private static void Message_Start(CSharpInstance instance, long time, long deltaTime)
         {

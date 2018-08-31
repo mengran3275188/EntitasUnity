@@ -28,6 +28,7 @@ namespace ScriptableSystem
         void ClearMessage(params string[] msgIds);
         void AddVariable(string varName, object val);
         void Reset();
+        IInstance Clone();
     }
 
     public sealed class MessageHandler
@@ -210,7 +211,7 @@ namespace ScriptableSystem
         {
             get { return m_ParallelCommands; }
         }
-        public Instance Clone()
+        public IInstance Clone()
         {
             Instance instance = new Instance();
             foreach (KeyValuePair<string, object> pair in m_PreInitedLocalVariables)

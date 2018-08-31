@@ -56,9 +56,9 @@ namespace ScriptableSystem
         }
         public IInstance NewInstance(int id, int type)
         {
-            Instance instance = null;
+            IInstance instance = null;
             int finalId = GenId(id, type);
-            Instance temp = GetInstanceResource(finalId);
+            IInstance temp = GetInstanceResource(finalId);
             if (null != temp)
             {
                 instance = temp.Clone();
@@ -70,6 +70,16 @@ namespace ScriptableSystem
             lock (m_Lock)
             {
                 m_Instances.Clear();
+            }
+        }
+        public void AddInstanceResource(int id, IInstance instance)
+        {
+            lock(m_Lock)
+            {
+                if(!m_Instances.ContainsKey(id))
+                {
+                    m_Instances.Add(id, instance);
+                }
             }
         }
 
@@ -105,33 +115,11 @@ namespace ScriptableSystem
                         }
                     }
                 }
-                /*
-                foreach (ScriptableData.ScriptableDataInfo info in dataFile.ScriptableDatas) {
-                  if (info.GetId() == "story" || info.GetId() == "script") {
-                    ScriptableData.FunctionData funcData = info.First;
-                    if (null != funcData) {
-                      ScriptableData.CallData callData = funcData.Call;
-                      if (null != callData && callData.HaveParam()) {
-                        int storyId = int.Parse(callData.GetParamId(0));
-                        int id = GenId(storyId, sceneId);
-                        if (!m_Instances.ContainsKey(id)) {
-                          Instance instance = new Instance();
-                          instance.Init(info);
-                          m_Instances.Add(id, instance);
-
-                          LogSystem.Debug("ParseStory {0}", id);
-                        } else {
-                          //repeated story config.
-                        }
-                      }
-                    }
-                  }
-                }*/
             }
         }
-        private Instance GetInstanceResource(int id)
+        private IInstance GetInstanceResource(int id)
         {
-            Instance instance = null;
+            IInstance instance = null;
             lock (m_Lock)
             {
                 m_Instances.TryGetValue(id, out instance);
@@ -140,7 +128,7 @@ namespace ScriptableSystem
         }
 
         private object m_Lock = new object();
-        private Dictionary<int, Instance> m_Instances = new Dictionary<int, Instance>();
+        private Dictionary<int, IInstance> m_Instances = new Dictionary<int, IInstance>();
         private static int GenId(int id, int type)
         {
             return id * 100 + type;
