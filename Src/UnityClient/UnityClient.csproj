@@ -132,6 +132,7 @@
     <Compile Include="Game\Features\Skill\Command\SkillCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\VisibleCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\VolumetricLineCommand.cs" />
+    <Compile Include="Game\Features\Skill\SkillScripts\CommandHelper.cs" />
     <Compile Include="Game\Features\Skill\SkillScripts\Skill_Test.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\Features\SkillInputSystem.cs" />

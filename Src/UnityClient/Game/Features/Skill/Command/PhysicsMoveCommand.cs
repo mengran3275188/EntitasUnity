@@ -8,6 +8,10 @@ namespace SkillCommands
 {
     public class PhysicsMoveCommand : AbstractCommand
     {
+        public void Load(Vector3 speed)
+        {
+            m_Speed = speed;
+        }
         protected override void Load(CallData callData)
         {
             if (callData.GetParamNum() > 1)

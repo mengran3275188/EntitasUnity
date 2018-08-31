@@ -41,6 +41,31 @@ namespace SkillCommands
             if (m_HaveObjId)
                 m_ObjIdVarName.Evaluate(instance);
         }
+        internal void Load(int layer, long remainTime, long damageInterval, Vector3 offset, Vector3 size, params StateBuff[] stateBuffs)
+        {
+            m_LayerId = layer;
+            m_RemainTime = remainTime;
+            m_Interval = damageInterval;
+            m_Offset = offset;
+            m_Size = size;
+            m_Rotation = Quaternion.identity;
+            foreach (var stateBuff in stateBuffs)
+                m_StateImpacts[stateBuff.m_State] = stateBuff;
+
+        }
+        internal void Load(int layer, long remainTime, long damageInterval, Vector3 startPos, Vector3 endPos, float radius, params StateBuff[] stateBuffs)
+        {
+            m_LayerId = layer;
+            m_RemainTime = remainTime;
+            m_Interval = damageInterval;
+
+            m_Offset = (startPos + endPos) / 2;
+            m_Size = new Vector3(Vector3.Distance(startPos, endPos), radius, radius);
+
+            m_Rotation = Quaternion.LookRotation(Vector3.Cross((endPos - startPos), Vector3.up));
+            foreach (var stateBuff in stateBuffs)
+                m_StateImpacts[stateBuff.m_State] = stateBuff;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();

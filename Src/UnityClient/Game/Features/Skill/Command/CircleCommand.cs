@@ -15,6 +15,21 @@ namespace SkillCommands
             copy.m_StartPos = m_StartPos;
             return copy;
         }
+        public void Load(float startDistance, float startAngle, params float[] args)
+        {
+            m_StartPos = new Vector3(startDistance, 0, startAngle);
+
+            for(int i = 0; i < args.Length; i+=5)
+            {
+                MoveSectionInfo section = new MoveSectionInfo();
+                section.moveTime = args[i];
+                section.speedVect.x = args[i + 1];
+                section.speedVect.z = args[i + 2];
+                section.accelVect.x = args[i + 3];
+                section.accelVect.z = args[i + 4];
+                m_SectionList.Add(section);
+            }
+        }
         protected override void Load(CallData callData)
         {
             int sectionNum = 0;
@@ -34,7 +49,7 @@ namespace SkillCommands
                 section.speedVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 3));
                 section.speedVect.z = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 4));
                 section.accelVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 5));
-                section.accelVect.x = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 6));
+                section.accelVect.z = (float)System.Convert.ToDouble(callData.GetParamId(sectionNum * 5 + 6));
                 m_SectionList.Add(section);
                 sectionNum++;
             }

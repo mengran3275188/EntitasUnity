@@ -47,7 +47,9 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
+
             CommandManager.Instance.RegisterCommandFactory("camp", new CommandFactoryHelper<SkillCommands.CampCommand>());
+            CommandManager.Instance.RegisterCommandFactory("csharpcamp", new CommandFactoryHelper<SkillCommands.CSharpCampCommand>());
 
             ConfigManager.Instance.AddInstanceResource(SkillScripts.Skill_Test.GetId(), new SkillScripts.Skill_Test());
 

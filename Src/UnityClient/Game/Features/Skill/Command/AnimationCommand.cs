@@ -115,6 +115,11 @@ namespace SkillCommands
             return ExecResult.Finished;
         }
 
+        public void Load(string animationName, float speed)
+        {
+            m_AnimName = animationName;
+            m_Speed = speed;
+        }
         protected override void Load(ScriptableData.CallData callData)
         {
             int num = callData.GetParamNum();

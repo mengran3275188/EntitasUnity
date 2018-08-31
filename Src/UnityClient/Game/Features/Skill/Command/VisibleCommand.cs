@@ -6,6 +6,10 @@ namespace SkillCommands
 {
     internal class VisibleCommand : AbstractCommand
     {
+        internal void Load(bool visible)
+        {
+            m_Visible = visible;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
@@ -28,5 +32,6 @@ namespace SkillCommands
         }
 
         private bool m_Visible = true;
+
     }
 }

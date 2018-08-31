@@ -25,6 +25,15 @@ namespace SkillCommands
             }
             return command;
         }
+        public void Load(Vector3 offset, float radius, params StateBuff[] stateBuffs)
+        {
+            m_RelativeCenter = offset;
+            m_Range = radius;
+            foreach(var stateBuff in stateBuffs)
+            {
+                m_StateImpacts[stateBuff.m_State] = stateBuff;
+            }
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();

@@ -8,6 +8,10 @@ namespace SkillCommands
 {
     public class ChildrenCommand : AbstractCommand
     {
+        public void Load(string retValueName)
+        {
+            m_RetString = retValueName;
+        }
         protected override void Load(StatementData statementData)
         {
             if(statementData.Functions.Count == 2)

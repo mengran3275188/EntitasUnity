@@ -8,6 +8,12 @@ namespace SkillCommands
 {
     public class FindTargetCommand : AbstractCommand
     {
+        public void Load(Vector3 offset, float radius, string retValueName)
+        {
+            m_Offset = offset;
+            m_Radius = radius;
+            m_ObjIdVarName = retValueName;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();

@@ -7,6 +7,11 @@ namespace SkillCommands
 {
     public class SkillCommand : AbstractCommand
     {
+        internal void Load(uint entityId, int skillId)
+        {
+            m_TargetId = entityId;
+            m_SkillId = skillId;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
@@ -29,7 +34,11 @@ namespace SkillCommands
             GameEntity target = instance.Target as GameEntity;
             if (null == target)
                 return ExecResult.Finished;
-            GameEntity skillEntity = Contexts.sharedInstance.game.GetEntityWithId(m_Target.Value);
+            uint targetId = m_TargetId;
+            if (m_Target.HaveValue)
+                targetId = m_Target.Value;
+
+            GameEntity skillEntity = Contexts.sharedInstance.game.GetEntityWithId(targetId);
             if (null == skillEntity)
                 return ExecResult.Finished;
 
@@ -39,6 +48,8 @@ namespace SkillCommands
         }
 
         private IValue<uint> m_Target = new SkillValue<uint>();
+        private uint m_TargetId = 0;
         private int m_SkillId = 0;
+
     }
 }

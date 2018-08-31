@@ -45,6 +45,25 @@ namespace SkillCommands
             copy.m_IsCurveMoving = true;
             return copy;
         }
+        public void Load(int direction, params float[] args)
+        {
+            m_DirectionType = (DirectionType)direction;
+
+            m_SectionList.Clear();
+            for(int i = 0; i < args.Length; i+=7)
+            {
+                MoveSectionInfo section = new MoveSectionInfo();
+                section.moveTime = args[i];
+                section.speedVect.x = args[i + 1];
+                section.speedVect.y = args[i + 2];
+                section.speedVect.z = args[i + 3];
+                section.accelVect.x = args[i + 4];
+                section.accelVect.y = args[i + 5];
+                section.accelVect.z = args[i + 6];
+                m_SectionList.Add(section);
+            }
+            m_IsCurveMoving = true;
+        }
         protected override void Load(ScriptableData.CallData callData)
         {
             if (callData.GetParamNum() > 0)

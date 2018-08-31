@@ -36,7 +36,6 @@
     * [伤害命令](#伤害命令)
         * [areadamage](#areadamage)
         * [colliderdamage](#colliderdamage)
-        * [removecollider](#removecollider)
     * [寻找目标命令](#寻找目标命令)
         * [findtarget](#findtarget)
         * [children](#children)
@@ -360,12 +359,6 @@ colliderdamage("TriggerBullet", 1000, 100)
     statebuff("Default", 1001);
     statebuff("Skill", 1002);
 };
-```
-
-### removecollider
-移除检测伤害的物理组件
-```
-removecollider();
 ```
 
 ##寻找目标命令

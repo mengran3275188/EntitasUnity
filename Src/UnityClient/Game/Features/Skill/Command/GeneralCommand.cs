@@ -8,6 +8,11 @@ namespace SkillCommands
 {
     internal class MoveChildTrigger : AbstractCommand
     {
+        internal void Load(string childName, string nodeName)
+        {
+            m_ChildName = childName;
+            m_NodeName = nodeName;
+        }
         protected override void Load(ScriptableData.CallData callData)
         {
             if (callData.GetParamNum() > 0)

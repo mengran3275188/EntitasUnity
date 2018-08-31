@@ -11,6 +11,14 @@ namespace SceneCommand
 {
     internal class CreateCharacterCommand : AbstractCommand
     {
+        public void Load(int characterId, Vector3 position, Vector3 rotation, bool isMainPlayer, int skillId)
+        {
+            m_CharacterId = characterId;
+            m_LocalPosition = position;
+            m_LocalRotation = rotation;
+            m_MainPlayer = isMainPlayer;
+            m_SkillId = skillId;
+        }
         protected override void Load(CallData callData)
         {
             if (callData.GetParamNum() >= 3)

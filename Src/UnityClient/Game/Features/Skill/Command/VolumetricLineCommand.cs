@@ -9,6 +9,13 @@ namespace SkillCommands
 {
     internal class VolumetricLineCommand : AbstractCommand
     {
+        public void Load(Vector3 startPos, Vector3 endPos, float width, long remainTime)
+        {
+            m_StartPos = startPos;
+            m_EndPos = endPos;
+            m_Width = width;
+            m_RemianTime = remainTime;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();

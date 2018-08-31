@@ -7,6 +7,10 @@ namespace SkillCommands
 {
     internal class ChangeLayerCommand : AbstractCommand
     {
+        public void Load(string layerName)
+        {
+            m_TargetLayer = LayerMask.NameToLayer(layerName);
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();

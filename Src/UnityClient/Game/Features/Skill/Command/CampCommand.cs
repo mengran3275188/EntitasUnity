@@ -4,6 +4,37 @@ using ScriptableData;
 
 namespace SkillCommands
 {
+    internal class CSharpCampCommand : AbstractCommand
+    {
+        public void Load(uint entityId, int campId)
+        {
+            m_EntityId = entityId;
+            m_CampId = campId;
+        }
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
+        {
+            GameEntity target = instance.Target as GameEntity;
+            if (null == target)
+                return ExecResult.Finished;
+            GameEntity entity = Contexts.sharedInstance.game.GetEntityWithId(m_EntityId);
+            if (null == entity)
+                return ExecResult.Finished;
+
+            entity.ReplaceCamp(m_CampId);
+            if(entity.hasAI)
+            {
+                if (entity.aI.Agent is CharacterAgent agent)
+                {
+                    agent._set_m_CurTargetId(0);
+                }
+            }
+
+            return ExecResult.Finished;
+        }
+
+        private uint m_EntityId = 0;
+        private int m_CampId = 0;
+    }
     internal class CampCommand : AbstractCommand
     {
         protected override void Load(CallData callData)
