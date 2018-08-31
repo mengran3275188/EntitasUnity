@@ -45,6 +45,26 @@ namespace SceneCommand
                 }
             }
         }
+        protected override void Load(StatementData statementData)
+        {
+            if(statementData.Functions.Count == 2)
+            {
+                FunctionData first = statementData.First;
+                FunctionData second = statementData.Second;
+                if(null != first && null != first.Call && null != second && null != second.Call)
+                {
+                    Load(first);
+                    LoadVarName(second.Call);
+                }
+            }
+        }
+        private void LoadVarName(CallData callData)
+        {
+            if(callData.GetId() == "ret" && callData.GetParamNum() == 1)
+            {
+                m_ObjIdVarName = callData.GetParamId(0);
+            }
+        }
         protected override ExecResult ExecCommand(Instance instance, long delta)
         {
             var gameContext = Contexts.sharedInstance.game;
@@ -63,15 +83,19 @@ namespace SceneCommand
             float rotation = target.rotation.Value + m_LocalRotation.y * Mathf.Deg2Rad;
 
             if(m_MainPlayer)
-                Services.Instance.CreateCharacterService.CreatePlayer(entityId, m_CharacterId, campId, position, rotation);
+                Services.Instance.CreateCharacterService.CreatePlayer(entityId, target.id.value, m_CharacterId, campId, position, rotation);
             else
-                Services.Instance.CreateCharacterService.CreateNpc(entityId, m_CharacterId, campId, position, rotation);
+                Services.Instance.CreateCharacterService.CreateNpc(entityId, target.id.value, m_CharacterId, campId, position, rotation);
 
             if (m_SkillId > 0)
             {
                 var entity = gameContext.GetEntityWithId(entityId);
                 SkillSystem.Instance.StartSkill(target, entity, m_SkillId, -1, target.position.Value, target.rotation.Value);
             }
+
+            if (!string.IsNullOrEmpty(m_ObjIdVarName))
+                instance.AddVariable(m_ObjIdVarName, entityId);
+
             return ExecResult.Finished;
         }
         private int m_CharacterId;
@@ -79,12 +103,6 @@ namespace SceneCommand
         private Vector3 m_LocalPosition;
         private Vector3 m_LocalRotation;
         private int m_SkillId = 0;
-
-        private enum PhysicsType
-        {
-            Invalid,
-            Box,
-            Capsule,
-        }
+        private string m_ObjIdVarName = string.Empty;
     }
 }

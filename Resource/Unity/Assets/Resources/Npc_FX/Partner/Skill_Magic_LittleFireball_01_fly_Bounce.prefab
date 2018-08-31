@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 421668}
   - component: {fileID: 19847470}
   - component: {fileID: 19930086}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 461848}
   - component: {fileID: 19860220}
   - component: {fileID: 19952542}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 434974}
   - component: {fileID: 19879744}
   - component: {fileID: 19946428}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 54491015039262910}
   - component: {fileID: 114973920045436052}
   - component: {fileID: 135682530430801332}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Skill_Magic_LittleFireball_01_fly_Bounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 410416}
   - component: {fileID: 19866166}
   - component: {fileID: 19932372}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18508,7 +18508,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193604}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b4f986d16ae256e44bf496e2b975bc00, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

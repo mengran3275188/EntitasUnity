@@ -28,7 +28,7 @@ namespace UnityClient
                 GameObject.DestroyImmediate(m_UIRoot.GetChild(i).gameObject);
             }
         }
-        public void ShowGamemap(GameEntity[] chunkEntities)
+        public void ShowGamemap(ChunkEntity[] chunkEntities)
         {
             Transform mapTransform = m_UIRoot.Find("GameMap");
             if (null == mapTransform)
@@ -44,7 +44,7 @@ namespace UnityClient
             }
 
         }
-        private void GenerateGameMap(Transform root, GameEntity[] entities)
+        private void GenerateGameMap(Transform root, ChunkEntity[] entities)
         {
             Bounds bounds = new Bounds();
             foreach(var chunkEntity in entities)

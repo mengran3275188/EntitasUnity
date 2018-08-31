@@ -21,13 +21,15 @@ public partial class Contexts : Entitas.IContexts {
 
     static Contexts _sharedInstance;
 
+    public ChunkContext chunk { get; set; }
     public GameContext game { get; set; }
     public GameStateContext gameState { get; set; }
     public InputContext input { get; set; }
 
-    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { game, gameState, input }; } }
+    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { chunk, game, gameState, input }; } }
 
     public Contexts() {
+        chunk = new ChunkContext();
         game = new GameContext();
         gameState = new GameStateContext();
         input = new InputContext();
@@ -61,6 +63,7 @@ public partial class Contexts : Entitas.IContexts {
 public partial class Contexts {
 
     public const string Id = "Id";
+    public const string Parent = "Parent";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
@@ -68,6 +71,11 @@ public partial class Contexts {
             Id,
             game.GetGroup(GameMatcher.Id),
             (e, c) => ((Entitas.Data.IdComponent)c).value));
+
+        game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, uint>(
+            Parent,
+            game.GetGroup(GameMatcher.Parent),
+            (e, c) => ((Entitas.Data.ParentComponent)c).value));
     }
 }
 
@@ -75,6 +83,10 @@ public static class ContextsExtensions {
 
     public static GameEntity GetEntityWithId(this GameContext context, uint value) {
         return ((Entitas.PrimaryEntityIndex<GameEntity, uint>)context.GetEntityIndex(Contexts.Id)).GetEntity(value);
+    }
+
+    public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithParent(this GameContext context, uint value) {
+        return ((Entitas.EntityIndex<GameEntity, uint>)context.GetEntityIndex(Contexts.Parent)).GetEntities(value);
     }
 }
 //------------------------------------------------------------------------------
@@ -92,6 +104,7 @@ public partial class Contexts {
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeContexObservers() {
         try {
+            CreateContextObserver(chunk);
             CreateContextObserver(game);
             CreateContextObserver(gameState);
             CreateContextObserver(input);

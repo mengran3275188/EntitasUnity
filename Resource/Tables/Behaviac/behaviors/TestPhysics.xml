@@ -4,7 +4,7 @@
     <Comment Background="NoColor" Text="" />
     <DescriptorRefs value="0:" />
     <Connector Identifier="GenericChildren">
-      <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="0" Method="Self.CharacterAgent::MoveToPlayer()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_INVALID">
+      <Node Class="PluginBehaviac.Nodes.Action" Enable="true" HasOwnPrefabData="false" Id="0" Method="Self.CharacterAgent::MoveToTarget()" PrefabName="" PrefabNodeId="-1" ResultFunctor="&quot;&quot;" ResultOption="BT_INVALID">
         <Comment Background="NoColor" Text="" />
       </Node>
     </Connector>

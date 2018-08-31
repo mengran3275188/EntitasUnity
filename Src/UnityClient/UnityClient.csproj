@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UNITY_EDITOR</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -39,11 +39,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Plugins\Behaviac.dll</HintPath>
     </Reference>
+    <Reference Include="DesperateDevs.Utils, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Plugins\DesperateDevs.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="Entitas">
       <HintPath>..\Plugins\Entitas.dll</HintPath>
     </Reference>
     <Reference Include="Entitas.CodeGeneration.Attributes">
       <HintPath>..\Plugins\Entitas.CodeGeneration.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Unity">
+      <HintPath>..\Plugins\Entitas.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.Unity">
+      <HintPath>..\Plugins\Entitas.VisualDebugging.Unity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,6 +73,13 @@
   <ItemGroup>
     <Compile Include="behaviac_generated\types\AgentProperties.cs" />
     <Compile Include="behaviac_generated\types\CharacterAgent.cs" />
+    <Compile Include="Chunk\ChunkSystems.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkAttribute.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkComponents.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkComponentsLookup.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkContext.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkEntity.cs" />
+    <Compile Include="EntitasGenerated\Chunk\ChunkMatcher.cs" />
     <Compile Include="EntitasGenerated\Contexts.cs" />
     <Compile Include="EntitasGenerated\Events\Components\PositionListenerComponent.cs" />
     <Compile Include="EntitasGenerated\Events\GameEventSystems.cs" />
@@ -91,7 +108,7 @@
     <Compile Include="Game\Features\AISystem.cs" />
     <Compile Include="Game\Features\AttrSystem.cs" />
     <Compile Include="Game\Features\BornSystem.cs" />
-    <Compile Include="Game\Features\ChunkSystem.cs" />
+    <Compile Include="Chunk\Features\ChunkSystem.cs" />
     <Compile Include="Game\Features\Cleanup\CleanResourceSystem.cs" />
     <Compile Include="Game\Features\Cleanup\CleanupEntitySystem.cs" />
     <Compile Include="Game\Features\DeadSystem.cs" />
@@ -106,8 +123,15 @@
     <Compile Include="Game\Features\Scene\SceneSystem.cs" />
     <Compile Include="GameState\Features\ChangeSceneSystem.cs" />
     <Compile Include="Game\Features\Skill\Command\BreakSectionCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\CampCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\ChangeLayerCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\ChildrenCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\CircleCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\FindTargetCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\PhysicsMoveCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\SkillCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\VisibleCommand.cs" />
+    <Compile Include="Game\Features\Skill\Command\VolumetricLineCommand.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\Features\SkillInputSystem.cs" />
     <Compile Include="Input\Features\SkillKeyBindingSystem.cs" />

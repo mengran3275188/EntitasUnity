@@ -17,7 +17,6 @@ namespace UnityClient
         }
         public void Initialize()
         {
-
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
             CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
@@ -32,6 +31,7 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("destroyself", new CommandFactoryHelper<SkillCommands.DestroySelfCommand>());
             CommandManager.Instance.RegisterCommandFactory("colliderdamage", new CommandFactoryHelper<SkillCommands.ColliderDamageCommand>());
             CommandManager.Instance.RegisterCommandFactory("damage", new CommandFactoryHelper<SkillCommands.DamageCommand>());
+            CommandManager.Instance.RegisterCommandFactory("changelayer", new CommandFactoryHelper<SkillCommands.ChangeLayerCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("selfbuff", new CommandFactoryHelper<SkillCommands.SelfBuffCommand>());
 
@@ -39,6 +39,15 @@ namespace UnityClient
             CommandManager.Instance.RegisterCommandFactory("disablerotationinput", new CommandFactoryHelper<SkillCommands.DisableRotationInputCommand>());
 
             CommandManager.Instance.RegisterCommandFactory("breaksection", new CommandFactoryHelper<SkillCommands.BreakSectionCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("findtarget", new CommandFactoryHelper<SkillCommands.FindTargetCommand>());
+            CommandManager.Instance.RegisterCommandFactory("children", new CommandFactoryHelper<SkillCommands.ChildrenCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("lineeffect", new CommandFactoryHelper<SkillCommands.VolumetricLineCommand>());
+            CommandManager.Instance.RegisterCommandFactory("visible", new CommandFactoryHelper<SkillCommands.VisibleCommand>());
+
+            CommandManager.Instance.RegisterCommandFactory("skill", new CommandFactoryHelper<SkillCommands.SkillCommand>());
+            CommandManager.Instance.RegisterCommandFactory("camp", new CommandFactoryHelper<SkillCommands.CampCommand>());
         }
 
         public void Execute()
@@ -75,7 +84,8 @@ namespace UnityClient
                             instance.SkillInstance.Target = entity;
                             instance.SkillInstance.SenderPosition = skillComponent.StartParam.SenderPosition; ;
                             instance.SkillInstance.SenderDirection = skillComponent.StartParam.SenderDirection;
-                            instance.SkillInstance.Context = null;
+                            instance.SkillInstance.Context = Contexts.sharedInstance.game;
+                            instance.SkillInstance.AddVariable("@@id", entity.id.value);
                             instance.SkillInstance.GlobalVariables = m_GlobalVariables;
                             instance.SkillInstance.Start();
 
@@ -131,6 +141,10 @@ namespace UnityClient
             {
                 BreakSkill(entity);
             }
+        }
+        public void ForceBreakSkill(GameEntity entity)
+        {
+            BreakSkill(entity);
         }
         public Vector3 GetSkillVelocity(GameEntity entity)
         {

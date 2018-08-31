@@ -34,7 +34,7 @@ namespace UnityClient
 
                 foreach(var chunk in chunks)
                 {
-                    var e = _contexts.game.CreateEntity();
+                    var e = _contexts.chunk.CreateEntity();
                     e.AddChunk(chunk);
                 }
             }

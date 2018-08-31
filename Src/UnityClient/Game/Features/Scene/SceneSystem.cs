@@ -31,6 +31,9 @@ namespace UnityClient
                 Contexts.sharedInstance.game.ReplaceScene(config, sceneInstance);
                 Contexts.sharedInstance.game.sceneEntity.ReplacePosition(Vector3.zero);
                 Contexts.sharedInstance.game.sceneEntity.ReplaceRotation(0);
+
+                uint entityId = IdSystem.Instance.GenId(IdEnum.Entity);
+                Contexts.sharedInstance.game.sceneEntity.ReplaceId(entityId);
                 Services.Instance.SceneService.InitChunks();
 
                 sceneInstance.m_SceneInstance.Start();

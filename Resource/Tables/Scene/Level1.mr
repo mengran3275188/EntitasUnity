@@ -3,7 +3,7 @@ script(3)
 	onmessage("start")
 	{
 		log("scene start");
-		createcharacter(1, vector3(61, 0, 102), vector3(0, 0, 0))
+		createcharacter(3, vector3(61, 0, 102), vector3(0, 0, 0))
 		{
 			mainplayer();
             attr(1);

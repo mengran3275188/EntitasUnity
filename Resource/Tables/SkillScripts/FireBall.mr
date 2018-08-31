@@ -55,11 +55,12 @@ skill(1004)
 	onmessage("start")
 	{
 		physicsmove(7000, vector3(0, 0, 30));
-		colliderdamage(7000, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
+		colliderdamage("TriggerBullet", 7000, 100)
         {
-				statebuff("Default", 1);
-				statebuff("Skill", 3);
-        }objid("@colliderId");
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
 		wait(7000);
 		destroyself();
 		terminate();
@@ -114,6 +115,7 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1008);
 		};
+		/*
 		wait(100);
 		createcharacter(1008, vector3(0, 1.2, 6), vector3(0, 0, 0))
 		{
@@ -135,6 +137,7 @@ skill(4)
       physics(true, vector(0, 0, 0), vector3(0.1, 0.1, 1.5));
 			skill(1008);
 		};
+		*/
 		//wait(200);
 		terminate();
 	};
@@ -145,17 +148,15 @@ skill(1005)
 {
 	onmessage("start")
 	{
-		loop(5)
-		{
-			circlemove(4, 0, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
+        circlemove(4, 0, 5, 0, 180, 0, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
-			{
-					statebuff("Default", 1);
-					statebuff("Skill", 3);
-			}objid("@colliderId");
-			wait(800);
-		};
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
 		destroyself();
 		terminate();
 	};
@@ -173,17 +174,15 @@ skill(1006)
 {
 	onmessage("start")
 	{
-		loop(5)
-		{
-			circlemove(4, 90, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
+        circlemove(4, 90, 4, 0, 180, 0, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
-			{
-					statebuff("Default", 1);
-					statebuff("Skill", 3);
-			}objid("@colliderId");
-			wait(800);
-		};
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+                statebuff("Default", 1);
+                statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
 		destroyself();
 		terminate();
 	};
@@ -200,17 +199,15 @@ skill(1007)
 {
 	onmessage("start")
 	{
-		loop(5)
-		{
-			circlemove(4, 180, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
+        circlemove(4, 180, 4, 0, 180, 0, 0);
 
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
-			{
-					statebuff("Default", 1);
-					statebuff("Skill", 3);
-			}objid("@colliderId");
-			wait(800);
-		};
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
 		destroyself();
 		terminate();
 	};
@@ -227,17 +224,15 @@ skill(1008)
 {
 	onmessage("start")
 	{
-		loop(5)
-		{
-			circlemove(4, 270, 1, 8, 180, -4, 0, 1, -8, 180, 4, 0);
-			
-			colliderdamage(800, 100, vector3(0,0,0), vector3(0.5, 0.5, 1.5))
-			{
-					statebuff("Default", 1);
-					statebuff("Skill", 3);
-			}objid("@colliderId");
-			wait(800);
-		};
+        circlemove(4, 270, 4, 0, 180, 0, 0);
+        
+        colliderdamage("TriggerBullet", 4000, 100)
+        {
+            box(vector3(0,0,0), vector3(0.5, 0.5, 1.5));
+            statebuff("Default", 1);
+            statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(4000);
 		destroyself();
 		terminate();
 	};

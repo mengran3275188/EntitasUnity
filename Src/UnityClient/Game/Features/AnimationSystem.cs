@@ -31,7 +31,7 @@ namespace UnityClient
                     Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Dead));
                 }else if(entity.hasBorn)
                 {
-                    Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
+                    //Services.Instance.ViewService.CrossFadeAnimation(entity, GetAnimationName(animation.ActionId, animation.Prefix, AnimationType.Born));
                 }
                 else
                 {

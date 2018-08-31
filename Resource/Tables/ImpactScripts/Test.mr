@@ -29,7 +29,9 @@ skill(2)
 {
 	onmessage("start")
 	{
+		visible(false);
 		wait(1666);
+		visible(true);
 		terminate();
 	};
 };

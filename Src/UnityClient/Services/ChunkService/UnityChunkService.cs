@@ -10,7 +10,7 @@ namespace UnityClient
         public UnityChunkService(Contexts contexts) : base(contexts)
         {
         }
-        public void LoadChunk(GameEntity entity, IChunk chunk)
+        public void LoadChunk(ChunkEntity entity, IChunk chunk)
         {
             UnityChunk unityChunk = chunk as UnityChunk;
 
@@ -53,6 +53,8 @@ namespace UnityClient
         {
             UnityChunk unityChunk = chunk as UnityChunk;
 
+            GameEntity sceneEntity = _contexts.game.sceneEntity;
+
             foreach (var npcSpawn in unityChunk.m_Npcs)
             {
 
@@ -60,7 +62,7 @@ namespace UnityClient
                 Vector3 position = unityChunk.gameObject.transform.TransformPoint(npcSpawn.Position);
                 float rotation = 0;
 
-                Services.Instance.CreateCharacterService.CreateNpc(entityId, npcSpawn.NpcId, (int)CampId.Blue, position, rotation);
+                Services.Instance.CreateCharacterService.CreateNpc(entityId, sceneEntity.id.value, npcSpawn.NpcId, (int)CampId.Blue, position, rotation);
             }
         }
         private void LoadChunkDoor(UnityChunk chunk, UnityChunkDoor chunkDoor)

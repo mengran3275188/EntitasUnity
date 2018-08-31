@@ -3,7 +3,7 @@
 <!--Source File: TestPhysics.xml-->
 <behavior name="TestPhysics" agenttype="CharacterAgent" version="5">
   <node class="Action" id="0">
-    <property Method="Self.CharacterAgent::MoveToPlayer()" />
+    <property Method="Self.CharacterAgent::MoveToTarget()" />
     <property ResultOption="BT_INVALID" />
   </node>
 </behavior>

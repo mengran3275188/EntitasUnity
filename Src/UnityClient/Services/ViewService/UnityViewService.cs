@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityDelegate;
 using Entitas.Data;
+using Entitas.Unity;
 using Util;
 
 namespace UnityClient
@@ -12,11 +13,14 @@ namespace UnityClient
         public UnityViewService(Contexts contexts): base(contexts)
         {
         }
-        public void LoadAsset(GameEntity entity, uint resId, string asset)
+        public void LoadAsset(GameEntity entity, uint resId, string asset, float scale, Vector3 position)
         {
             var viewObject = ResourceSystem.NewObject(asset) as GameObject;
             if(null != viewObject)
             {
+                viewObject.transform.localScale = Vector3.one * scale;
+                viewObject.transform.localPosition = position;
+
                 var view = viewObject.GetComponent<IView>();
                 if(null != view)
                 {
@@ -27,6 +31,8 @@ namespace UnityClient
                 var rigidbody = viewObject.GetComponent<IRigidbody>();
                 if (null != rigidbody)
                     entity.AddPhysics(rigidbody, Vector3.zero);
+
+                viewObject.Link(entity, Contexts.sharedInstance.game);
 
             }
             else
@@ -39,6 +45,7 @@ namespace UnityClient
             if(entity.hasView)
             {
                 UnityView view = entity.view.Value as UnityView;
+                view.gameObject.Unlink();
                 ResourceSystem.RecycleObject(view.gameObject);
             }
         }

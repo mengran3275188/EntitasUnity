@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Terrain
+  - Player
+  - Character
+  - TriggerBullet
+  - PhysicsBullet
+  - InvisibelWall
   - 
   - 
   - 

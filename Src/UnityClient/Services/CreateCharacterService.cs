@@ -10,19 +10,19 @@ namespace UnityClient
         public CreateCharacterService(Contexts contexts) : base(contexts)
         {
         }
-        public void CreateNpc(uint id, int characterId, int campId, Vector3 position, float rotation)
+        public void CreateNpc(uint id, uint parentId, int characterId, int campId, Vector3 position, float rotation)
         {
-            var e = CreateCharacter(id, characterId, campId, position, rotation);
+            var e = CreateCharacter(id, parentId, characterId, campId, position, rotation);
             if (null != e)
                 e.isNpc = true;
         }
-        public void CreatePlayer(uint id, int characterId, int campId, Vector3 position, float rotation)
+        public void CreatePlayer(uint id, uint parentId, int characterId, int campId, Vector3 position, float rotation)
         {
-            var e = CreateCharacter(id, characterId, campId, position, rotation);
+            var e = CreateCharacter(id, parentId, characterId, campId, position, rotation);
             if (null != e)
                 e.isMainPlayer = true;
         }
-        private GameEntity CreateCharacter(uint id, int characterId, int campId, Vector3 position, float rotation)
+        private GameEntity CreateCharacter(uint id, uint parentId, int characterId, int campId, Vector3 position, float rotation)
         {
             CharacterConfig config = CharacterConfigProvider.Instance.GetCharacterConfig(characterId);
             if (null != config)
@@ -30,9 +30,11 @@ namespace UnityClient
                 var e = _contexts.game.CreateEntity();
                 e.AddId(id);
 
+                e.AddParent(parentId);
+
                 // res
                 uint resId = IdSystem.Instance.GenId(IdEnum.Resource);
-                Services.Instance.ViewService.LoadAsset(e, resId, config.Model);
+                Services.Instance.ViewService.LoadAsset(e, resId, config.Model, config.Scale, position);
                 e.AddResource(resId);
 
                 // animation
@@ -41,7 +43,6 @@ namespace UnityClient
                 // movement
                 e.AddMovement(Vector3.zero);
                 Quaternion quaternion = Quaternion.Euler(0, Mathf.Rad2Deg * rotation, 0);
-                e.physics.Rigid.Position = position;
                 e.AddPosition(position);
                 e.AddRotation(rotation);
 

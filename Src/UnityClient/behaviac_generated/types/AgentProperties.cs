@@ -188,7 +188,7 @@ namespace behaviac
 
 		public override bool Load()
 		{
-			AgentMeta.TotalSignature = 2081019846;
+			AgentMeta.TotalSignature = 3403492403;
 
 			AgentMeta meta;
 
@@ -203,16 +203,19 @@ namespace behaviac
 			meta.RegisterMethod(502968959, new CMethod_behaviac_Agent_VectorRemove());
 
 			// CharacterAgent
-			meta = new AgentMeta(1264563113);
+			meta = new AgentMeta(1867616810);
 			AgentMeta._AgentMetas_[3209652550] = meta;
+			meta.RegisterMemberProperty(3920670722, new CMemberProperty<uint>("m_CurTargetId", delegate(Agent self, uint value) { ((CharacterAgent)self)._set_m_CurTargetId(value); }, delegate(Agent self) { return ((CharacterAgent)self)._get_m_CurTargetId(); }));
+			meta.RegisterMemberProperty(3197991956, new CMemberProperty<uint>("m_ExternalTargetId", delegate(Agent self, uint value) { ((CharacterAgent)self)._set_m_ExternalTargetId(value); }, delegate(Agent self) { return ((CharacterAgent)self)._get_m_ExternalTargetId(); }));
 			meta.RegisterMethod(1672911688, new CAgentMethod<bool>(delegate(Agent self) { return ((CharacterAgent)self).CanUseSkill(); }));
-			meta.RegisterMethod(1915352992, new CAgentMethod<float>(delegate(Agent self) { return ((CharacterAgent)self).DistanceToPlayer(); }));
-			meta.RegisterMethod(2241023544, new CAgentMethodVoid(delegate(Agent self) { ((CharacterAgent)self).EscapeFromPlayer(); }));
+			meta.RegisterMethod(4213484053, new CAgentMethod<float>(delegate(Agent self) { return ((CharacterAgent)self).DistanceToTarget(); }));
+			meta.RegisterMethod(211686285, new CAgentMethodVoid(delegate(Agent self) { ((CharacterAgent)self).EscapeFromTarget(); }));
 			meta.RegisterMethod(3148996176, new CAgentMethodVoid(delegate(Agent self) { ((CharacterAgent)self).FaceToTarget(); }));
 			meta.RegisterMethod(1045109914, new CAgentStaticMethodVoid<string>(delegate(string param0) { CharacterAgent.LogMessage(param0); }));
-			meta.RegisterMethod(3823470545, new CAgentMethod<behaviac.EBTStatus>(delegate(Agent self) { return ((CharacterAgent)self).MoveToPlayer(); }));
+			meta.RegisterMethod(1793645156, new CAgentMethod<behaviac.EBTStatus>(delegate(Agent self) { return ((CharacterAgent)self).MoveToTarget(); }));
 			meta.RegisterMethod(605181692, new CAgentMethodVoid<string>(delegate(Agent self, string animName) { ((CharacterAgent)self).PlayAnimation(animName); }));
 			meta.RegisterMethod(2313437402, new CAgentMethodVoid(delegate(Agent self) { ((CharacterAgent)self).StopMove(); }));
+			meta.RegisterMethod(3934788799, new CAgentMethod<uint>(delegate(Agent self) { return ((CharacterAgent)self).TryFindTarget(); }));
 			meta.RegisterMethod(2129264648, new CAgentMethodVoid<int>(delegate(Agent self, int SkillId) { ((CharacterAgent)self).UseSkill(SkillId); }));
 			meta.RegisterMethod(2521019022, new CMethod_behaviac_Agent_VectorAdd());
 			meta.RegisterMethod(2306090221, new CMethod_behaviac_Agent_VectorClear());

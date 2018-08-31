@@ -10,7 +10,6 @@ namespace UnityClient
         {
             Add(IdSystem.Instance);
             Add(SceneSystem.Instance);
-            Add(new ChunkSystem(contexts));
             Add(new AttrSystem(contexts));
             Add(new HpSystem(contexts));
             Add(new DeadSystem(contexts));

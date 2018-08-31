@@ -116,7 +116,7 @@ namespace SkillCommands
 
             Vector3 targetPos = centerPos + Quaternion.Euler(0, nowPos.z, 0) * (Vector3.forward * nowPos.x);
 
-
+            target.ReplaceRotation((targetPos - target.physics.Rigid.Position).ToDir());
             target.physics.Rigid.Position = targetPos;
         }
 

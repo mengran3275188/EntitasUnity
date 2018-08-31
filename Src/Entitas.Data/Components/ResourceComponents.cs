@@ -11,6 +11,10 @@ namespace Entitas.Data
     {
         [PrimaryEntityIndex]public uint value;
     }
+    public sealed class ParentComponent : IComponent
+    {
+        [EntityIndex] public uint value;
+    }
 
     public sealed class ResourceComponent : IComponent
     {
@@ -58,10 +62,6 @@ namespace Entitas.Data
     public sealed class BornComponent : IComponent
     {
         public float BornTime;
-    }
-    public sealed class ChunkComponent : IComponent
-    {
-        public IChunk Value;
     }
     public sealed class ChunkDoorComponent : IComponent
     {
