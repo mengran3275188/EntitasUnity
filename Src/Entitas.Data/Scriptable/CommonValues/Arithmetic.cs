@@ -34,13 +34,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -120,13 +120,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -195,13 +195,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -270,13 +270,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -345,13 +345,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -419,12 +419,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -487,12 +487,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -555,12 +555,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -623,12 +623,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -699,7 +699,7 @@ namespace ScriptableSystem.CommonValues
         m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       if (m_ParamNum > 0)
         m_X.Evaluate(instance);
@@ -707,7 +707,7 @@ namespace ScriptableSystem.CommonValues
         m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       if (m_ParamNum > 0)
         m_X.Analyze(instance);
@@ -791,7 +791,7 @@ namespace ScriptableSystem.CommonValues
         m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       if (m_ParamNum > 0)
         m_X.Evaluate(instance);
@@ -799,7 +799,7 @@ namespace ScriptableSystem.CommonValues
         m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       if (m_ParamNum > 0)
         m_X.Analyze(instance);
@@ -867,12 +867,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -928,12 +928,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -989,12 +989,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -1050,12 +1050,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -1111,12 +1111,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }
@@ -1181,14 +1181,14 @@ namespace ScriptableSystem.CommonValues
       }
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       for (int i = 0; i < m_List.Count; i++) {
         m_List[i].Evaluate(instance);
       }
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       for (int i = 0; i < m_List.Count; i++) {
         m_List[i].Analyze(instance);
@@ -1281,14 +1281,14 @@ namespace ScriptableSystem.CommonValues
       }
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       for (int i = 0; i < m_List.Count; i++) {
         m_List[i].Evaluate(instance);
       }
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       for (int i = 0; i < m_List.Count; i++) {
         m_List[i].Analyze(instance);

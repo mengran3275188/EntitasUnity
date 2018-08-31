@@ -24,12 +24,12 @@ namespace ScriptableSystem.CommonCommands
       m_Value.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Value.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       if (m_Value.HaveValue) {
         if (m_VarName.StartsWith("@@")) {
@@ -84,12 +84,12 @@ namespace ScriptableSystem.CommonCommands
       m_Value.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Value.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       if (m_VarName.StartsWith("@@")) {
         if (null != instance.GlobalVariables) {
@@ -184,12 +184,12 @@ namespace ScriptableSystem.CommonCommands
       m_Value.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Value.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       if (m_VarName.StartsWith("@@")) {
         if (null != instance.GlobalVariables) {
@@ -282,13 +282,13 @@ namespace ScriptableSystem.CommonCommands
       m_Value.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_VarName.Evaluate(instance);
       m_Value.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       if (m_VarName.HaveValue && m_Value.HaveValue) {
         string varName = m_VarName.Value;
@@ -344,14 +344,14 @@ namespace ScriptableSystem.CommonCommands
       m_Value.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_ListValue.Evaluate(instance);
       m_IndexValue.Evaluate(instance);
       m_Value.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       if (m_ListValue.HaveValue && m_IndexValue.HaveValue && m_Value.HaveValue) {
         IList listValue = m_ListValue.Value;

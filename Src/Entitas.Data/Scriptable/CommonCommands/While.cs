@@ -44,12 +44,12 @@ namespace ScriptableSystem.CommonCommands
       m_Condition.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Condition.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       ExecResult ret = ExecResult.Blocked;
       while (ret == ExecResult.Blocked) {

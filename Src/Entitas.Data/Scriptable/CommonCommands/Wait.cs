@@ -25,12 +25,12 @@ namespace ScriptableSystem.CommonCommands
       m_Time.Evaluate(iterator, args);    
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Time.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       int curTime = m_CurTime;
       m_CurTime += (int)delta;

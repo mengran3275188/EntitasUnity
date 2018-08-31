@@ -21,12 +21,12 @@ namespace ScriptableSystem.CommonValues
     }
     public void Evaluate(object iterator, object[] args)
     {}
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_Value = (int)TimeUtility.Instance.GetLocalMilliseconds();
       m_HaveValue = true;
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
     }
     public bool HaveValue

@@ -36,7 +36,7 @@ namespace SkillCommands
             if (m_HaveObjId)
                 m_ObjIdVarName.Evaluate(iterator, args);
         }
-        protected override void UpdateVariables(Instance instance)
+        protected override void UpdateVariables(IInstance instance)
         {
             if (m_HaveObjId)
                 m_ObjIdVarName.Evaluate(instance);
@@ -119,7 +119,7 @@ namespace SkillCommands
                 m_HaveObjId = true;
             }
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if (null == target)
@@ -193,7 +193,7 @@ namespace SkillCommands
         private IValue<string> m_ObjIdVarName = new SkillValue<string>();
         private bool m_HaveObjId = false;
         private GameEntity m_Target = null;
-        private Instance m_Instance = null;
+        private IInstance m_Instance = null;
         private Dictionary<uint, long> m_DamagedEntities = new Dictionary<uint, long>();
 
     }

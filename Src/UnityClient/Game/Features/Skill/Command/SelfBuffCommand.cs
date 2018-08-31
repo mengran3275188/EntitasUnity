@@ -16,7 +16,7 @@ namespace SkillCommands
                 m_BuffId = int.Parse(callData.GetParamId(0));
         }
 
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
 
             if(instance.Target is GameEntity obj)

@@ -20,12 +20,12 @@ namespace SkillCommands
             m_CampId.Evaluate(iterator, args);
             m_EntityId.Evaluate(iterator, args);
         }
-        protected override void UpdateVariables(Instance instance)
+        protected override void UpdateVariables(IInstance instance)
         {
             m_CampId.Evaluate(instance);
             m_EntityId.Evaluate(instance);
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if (null == target)

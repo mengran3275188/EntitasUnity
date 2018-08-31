@@ -65,7 +65,7 @@ namespace SceneCommand
                 m_ObjIdVarName = callData.GetParamId(0);
             }
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             var gameContext = Contexts.sharedInstance.game;
 

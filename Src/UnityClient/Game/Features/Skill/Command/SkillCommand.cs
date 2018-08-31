@@ -20,11 +20,11 @@ namespace SkillCommands
         {
             m_Target.Evaluate(iterator, args);
         }
-        protected override void UpdateVariables(Instance instance)
+        protected override void UpdateVariables(IInstance instance)
         {
             m_Target.Evaluate(instance);
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if (null == target)

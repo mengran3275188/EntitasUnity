@@ -19,7 +19,7 @@ namespace SkillCommands
     internal class EffectCommand : AbstractCommand
     {
 
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             if(instance.Target is GameEntity obj)
             {
@@ -40,6 +40,14 @@ namespace SkillCommands
             return ExecResult.Finished;
         }
 
+        public void Load(string path, float deleteTime, string attachPath, bool isAttach, Vector3 position)
+        {
+            m_EffectPath = path;
+            m_DeleteTime = deleteTime;
+            m_AttachPath = attachPath;
+            m_IsAttach = isAttach;
+            m_Pos = position;
+        }
         protected override void Load(ScriptableData.CallData callData)
         {
             int num = callData.GetParamNum();

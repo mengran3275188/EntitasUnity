@@ -7,7 +7,7 @@ namespace Entitas.Data
     public class SceneInstanceInfo
     {
         public int m_SceneId;
-        public Instance m_SceneInstance;
+        public IInstance m_SceneInstance;
         public bool m_IsUsed;
     }
 }

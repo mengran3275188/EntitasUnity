@@ -203,11 +203,18 @@ namespace UnityClient
                 if(null != config)
                     ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath(config.Script));
 
-                Instance instance = ConfigManager.Instance.NewInstance(skillId, 0);
+                IInstance instance = ConfigManager.Instance.NewInstance(skillId, 0);
+                instance = new SkillScripts.Skill_Test();
                 if(null == instance)
                 {
                     LogUtil.Error("Can't load skill config, skill:{0}!", skillId);
                 }
+                if (instance is CSharpInstance cshapInstance)
+                {
+                    cshapInstance.Init();
+                    instance = cshapInstance.Clone();
+                }
+
                 SkillInstanceInfo res = new SkillInstanceInfo
                 {
                     SkillId = skillId,

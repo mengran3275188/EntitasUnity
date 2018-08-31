@@ -14,7 +14,7 @@ namespace SkillCommands
                 m_Visible = bool.Parse(callData.GetParamId(0));
             }
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (null == obj)

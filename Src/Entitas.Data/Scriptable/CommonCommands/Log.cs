@@ -38,7 +38,7 @@ namespace ScriptableSystem.CommonCommands
       }*/
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Format.Evaluate(instance);
       for (int i = 0; i < m_FormatArgs.Count; i++)
@@ -51,7 +51,7 @@ namespace ScriptableSystem.CommonCommands
       }*/
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       string format = m_Format.Value;
       ArrayList arglist = new ArrayList();

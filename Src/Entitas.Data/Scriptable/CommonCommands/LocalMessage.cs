@@ -37,7 +37,7 @@ namespace ScriptableSystem.CommonCommands
       }*/
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_MsgId.Evaluate(instance);
       for (int i = 0; i < m_MsgArgs.Count; i++)
@@ -50,7 +50,7 @@ namespace ScriptableSystem.CommonCommands
       }*/
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       string msgId = m_MsgId.Value;
       ArrayList arglist = new ArrayList();
@@ -104,14 +104,14 @@ namespace ScriptableSystem.CommonCommands
       }
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       for (int i = 0; i < m_MsgIds.Count; i++) {
         m_MsgIds[i].Evaluate(instance);
       }
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       string[] arglist = new string[m_MsgIds.Count];
       for (int i = 0; i < m_MsgIds.Count; i++) {

@@ -20,7 +20,7 @@ namespace SkillCommands
                 m_RemianTime = long.Parse(callData.GetParamId(3));
             }
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (null == obj)

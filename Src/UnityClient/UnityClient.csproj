@@ -132,6 +132,7 @@
     <Compile Include="Game\Features\Skill\Command\SkillCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\VisibleCommand.cs" />
     <Compile Include="Game\Features\Skill\Command\VolumetricLineCommand.cs" />
+    <Compile Include="Game\Features\Skill\SkillScripts\Skill_Test.cs" />
     <Compile Include="Game\GameSystems.cs" />
     <Compile Include="Input\Features\SkillInputSystem.cs" />
     <Compile Include="Input\Features\SkillKeyBindingSystem.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Services\ChunkService\UnityChunkTrigger.cs" />
     <Compile Include="Services\PhysicsService\UnityCollider.cs" />
     <Compile Include="Services\PhysicsService\UnityRigid.cs" />
+    <Compile Include="View\ObjectSpin.cs" />
     <Compile Include="View\UnityView.cs" />
   </ItemGroup>
   <ItemGroup>

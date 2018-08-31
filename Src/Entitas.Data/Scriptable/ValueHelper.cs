@@ -66,8 +66,8 @@ namespace ScriptableSystem
         void InitFromDsl(ScriptableData.ISyntaxComponent param, int startIndex);
         IValueParam Clone();
         void Evaluate(object iterator, object[] args);
-        void Evaluate(Instance instance);
-        void Analyze(Instance instance);
+        void Evaluate(IInstance instance);
+        void Analyze(IInstance instance);
         bool HaveValue { get; }
     }
     public sealed class ValueParam : IValueParam
@@ -81,9 +81,9 @@ namespace ScriptableSystem
         }
         public void Evaluate(object iterator, object[] args)
         { }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         { }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         { }
         public bool HaveValue
         {
@@ -110,11 +110,11 @@ namespace ScriptableSystem
         {
             m_P1.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
         }
@@ -152,12 +152,12 @@ namespace ScriptableSystem
             m_P1.Evaluate(iterator, args);
             m_P2.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -204,13 +204,13 @@ namespace ScriptableSystem
             m_P2.Evaluate(iterator, args);
             m_P3.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
             m_P3.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -266,14 +266,14 @@ namespace ScriptableSystem
             m_P3.Evaluate(iterator, args);
             m_P4.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
             m_P3.Evaluate(instance);
             m_P4.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -338,7 +338,7 @@ namespace ScriptableSystem
             m_P4.Evaluate(iterator, args);
             m_P5.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
@@ -346,7 +346,7 @@ namespace ScriptableSystem
             m_P4.Evaluate(instance);
             m_P5.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -420,7 +420,7 @@ namespace ScriptableSystem
             m_P5.Evaluate(iterator, args);
             m_P6.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
@@ -429,7 +429,7 @@ namespace ScriptableSystem
             m_P5.Evaluate(instance);
             m_P6.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -512,7 +512,7 @@ namespace ScriptableSystem
             m_P6.Evaluate(iterator, args);
             m_P7.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
@@ -522,7 +522,7 @@ namespace ScriptableSystem
             m_P6.Evaluate(instance);
             m_P7.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -614,7 +614,7 @@ namespace ScriptableSystem
             m_P7.Evaluate(iterator, args);
             m_P8.Evaluate(iterator, args);
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             m_P1.Evaluate(instance);
             m_P2.Evaluate(instance);
@@ -625,7 +625,7 @@ namespace ScriptableSystem
             m_P7.Evaluate(instance);
             m_P8.Evaluate(instance);
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             m_P1.Analyze(instance);
             m_P2.Analyze(instance);
@@ -1940,14 +1940,14 @@ namespace ScriptableSystem
                 val.Evaluate(iterator, args);
             }
         }
-        public void Evaluate(Instance instance)
+        public void Evaluate(IInstance instance)
         {
             foreach (IValue<P> val in m_Args)
             {
                 val.Evaluate(instance);
             }
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             foreach (IValue<P> val in m_Args)
             {

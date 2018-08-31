@@ -61,14 +61,14 @@ namespace ScriptableSystem.CommonCommands
       }
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       foreach (IValue<object> val in m_Iterators) {
         val.Evaluate(instance);
       }
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       ExecResult ret = ExecResult.Blocked;
       while(ret == ExecResult.Blocked) {
@@ -201,13 +201,13 @@ namespace ScriptableSystem.CommonCommands
       TryUpdateValue();
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_LoadedList.Evaluate(instance);
       TryUpdateValue();
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       ExecResult ret = ExecResult.Blocked;
       while (ret == ExecResult.Blocked) {
@@ -346,12 +346,12 @@ namespace ScriptableSystem.CommonCommands
       m_Count.Evaluate(iterator, args);
     }
 
-    protected override void UpdateVariables(Instance instance)
+    protected override void UpdateVariables(IInstance instance)
     {
       m_Count.Evaluate(instance);
     }
 
-    protected override ExecResult ExecCommand(Instance instance, long delta)
+    protected override ExecResult ExecCommand(IInstance instance, long delta)
     {
       ExecResult ret = ExecResult.Blocked;
       while (ret == ExecResult.Blocked) {

@@ -174,7 +174,7 @@ namespace UnityClient
                 BuffConfig config = BuffConfigProvider.Instance.GetBuffConfig(buffId);
                 if (null != config)
                     ConfigManager.Instance.LoadIfNotExist(buffId, 2, HomePath.Instance.GetAbsolutePath(config.Script));
-                Instance instance = ConfigManager.Instance.NewInstance(buffId, 2);
+                IInstance instance = ConfigManager.Instance.NewInstance(buffId, 2);
                 if (null == instance)
                 {
                     LogUtil.Error("ImpactSystem.NewImpactInstance : Can't load impact config, impact:{0}.", buffId);

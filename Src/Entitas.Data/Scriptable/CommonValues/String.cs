@@ -51,7 +51,7 @@ namespace ScriptableSystem.CommonValues
       }*/
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_Format.Evaluate(instance);
       for (int i = 0; i < m_FormatArgs.Count; i++)
@@ -64,7 +64,7 @@ namespace ScriptableSystem.CommonValues
       }*/
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_Format.Analyze(instance);
       for (int i = 0; i < m_FormatArgs.Count; i++)
@@ -172,7 +172,7 @@ namespace ScriptableSystem.CommonValues
         m_Length.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_String.Evaluate(instance);
       if (m_ParamNum > 1)
@@ -181,7 +181,7 @@ namespace ScriptableSystem.CommonValues
         m_Length.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       if (m_ParamNum > 1)
         m_Start.Analyze(instance);

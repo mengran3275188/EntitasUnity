@@ -9,7 +9,11 @@ namespace SkillCommands
 {
     internal class AnimationCommand : AbstractCommand
     {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        public void Load(string animName)
+        {
+            m_AnimName = animName;
+        }
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (null != obj)
@@ -101,7 +105,7 @@ namespace SkillCommands
     }
     public class AnimationSpeedCommand : AbstractCommand
     {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity obj = instance.Target as GameEntity;
             if (obj != null)

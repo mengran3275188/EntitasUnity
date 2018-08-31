@@ -32,6 +32,20 @@ namespace ScriptableSystem
             }
             return command;
         }
+        public ICommand CreateCommand(string type)
+        {
+            ICommand command = null;
+            ICommandFactory factory = GetFactory(type);
+            if (null != factory)
+            {
+                command = factory.Create();
+            }
+            else
+            {
+                LogUtil.Debug("CreateCommand failed, unknown type:{0}.", type);
+            }
+            return command;
+        }
         public CommandManager()
         {
             RegisterCommandFactory("=", new CommandFactoryHelper<CommonCommands.AssignCommand>());

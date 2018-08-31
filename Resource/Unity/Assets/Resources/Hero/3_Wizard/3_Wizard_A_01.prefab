@@ -1853,6 +1853,7 @@ Animation:
   - {fileID: 7400004, guid: e5f6c6a6c42488348a0e4e07189db212, type: 3}
   - {fileID: 7400006, guid: e5f6c6a6c42488348a0e4e07189db212, type: 3}
   - {fileID: 7400008, guid: e5f6c6a6c42488348a0e4e07189db212, type: 3}
+  - {fileID: 7400016, guid: e5f6c6a6c42488348a0e4e07189db212, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

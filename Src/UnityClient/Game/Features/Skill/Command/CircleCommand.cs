@@ -43,7 +43,7 @@ namespace SkillCommands
         {
             m_IsInited = false;
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if (target == null)
@@ -93,7 +93,7 @@ namespace SkillCommands
         }
 
 
-        private void Init(GameEntity sender, GameEntity target, Instance instance)
+        private void Init(GameEntity sender, GameEntity target, IInstance instance)
         {
             CopySectionList();
             m_ElapsedTime = 0;
@@ -108,7 +108,7 @@ namespace SkillCommands
                 m_SectionListCopy.Add(m_SectionList[i].Clone());
             }
         }
-        private void Move(Instance instance, GameEntity sender, GameEntity target, Vector3 lastPos, Vector3 distance)
+        private void Move(IInstance instance, GameEntity sender, GameEntity target, Vector3 lastPos, Vector3 distance)
         {
             Vector3 nowPos = lastPos + distance;
 

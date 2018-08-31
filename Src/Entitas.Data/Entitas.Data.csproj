@@ -110,6 +110,7 @@
     <Compile Include="Scriptable\CommonValues\String.cs" />
     <Compile Include="Scriptable\CommonValues\Time.cs" />
     <Compile Include="Scriptable\ConfigManager.cs" />
+    <Compile Include="Scriptable\CSharpInstance.cs" />
     <Compile Include="Scriptable\ICommand.cs" />
     <Compile Include="Scriptable\ICommandFactory.cs" />
     <Compile Include="Scriptable\Instance.cs" />

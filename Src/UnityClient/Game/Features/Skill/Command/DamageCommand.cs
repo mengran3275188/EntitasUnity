@@ -19,7 +19,7 @@ namespace SkillCommands
                 m_Damage = float.Parse(callData.GetParamId(0));
             }
         }
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity sender = Contexts.sharedInstance.game.GetEntityWithId(instance.SenderId);
             if (instance.Target is GameEntity obj && null != sender)

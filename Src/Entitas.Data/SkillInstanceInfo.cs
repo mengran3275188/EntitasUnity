@@ -8,14 +8,14 @@ namespace Entitas.Data
         public List<BreakSection> BreakSections;
         public int SkillId;
         public int Category;
-        public Instance SkillInstance;
+        public IInstance SkillInstance;
         public bool IsUsed;
     }
 
     public class BuffInstanceInfo
     {
         public int BuffId;
-        public Instance BuffInstance;
+        public IInstance BuffInstance;
         public bool IsUsed;
     }
     public class SkillInfo

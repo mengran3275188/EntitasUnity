@@ -42,7 +42,6 @@ namespace UnityClient
 
                 // movement
                 e.AddMovement(Vector3.zero);
-                Quaternion quaternion = Quaternion.Euler(0, Mathf.Rad2Deg * rotation, 0);
                 e.AddPosition(position);
                 e.AddRotation(rotation);
 

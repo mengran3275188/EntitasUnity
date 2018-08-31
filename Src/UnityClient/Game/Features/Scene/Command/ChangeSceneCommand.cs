@@ -9,7 +9,7 @@ namespace SceneCommand
 {
     internal class ChangeSceneCommand : AbstractCommand
     {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             if(Contexts.sharedInstance.gameState.hasTargetSceneId)
             {

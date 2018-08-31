@@ -8,8 +8,8 @@ namespace ScriptableSystem
     void InitFromDsl(ScriptableData.ISyntaxComponent param);//从DSL语言初始化值实例
     IValue<T> Clone();//克隆一个新实例，每个值只从DSL语言初始化一次，之后的实例由克隆产生，提升性能
     void Evaluate(object iterator, object[] args);//从引用的参数获取参数值
-    void Evaluate(Instance instance);//从引用的变量获取变量值
-    void Analyze(Instance instance);//语义分析，配合上下文instance进行语义分析，在执行前收集必要的信息
+    void Evaluate(IInstance instance);//从引用的变量获取变量值
+    void Analyze(IInstance instance);//语义分析，配合上下文instance进行语义分析，在执行前收集必要的信息
     bool HaveValue { get; }//是否已经有值，对常量初始化后即产生值，对参数、变量与函数则在Evaluate后产生值
     T Value { get; }//具体的值
   }
@@ -64,7 +64,7 @@ namespace ScriptableSystem
         }
       }
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       if (null != m_LocalName) {
         Dictionary<string, object> locals = instance.LocalVariables;
@@ -90,7 +90,7 @@ namespace ScriptableSystem
         }
       }
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       if (null != m_Proxy) {
         m_Proxy.Analyze(instance);
@@ -239,7 +239,7 @@ namespace ScriptableSystem
         }
       }
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       if (null != m_LocalName) {
         Dictionary<string, object> locals = instance.LocalVariables;
@@ -265,7 +265,7 @@ namespace ScriptableSystem
         }
       }
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       if (null != m_Proxy) {
         m_Proxy.Analyze(instance);
@@ -380,11 +380,11 @@ namespace ScriptableSystem
     {
       m_Original.Evaluate(iterator, args);
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_Original.Evaluate(instance);
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_Original.Analyze(instance);
     }

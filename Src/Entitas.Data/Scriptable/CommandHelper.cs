@@ -26,12 +26,12 @@ namespace ScriptableSystem
       m_Params.Evaluate(iterator, args);
       TryUpdateValue(null);
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_Params.Evaluate(instance);
       TryUpdateValue(instance);
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_Params.Analyze(instance);
     }
@@ -49,9 +49,9 @@ namespace ScriptableSystem
         return m_Result.Value;
       }
     }
-    protected abstract void UpdateValue(Instance instance, ValueParamType _params, ValueResult result);
+    protected abstract void UpdateValue(IInstance instance, ValueParamType _params, ValueResult result);
 
-    private void TryUpdateValue(Instance instance)
+    private void TryUpdateValue(IInstance instance)
     {
       if (m_Params.HaveValue) {
         UpdateValue(instance, (ValueParamType)m_Params, m_Result);
@@ -83,11 +83,11 @@ namespace ScriptableSystem
       m_LastExecResult = ExecResult.Unknown;
       ResetState();
     }
-    public void Prepare(Instance instance, object iterator, object[] args)
+    public void Prepare(IInstance instance, object iterator, object[] args)
     {
       m_Params.Evaluate(iterator, args);
     }
-    public ExecResult Execute(Instance instance, long delta)
+    public ExecResult Execute(IInstance instance, long delta)
     {
       if (m_LastExecResult == ExecResult.Unknown) {
         //重复执行时不需要每个tick都更新变量值，每个命令每次执行，变量值只读取一次。
@@ -96,17 +96,17 @@ namespace ScriptableSystem
       m_LastExecResult = ExecCommand(instance, (ValueParamType)m_Params, delta);
       return m_LastExecResult;
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       SemanticAnalyze(instance);
     }
 
     protected virtual void ResetState() { }
-    protected virtual ExecResult ExecCommand(Instance instance, ValueParamType _params, long delta)
+    protected virtual ExecResult ExecCommand(IInstance instance, ValueParamType _params, long delta)
     {
       return ExecResult.Finished;
     }
-    protected virtual void SemanticAnalyze(Instance instance) { }
+    protected virtual void SemanticAnalyze(IInstance instance) { }
 
     private ExecResult m_LastExecResult = ExecResult.Unknown;    
     private IValueParam m_Params = new ValueParamType();

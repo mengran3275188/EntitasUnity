@@ -5,6 +5,31 @@ using Util;
 
 namespace ScriptableSystem
 {
+    public interface IInstance
+    {
+        int Id { get; }
+        long Time { get; }
+        long SkillTime { get; }
+        uint SenderId { get; set; }
+        Vector3 SenderPosition { get; set; }
+        float SenderDirection { get; set; }
+        object Target { get; set; }
+        bool IsTerminated { get; set; }
+        bool DisableMoveInput { get; set; }
+        bool DisableRotationInput { get; set; }
+        object Context { get; set; }
+        Vector3 Velocity { get; set; }
+        List<ICommand> ParallelCommands { get; }
+        Dictionary<string, object> LocalVariables { get; }
+        Dictionary<string, object> GlobalVariables { get; set; }
+        void Start();
+        void Tick(long curTime);
+        void SendMessage(string msgId, params object[] args);
+        void ClearMessage(params string[] msgIds);
+        void AddVariable(string varName, object val);
+        void Reset();
+    }
+
     public sealed class MessageHandler
     {
         public string MessageId
@@ -64,11 +89,13 @@ namespace ScriptableSystem
                 if (result == ExecResult.Blocked)
                 {
                     break;
-                }else if(result == ExecResult.Finished)
+                }
+                else if (result == ExecResult.Finished)
                 {
                     cmd.Reset();
                     m_CommandQueue.Dequeue();
-                }else if(result == ExecResult.Parallel)
+                }
+                else if (result == ExecResult.Parallel)
                 {
                     instance.ParallelCommands.Add(m_CommandQueue.Dequeue());
                 }
@@ -111,11 +138,15 @@ namespace ScriptableSystem
         private object[] m_Arguments = null;
         private List<ICommand> m_LoadedCommands = new List<ICommand>();
     }
-    public sealed class Instance
+    public sealed class Instance : IInstance
     {
         public long Time
         {
             get { return m_LastTickTime; }
+        }
+        public long SkillTime
+        {
+            get { return m_CurTime; }
         }
         public int Id
         {
@@ -370,7 +401,7 @@ namespace ScriptableSystem
                 m_LastTickTime = curTime;
                 m_CurTime += delta;
             }
-            foreach(MessageHandler handler in m_MessageHandlers)
+            foreach (MessageHandler handler in m_MessageHandlers)
             {
                 string msgId = handler.MessageId;
                 Queue<MessageInfo> queue;
@@ -387,10 +418,10 @@ namespace ScriptableSystem
             }
 
             int ct = m_ParallelCommands.Count;
-            for(int ix = ct - 1; ix >= 0; --ix)
+            for (int ix = ct - 1; ix >= 0; --ix)
             {
                 ICommand cmd = m_ParallelCommands[ix];
-                if(cmd.Execute(this, delta) == ExecResult.Finished)
+                if (cmd.Execute(this, delta) == ExecResult.Finished)
                 {
                     cmd.Reset();
                     m_ParallelCommands.Remove(cmd);
@@ -416,10 +447,11 @@ namespace ScriptableSystem
         }
         public void AddVariable(string varName, object val)
         {
-            if(varName.StartsWith("@@"))
+            if (varName.StartsWith("@@"))
             {
                 AddLocalVariable(varName, val);
-            }else if(varName.StartsWith("@"))
+            }
+            else if (varName.StartsWith("@"))
             {
                 AddGlobalVariable(varName, val);
             }
@@ -430,7 +462,7 @@ namespace ScriptableSystem
         }
         private void AddLocalVariable(string varName, object val)
         {
-            if(m_LocalVariables.ContainsKey(varName))
+            if (m_LocalVariables.ContainsKey(varName))
             {
                 m_LocalVariables[varName] = val;
             }
@@ -441,7 +473,7 @@ namespace ScriptableSystem
         }
         private void AddGlobalVariable(string varName, object val)
         {
-            if(m_GlobalVariables.ContainsKey(varName))
+            if (m_GlobalVariables.ContainsKey(varName))
             {
                 m_GlobalVariables[varName] = val;
             }

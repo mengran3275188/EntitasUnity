@@ -99,7 +99,7 @@ namespace SkillCommands
             }
         }
 
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if (target == null)
@@ -165,7 +165,7 @@ namespace SkillCommands
             m_IsInited = false;
         }
 
-        private void Init(GameEntity sender, GameEntity target, Instance instance)
+        private void Init(GameEntity sender, GameEntity target, IInstance instance)
         {
             CopySectionList();
             m_ElapsedTime = 0;
@@ -186,7 +186,7 @@ namespace SkillCommands
                 m_SectionListCopy.Add(m_SectionList[i].Clone());
             }
         }
-        private static Vector3 Move(Instance instance, GameEntity obj, float rotateDir, Vector3 speed_vect, Vector3 accel_vect, float time)
+        private static Vector3 Move(IInstance instance, GameEntity obj, float rotateDir, Vector3 speed_vect, Vector3 accel_vect, float time)
         {
 
             Vector3 speed = speed_vect + accel_vect * time / 2;
@@ -196,7 +196,7 @@ namespace SkillCommands
 
             return (speed_vect + accel_vect * time);
         }
-        private static float UpdateRotation(Instance instance, GameEntity sender, GameEntity target, DirectionType directionType)
+        private static float UpdateRotation(IInstance instance, GameEntity sender, GameEntity target, DirectionType directionType)
         {
             float rotateDir = 0;
             switch(directionType)
@@ -233,7 +233,7 @@ namespace SkillCommands
 
     public class DisableMoveInputCommand : AbstractCommand
     {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if(null != target)
@@ -242,6 +242,10 @@ namespace SkillCommands
                 target.ReplaceMovement(Vector3.zero);
             }
             return ExecResult.Finished;
+        }
+        public void Load(bool enable)
+        {
+            m_Value = enable;
         }
         protected override void Load(CallData callData)
         {
@@ -256,7 +260,7 @@ namespace SkillCommands
 
     public class DisableRotationInputCommand : AbstractCommand
     {
-        protected override ExecResult ExecCommand(Instance instance, long delta)
+        protected override ExecResult ExecCommand(IInstance instance, long delta)
         {
             GameEntity target = instance.Target as GameEntity;
             if(null != target)
@@ -264,6 +268,10 @@ namespace SkillCommands
                 instance.DisableRotationInput = m_Value;
             }
             return ExecResult.Finished;
+        }
+        public void Load(bool enable)
+        {
+            m_Value = enable;
         }
         protected override void Load(CallData callData)
         {

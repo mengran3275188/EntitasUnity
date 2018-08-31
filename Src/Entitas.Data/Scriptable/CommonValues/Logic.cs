@@ -31,13 +31,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -100,13 +100,13 @@ namespace ScriptableSystem.CommonValues
       m_Y.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       m_Y.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
       m_Y.Analyze(instance);
@@ -166,12 +166,12 @@ namespace ScriptableSystem.CommonValues
       m_X.Evaluate(iterator, args);
       TryUpdateValue();
     }
-    public void Evaluate(Instance instance)
+    public void Evaluate(IInstance instance)
     {
       m_X.Evaluate(instance);
       TryUpdateValue();
     }
-    public void Analyze(Instance instance)
+    public void Analyze(IInstance instance)
     {
       m_X.Analyze(instance);
     }

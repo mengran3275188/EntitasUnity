@@ -2,9 +2,25 @@ skill(900)
 {
     onmessage("start")
     {
-        createcharacter(1013, vector3(0, 0, 5), vector3(0, 0, 0))
+        disablemoveinput(true);
+        disablerotationinput(true);
+        breaksection(1, 1100, 4000);
+        animation("s03_yunshi00_01");
+
+        effect("Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_01", 1400, "", false)
         {
-            skill(901);
+            transform(vector3(0, 0, 5));
+        };
+        wait(100);
+
+        effect("Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_03", 4500, "", false)
+        {
+            transform(vector3(0, 0, 5));
+        };
+        wait(1000);
+        effect("Hero_FX/3_Wdwzard/3_hero_Wizard_s03_yunshi00_02", 3000, "", false)
+        {
+            transform(vector3(0, 0, 5));
         };
         terminate();
     };
@@ -27,22 +43,242 @@ skill(902)
 {
     onmessage("start")
     {
-        createcharacter(1014, vector3(0, 0.5, 0), vector3(0, 0, 0))
+        lineeffect(vector3(1.5, 1, 4), vector3(4, 1, 1.5), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
         {
-            skill(903);
-        };
-        wait(4000);
-        destroyself();
-        terminate();
-    };
-};
-skill(903)
-{
-    onmessage("start")
-    {
-        wait(100);
-        physicsmove(10, vector3(0, 0, 15));
-        wait(4000);
+			line(vector3(1.5, 1, 4), vector3(4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, 1.5), vector3(4, 1, -1.5), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(4, 1, 1.5), vector3(4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(1.5, 1, -4), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(4, 1, -1.5), vector3(1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(1.5, 1, -4), vector3(-1.5, 1, -4), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(1.5, 1, -4), vector3(-1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(-1.5, 1, -4), vector3(-4, 1, -1.5), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-1.5, 1, -4), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(-4, 1, -1.5), vector3(-4, 1, 1.5), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-4, 1, -1.5), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(-4, 1, 1.5), vector3(-1.5, 1, 4), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-4, 1, 1.5), vector3(-1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(-1.5, 1, 4), vector3(1.5, 1, 4), 1, 4000);
+		colliderdamage("TriggerBullet", 10000, 100)
+        {
+			line(vector3(-1.5, 1, 4), vector3(1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        // slice 0
+        lineeffect(vector3(1.5, 1, 4), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, 4), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-1.5, 1, -4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(700);
+
+        // slice 1
+        lineeffect(vector3(4, 1, 1.5), vector3(-1.5, 1, 4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(1.5, 1, -4), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, -4), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(700);
+
+        // star
+        lineeffect(vector3(1.5, 1, 4), vector3(-1.5, 1, -4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, 4), vector3(-1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(1.5, 1, -4), vector3(-1.5, 1, 4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, -4), vector3(-1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+        wait(700);
+
+        // all
+        // slice 0
+        lineeffect(vector3(1.5, 1, 4), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, 4), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-1.5, 1, -4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        // slice 1
+        lineeffect(vector3(4, 1, 1.5), vector3(-1.5, 1, 4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(1.5, 1, -4), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, -4), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        // star
+        lineeffect(vector3(1.5, 1, 4), vector3(-1.5, 1, -4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, 4), vector3(-1.5, 1, -4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, -1.5), vector3(-4, 1, 1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(1.5, 1, -4), vector3(-1.5, 1, 4), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(1.5, 1, -4), vector3(-1.5, 1, 4), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+        lineeffect(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 1, 500);
+		colliderdamage("TriggerBullet", 10000, 500)
+        {
+			line(vector3(4, 1, 1.5), vector3(-4, 1, -1.5), 0.1);
+			statebuff("Default", 1);
+			statebuff("Skill", 3);
+        }ret("@colliderId");
+
+
+        wait(1900);
         destroyself();
         terminate();
     };

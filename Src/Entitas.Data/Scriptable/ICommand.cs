@@ -15,9 +15,9 @@ namespace ScriptableSystem
         void Init(ScriptableData.ISyntaxComponent config);
         ICommand Clone();
         void Reset();
-        void Prepare(Instance instance, object iterator, object[] args);
-        ExecResult Execute(Instance instance, long delta);
-        void Analyze(Instance instance);
+        void Prepare(IInstance instance, object iterator, object[] args);
+        ExecResult Execute(IInstance instance, long delta);
+        void Analyze(IInstance instance);
     }
     public abstract class AbstractCommand : ICommand
     {
@@ -58,11 +58,11 @@ namespace ScriptableSystem
         {
             ResetState();
         }
-        public void Prepare(Instance instance, object iterator, object[] args)
+        public void Prepare(IInstance instance, object iterator, object[] args)
         {
             UpdateArguments(iterator, args);
         }
-        public ExecResult Execute(Instance instance, long delta)
+        public ExecResult Execute(IInstance instance, long delta)
         {
             if(m_LastExecResult != ExecResult.Finished  || m_IscompositeCommand)
             {
@@ -72,7 +72,7 @@ namespace ScriptableSystem
             m_LastExecResult = ExecCommand(instance, delta);
             return m_LastExecResult;
         }
-        public void Analyze(Instance instance)
+        public void Analyze(IInstance instance)
         {
             SemanticAnalyze(instance);
         }
@@ -82,12 +82,12 @@ namespace ScriptableSystem
         }
         protected virtual void ResetState() { }
         protected virtual void UpdateArguments(object iterator, object[] args) { }
-        protected virtual void UpdateVariables(Instance instance) { }
-        protected virtual ExecResult ExecCommand(Instance instance, long delta)
+        protected virtual void UpdateVariables(IInstance instance) { }
+        protected virtual ExecResult ExecCommand(IInstance instance, long delta)
         {
             return ExecResult.Finished;
         }
-        protected virtual void SemanticAnalyze(Instance instance) { }
+        protected virtual void SemanticAnalyze(IInstance instance) { }
         protected virtual void Load(ScriptableData.CallData callData) { }
         protected virtual void Load(ScriptableData.FunctionData funcData) { }
         protected virtual void Load(ScriptableData.StatementData statementData) { }

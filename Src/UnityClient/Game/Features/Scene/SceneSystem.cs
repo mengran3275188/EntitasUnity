@@ -64,7 +64,7 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 ConfigManager.Instance.LoadIfNotExist(sceneId, 1, HomePath.Instance.GetAbsolutePath(scriptPath));
-                Instance instance = ConfigManager.Instance.NewInstance(sceneId, 1);
+                IInstance instance = ConfigManager.Instance.NewInstance(sceneId, 1);
                 if(null == instance)
                 {
                     LogUtil.Error("SceneSystem::NewSceneInstance scene script {0} not found!", sceneId);
