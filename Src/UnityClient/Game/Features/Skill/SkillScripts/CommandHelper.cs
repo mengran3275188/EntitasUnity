@@ -155,8 +155,11 @@ namespace SkillScripts
             cmd.Load(enable);
             cmd.Execute(instance, deltaTime);
         }
-        internal static void BreakSection(IInstance instance, long deltaTime, bool enable)
+        internal static void BreakSection(IInstance instance, long deltaTime, int breakType, long startTime, long endTime)
         {
+            BreakSectionCommand cmd = CommandManager.Instance.CreateCommand("breaksection") as BreakSectionCommand;
+            cmd.Load(breakType, startTime, endTime);
+            cmd.Execute(instance, deltaTime);
         }
     }
 }

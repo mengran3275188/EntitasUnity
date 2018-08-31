@@ -8,6 +8,12 @@ namespace SkillCommands
 {
     internal class BreakSectionCommand : AbstractCommand
     {
+        public void Load(int breakType, long startTime, long endTime)
+        {
+            m_BreakType = breakType;
+            m_StartTime = startTime;
+            m_EndTime = endTime;
+        }
         protected override void Load(CallData callData)
         {
             int num = callData.GetParamNum();
