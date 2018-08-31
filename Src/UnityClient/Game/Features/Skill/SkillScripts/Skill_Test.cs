@@ -27,6 +27,7 @@ namespace SkillScripts
         {
             if(ShouldCall(0, time, deltaTime))
             {
+                Util.LogUtil.Debug("OnStart {0},  time {1} deltaTime {2}.", instance.Id, time, deltaTime);
                 DisableMoveInputCmd(instance, deltaTime, true);
                 DisableRotationInputCmd(instance, deltaTime, true);
                 Animation(instance, deltaTime, "s03_yunshi00_01");

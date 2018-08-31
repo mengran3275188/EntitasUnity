@@ -42,7 +42,8 @@ namespace ScriptableSystem
         }
         public void Tick(CSharpInstance instance, long delta)
         {
-            m_Delegate(instance, instance.SkillTime, delta);
+            if (delta > 0)
+                m_Delegate(instance, instance.SkillTime, delta);
         }
         public void Analyze(CSharpInstance instance)
         {
@@ -55,7 +56,7 @@ namespace ScriptableSystem
         private object[] m_Arguments = null;
         private MessageHandlerDelegate m_Delegate;
     }
-    public  class CSharpInstance : IInstance
+    public class CSharpInstance : IInstance
     {
         public long Time
         {
@@ -187,7 +188,7 @@ namespace ScriptableSystem
             msgInfo.m_MsgId = msgId;
             msgInfo.m_Args = args;
             Queue<MessageInfo> queue;
-            if(m_MessageQueues.TryGetValue(msgId, out queue))
+            if (m_MessageQueues.TryGetValue(msgId, out queue))
             {
                 queue.Enqueue(msgInfo);
             }
@@ -230,7 +231,7 @@ namespace ScriptableSystem
                 m_CurTime += delta;
             }
 
-            foreach(CSharpMessageHandler handler in m_MessageHandlers)
+            foreach (CSharpMessageHandler handler in m_MessageHandlers)
             {
                 string msgId = handler.MessageId;
                 Queue<MessageInfo> queue;
@@ -246,10 +247,10 @@ namespace ScriptableSystem
                 }
             }
             int ct = m_ParallelCommands.Count;
-            for(int ix = ct - 1; ix >= 0; --ix)
+            for (int ix = ct - 1; ix >= 0; --ix)
             {
                 ICommand cmd = m_ParallelCommands[ix];
-                if(cmd.Execute(this, delta) == ExecResult.Finished)
+                if (cmd.Execute(this, delta) == ExecResult.Finished)
                 {
                     cmd.Reset();
                     m_ParallelCommands.Remove(cmd);
@@ -270,10 +271,11 @@ namespace ScriptableSystem
         }
         public void AddVariable(string varName, object val)
         {
-            if(varName.StartsWith("@@"))
+            if (varName.StartsWith("@@"))
             {
                 AddLocalVariable(varName, val);
-            }else if(varName.StartsWith("@"))
+            }
+            else if (varName.StartsWith("@"))
             {
                 AddGlobalVariable(varName, val);
             }
@@ -291,12 +293,12 @@ namespace ScriptableSystem
         }
         protected static bool ShouldCall(long callTime, long curTime, long deltaTime)
         {
-            return curTime >= callTime && callTime >= curTime - deltaTime;
+            return curTime > callTime && callTime >= curTime - deltaTime;
         }
 
         private void AddLocalVariable(string varName, object val)
         {
-            if(m_LocalVariables.ContainsKey(varName))
+            if (m_LocalVariables.ContainsKey(varName))
             {
                 m_LocalVariables[varName] = val;
             }
@@ -307,7 +309,7 @@ namespace ScriptableSystem
         }
         private void AddGlobalVariable(string varName, object val)
         {
-            if(m_GlobalVariables.ContainsKey(varName))
+            if (m_GlobalVariables.ContainsKey(varName))
             {
                 m_GlobalVariables[varName] = val;
             }
