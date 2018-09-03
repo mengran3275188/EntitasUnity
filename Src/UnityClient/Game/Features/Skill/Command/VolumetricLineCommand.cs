@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using ScriptableData;
-using ScriptableSystem;
 using UnityEngine;
 using Entitas.Data;
 

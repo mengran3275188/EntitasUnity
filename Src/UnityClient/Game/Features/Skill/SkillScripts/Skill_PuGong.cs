@@ -1,8 +1,7 @@
-﻿using ScriptableSystem;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityClient;
 
-namespace SkillScripts
+namespace ScriptableData.SkillScripts
 {
     internal class Skill_PuGong_1 : BaseSkillScript
     {

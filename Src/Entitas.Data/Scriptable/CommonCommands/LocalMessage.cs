@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace ScriptableSystem.CommonCommands
+namespace ScriptableData.CommonCommands
 {
   /// <summary>
   /// firemessage(msgid,arg1,arg2,...);

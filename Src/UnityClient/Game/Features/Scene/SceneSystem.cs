@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Util;
 using Entitas;
 using Entitas.Data;
-using ScriptableSystem;
+using ScriptableData;
 using UnityEngine;
 
 namespace UnityClient

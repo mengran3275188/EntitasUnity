@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScriptableSystem;
 using Entitas;
 using Util;
 using Entitas.Data;
 using UnityEngine;
+using ScriptableData;
+using ScriptableData.SkillScripts;
 
 namespace UnityClient
 {
@@ -23,10 +24,10 @@ namespace UnityClient
 
         private void RegisterScript()
         {
-            SkillScripts.SkillScriptsManager.Instance.RegisterScript(900, 0, new SkillScripts.Skill_Test());
-            SkillScripts.SkillScriptsManager.Instance.RegisterScript(1, 0, new SkillScripts.Skill_PuGong_1());
-            SkillScripts.SkillScriptsManager.Instance.RegisterScript(101, 0, new SkillScripts.Skill_PuGong_101());
-            SkillScripts.SkillScriptsManager.Instance.RegisterScript(102, 0, new SkillScripts.Skill_PuGong_102());
+            SkillScriptsManager.Instance.RegisterScript(900, 0, new Skill_Test());
+            SkillScriptsManager.Instance.RegisterScript(1, 0, new Skill_PuGong_1());
+            SkillScriptsManager.Instance.RegisterScript(101, 0, new Skill_PuGong_101());
+            SkillScriptsManager.Instance.RegisterScript(102, 0, new Skill_PuGong_102());
         }
         private void RegisterCommandFactory()
         {
@@ -213,7 +214,7 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 //do load
-                if(!SkillScripts.SkillScriptsManager.Instance.LoadIfNotExits(skillId, 0))
+                if(!SkillScriptsManager.Instance.LoadIfNotExits(skillId, 0))
                 {
                     SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
                     if (null != config)

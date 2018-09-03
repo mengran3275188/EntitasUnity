@@ -1,7 +1,6 @@
-﻿using ScriptableSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SkillScripts
+namespace ScriptableData.SkillScripts
 {
     public sealed class Skill_Test : BaseSkillScript
     {

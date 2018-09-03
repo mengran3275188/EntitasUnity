@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScriptableSystem;
-using ScriptableSystem.CommonCommands;
+using ScriptableData;
+using ScriptableData.CommonCommands;
 using SkillCommands;
 using SceneCommand;
 using UnityEngine;
 using UnityClient;
 
-namespace SkillScripts
+namespace ScriptableData.SkillScripts
 {
     public enum DirectionType
     {

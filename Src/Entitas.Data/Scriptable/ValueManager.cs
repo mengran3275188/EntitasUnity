@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Util;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
   public interface IValueFactory
   {

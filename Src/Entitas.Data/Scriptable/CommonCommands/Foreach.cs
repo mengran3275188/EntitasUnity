@@ -3,7 +3,7 @@ using Util;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ScriptableSystem.CommonCommands
+namespace ScriptableData.CommonCommands
 {
   /// <summary>
   /// foreach(v1,v2,v3)

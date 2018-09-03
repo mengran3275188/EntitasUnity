@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ScriptableData;
-using ScriptableSystem;
 using UnityClient;
 
 namespace SceneCommand

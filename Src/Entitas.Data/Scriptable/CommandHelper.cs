@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
   /// <summary>
   /// 简单的函数值基类，简化实现IValue需要写的代码行数(当前值类只支持CallData样式)

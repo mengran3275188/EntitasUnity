@@ -1,11 +1,10 @@
 ﻿using System;
 using Entitas;
 using Entitas.Data;
-using ScriptableData;
-using ScriptableSystem;
 using UnityClient;
 using Util;
 using UnityEngine;
+using ScriptableData;
 
 namespace SceneCommand
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Util;
 
-namespace ScriptableSystem.CommonValues
+namespace ScriptableData.CommonValues
 {
   internal sealed class TimeValue : IValue<object>
   {

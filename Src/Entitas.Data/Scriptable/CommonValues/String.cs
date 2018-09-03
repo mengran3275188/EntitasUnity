@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ScriptableSystem.CommonValues
+namespace ScriptableData.CommonValues
 {
   internal sealed class FormatValue : IValue<object>
   {

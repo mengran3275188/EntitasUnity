@@ -2,7 +2,7 @@
 using Util;
 using System.Collections.Generic;
 
-namespace ScriptableSystem.CommonCommands
+namespace ScriptableData.CommonCommands
 {
   /// <summary>
   /// if(@val>0)

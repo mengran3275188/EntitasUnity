@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
     class Program
     {

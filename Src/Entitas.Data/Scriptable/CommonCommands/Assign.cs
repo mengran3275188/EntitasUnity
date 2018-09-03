@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ScriptableSystem.CommonCommands
+namespace ScriptableData.CommonCommands
 {
   /// <summary>
   /// assign(@local,value);

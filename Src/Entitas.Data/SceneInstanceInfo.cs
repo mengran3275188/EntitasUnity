@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScriptableSystem;
+using ScriptableData;
 
 namespace Entitas.Data
 {

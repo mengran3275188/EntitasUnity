@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Entitas.Data;
 using ScriptableData;
-using ScriptableSystem;
 
 namespace SkillCommands
 {

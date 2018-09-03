@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScriptableSystem;
 using Util;
 
-namespace SkillScripts
+namespace ScriptableData.SkillScripts
 {
     public class SkillScriptsManager : Singleton<SkillScriptsManager>
     {

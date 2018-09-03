@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Util;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
     public sealed class CommandManager : Singleton<CommandManager>
     {

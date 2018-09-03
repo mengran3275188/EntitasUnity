@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScriptableSystem;
 using ScriptableData;
-using Entitas.Data;
 using Util;
 using UnityClient;
 using UnityEngine;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Util.MyMath;
 using Util;
 
-namespace ScriptableSystem.CommonValues
+namespace ScriptableData.CommonValues
 {
     internal sealed class PropGetValue : IValue<object>
     {

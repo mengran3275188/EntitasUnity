@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScriptableSystem.CommonValues
+namespace ScriptableData.CommonValues
 {
   internal sealed class AndOperator : IValue<object>
   {

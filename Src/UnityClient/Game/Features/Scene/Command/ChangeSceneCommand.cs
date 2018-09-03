@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using ScriptableData;
-using ScriptableSystem;
-using UnityClient;
-using Entitas.Data;
 
 namespace SceneCommand
 {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-namespace ScriptableSystem.CommonCommands
+namespace ScriptableData.CommonCommands
 {
   /// <summary>
   /// log(format,arg1,arg2,...);

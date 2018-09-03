@@ -5,7 +5,7 @@ using Util;
 using System.Linq;
 using System.Text;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
     public delegate void MessageHandlerDelegate(CSharpInstance instance, long time, long deltaTime);
 

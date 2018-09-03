@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-namespace ScriptableSystem
+namespace ScriptableData
 {
     public interface IInstance
     {

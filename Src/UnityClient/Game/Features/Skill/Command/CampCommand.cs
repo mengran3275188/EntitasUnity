@@ -1,5 +1,4 @@
 ﻿using System;
-using ScriptableSystem;
 using ScriptableData;
 
 namespace SkillCommands

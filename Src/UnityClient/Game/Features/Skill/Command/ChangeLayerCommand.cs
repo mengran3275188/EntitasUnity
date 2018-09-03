@@ -1,6 +1,5 @@
 ﻿using System;
 using ScriptableData;
-using ScriptableSystem;
 using UnityEngine;
 
 namespace SkillCommands
