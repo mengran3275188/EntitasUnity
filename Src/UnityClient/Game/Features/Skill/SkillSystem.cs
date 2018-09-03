@@ -17,6 +17,19 @@ namespace UnityClient
         }
         public void Initialize()
         {
+            RegisterScript();
+            RegisterCommandFactory();
+        }
+
+        private void RegisterScript()
+        {
+            SkillScripts.SkillScriptsManager.Instance.RegisterScript(900, 0, new SkillScripts.Skill_Test());
+            SkillScripts.SkillScriptsManager.Instance.RegisterScript(1, 0, new SkillScripts.Skill_PuGong_1());
+            SkillScripts.SkillScriptsManager.Instance.RegisterScript(101, 0, new SkillScripts.Skill_PuGong_101());
+            SkillScripts.SkillScriptsManager.Instance.RegisterScript(102, 0, new SkillScripts.Skill_PuGong_102());
+        }
+        private void RegisterCommandFactory()
+        {
             CommandManager.Instance.RegisterCommandFactory("animation", new CommandFactoryHelper<SkillCommands.AnimationCommand>());
             CommandManager.Instance.RegisterCommandFactory("animationspeed", new CommandFactoryHelper<SkillCommands.AnimationSpeedCommand>());
             CommandManager.Instance.RegisterCommandFactory("effect", new CommandFactoryHelper<SkillCommands.EffectCommand>());
@@ -50,11 +63,7 @@ namespace UnityClient
 
             CommandManager.Instance.RegisterCommandFactory("camp", new CommandFactoryHelper<SkillCommands.CampCommand>());
             CommandManager.Instance.RegisterCommandFactory("csharpcamp", new CommandFactoryHelper<SkillCommands.CSharpCampCommand>());
-
-            ConfigManager.Instance.AddInstanceResource(SkillScripts.Skill_Test.GetId(), new SkillScripts.Skill_Test());
-
         }
-
         public void Execute()
         {
             long time = (long)(m_Contexts.input.time.Value * 1000);
@@ -204,9 +213,12 @@ namespace UnityClient
             if(null == instanceInfo)
             {
                 //do load
-                SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
-                if(null != config)
-                    ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath(config.Script));
+                if(!SkillScripts.SkillScriptsManager.Instance.LoadIfNotExits(skillId, 0))
+                {
+                    SkillConfig config = SkillConfigProvider.Instance.GetSkillConfig(skillId);
+                    if (null != config)
+                        ConfigManager.Instance.LoadIfNotExist(skillId, 0, HomePath.Instance.GetAbsolutePath(config.Script));
+                }
 
                 IInstance instance = ConfigManager.Instance.NewInstance(skillId, 0);
                 if(null == instance)

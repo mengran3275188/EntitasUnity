@@ -284,16 +284,12 @@ namespace ScriptableSystem
                 Util.LogUtil.Error("AddVariable var name {0} is invalid! var name should starts with @ or @@.", varName);
             }
         }
-        protected void AddMessageHandler(string msgId, MessageHandlerDelegate action)
+        public void AddMessageHandler(string msgId, MessageHandlerDelegate action)
         {
             CSharpMessageHandler handler = new CSharpMessageHandler();
             handler.MessageId = msgId;
             handler.Delegate = action;
             m_MessageHandlers.Add(handler);
-        }
-        protected static bool ShouldCall(long callTime, long curTime, long deltaTime)
-        {
-            return curTime > callTime && callTime >= curTime - deltaTime;
         }
 
         private void AddLocalVariable(string varName, object val)

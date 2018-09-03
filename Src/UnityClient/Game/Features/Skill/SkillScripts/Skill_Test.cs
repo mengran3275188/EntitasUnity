@@ -1,46 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ScriptableSystem;
-using ScriptableSystem.CommonCommands;
-using SkillCommands;
+﻿using ScriptableSystem;
 using UnityEngine;
 
 namespace SkillScripts
 {
-    public sealed class Skill_Test : ScriptableSystem.CSharpInstance
+    public sealed class Skill_Test : BaseSkillScript
     {
-        public Skill_Test()
+        protected override void StartHandler()
         {
-            AddMessageHandler("start", Message_Start);
-        }
-        public static int GetId()
-        {
-            return 100 * GetSkillId();
-        }
-        private static int GetSkillId()
-        {
-            return 900;
-        }
-        private static void Message_Start(CSharpInstance instance, long time, long deltaTime)
-        {
-            if(ShouldCall(0, time, deltaTime))
+            if(ShouldCall(0))
             {
-                Util.LogUtil.Debug("OnStart {0},  time {1} deltaTime {2}.", instance.Id, time, deltaTime);
-                Cmd.DisableMoveInputCmd(instance, deltaTime, true);
-                Cmd.DisableRotationInputCmd(instance, deltaTime, true);
-                Cmd.Animation(instance, deltaTime, "s03_yunshi00_01");
-                Cmd.Effect(instance, deltaTime, "Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_01", 1400, "", false, new Vector3(0, 0, 5));
+                DisableMoveInputCmd(true);
+                DisableRotationInputCmd(true);
+                Animation("s03_yunshi00_01");
+                Effect("Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_01", 1400, "", false, new Vector3(0, 0, 5));
             }
-            if(ShouldCall(100, time, deltaTime))
+            if(ShouldCall(100))
             {
-                Cmd.Effect(instance, deltaTime, "Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_03", 4500, "", false, new Vector3(0, 0, 5));
+                Effect("Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_03", 4500, "", false, new Vector3(0, 0, 5));
             }
-            if(ShouldCall(1100, time, deltaTime))
+            if(ShouldCall(1100))
             {
-                Cmd.Effect(instance, deltaTime, "Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_02", 3000, "", false, new Vector3(0, 0, 5));
-                Cmd.Terminate(instance, deltaTime);
+                Effect("Hero_FX/3_Wizard/3_hero_Wizard_s03_yunshi00_02", 3000, "", false, new Vector3(0, 0, 5));
+                Terminate();
             }
         }
     }
