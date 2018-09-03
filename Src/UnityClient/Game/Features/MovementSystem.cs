@@ -20,10 +20,12 @@ namespace UnityClient
             var entities = m_MovingEntities.GetEntities();
             foreach (GameEntity entity in entities)
             {
-                if(entity.hasPhysics)
+                if (entity.hasPhysics)
                 {
-                    if(entity.physics.Rigid.IsKinematic)
+                    if (entity.physics.Rigid.IsKinematic)
                     {
+                        float physicalYSpeed = entity.physics.Rigid.Velocity.y;
+
                         Vector3 velocity = entity.movement.Velocity;
                         Vector3 offset = entity.physics.Offset;
                         IRigidbody rigid = entity.physics.Rigid;
@@ -31,7 +33,15 @@ namespace UnityClient
                         Vector3 skillVelocity = SkillSystem.Instance.GetSkillVelocity(entity);
                         Vector3 buffVelocity = BuffSystem.Instance.GetBuffVelocity(entity);
 
-                        rigid.Velocity = velocity + skillVelocity + buffVelocity;
+                        if (skillVelocity.IsNearlyZero() && buffVelocity.IsNearlyZero())
+                        {
+                            rigid.Velocity = velocity + Vector3.up * physicalYSpeed;
+                        }
+                        else
+                        {
+                            rigid.Velocity = velocity + skillVelocity + buffVelocity;
+                        }
+
                         rigid.Rotation = Quaternion.Euler(0, Mathf.Rad2Deg * entity.rotation.Value, 0);
                     }
 
